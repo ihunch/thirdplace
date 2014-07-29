@@ -1,0 +1,1252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0ce89d2d-eb57-4fb8-bbed-540228297295" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends (Square)/ali.imageset/ali@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends/alic.imageset/alic@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends (Square)/andy.imageset/andy@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends/andyc.imageset/andyc@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/bar.imageset/bar@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/bbb.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/bbb1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/bbb2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/btn_icn_Zoo-Map.imageset/btn_icn_Zoo-Map@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/cal.imageset/cal@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/chevron.imageset/chevron@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends (Square)/danah.imageset/danah@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends/danahc.imageset/danahc@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends (Square)/jen.imageset/jen@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends/jenc.imageset/jenc@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends (Square)/joseph.imageset/joseph@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends/josephc.imageset/josephc@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/list.imageset/list@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/location-1.imageset/location@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/location.imageset/location@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends (Square)/luke.imageset/luke@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends/lukec.imageset/lukec@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/notification.imageset/notification@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends (Square)/oli.imageset/oli@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends/olic.imageset/olic@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/patternBackground.imageset/patternBackground@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/plus.imageset/plus@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Add Friend/AddFriendViewController.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Add Friend/AddFriendViewController.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends (Square)/ali.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends (Square)/andy.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends (Square)/danah.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends (Square)/jen.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends (Square)/joseph.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends (Square)/luke.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends (Square)/oli.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends/alic.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends/andyc.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends/danahc.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends/jenc.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends/josephc.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends/lukec.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/Friends/olic.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/bar.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/btn_icn_Zoo-Map.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/cal.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/chevron.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/list.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/location-1.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/location.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/notification.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/patternBackground.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/plus.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/CoreData+MagicalRecord.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/CoreData+MagicalRecord.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/CoreData+MagicalRecord.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Create Event/CreateEventTableViewController.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Create Event/CreateEventTableViewController.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Create Event/CreateEventViewController.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Create Event/CreateEventViewController.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Database/DatabaseManager.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Database/DatabaseManager.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Discover/DiscoverViewController.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Discover/DiscoverViewController.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Database/Models/Event.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Database/Models/Event.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Database/Models/Friend.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Database/Models/Friend.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Create Event/FriendCollectionViewCell.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Create Event/FriendCollectionViewCell.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Home/FriendContainerView.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Home/FriendContainerView.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Home/FriendView.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Home/FriendView.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Create Event/FriendsCollectionViewController.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Create Event/FriendsCollectionViewController.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Helpers/GCPlaceholderTextView.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Helpers/GCPlaceholderTextView.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Home/HomeViewController.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/LICENSE.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Home/Line.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Home/Line.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Home/LinesView.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Home/LinesView.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Login/LoginViewController.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Login/LoginViewController.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/MagicalImportFunctions.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/MagicalImportFunctions.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/DataImport/MagicalImportFunctions.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/DataImport/MagicalImportFunctions.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/MagicalRecord+Actions.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/MagicalRecord+Actions.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Core/MagicalRecord+Actions.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Core/MagicalRecord+Actions.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/MagicalRecord+ErrorHandling.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/MagicalRecord+ErrorHandling.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Core/MagicalRecord+ErrorHandling.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Core/MagicalRecord+ErrorHandling.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/MagicalRecord+Options.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/MagicalRecord+Options.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Core/MagicalRecord+Options.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Core/MagicalRecord+Options.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/MagicalRecord+Setup.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/MagicalRecord+Setup.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Core/MagicalRecord+Setup.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Core/MagicalRecord+Setup.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/MagicalRecord+ShorthandSupport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/MagicalRecord+ShorthandSupport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Core/MagicalRecord+ShorthandSupport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Core/MagicalRecord+ShorthandSupport.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/MagicalRecord+iCloud.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/MagicalRecord+iCloud.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Core/MagicalRecord+iCloud.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Core/MagicalRecord+iCloud.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/MagicalRecord.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/MagicalRecord.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Core/MagicalRecord.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Core/MagicalRecord.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/MagicalRecordShorthand.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/MagicalRecordShorthand.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Core/MagicalRecordShorthand.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Base.lproj/Main.storyboard" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Manifest.lock" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace.xcodeproj/xcuserdata/david.xcuserdatad/xcschemes/Mogenerator.xcscheme" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/NSAttributeDescription+MagicalDataImport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/NSAttributeDescription+MagicalDataImport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/DataImport/NSAttributeDescription+MagicalDataImport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/DataImport/NSAttributeDescription+MagicalDataImport.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/NSEntityDescription+MagicalDataImport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/NSEntityDescription+MagicalDataImport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/DataImport/NSEntityDescription+MagicalDataImport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/DataImport/NSEntityDescription+MagicalDataImport.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/NSManagedObject+MagicalAggregation.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/NSManagedObject+MagicalAggregation.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalAggregation.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalAggregation.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/NSManagedObject+MagicalDataImport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/NSManagedObject+MagicalDataImport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalDataImport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalDataImport.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/NSManagedObject+MagicalFinders.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/NSManagedObject+MagicalFinders.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalFinders.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalFinders.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/NSManagedObject+MagicalRecord.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/NSManagedObject+MagicalRecord.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalRecord.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalRecord.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/NSManagedObject+MagicalRequests.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/NSManagedObject+MagicalRequests.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalRequests.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalRequests.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/NSManagedObjectContext+MagicalObserving.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/NSManagedObjectContext+MagicalObserving.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalObserving.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalObserving.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/NSManagedObjectContext+MagicalRecord.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/NSManagedObjectContext+MagicalRecord.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalRecord.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalRecord.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/NSManagedObjectContext+MagicalSaves.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/NSManagedObjectContext+MagicalSaves.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalSaves.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalSaves.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/NSManagedObjectContext+MagicalThreading.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/NSManagedObjectContext+MagicalThreading.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalThreading.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalThreading.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/NSManagedObjectModel+MagicalRecord.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/NSManagedObjectModel+MagicalRecord.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSManagedObjectModel+MagicalRecord.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSManagedObjectModel+MagicalRecord.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/NSNumber+MagicalDataImport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/NSNumber+MagicalDataImport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/DataImport/NSNumber+MagicalDataImport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/DataImport/NSNumber+MagicalDataImport.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/NSObject+MagicalDataImport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/NSObject+MagicalDataImport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/DataImport/NSObject+MagicalDataImport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/DataImport/NSObject+MagicalDataImport.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/NSPersistentStore+MagicalRecord.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/NSPersistentStore+MagicalRecord.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSPersistentStore+MagicalRecord.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSPersistentStore+MagicalRecord.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/NSPersistentStoreCoordinator+MagicalRecord.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/NSPersistentStoreCoordinator+MagicalRecord.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSPersistentStoreCoordinator+MagicalRecord.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/NSPersistentStoreCoordinator+MagicalRecord.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/NSRelationshipDescription+MagicalDataImport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/NSRelationshipDescription+MagicalDataImport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/DataImport/NSRelationshipDescription+MagicalDataImport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/DataImport/NSRelationshipDescription+MagicalDataImport.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/MagicalRecord/NSString+MagicalDataImport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/MagicalRecord/NSString+MagicalDataImport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/DataImport/NSString+MagicalDataImport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/MagicalRecord/Categories/DataImport/NSString+MagicalDataImport.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/NYXImagesKit/NYXImagesHelper.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/NYXImagesKit/NYXImagesHelper.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Helper/NYXImagesHelper.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Helper/NYXImagesHelper.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/NYXImagesKit/NYXImagesKit.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/NYXImagesKit/NYXImagesKit.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Helper/NYXImagesKit.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/NYXImagesKit/NYXProgressiveImageView.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/NYXImagesKit/NYXProgressiveImageView.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Classes/NYXProgressiveImageView.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Classes/NYXProgressiveImageView.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Calendar/PlaceCell.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Calendar/PlaceCell.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Podfile.lock" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Podfile" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Pods-MagicalRecord-Private.xcconfig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Pods-MagicalRecord-dummy.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Pods-MagicalRecord-prefix.pch" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Pods-MagicalRecord.xcconfig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/david.xcuserdatad/xcschemes/Pods-MagicalRecord.xcscheme" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Pods-NYXImagesKit-Private.xcconfig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Pods-NYXImagesKit-dummy.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Pods-NYXImagesKit-prefix.pch" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Pods-NYXImagesKit.xcconfig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/david.xcuserdatad/xcschemes/Pods-NYXImagesKit.xcscheme" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Pods-acknowledgements.markdown" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Pods-acknowledgements.plist" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Pods-dummy.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Pods-environment.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Pods-resources.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Pods.xcconfig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/david.xcuserdatad/xcschemes/Pods.xcscheme" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Animators/PresentingAnimator.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Animators/PresentingAnimator.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Profile/ProfileViewController.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Profile/ProfileViewController.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/MagicalRecord/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Database/Models/RootEntity.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Database/Models/RootEntity.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Calendar/SocialCalendarTableViewController.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Calendar/SocialCalendarTableViewController.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Helpers/TextFieldToolbar.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Helpers/TextFieldToolbar.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/NYXImagesKit/UIImage+Blurring.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/NYXImagesKit/UIImage+Blurring.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Categories/UIImage+Blurring.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Categories/UIImage+Blurring.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/NYXImagesKit/UIImage+Enhancing.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/NYXImagesKit/UIImage+Enhancing.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Categories/UIImage+Enhancing.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Categories/UIImage+Enhancing.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/NYXImagesKit/UIImage+Filtering.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/NYXImagesKit/UIImage+Filtering.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Categories/UIImage+Filtering.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Categories/UIImage+Filtering.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/NYXImagesKit/UIImage+Masking.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/NYXImagesKit/UIImage+Masking.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Categories/UIImage+Masking.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Categories/UIImage+Masking.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/NYXImagesKit/UIImage+Reflection.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/NYXImagesKit/UIImage+Reflection.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Categories/UIImage+Reflection.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Categories/UIImage+Reflection.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/NYXImagesKit/UIImage+Resizing.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/NYXImagesKit/UIImage+Resizing.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Categories/UIImage+Resizing.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Categories/UIImage+Resizing.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/NYXImagesKit/UIImage+Rotating.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/NYXImagesKit/UIImage+Rotating.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Categories/UIImage+Rotating.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Categories/UIImage+Rotating.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/NYXImagesKit/UIImage+Saving.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/NYXImagesKit/UIImage+Saving.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Categories/UIImage+Saving.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Categories/UIImage+Saving.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/NYXImagesKit/UIScrollView+Screenshot.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/NYXImagesKit/UIScrollView+Screenshot.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Categories/UIScrollView+Screenshot.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Categories/UIScrollView+Screenshot.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/BuildHeaders/NYXImagesKit/UIView+Screenshot.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Headers/NYXImagesKit/UIView+Screenshot.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Categories/UIView+Screenshot.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/Categories/UIView+Screenshot.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace.xcworkspace/xcuserdata/david.xcuserdatad/WorkspaceSettings.xcsettings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Database/Models/_Event.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Database/Models/_Event.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Database/Models/_Friend.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Database/Models/_Friend.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Database/Models/_RootEntity.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Database/Models/_RootEntity.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace.xcworkspace/contents.xcworkspacedata" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/thirdplace/Database/Model.xcdatamodeld/Model.xcdatamodel/contents" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/project.pbxproj" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/NYXImagesKit/readme.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/thirdplace.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/xcode.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/david.xcuserdatad/xcschemes/xcschememanagement.plist" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/HomeScreen/Base.lproj/Main.storyboard" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/HomeScreen/ViewController.m" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/HomeScreenTests/HomeScreenTests-Info.plist" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/HomeScreenTests/HomeScreenTests.m" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/HomeScreenTests/en.lproj/InfoPlist.strings" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/HomeScreen.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/thirdplace.xcodeproj/project.pbxproj" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/HomeScreen.xcodeproj/project.xcworkspace/contents.xcworkspacedata" afterPath="$PROJECT_DIR$/thirdplace.xcodeproj/project.xcworkspace/contents.xcworkspacedata" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/HomeScreen.xcodeproj/xcuserdata/david.xcuserdatad/xcschemes/HomeScreen.xcscheme" afterPath="$PROJECT_DIR$/thirdplace.xcodeproj/xcuserdata/david.xcuserdatad/xcschemes/thirdplace.xcscheme" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/HomeScreen.xcodeproj/xcuserdata/david.xcuserdatad/xcschemes/xcschememanagement.plist" afterPath="$PROJECT_DIR$/thirdplace.xcodeproj/xcuserdata/david.xcuserdatad/xcschemes/xcschememanagement.plist" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/HomeScreen/AppDelegate.h" afterPath="$PROJECT_DIR$/thirdplace/AppDelegate.h" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/HomeScreen/AppDelegate.m" afterPath="$PROJECT_DIR$/thirdplace/AppDelegate.m" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/HomeScreen/HomeScreen-Info.plist" afterPath="$PROJECT_DIR$/thirdplace/thirdplace-Info.plist" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/HomeScreen/HomeScreen-Prefix.pch" afterPath="$PROJECT_DIR$/thirdplace/thirdplace-Prefix.pch" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/HomeScreen/Images.xcassets/AppIcon.appiconset/Contents.json" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/AppIcon.appiconset/Contents.json" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/HomeScreen/Images.xcassets/LaunchImage.launchimage/Contents.json" afterPath="$PROJECT_DIR$/thirdplace/Images.xcassets/LaunchImage.launchimage/Contents.json" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/HomeScreen/ViewController.h" afterPath="$PROJECT_DIR$/thirdplace/Home/HomeViewController.h" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/HomeScreen/en.lproj/InfoPlist.strings" afterPath="$PROJECT_DIR$/thirdplace/en.lproj/InfoPlist.strings" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/HomeScreen/main.m" afterPath="$PROJECT_DIR$/thirdplace/main.m" />
+    </list>
+    <ignored path="thirdplace.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="iphoneos" />
+  <component name="FavoritesManager">
+    <favorites_list name="thirdplace" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="CreateEventTableViewController.m" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/thirdplace/Create Event/CreateEventTableViewController.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.33467743" vertical-offset="1184" max-vertical-offset="2175">
+              <caret line="95" column="62" selection-start-line="95" selection-start-column="62" selection-end-line="95" selection-end-column="62" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HomeViewController.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/thirdplace/Home/HomeViewController.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="750" max-vertical-offset="1395">
+              <caret line="88" column="2" selection-start-line="88" selection-start-column="2" selection-end-line="88" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FriendView.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/thirdplace/Home/FriendView.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="314" max-vertical-offset="2475">
+              <caret line="44" column="69" selection-start-line="44" selection-start-column="69" selection-end-line="44" selection-end-column="69" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProfileViewController.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/thirdplace/Profile/ProfileViewController.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="239" max-vertical-offset="735">
+              <caret line="41" column="55" selection-start-line="41" selection-start-column="55" selection-end-line="41" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProfileViewController.h" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/thirdplace/Profile/ProfileViewController.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="225">
+              <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/thirdplace/main.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
+              <caret line="12" column="33" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FriendView.h" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/thirdplace/Home/FriendView.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
+              <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FriendCollectionViewCell.h" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/thirdplace/Create Event/FriendCollectionViewCell.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="315">
+              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HomeViewController.h" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/thirdplace/Home/HomeViewController.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
+              <caret line="10" column="11" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FriendContainerView.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/thirdplace/Home/FriendContainerView.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="690" max-vertical-offset="3120">
+              <caret line="90" column="0" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="true" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/thirdplace/Base.lproj/Main.storyboard" />
+        <option value="$PROJECT_DIR$/thirdplace/Friend.m" />
+        <option value="$PROJECT_DIR$/thirdplace/Friend.h" />
+        <option value="$PROJECT_DIR$/thirdplace/CircleImageView.h" />
+        <option value="$PROJECT_DIR$/thirdplace/FriendScrollView.h" />
+        <option value="$PROJECT_DIR$/thirdplace/FriendScrollView.m" />
+        <option value="$PROJECT_DIR$/thirdplace/CircleImageView.m" />
+        <option value="$PROJECT_DIR$/thirdplace/LinesView.h" />
+        <option value="$PROJECT_DIR$/thirdplace/Line.h" />
+        <option value="$PROJECT_DIR$/thirdplace/Line.m" />
+        <option value="$PROJECT_DIR$/thirdplace/LinesView.m" />
+        <option value="$PROJECT_DIR$/thirdplace/ViewController.m" />
+        <option value="$PROJECT_DIR$/thirdplace/thirdplace-Prefix.pch" />
+        <option value="$PROJECT_DIR$/thirdplace/LoginViewController.h" />
+        <option value="$PROJECT_DIR$/thirdplace/Database/Models/RootEntity.m" />
+        <option value="$PROJECT_DIR$/thirdplace/Database/Models/RootEntity.h" />
+        <option value="$PROJECT_DIR$/thirdplace/Database/DatabaseManager.m" />
+        <option value="$PROJECT_DIR$/thirdplace/FriendView.h" />
+        <option value="$PROJECT_DIR$/thirdplace/AppDelegate.m" />
+        <option value="$PROJECT_DIR$/thirdplace/LoginViewController.m" />
+        <option value="$PROJECT_DIR$/thirdplace/FriendContainerView.h" />
+        <option value="$PROJECT_DIR$/thirdplace/HomeViewController.m" />
+        <option value="$PROJECT_DIR$/thirdplace/FriendContainerView.m" />
+        <option value="$PROJECT_DIR$/thirdplace/FriendView.m" />
+        <option value="$PROJECT_DIR$/thirdplace/Home/FriendContainerView.h" />
+        <option value="$PROJECT_DIR$/thirdplace/Add Friend/AddFriendViewController.h" />
+        <option value="$PROJECT_DIR$/thirdplace/Add Friend/AddFriendViewController.m" />
+        <option value="$PROJECT_DIR$/thirdplace/Create Event/FriendCollectionViewCell.h" />
+        <option value="$PROJECT_DIR$/thirdplace/Create Event/CreateEventViewController.h" />
+        <option value="$PROJECT_DIR$/thirdplace/Create Event/CreateEventViewController.m" />
+        <option value="$PROJECT_DIR$/thirdplace/Discover/DiscoverViewController.h" />
+        <option value="$PROJECT_DIR$/thirdplace/Discover/DiscoverViewController.m" />
+        <option value="$PROJECT_DIR$/thirdplace/Create Event/CreateEventTableViewController.h" />
+        <option value="$PROJECT_DIR$/thirdplace/Create Event/FriendsCollectionViewController.m" />
+        <option value="$PROJECT_DIR$/thirdplace/Calendar/SocialCalendarTableViewController.h" />
+        <option value="$PROJECT_DIR$/thirdplace/Calendar/PlaceCell.h" />
+        <option value="$PROJECT_DIR$/thirdplace/Calendar/PlaceCell.m" />
+        <option value="$PROJECT_DIR$/thirdplace/Calendar/SocialCalendarTableViewController.m" />
+        <option value="$PROJECT_DIR$/thirdplace/Animators/PresentingAnimator.h" />
+        <option value="$PROJECT_DIR$/thirdplace/Animators/PresentingAnimator.m" />
+        <option value="$PROJECT_DIR$/thirdplace/Home/HomeViewController.m" />
+        <option value="$PROJECT_DIR$/thirdplace/Profile/ProfileViewController.h" />
+        <option value="$PROJECT_DIR$/thirdplace/Profile/ProfileViewController.m" />
+        <option value="$PROJECT_DIR$/thirdplace/Home/FriendView.h" />
+        <option value="$PROJECT_DIR$/thirdplace/Home/FriendContainerView.m" />
+        <option value="$PROJECT_DIR$/thirdplace/Home/FriendView.m" />
+        <option value="$PROJECT_DIR$/thirdplace/Create Event/CreateEventTableViewController.m" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="22" />
+    <option name="width" value="1440" />
+    <option name="height" value="874" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="Cidr.FilesView" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeRootNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thirdplace" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeRootNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thirdplace" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thirdplace" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeRootNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thirdplace" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thirdplace" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Profile" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeRootNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thirdplace" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thirdplace" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Home" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeRootNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thirdplace" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thirdplace" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Create Event" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeRootNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thirdplace" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thirdplace" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Add Friend" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeRootNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Pods" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeRootNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Pods" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Products" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.lastSelected" value="preferences.pluginManager" />
+    <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/thirdplace.xcodeproj" />
+    <property name="recentsLimit" value="5" />
+    <property name="OBJC.PRESERVED_TARGET_SELECTION" value="thirdplace" />
+    <property name="FullScreen" value="false" />
+  </component>
+  <component name="RunManager" selected="Application.thirdplace">
+    <configuration default="true" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="thirdplace" TARGET_NAME="thirdplace" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="thirdplace" RUN_TARGET_NAME="thirdplace" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+      <envs />
+      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
+        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
+      </EXTENSION>
+      <method />
+    </configuration>
+    <configuration default="true" type="OCUnitRunConfiguration" factoryName="XCTest/Kiwi" PASS_PARENT_ENVS="FALSE" TEST_MODE="SUITE_TEST">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="OCGoogleTestRunConfigurationType" factoryName="Google Test" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="thirdplace" TARGET_NAME="thirdplace" CONFIG_NAME="Debug" TEST_MODE="SUITE_TEST">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="thirdplace" type="AppleRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="thirdplace" TARGET_NAME="thirdplace" CONFIG_NAME="Debug" SCHEME_NAME="thirdplace" RUN_TARGET_PROJECT_NAME="thirdplace" RUN_TARGET_NAME="thirdplace" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+      <envs />
+      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
+        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
+      </EXTENSION>
+      <RunnerSettings RunnerId="AppRunner" />
+      <ConfigurationWrapper RunnerId="AppRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Mogenerator" type="AppleRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="thirdplace" TARGET_NAME="Mogenerator" CONFIG_NAME="Debug" SCHEME_NAME="Mogenerator" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+      <envs />
+      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
+        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
+      </EXTENSION>
+      <method />
+    </configuration>
+    <configuration default="false" name="Pods-MagicalRecord" type="AppleRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="Pods" TARGET_NAME="Pods-MagicalRecord" CONFIG_NAME="Debug" SCHEME_NAME="Pods-MagicalRecord" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+      <envs />
+      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
+        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
+      </EXTENSION>
+      <method />
+    </configuration>
+    <configuration default="false" name="Pods" type="AppleRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="Pods" TARGET_NAME="Pods" CONFIG_NAME="Debug" SCHEME_NAME="Pods" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+      <envs />
+      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
+        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
+      </EXTENSION>
+      <method />
+    </configuration>
+    <configuration default="false" name="Pods-NYXImagesKit" type="AppleRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="Pods" TARGET_NAME="Pods-NYXImagesKit" CONFIG_NAME="Debug" SCHEME_NAME="Pods-NYXImagesKit" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+      <envs />
+      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
+        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
+      </EXTENSION>
+      <method />
+    </configuration>
+    <configuration default="false" name="Pods-RHAddressBook" type="AppleRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="Pods" TARGET_NAME="Pods-RHAddressBook" CONFIG_NAME="Debug" SCHEME_NAME="Pods-RHAddressBook" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+      <envs />
+      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
+        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
+      </EXTENSION>
+      <method />
+    </configuration>
+    <configuration default="false" name="Pods-AFNetworking" type="AppleRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="Pods" TARGET_NAME="Pods-AFNetworking" CONFIG_NAME="Debug" SCHEME_NAME="Pods-AFNetworking" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+      <envs />
+      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
+        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
+      </EXTENSION>
+      <method />
+    </configuration>
+    <configuration default="false" name="Pods-DZNEmptyDataSet" type="AppleRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="Pods" TARGET_NAME="Pods-DZNEmptyDataSet" CONFIG_NAME="Debug" SCHEME_NAME="Pods-DZNEmptyDataSet" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+      <envs />
+      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
+        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
+      </EXTENSION>
+      <method />
+    </configuration>
+    <configuration default="false" name="Pods-DZNPhotoPickerController" type="AppleRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="Pods" TARGET_NAME="Pods-DZNPhotoPickerController" CONFIG_NAME="Debug" SCHEME_NAME="Pods-DZNPhotoPickerController" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+      <envs />
+      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
+        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
+      </EXTENSION>
+      <method />
+    </configuration>
+    <configuration default="false" name="Pods-SDWebImage" type="AppleRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="Pods" TARGET_NAME="Pods-SDWebImage" CONFIG_NAME="Debug" SCHEME_NAME="Pods-SDWebImage" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+      <envs />
+      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
+        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
+      </EXTENSION>
+      <method />
+    </configuration>
+    <configuration default="false" name="Pods-SPGooglePlacesAutocomplete" type="AppleRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="Pods" TARGET_NAME="Pods-SPGooglePlacesAutocomplete" CONFIG_NAME="Debug" SCHEME_NAME="Pods-SPGooglePlacesAutocomplete" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+      <envs />
+      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
+        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
+      </EXTENSION>
+      <method />
+    </configuration>
+    <configuration default="false" name="Pods-pop" type="AppleRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="Pods" TARGET_NAME="Pods-pop" CONFIG_NAME="Debug" SCHEME_NAME="Pods-pop" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+      <envs />
+      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
+        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
+      </EXTENSION>
+      <method />
+    </configuration>
+    <list size="12">
+      <item index="0" class="java.lang.String" itemvalue="Application.thirdplace" />
+      <item index="1" class="java.lang.String" itemvalue="Application.Mogenerator" />
+      <item index="2" class="java.lang.String" itemvalue="Application.Pods-MagicalRecord" />
+      <item index="3" class="java.lang.String" itemvalue="Application.Pods" />
+      <item index="4" class="java.lang.String" itemvalue="Application.Pods-NYXImagesKit" />
+      <item index="5" class="java.lang.String" itemvalue="Application.Pods-RHAddressBook" />
+      <item index="6" class="java.lang.String" itemvalue="Application.Pods-AFNetworking" />
+      <item index="7" class="java.lang.String" itemvalue="Application.Pods-DZNEmptyDataSet" />
+      <item index="8" class="java.lang.String" itemvalue="Application.Pods-DZNPhotoPickerController" />
+      <item index="9" class="java.lang.String" itemvalue="Application.Pods-SDWebImage" />
+      <item index="10" class="java.lang.String" itemvalue="Application.Pods-SPGooglePlacesAutocomplete" />
+      <item index="11" class="java.lang.String" itemvalue="Application.Pods-pop" />
+    </list>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" myUseAcceleration="nothing">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0ce89d2d-eb57-4fb8-bbed-540228297295" name="Default" comment="" />
+      <created>1404208191930</created>
+      <option name="number" value="Default" />
+      <updated>1404208191930</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="22" width="1440" height="874" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32736573" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28644502" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286445" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25933757" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32992327" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="100" y="122" width="1240" height="674" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <default-breakpoints>
+        <breakpoint enabled="true" type="CidrExceptionBreakpoint">
+          <properties />
+        </breakpoint>
+      </default-breakpoints>
+      <option name="time" value="23" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Pods/NYXImagesKit/Categories/UIImage+Filtering.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4875" max-vertical-offset="10320">
+          <caret line="321" column="11" selection-start-line="321" selection-start-column="11" selection-end-line="321" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/AddressBookUI.framework/Headers/ABNewPersonViewController.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.397878" vertical-offset="0" max-vertical-offset="754">
+          <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/AddressBook.framework/Headers/ABRecord.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33289126" vertical-offset="49" max-vertical-offset="975">
+          <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/AddressBook.framework/Headers/ABPerson.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33289126" vertical-offset="1729" max-vertical-offset="2970">
+          <caret line="139" column="23" selection-start-line="139" selection-start-column="23" selection-end-line="139" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/AddressBookUI.framework/Headers/ABPeoplePickerNavigationController.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8209549" vertical-offset="71" max-vertical-offset="825">
+          <caret line="49" column="8" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pods/RHAddressBook/RHAddressBook/RHRecord.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47511312" vertical-offset="1515" max-vertical-offset="4350">
+          <caret line="121" column="4" selection-start-line="121" selection-start-column="4" selection-end-line="121" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/AddressBook.framework/Headers/ABMultiValue.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3325792" vertical-offset="363" max-vertical-offset="900">
+          <caret line="36" column="42" selection-start-line="36" selection-start-column="42" selection-end-line="36" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pods/RHAddressBook/RHAddressBook/RHMultiValue.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36651585" vertical-offset="1188" max-vertical-offset="3045">
+          <caret line="93" column="38" selection-start-line="93" selection-start-column="38" selection-end-line="93" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIImagePickerController.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3326613" vertical-offset="15" max-vertical-offset="2130">
+          <caret line="14" column="61" selection-start-line="14" selection-start-column="61" selection-end-line="14" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pods/DZNPhotoPickerController/Source/Classes/UIImagePickerController/UIImagePickerController+Edit.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34350133" vertical-offset="131" max-vertical-offset="885">
+          <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pods/DZNPhotoPickerController/Source/Classes/DZNPhotoEditorViewController.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15517241" vertical-offset="1143" max-vertical-offset="10320">
+          <caret line="90" column="0" selection-start-line="90" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pods/Headers/DZNPhotoPickerController/Classes/DZNPhotoPickerControllerConstants.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1949602" vertical-offset="633" max-vertical-offset="1560">
+          <caret line="52" column="48" selection-start-line="52" selection-start-column="4" selection-end-line="52" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pods/Headers/DZNPhotoPickerController/Classes/UIImagePickerController/UIImagePickerController+Edit.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3580902" vertical-offset="0" max-vertical-offset="754">
+          <caret line="19" column="74" selection-start-line="19" selection-start-column="74" selection-end-line="19" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pods/NYXImagesKit/Categories/UIImage+Saving.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3326613" vertical-offset="675" max-vertical-offset="2400">
+          <caret line="59" column="7" selection-start-line="59" selection-start-column="7" selection-end-line="59" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Add Friend/AddFriendViewController.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19093406" vertical-offset="11" max-vertical-offset="3330">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/AppDelegate.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.43633953" vertical-offset="659" max-vertical-offset="1425">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Add Friend/AddFriendViewController.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29840848" vertical-offset="0" max-vertical-offset="754">
+          <caret line="15" column="73" selection-start-line="15" selection-start-column="73" selection-end-line="15" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pods/SPGooglePlacesAutocomplete/SPGooglePlacesAutocomplete/SPGooglePlacesAutocomplete.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30241936" vertical-offset="0" max-vertical-offset="496">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pods/SPGooglePlacesAutocomplete/SPGooglePlacesAutocomplete/SPGooglePlacesAutocompletePlace.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30241936" vertical-offset="0" max-vertical-offset="795">
+          <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pods/SPGooglePlacesAutocomplete/SPGooglePlacesAutocomplete/SPGooglePlacesAutocompletePlace.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42540324" vertical-offset="854" max-vertical-offset="1350">
+          <caret line="72" column="1" selection-start-line="72" selection-start-column="1" selection-end-line="72" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pods/SPGooglePlacesAutocomplete/SPGooglePlacesAutocomplete/SPGooglePlacesAutocompleteUtilities.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30241936" vertical-offset="0" max-vertical-offset="525">
+          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pods/SPGooglePlacesAutocomplete/SPGooglePlacesAutocomplete/SPGooglePlacesAutocompleteUtilities.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3773585" vertical-offset="10" max-vertical-offset="540">
+          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pods/SPGooglePlacesAutocomplete/SPGooglePlacesAutocomplete/SPGooglePlacesPlaceDetailQuery.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6220159" vertical-offset="1121" max-vertical-offset="1875">
+          <caret line="106" column="19" selection-start-line="106" selection-start-column="19" selection-end-line="106" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pods/SPGooglePlacesAutocomplete/SPGooglePlacesAutocomplete/SPGooglePlacesPlaceDetailQuery.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8753316" vertical-offset="0" max-vertical-offset="915">
+          <caret line="44" column="42" selection-start-line="44" selection-start-column="42" selection-end-line="44" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Login/LoginViewController.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="975" max-vertical-offset="1875">
+          <caret line="65" column="13" selection-start-line="49" selection-start-column="12" selection-end-line="65" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Discover/DiscoverViewController.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15873016" vertical-offset="0" max-vertical-offset="756">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Discover/DiscoverViewController.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17857143" vertical-offset="0" max-vertical-offset="756">
+          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Create Event/FriendsCollectionViewController.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33730158" vertical-offset="0" max-vertical-offset="756">
+          <caret line="17" column="11" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Create Event/CreateEventTableViewController.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1984127" vertical-offset="0" max-vertical-offset="756">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Create Event/FriendsCollectionViewController.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="1125">
+          <caret line="27" column="37" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Create Event/CreateEventViewController.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
+          <caret line="2" column="53" selection-start-line="2" selection-start-column="53" selection-end-line="2" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Calendar/SocialCalendarTableViewController.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30241936" vertical-offset="0" max-vertical-offset="496">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Calendar/PlaceCell.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="195" max-vertical-offset="330">
+          <caret line="13" column="45" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Create Event/CreateEventViewController.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="414" max-vertical-offset="1170">
+          <caret line="63" column="9" selection-start-line="63" selection-start-column="9" selection-end-line="63" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Calendar/PlaceCell.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="375">
+          <caret line="16" column="52" selection-start-line="16" selection-start-column="52" selection-end-line="16" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pods/Headers/pop/POPAnimatableProperty.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47214854" vertical-offset="1159" max-vertical-offset="2910">
+          <caret line="102" column="41" selection-start-line="102" selection-start-column="41" selection-end-line="102" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Animators/PresentingAnimator.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding>
+            <element signature="e#107#140#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Animators/PresentingAnimator.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="134" max-vertical-offset="630">
+          <caret line="26" column="14" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Calendar/SocialCalendarTableViewController.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="761" max-vertical-offset="1515">
+          <caret line="90" column="104" selection-start-line="90" selection-start-column="104" selection-end-line="90" selection-end-column="104" />
+          <folding>
+            <element signature="e#107#132#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Home/FriendContainerView.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
+          <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Create Event/FriendCollectionViewCell.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Home/HomeViewController.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
+          <caret line="10" column="11" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Create Event/FriendCollectionViewCell.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="315">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Home/FriendView.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
+          <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Profile/ProfileViewController.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="225">
+          <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Profile/ProfileViewController.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="239" max-vertical-offset="735">
+          <caret line="41" column="55" selection-start-line="41" selection-start-column="55" selection-end-line="41" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Home/HomeViewController.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1395">
+          <caret line="88" column="2" selection-start-line="88" selection-start-column="2" selection-end-line="88" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Home/FriendContainerView.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="690" max-vertical-offset="3120">
+          <caret line="90" column="0" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Home/FriendView.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="314" max-vertical-offset="2475">
+          <caret line="44" column="69" selection-start-line="44" selection-start-column="69" selection-end-line="44" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/main.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
+          <caret line="12" column="33" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thirdplace/Create Event/CreateEventTableViewController.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33467743" vertical-offset="1184" max-vertical-offset="2175">
+          <caret line="95" column="62" selection-start-line="95" selection-start-column="62" selection-end-line="95" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
+

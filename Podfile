@@ -1,0 +1,6 @@
+pod 'MagicalRecord'
+pod 'NYXImagesKit'
+pod 'RHAddressBook'
+pod 'DZNPhotoPickerController'
+pod 'SPGooglePlacesAutocomplete'
+pod 'pop', '~> 1.0'
