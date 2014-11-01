@@ -1,4 +1,4 @@
-thirdplace
+thirdplace - The personal social network
 ==========
 
-The personal social network
+* "Develop" is the working branch
