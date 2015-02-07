@@ -7,7 +7,7 @@
 #import "AddFriendViewController.h"
 #import "DZNPhotoPickerController.h"
 #import "Friend.h"
-#import "UIImagePickerControllerExtended.h"
+#import "UIImagePickerController+Edit.h"
 #import "RootEntity.h"
 #import "TextFieldToolbar.h"
 #import <RHAddressBook/AddressBook.h>
@@ -152,7 +152,9 @@
         if (_picker.cropMode != DZNPhotoEditorViewControllerCropModeNone)
         {
             UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-            DZNPhotoEditorViewController *editor = [[DZNPhotoEditorViewController alloc] initWithImage:image cropMode:_picker.cropMode];
+            DZNPhotoEditorViewController *editor =
+            [[DZNPhotoEditorViewController alloc] initWithImage:image];
+            editor.cropMode = _picker.cropMode;
             [_picker pushViewController:editor animated:YES];
         }
         else
