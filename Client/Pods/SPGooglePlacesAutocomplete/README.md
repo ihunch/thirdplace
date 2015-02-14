@@ -1,13 +1,22 @@
 SPGooglePlacesAutocomplete
 ===============
 
-SPGooglePlacesAutocomplete is a simple objective-c wrapper around the [Google Places Autocomplete API](https://developers.google.com/places/documentation/autocomplete). The API can be used to provide autocomplete functionality for text-based geographic searches, by returning Places such as businesses, addresses, and points of interest as a user types. SPGooglePlacesAutocomplete also provides support for converting Place results into CLPlacemark objects for easy mapping with MKMapView.
+SPGooglePlacesAutocomplete is a simple objective-c wrapper around the [Google Places Autocomplete API](https://developers.google.com/places/documentation/autocomplete). 
+
+The API can be used to provide autocomplete functionality for text-based geographic searches, by returning Places such as businesses, addresses, and points of interest as a user types. 
+
+SPGooglePlacesAutocomplete also provides support for converting Place results into CLPlacemark objects for easy mapping with MKMapView.
 
 Screenshots
 ----
 ![](http://i.imgur.com/heUHG4w.png)
 ![](http://i.imgur.com/l0uZGXX.png)
 
+
+TODO
+-------------
+1. Add Unit Test
+2. Create a Swift version
 
 How To Use It
 -------------

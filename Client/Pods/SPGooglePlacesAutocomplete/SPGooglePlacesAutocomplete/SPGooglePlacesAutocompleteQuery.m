@@ -3,7 +3,9 @@
 //  SPGooglePlacesAutocomplete
 //
 //  Created by Stephen Poletto on 7/17/12.
+//  Modified by Shahar Hadas on 3/26/2014
 //  Copyright (c) 2012 Stephen Poletto. All rights reserved.
+//  Copyright (c) 2014 Sparq. All rights reserved.
 //
 
 #import "SPGooglePlacesAutocompleteQuery.h"
@@ -24,7 +26,7 @@
         self.offset = NSNotFound;
         self.location = CLLocationCoordinate2DMake(-1, -1);
         self.radius = 500;
-        self.types = SPPlaceTypeInvalid;
+        self.types = SPPlaceTypeAll;
     }
     return self;
 }
@@ -39,7 +41,7 @@
                             [self.input stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                             SPBooleanStringForBool(self.sensor), self.key];
     if (self.offset != NSNotFound) {
-        [url appendFormat:@"&offset=%u", self.offset];
+        [url appendFormat:@"&offset=%lu", (unsigned long)self.offset];
     }
     if (self.location.latitude != -1) {
         [url appendFormat:@"&location=%f,%f", self.location.latitude, self.location.longitude];
@@ -50,7 +52,7 @@
     if (self.language) {
         [url appendFormat:@"&language=%@", self.language];
     }
-    if (self.types != SPPlaceTypeInvalid) {
+    if (self.types != SPPlaceTypeAll) {
         [url appendFormat:@"&types=%@", SPPlaceTypeStringForPlaceType(self.types)];
     }
     if (self.countryCode != nil) {

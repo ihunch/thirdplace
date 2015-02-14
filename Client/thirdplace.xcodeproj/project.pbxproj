@@ -21,7 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		42E20AD31985FF58009DDAE5 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42E20AD21985FF58009DDAE5 /* FacebookSDK.framework */; };
+		29A1868B1A88B7700078C858 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A1868A1A88B7700078C858 /* FacebookSDK.framework */; };
 		5AF0E0DFFBB412BC4095DB0F /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF0E37748887AA7AE376818 /* LoginViewController.m */; };
 		5AF0E0FC5B2CACAF7E472152 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF0E0B352D232D6B3F62BE4 /* AddressBook.framework */; };
 		5AF0E26EA1F0400EA23F73E3 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF0E617D666DEE84A05C2ED /* ProfileViewController.m */; };
@@ -66,7 +66,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		29A1868A1A88B7700078C858 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		42E20AD21985FF58009DDAE5 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		57CE74C8907036BC7D60FF1A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		5AF0E0031C763DFF7AF5FA94 /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
 		5AF0E04A06C893B03432701D /* CreateEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateEventViewController.m; sourceTree = "<group>"; };
 		5AF0E0B352D232D6B3F62BE4 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -137,8 +139,8 @@
 		63D13E4219666F3B00D17CF5 /* bbb2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bbb2.jpg; sourceTree = "<group>"; };
 		63D13E4319666F3B00D17CF5 /* bbb1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bbb1.jpg; sourceTree = "<group>"; };
 		63D13E4419666F3B00D17CF5 /* bbb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bbb.jpg; sourceTree = "<group>"; };
+		AABB3CEC391D37F8B1B5F6C4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B8B0F77F2AD2444AAC6F183F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA2559CF3AE6447E8F5F89C5 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,12 +148,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29A1868B1A88B7700078C858 /* FacebookSDK.framework in Frameworks */,
 				63626B141962B02D00FA58D5 /* CoreGraphics.framework in Frameworks */,
 				63626B161962B02D00FA58D5 /* UIKit.framework in Frameworks */,
 				63626B121962B02D00FA58D5 /* Foundation.framework in Frameworks */,
 				5B7B1960C59648F598B80AB9 /* libPods.a in Frameworks */,
 				5AF0E0FC5B2CACAF7E472152 /* AddressBook.framework in Frameworks */,
-				42E20AD31985FF58009DDAE5 /* FacebookSDK.framework in Frameworks */,
 				5AF0EE84CDDB0411F27CD3CF /* AddressBookUI.framework in Frameworks */,
 				5AF0E7268587937F2790EAA5 /* MapKit.framework in Frameworks */,
 			);
@@ -160,6 +162,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37C6DF59394915137CBB84AD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				57CE74C8907036BC7D60FF1A /* Pods.debug.xcconfig */,
+				AABB3CEC391D37F8B1B5F6C4 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		5AF0E05F457B26636BB9D5F2 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,7 +314,7 @@
 				63626B171962B02D00FA58D5 /* thirdplace */,
 				63626B101962B02D00FA58D5 /* Frameworks */,
 				63626B0F1962B02D00FA58D5 /* Products */,
-				BA2559CF3AE6447E8F5F89C5 /* Pods.xcconfig */,
+				37C6DF59394915137CBB84AD /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -318,6 +329,7 @@
 		63626B101962B02D00FA58D5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				29A1868A1A88B7700078C858 /* FacebookSDK.framework */,
 				42E20AD21985FF58009DDAE5 /* FacebookSDK.framework */,
 				63626B111962B02D00FA58D5 /* Foundation.framework */,
 				63626B131962B02D00FA58D5 /* CoreGraphics.framework */,
@@ -479,7 +491,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -628,7 +640,7 @@
 		};
 		63626B411962B02D00FA58D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA2559CF3AE6447E8F5F89C5 /* Pods.xcconfig */;
+			baseConfigurationReference = 57CE74C8907036BC7D60FF1A /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -638,6 +650,7 @@
 					"$(inherited)",
 					/Users/JosephLiu/Documents/FacebookSDK,
 					/Users/jliu/Documents/FacebookSDK,
+					/Documents/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "thirdplace/thirdplace-Prefix.pch";
@@ -650,7 +663,7 @@
 		};
 		63626B421962B02D00FA58D5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA2559CF3AE6447E8F5F89C5 /* Pods.xcconfig */;
+			baseConfigurationReference = AABB3CEC391D37F8B1B5F6C4 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -660,6 +673,7 @@
 					"$(inherited)",
 					/Users/JosephLiu/Documents/FacebookSDK,
 					/Users/jliu/Documents/FacebookSDK,
+					/Documents/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "thirdplace/thirdplace-Prefix.pch";

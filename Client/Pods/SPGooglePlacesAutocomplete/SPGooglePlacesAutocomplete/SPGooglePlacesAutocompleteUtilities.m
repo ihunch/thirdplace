@@ -3,7 +3,9 @@
 //  SPGooglePlacesAutocomplete
 //
 //  Created by Stephen Poletto on 7/18/12.
+//  Modified by Shahar Hadas on 3/26/2014
 //  Copyright (c) 2012 Stephen Poletto. All rights reserved.
+//  Copyright (c) 2014 Sparq. All rights reserved.
 //
 
 #import "SPGooglePlacesAutocompleteUtilities.h"
@@ -14,8 +16,36 @@
 }
 @end
 
+NSArray *SPGooglePlacesAutocompletePlaceTypeNames(void)
+{
+    static NSMutableArray *names = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        names = [NSMutableArray array];
+        
+        [names insertObject:@"" atIndex:SPPlaceTypeAll];
+        
+        [names insertObject:@"geocode" atIndex:SPPlaceTypeGeocode];
+        [names insertObject:@"establishment" atIndex:SPPlaceTypeEstablishment];
+        [names insertObject:@"(regions)" atIndex:SPPlaceTypeRegions];
+        [names insertObject:@"(cities)" atIndex:SPPlaceTypeCities];
+    });
+    
+    return names;
+}
+
 SPGooglePlacesAutocompletePlaceType SPPlaceTypeFromDictionary(NSDictionary *placeDictionary) {
-    return [placeDictionary[@"types"] containsObject:@"establishment"] ? SPPlaceTypeEstablishment : SPPlaceTypeGeocode;
+    NSUInteger index;
+    
+    for (NSString *type in placeDictionary[@"types"]) {
+        index = [SPGooglePlacesAutocompletePlaceTypeNames() indexOfObject:type];
+        
+        if (index != NSNotFound) {
+            return (SPGooglePlacesAutocompletePlaceType)index;
+        }
+    }
+    
+    return SPPlaceTypeGeocode;
 }
 
 NSString *SPBooleanStringForBool(BOOL boolean) {
@@ -23,7 +53,7 @@ NSString *SPBooleanStringForBool(BOOL boolean) {
 }
 
 NSString *SPPlaceTypeStringForPlaceType(SPGooglePlacesAutocompletePlaceType type) {
-    return (type == SPPlaceTypeGeocode) ? @"geocode" : @"establishment";
+    return [SPGooglePlacesAutocompletePlaceTypeNames() objectAtIndex:type];
 }
 
 extern BOOL SPIsEmptyString(NSString *string) {

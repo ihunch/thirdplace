@@ -51,7 +51,9 @@
             NSString *addressString = placeDictionary[@"formatted_address"];
             [[self geocoder] geocodeAddressString:addressString completionHandler:^(NSArray *placemarks, NSError *error) {
                 if (error) {
-                    block(nil, nil, error);
+                    // Sometimes establishment has address, which location cannot be retrieved
+                    // ref: https://github.com/chenyuan/SPGooglePlacesAutocomplete/issues/9
+                    [self resolveGecodePlaceToPlacemark:block];
                 } else {
                     CLPlacemark *placemark = [placemarks onlyObject];
                     block(placemark, self.name, error);
