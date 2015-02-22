@@ -18,6 +18,13 @@
 
 #import "XMPP.h"
 
+extern NSString* const kXMPPHostName;
+extern NSString* const kXMPPServerName;
+
+extern NSString* const kXMPPHasDetailsKey;
+extern NSString* const kXMPPJIDKey;
+extern NSString* const kXMPPPasswordKey;
+
 // List the modules you're using here.
 
 #import "XMPPReconnect.h"
@@ -26,8 +33,18 @@
 #import "XMPPRosterCoreDataStorage.h"
 
 #import "XMPPvCardTempModule.h"
-#import "XMPPvCardAvatarModule.h"
 #import "XMPPvCardCoreDataStorage.h"
 
 #import "XMPPCapabilities.h"
 #import "XMPPCapabilitiesCoreDataStorage.h"
+
+@interface XMPPFramework : NSObject
+
++ (bool) hasLoginDetails;
++ (NSString *) jid;
++ (NSString *) password;
+
++ (void) updateLoginDetails:(NSString *)newJid withPassword:(NSString *)newPassword;
++ (void) clearLoginDetails;
+
+@end

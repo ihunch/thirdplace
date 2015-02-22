@@ -9,5 +9,10 @@
 #ifndef thirdplace_RandomGeneration_h
 #define thirdplace_RandomGeneration_h
 
+@interface RandomGeneration : NSObject
+
++ (NSString *)generateString:(int)length;
+
+@end
 
 #endif
