@@ -59,16 +59,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     if ([self isFbLoggedIn])
     {
         [self loginXMPP:^(bool success)
-        {
+         {
             if (!success)
             {
                 // TODO: Handle
                 return;
             }
-            
-            // TODO: SK: Fix view transitioning + figure out why this was here
-            //[navigationController setViewControllers:@[[storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"]]];
-        }];
+             
+            [self openHomeView];
+         }];
     }
     else
     {
@@ -125,7 +124,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     if (XMPPFramework.hasLoginDetails)
     {
-        completion([self connectXMPP:XMPPFramework.jid]);
+        completion([self connectXMPP:XMPPFramework.jid withPassword:XMPPFramework.password]);
         return;
     }
     
@@ -140,13 +139,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             NSString *password = [[self class] stringToXmppPassword:fbId];
             [XMPPFramework updateLoginDetails:jid withPassword:password];
             
-            success = [self connectXMPP:jid];
+            success = [self connectXMPP:jid withPassword:password];
         }
         
         completion(success);
     }];
 }
-
 
 - (void)setupXMPPStream
 {
@@ -247,7 +245,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 }
 
 // TODO: Call this when if/when necessary after disconnectXMPP is called
-- (BOOL)connectXMPP:(NSString *)jid
+- (BOOL)connectXMPP:(NSString *)jid withPassword:(NSString *)password
 {
     if (![xmppStream isDisconnected]) {
         return YES;
@@ -256,20 +254,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [xmppStream setMyJID:[XMPPJID jidWithString:jid]];
     
     NSError *error = nil;
-    if (![xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error])
-    {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error connecting"
-                                                            message:@"See console for error details."
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Ok"
-                                                  otherButtonTitles:nil];
-        [alertView show];
-        DDLogError(@"Error connecting: %@", error);
-        
-        return NO;
-    }
     
-    return YES;
+    if ([xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error])
+        return YES;
+    
+    return NO;
 }
 
 // TODO: Call this when necessary
@@ -293,6 +282,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     // TODO: Find better way of generating pw for user for quick login (this method does allow login on any device)
     return [NSString stringWithFormat:@"%u", (uint)s.hash];
+}
+
+- (void)openHomeView
+{
+    // TODO: SK: Fix view transitioning + figure out why this was here
+    //[navigationController setViewControllers:@[[storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"]]];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -392,6 +387,22 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    
+    NSString *password = XMPPFramework.password;
+    
+    NSError *nserror = nil;
+    
+    if (![xmppStream registerWithPassword:password error:&nserror])
+    {
+        DDLogError(@"Error registering: %@", nserror);
+        return;
+    }
+    
+    if (![[self xmppStream] authenticateWithPassword:password error:&nserror])
+    {
+        DDLogError(@"Error authenticating: %@", nserror);
+        return;
+    }
 }
 
 - (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq
