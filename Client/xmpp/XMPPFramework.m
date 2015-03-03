@@ -14,26 +14,30 @@ NSString* const kXMPPServerName = @"ip-172-31-1-174";
 NSString *const kXMPPHasDetailsKey = @"kXMPPHasDetails";
 NSString *const kXMPPJIDKey = @"kXMPPJID";
 NSString *const kXMPPPasswordKey = @"kXMPPPassword";
+NSString *const kXMPPNameKey = @"kXMPPName";
+NSString *const kXMPPEmailKey = @"kXMPPEmail";
 
 @implementation XMPPFramework
 
 + (bool) hasLoginDetails { @synchronized(self) { return [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPHasDetailsKey]; } }
 + (NSString *) jid { @synchronized(self) { return [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPJIDKey]; } }
 + (NSString *) password { @synchronized(self) { return [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPPasswordKey]; } }
++ (NSString *) name { @synchronized(self) { return [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPNameKey]; } }
++ (NSString *) email { @synchronized(self) { return [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPEmailKey]; } }
 
-+ (void) updateLoginDetails:(NSString *)newJid withPassword:(NSString *)newPassword
++ (void) updateDetails:(NSString *)newJid withPassword:(NSString *)newPassword withName:(NSString *)newName withEmail:(NSString *)newEmail
 {
-    [self update:newJid withPassword:newPassword];
+    [self update:newJid withPassword:newPassword withName:newName withEmail:newEmail];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kXMPPHasDetailsKey];
 }
 
-+ (void) clearLoginDetails
++ (void) clearDetails
 {
-    [self update:nil withPassword:nil];
+    [self update:nil withPassword:nil withName:nil withEmail:nil];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kXMPPHasDetailsKey];
 }
 
-+(void) update:(NSString *)newJid withPassword:(NSString *)newPassword
++(void) update:(NSString *)newJid withPassword:(NSString *)newPassword withName:(NSString *)newName withEmail:(NSString *)newEmail
 {
     if (newJid != nil) {
         [[NSUserDefaults standardUserDefaults] setObject:newJid forKey:kXMPPJIDKey];
@@ -45,6 +49,18 @@ NSString *const kXMPPPasswordKey = @"kXMPPPassword";
         [[NSUserDefaults standardUserDefaults] setObject:newPassword forKey:kXMPPPasswordKey];
     } else {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:kXMPPPasswordKey];
+    }
+    
+    if (newName != nil) {
+        [[NSUserDefaults standardUserDefaults] setObject:newName forKey:kXMPPNameKey];
+    } else {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kXMPPNameKey];
+    }
+    
+    if (newEmail != nil) {
+        [[NSUserDefaults standardUserDefaults] setObject:newEmail forKey:kXMPPEmailKey];
+    } else {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kXMPPEmailKey];
     }
 }
 

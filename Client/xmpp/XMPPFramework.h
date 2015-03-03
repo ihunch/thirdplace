@@ -43,8 +43,10 @@ extern NSString* const kXMPPPasswordKey;
 + (bool) hasLoginDetails;
 + (NSString *) jid;
 + (NSString *) password;
++ (NSString *) name;
++ (NSString *) email;
 
-+ (void) updateLoginDetails:(NSString *)newJid withPassword:(NSString *)newPassword;
-+ (void) clearLoginDetails;
++ (void) updateDetails:(NSString *)newJid withPassword:(NSString *)newPassword withName:(NSString *)newName withEmail:(NSString *)newEmail;
++ (void) clearDetails;
 
 @end

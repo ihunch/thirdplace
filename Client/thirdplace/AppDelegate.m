@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "DatabaseManager.h"
+#import "Friend.h"
+#import "RootEntity.h"
 
 #import "DDLog.h"
 #import "DDTTYLogger.h"
@@ -58,16 +60,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
     if ([self isFbLoggedIn])
     {
-        [self loginXMPP:^(bool success)
-         {
-            if (!success)
-            {
-                // TODO: Handle
-                return;
-            }
-             
-            [self openHomeView];
-         }];
+        [self loginXMPP];
     }
     else
     {
@@ -80,9 +73,24 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     return YES;
 }
 
+
 - (void)dealloc
 {
     [self teardownXMPPStream];
+}
+
+- (void)loginXMPP
+{
+    [self loginXMPP:^(bool success)
+     {
+         if (!success)
+         {
+             // TODO: Handle
+             return;
+         }
+         
+         [self openHomeView];
+     }];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -119,9 +127,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)loginXMPP:(void (^)(bool))completion
 {
-    if (![self isFbLoggedIn])
-        return;
-    
     if (XMPPFramework.hasLoginDetails)
     {
         completion([self connectXMPP:XMPPFramework.jid withPassword:XMPPFramework.password]);
@@ -135,9 +140,17 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         if (success)
         {
             NSString *fbId = [user objectForKey:@"id"]; // App-scoped user id
+            
             NSString *jid = [[self class] stringToJID:fbId];
             NSString *password = [[self class] stringToXmppPassword:fbId];
-            [XMPPFramework updateLoginDetails:jid withPassword:password];
+            
+            NSString *fbFirstName = [user objectForKey:@"first_name"];
+            NSString *fbLastName = [user objectForKey:@"last_name"];
+            NSString *fbEmail = [user objectForKey:@"email"];
+            
+            NSString *fbFullName = [NSString stringWithFormat:@"%@ %@", fbFirstName, fbLastName];
+            
+            [XMPPFramework updateDetails:jid withPassword:password withName:fbFullName withEmail:fbEmail];
             
             success = [self connectXMPP:jid withPassword:password];
         }
@@ -290,6 +303,39 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     //[navigationController setViewControllers:@[[storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"]]];
 }
 
+- (void)addFbFriends
+{
+    // NOTE: This only gets friends who are already using the app
+    FBRequest* friendsRequest = [FBRequest requestForMyFriends];
+    [friendsRequest startWithCompletionHandler: ^(FBRequestConnection *connection,
+                                                  NSDictionary* result,
+                                                  NSError *error) {
+        NSArray* friends = [result objectForKey:@"data"];
+        
+        for (NSDictionary<FBGraphUser>* fbFriend in friends) {
+            XMPPJID *jid = [XMPPJID jidWithString: [[self class] stringToJID:fbFriend.objectID]];
+            XMPPUserCoreDataStorageObject *user = [xmppRosterStorage userForJID:jid xmppStream:xmppStream managedObjectContext:[self managedObjectContext_roster]];
+
+            if (user == nil)
+            {
+                // TODO: This "auto-fill" is temp, the found FB friends should be easily addable to friends list from the add friends screen
+                Friend *friend = [Friend MR_createEntity];
+                friend.firstName = fbFriend.first_name;
+                friend.lastName = fbFriend.last_name;
+                
+                int x = arc4random_uniform(250);
+                int y = arc4random_uniform(400);
+                friend.xValue = x; friend.yValue = y;
+                
+                [[RootEntity rootEntity].friendsSet addObject:friend];
+                [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+                
+                [xmppRoster addUser:jid withNickname:nil];
+            }
+        }
+    }];
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark UIApplicationDelegate
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -382,6 +428,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
     [self goOnline];
+    
+    [self addFbFriends];
 }
 
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error
@@ -392,7 +440,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     NSError *nserror = nil;
     
-    if (![xmppStream registerWithPassword:password error:&nserror])
+    NSMutableArray *elements = [NSMutableArray array];
+    [elements addObject:[NSXMLElement elementWithName:@"username" stringValue:[xmppStream myJID].user]];
+    [elements addObject:[NSXMLElement elementWithName:@"password" stringValue:password]];
+    [elements addObject:[NSXMLElement elementWithName:@"name" stringValue:XMPPFramework.name]];
+    [elements addObject:[NSXMLElement elementWithName:@"email" stringValue:XMPPFramework.email]];
+    
+    if (![xmppStream registerWithElements:elements error:&nserror])
     {
         DDLogError(@"Error registering: %@", nserror);
         return;
