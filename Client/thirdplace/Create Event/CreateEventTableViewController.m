@@ -9,6 +9,9 @@
 #import "TextFieldToolbar.h"
 #import "Event.h"
 #import "RootEntity.h"
+#import "AppDelegate.h"
+#import "XMPPIQ.h"
+#import "_Friend.h"
 
 @interface CreateEventTableViewController () <CLLocationManagerDelegate, UITextFieldDelegate, UITextViewDelegate>
 
@@ -96,6 +99,40 @@
     event.friends = [[NSSet alloc] initWithArray:self.friends];
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+
+    NSMutableArray *jids = [[NSMutableArray alloc] init];
+    
+    DDXMLElement *createElement = [DDXMLElement elementWithName:@"create" xmlns:@"hangout:iq:detail"];
+    DDXMLElement *hangoutElement = [DDXMLElement elementWithName:@"hangout"];
+    [hangoutElement addChild:[DDXMLElement elementWithName:@"description" stringValue:@"Test Desc"]]; // TODO
+    DDXMLElement *usersElement = [DDXMLElement elementWithName:@"users"];
+    for (_Friend *f in [self friends])
+    {
+        if (f.email == nil)
+            continue;
+        
+        [jids addObject:[XMPPJID jidWithString:f.email]];
+        
+        [usersElement addChild:[DDXMLElement elementWithName:@"user" stringValue:f.email]]; // HACK: Email contains jid for now
+    }
+    [hangoutElement addChild:usersElement];
+    [hangoutElement addChild:[DDXMLElement elementWithName:@"startdate" stringValue:event.date.description]];
+    [hangoutElement addChild:[DDXMLElement elementWithName:@"enddate" stringValue:event.date.description]];
+    [hangoutElement addChild:[DDXMLElement elementWithName:@"timedescription" stringValue:@"Test Time Desc"]]; // TODO
+    [hangoutElement addChild:[DDXMLElement elementWithName:@"message" stringValue:@"Hey"]]; // TODO
+    [hangoutElement addChild:[DDXMLElement elementWithName:@"locationid" stringValue:@"0"]]; // TODO
+    [createElement addChild:hangoutElement];
+    
+    XMPPJID *to = jids.firstObject; // Assuming only one friend is in the hangout for now
+    
+    if (to != nil)
+    {
+        XMPPIQ *iq = [[XMPPIQ alloc] initWithType:@"set" to:to];
+        [iq addChild:createElement];
+        [[appDelegate xmppStream] sendElement:iq];
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
     //[self dismissViewControllerAnimated:YES completion:nil];
 }

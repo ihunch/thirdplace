@@ -322,6 +322,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                 Friend *friend = [Friend MR_createEntity];
                 friend.firstName = fbFriend.first_name;
                 friend.lastName = fbFriend.last_name;
+                friend.email = jid.description; // TODO: Add proper JID field to DB
                 
                 int x = arc4random_uniform(250);
                 int y = arc4random_uniform(400);
@@ -469,38 +470,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    
-    // A simple example of inbound message handling.
-    
-    // TODO: Replace rest of method with parsing/handling thirdplace messages
-    if ([message isChatMessageWithBody])
-    {
-        XMPPUserCoreDataStorageObject *user = [xmppRosterStorage userForJID:[message from]
-                                                                 xmppStream:xmppStream
-                                                       managedObjectContext:[self managedObjectContext_roster]];
-        
-        NSString *body = [[message elementForName:@"body"] stringValue];
-        NSString *displayName = [user displayName];
-        
-        if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
-        {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:displayName
-                                                                message:body
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"Ok"
-                                                      otherButtonTitles:nil];
-            [alertView show];
-        }
-        else
-        {
-            // We are not active, so use a local notification instead
-            UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-            localNotification.alertAction = @"Ok";
-            localNotification.alertBody = [NSString stringWithFormat:@"From: %@\n\n%@",displayName,body];
-            
-            [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
-        }
-    }
 }
 
 - (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence
