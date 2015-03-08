@@ -101,7 +101,8 @@
 
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 
-    NSMutableArray *jids = [[NSMutableArray alloc] init];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm"];
     
     DDXMLElement *createElement = [DDXMLElement elementWithName:@"create" xmlns:@"hangout:iq:detail"];
     DDXMLElement *hangoutElement = [DDXMLElement elementWithName:@"hangout"];
@@ -111,27 +112,24 @@
     {
         if (f.email == nil)
             continue;
-        
-        [jids addObject:[XMPPJID jidWithString:f.email]];
-        
+
         [usersElement addChild:[DDXMLElement elementWithName:@"user" stringValue:f.email]]; // HACK: Email contains jid for now
     }
     [hangoutElement addChild:usersElement];
-    [hangoutElement addChild:[DDXMLElement elementWithName:@"startdate" stringValue:event.date.description]];
-    [hangoutElement addChild:[DDXMLElement elementWithName:@"enddate" stringValue:event.date.description]];
+    [hangoutElement addChild:[DDXMLElement elementWithName:@"startdate" stringValue:[dateFormat stringFromDate:event.date]]];
+    [hangoutElement addChild:[DDXMLElement elementWithName:@"enddate" stringValue:[dateFormat stringFromDate:event.date]]];
     [hangoutElement addChild:[DDXMLElement elementWithName:@"timedescription" stringValue:@"Test Time Desc"]]; // TODO
     [hangoutElement addChild:[DDXMLElement elementWithName:@"message" stringValue:@"Hey"]]; // TODO
     [hangoutElement addChild:[DDXMLElement elementWithName:@"locationid" stringValue:@"0"]]; // TODO
     [createElement addChild:hangoutElement];
     
-    XMPPJID *to = jids.firstObject; // Assuming only one friend is in the hangout for now
-    
-    if (to != nil)
-    {
-        XMPPIQ *iq = [[XMPPIQ alloc] initWithType:@"set" to:to];
-        [iq addChild:createElement];
-        [[appDelegate xmppStream] sendElement:iq];
-    }
+    NSXMLElement *iq = [NSXMLElement elementWithName:@"iq"];
+    [iq addAttributeWithName:@"id" stringValue:@"123"]; // Not used
+    [iq addAttributeWithName:@"type" stringValue:@"set"];
+    [iq addAttributeWithName:@"to" stringValue:@"thirdplacehangout.ip-172-31-1-174"];
+    [iq addAttributeWithName:@"from" stringValue:[[XMPPFramework jid] description]];
+    [iq addChild:createElement];
+    [[appDelegate xmppStream] sendElement:iq];
     
     [self.navigationController popViewControllerAnimated:YES];
     //[self dismissViewControllerAnimated:YES completion:nil];
