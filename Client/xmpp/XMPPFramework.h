@@ -25,6 +25,8 @@ extern NSString* const kXMPPHasDetailsKey;
 extern NSString* const kXMPPJIDKey;
 extern NSString* const kXMPPPasswordKey;
 
+extern NSString* const kXMPPMessageId_InviteHangout;
+
 // List the modules you're using here.
 
 #import "XMPPReconnect.h"

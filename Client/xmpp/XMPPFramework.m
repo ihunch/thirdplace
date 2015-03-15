@@ -17,6 +17,8 @@ NSString *const kXMPPPasswordKey = @"kXMPPPassword";
 NSString *const kXMPPNameKey = @"kXMPPName";
 NSString *const kXMPPEmailKey = @"kXMPPEmail";
 
+NSString *const kXMPPMessageId_InviteHangout = @"xmpp_msg_invite";
+
 @implementation XMPPFramework
 
 + (bool) hasLoginDetails { @synchronized(self) { return [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPHasDetailsKey]; } }

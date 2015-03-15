@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "DatabaseManager.h"
+#import "Event.h"
 #import "Friend.h"
 #import "RootEntity.h"
 
@@ -316,6 +317,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             XMPPJID *jid = [XMPPJID jidWithString: [[self class] stringToJID:fbFriend.objectID]];
             XMPPUserCoreDataStorageObject *user = [xmppRosterStorage userForJID:jid xmppStream:xmppStream managedObjectContext:[self managedObjectContext_roster]];
 
+            // TOFIX: Is currently always nil, creating duplicate user every time
             if (user == nil)
             {
                 // TODO: This "auto-fill" is temp, the found FB friends should be easily addable to friends list from the add friends screen
@@ -470,6 +472,67 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    
+    NSString *msgId = [message attributeStringValueForName:@"id"];
+    
+    if ([msgId isEqual:kXMPPMessageId_InviteHangout])
+    {
+        DDXMLNode *hangoutNode = message.nextNode;
+        DDXMLNode *propertyNode = hangoutNode.nextNode;
+        
+        Event *event = [Event MR_createEntity];
+        event.rootEntity = [RootEntity rootEntity];
+        // TODO: Stop following line from triggering exception
+        //event.friends = [NSSet setWithObject:message.from.description];
+        
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm"];
+        
+        // TODO: Add parse helper to event class
+        if (propertyNode != nil)
+        {
+            do
+            {
+                NSString *name = propertyNode.name;
+                NSString *value = propertyNode.stringValue;
+                
+                if (value == nil)
+                    continue;
+                
+                if ([name isEqual:@"hangoutid"])
+                {
+                    int hangoutId = [value intValue]; // TODO: Add to event data
+                }
+                else if ([name isEqual:@"startdate"])
+                {
+                    event.date = [dateFormat dateFromString:value];
+                }
+                else if ([name isEqual:@"enddate"])
+                {
+                    NSDate *endDate = [dateFormat dateFromString:value]; // TODO: Add to event data
+                }
+                else if ([name isEqual:@"description"])
+                {
+                    NSString *desc = value; // TODO: Add to event data
+                }
+                else if ([name isEqual:@"timedescription"])
+                {
+                    NSString *timeDesc = value; // TODO: Add to event data
+                }
+                else if ([name isEqual:@"message"])
+                {
+                    NSString *message = value; // TODO: Add to event data
+                }
+                else if ([name isEqual:@"locationid"])
+                {
+                    int locationId = [value intValue]; // TODO: Add to event data
+                }
+            }
+            while ((propertyNode = propertyNode.nextSibling) != nil);
+        }
+
+        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+    }
 }
 
 - (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence

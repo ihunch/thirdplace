@@ -101,6 +101,8 @@
 
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 
+    // TODO: Wrap all message creation up into appropriate class
+    
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm"];
     
@@ -124,7 +126,7 @@
     [createElement addChild:hangoutElement];
     
     NSXMLElement *iq = [NSXMLElement elementWithName:@"iq"];
-    [iq addAttributeWithName:@"id" stringValue:@"123"]; // Not used
+    [iq addAttributeWithName:@"id" stringValue:kXMPPMessageId_InviteHangout];
     [iq addAttributeWithName:@"type" stringValue:@"set"];
     [iq addAttributeWithName:@"to" stringValue:@"thirdplacehangout.ip-172-31-1-174"];
     [iq addAttributeWithName:@"from" stringValue:[[XMPPFramework jid] description]];
