@@ -12,9 +12,6 @@ const struct EventRelationships EventRelationships = {
 	.rootEntity = @"rootEntity",
 };
 
-const struct EventFetchedProperties EventFetchedProperties = {
-};
-
 @implementation EventID
 @end
 
@@ -40,41 +37,24 @@ const struct EventFetchedProperties EventFetchedProperties = {
 
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
-	
 
 	return keyPaths;
 }
 
-
-
-
 @dynamic date;
-
-
-
-
-
 
 @dynamic friends;
 
-	
 - (NSMutableSet*)friendsSet {
 	[self willAccessValueForKey:@"friends"];
-  
+
 	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"friends"];
-  
+
 	[self didAccessValueForKey:@"friends"];
 	return result;
 }
-	
 
 @dynamic rootEntity;
 
-	
-
-
-
-
-
-
 @end
+

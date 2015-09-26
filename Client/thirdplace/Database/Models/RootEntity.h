@@ -1,7 +1,6 @@
 #import "_RootEntity.h"
 
 @interface RootEntity : _RootEntity {}
-
-+ (RootEntity *)rootEntity;
-
+// Custom logic goes here.
++ (RootEntity *)rEntity;
 @end

@@ -24,7 +24,7 @@
 {
     [super viewDidLoad];
     
-    Friend *me = [RootEntity rootEntity].me;
+    Friend *me = [RootEntity rEntity].me;
     self.friendView.friend = me;
     
     self.travelDistanceSlider.value = me.travelDistanceValue;
@@ -35,13 +35,13 @@
 - (IBAction)changedTravelSlider:(UISlider *)slider
 {
     self.travelDistanceLabel.text = [NSString stringWithFormat:@"%.2fkm", slider.value];
-    [RootEntity rootEntity].me.travelDistanceValue = slider.value;
+    [RootEntity rEntity].me.travelDistanceValue = slider.value;
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:nil];
 }
 
 - (IBAction)toggleDiscoverNewPlaces:(UISwitch *)_switch
 {
-    [RootEntity rootEntity].me.discoverNewPlacesValue = _switch.on;
+    [RootEntity rEntity].me.discoverNewPlacesValue = _switch.on;
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:nil];
 }
 

@@ -20,9 +20,6 @@ const struct FriendRelationships FriendRelationships = {
 	.rootEntity = @"rootEntity",
 };
 
-const struct FriendFetchedProperties FriendFetchedProperties = {
-};
-
 @implementation FriendID
 @end
 
@@ -48,7 +45,7 @@ const struct FriendFetchedProperties FriendFetchedProperties = {
 
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
-	
+
 	if ([key isEqualToString:@"discoverNewPlacesValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"discoverNewPlaces"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -73,12 +70,7 @@ const struct FriendFetchedProperties FriendFetchedProperties = {
 	return keyPaths;
 }
 
-
-
-
 @dynamic discoverNewPlaces;
-
-
 
 - (BOOL)discoverNewPlacesValue {
 	NSNumber *result = [self discoverNewPlaces];
@@ -86,7 +78,7 @@ const struct FriendFetchedProperties FriendFetchedProperties = {
 }
 
 - (void)setDiscoverNewPlacesValue:(BOOL)value_ {
-	[self setDiscoverNewPlaces:[NSNumber numberWithBool:value_]];
+	[self setDiscoverNewPlaces:@(value_)];
 }
 
 - (BOOL)primitiveDiscoverNewPlacesValue {
@@ -95,51 +87,20 @@ const struct FriendFetchedProperties FriendFetchedProperties = {
 }
 
 - (void)setPrimitiveDiscoverNewPlacesValue:(BOOL)value_ {
-	[self setPrimitiveDiscoverNewPlaces:[NSNumber numberWithBool:value_]];
+	[self setPrimitiveDiscoverNewPlaces:@(value_)];
 }
-
-
-
-
 
 @dynamic email;
 
-
-
-
-
-
 @dynamic firstName;
-
-
-
-
-
 
 @dynamic imagePath;
 
-
-
-
-
-
 @dynamic lastName;
-
-
-
-
-
 
 @dynamic mobileNumber;
 
-
-
-
-
-
 @dynamic travelDistance;
-
-
 
 - (float)travelDistanceValue {
 	NSNumber *result = [self travelDistance];
@@ -147,7 +108,7 @@ const struct FriendFetchedProperties FriendFetchedProperties = {
 }
 
 - (void)setTravelDistanceValue:(float)value_ {
-	[self setTravelDistance:[NSNumber numberWithFloat:value_]];
+	[self setTravelDistance:@(value_)];
 }
 
 - (float)primitiveTravelDistanceValue {
@@ -156,16 +117,10 @@ const struct FriendFetchedProperties FriendFetchedProperties = {
 }
 
 - (void)setPrimitiveTravelDistanceValue:(float)value_ {
-	[self setPrimitiveTravelDistance:[NSNumber numberWithFloat:value_]];
+	[self setPrimitiveTravelDistance:@(value_)];
 }
 
-
-
-
-
 @dynamic x;
-
-
 
 - (float)xValue {
 	NSNumber *result = [self x];
@@ -173,7 +128,7 @@ const struct FriendFetchedProperties FriendFetchedProperties = {
 }
 
 - (void)setXValue:(float)value_ {
-	[self setX:[NSNumber numberWithFloat:value_]];
+	[self setX:@(value_)];
 }
 
 - (float)primitiveXValue {
@@ -182,16 +137,10 @@ const struct FriendFetchedProperties FriendFetchedProperties = {
 }
 
 - (void)setPrimitiveXValue:(float)value_ {
-	[self setPrimitiveX:[NSNumber numberWithFloat:value_]];
+	[self setPrimitiveX:@(value_)];
 }
 
-
-
-
-
 @dynamic y;
-
-
 
 - (float)yValue {
 	NSNumber *result = [self y];
@@ -199,7 +148,7 @@ const struct FriendFetchedProperties FriendFetchedProperties = {
 }
 
 - (void)setYValue:(float)value_ {
-	[self setY:[NSNumber numberWithFloat:value_]];
+	[self setY:@(value_)];
 }
 
 - (float)primitiveYValue {
@@ -208,24 +157,12 @@ const struct FriendFetchedProperties FriendFetchedProperties = {
 }
 
 - (void)setPrimitiveYValue:(float)value_ {
-	[self setPrimitiveY:[NSNumber numberWithFloat:value_]];
+	[self setPrimitiveY:@(value_)];
 }
-
-
-
-
 
 @dynamic meRootEntity;
 
-	
-
 @dynamic rootEntity;
 
-	
-
-
-
-
-
-
 @end
+

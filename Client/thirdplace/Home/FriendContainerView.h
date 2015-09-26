@@ -3,7 +3,7 @@
 // Copyright (c) 2014 Hunch Pty Ltd. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @class Friend;
 

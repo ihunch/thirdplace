@@ -210,7 +210,7 @@
     int y = arc4random_uniform((u_int32_t)(self.view.frame.size.height));
     friend.xValue = x; friend.yValue = y;
 
-    [[RootEntity rootEntity].friendsSet addObject:friend];
+    [[RootEntity rEntity].friendsSet addObject:friend];
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
     [self.delegate didAddFriend:friend];
     [self.navigationController popViewControllerAnimated:YES];

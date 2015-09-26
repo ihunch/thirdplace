@@ -8,6 +8,8 @@
 #import "LinesView.h"
 #import "Line.h"
 #import "Friend.h"
+#import "RootEntity.h"
+#import "thirdplace-Swift.h"
 
 @interface FriendContainerView () <FriendViewDelegate>
 
@@ -28,20 +30,24 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-
     self.friendViews = [NSMutableArray array];
     self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"patternBackground"]];
 
-    self.linesView = [[LinesView alloc] initWithFrame:self.bounds];
+    self.linesView = [[LinesView alloc] init];
     [self addSubview:self.linesView];
 
     self.addFriendView = [FriendView addFriendView];
     self.addFriendView.frame = CGRectMake(0, 0, 50, 50);
     self.addFriendView.delegate = self;
     [self addSubview:self.addFriendView];
-    [self updateLines];
-
     [self setupGestureRecognizers];
+    
+    
+    self.me = [RootEntity rEntity].me;
+    for (Friend* friend in [RootEntity rEntity].friends)
+    {
+        [self addFriend:friend];
+    }
 }
 
 - (void)setupGestureRecognizers
@@ -62,9 +68,9 @@
     return YES;
 }
 
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecogniser
 {
-    CGPoint touchLocation = [gestureRecognizer locationInView:self];
+    CGPoint touchLocation = [gestureRecogniser locationInView:self];
     for (FriendView *friendView in self.friendViews)
     {
         if (CGRectContainsPoint(friendView.frame, touchLocation))
@@ -72,17 +78,17 @@
             return YES;
         }
     }
-
     return NO;
 }
-
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
 {
     CGPoint touchLocation = [gestureRecognizer locationInView:self];
-
+    FriendContainerTableViewCell* cell =  (FriendContainerTableViewCell*)self.superview.superview;
+    UITableView* tableview = (UITableView*)cell.superview.superview;
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan)
     {
+        tableview.scrollEnabled = NO;
         for (FriendView *friendView in self.friendViews)
         {
             if (CGRectContainsPoint(friendView.frame, touchLocation))
@@ -102,9 +108,10 @@
     }
     else if (gestureRecognizer.state == UIGestureRecognizerStateEnded || gestureRecognizer.state == UIGestureRecognizerStateCancelled)
     {
+        tableview.scrollEnabled = YES;
+        
         FriendView *friendView = self.dragFriendView;
         self.dragFriendView = nil;
-
         friendView.friend.xValue = friendView.center.x;
         friendView.friend.yValue = friendView.center.y;
         [friendView.friend.managedObjectContext MR_saveToPersistentStoreWithCompletion:nil];
@@ -122,8 +129,7 @@
         CGPoint translation = [gestureRecognizer translationInView:self];
         self.dragFriendView.center = CGPointMake(self.dragFriendView.center.x + translation.x, self.dragFriendView.center.y + translation.y);
         [self updateLines];
-    }
-
+    }   
     [gestureRecognizer setTranslation:CGPointZero inView:self];
 }
 
@@ -174,6 +180,8 @@
 
 - (void)updateLayout
 {
+    [self layoutIfNeeded];
+    self.linesView.frame = self.bounds;
     self.meView.center = CGPointMake(self.center.x, self.center.y - 50);
     self.addFriendView.center = CGPointMake(self.center.x, self.center.y + 50);
     [self updateLines];

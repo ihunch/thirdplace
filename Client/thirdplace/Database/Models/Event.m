@@ -1,12 +1,10 @@
 #import "Event.h"
 
-
 @interface Event ()
 
 // Private interface goes here.
 
 @end
-
 
 @implementation Event
 

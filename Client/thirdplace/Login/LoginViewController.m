@@ -34,15 +34,14 @@
     [self.view addSubview:activityIndicatorView];
     [activityIndicatorView startAnimating];
 
-    RootEntity *rootEntity = [RootEntity rootEntity];
+    RootEntity *rootEntity = [RootEntity rEntity];
     if (!rootEntity.me)
         rootEntity.me = [Friend MR_createEntity];
 
     rootEntity.me.firstName = user.first_name;
     rootEntity.me.lastName = user.last_name;
 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^
-    {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NSString *profilePictureURL = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", user.objectID];
         NSData *profilePictureData = [NSData dataWithContentsOfURL:[NSURL URLWithString:profilePictureURL]];
         if (profilePictureData)
@@ -68,7 +67,7 @@
 
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-            [self performSegueWithIdentifier:@"LoggedIn" sender:nil];
+              [self performSegueWithIdentifier:@"LoggedIn" sender:nil];
         });
     });
 }

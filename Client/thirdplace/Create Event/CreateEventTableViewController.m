@@ -94,7 +94,7 @@
 - (IBAction)pressedSend:(id)sender
 {
     Event *event = [Event MR_createEntity];
-    event.rootEntity = [RootEntity rootEntity];
+    event.rootEntity = [RootEntity rEntity];
     event.date = self.datePicker.date;
     event.friends = [[NSSet alloc] initWithArray:self.friends];
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];

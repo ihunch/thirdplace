@@ -22,6 +22,7 @@
 #import "XMPPRosterCoreDataStorage.h"
 #import "XMPPvCardAvatarModule.h"
 #import "XMPPvCardCoreDataStorage.h"
+#import "HomeViewController.h"
 
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
@@ -51,13 +52,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self setupXMPPStream];
     
     [DatabaseManager setup];
-    [FBLoginView class];
-
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 
-    UINavigationController *navigationController = [storyboard instantiateInitialViewController];
-    self.window.rootViewController = navigationController;
+    UIViewController *rootviewcontroller = [storyboard instantiateInitialViewController];
+    self.window.rootViewController = rootviewcontroller;
 
     if ([self isFbLoggedIn])
     {
@@ -65,7 +65,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
     else
     {
-        [navigationController setViewControllers:@[[storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"]]];
+      //  [navigationController setViewControllers:@[[storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"]]];
         // TODO: Call [self loginXMPP] after fb login process
     }
     
@@ -89,8 +89,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
              // TODO: Handle
              return;
          }
-         
-         [self openHomeView];
      }];
 }
 
@@ -282,7 +280,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [xmppStream disconnect];
 }
 
-+ (NSString *) stringToJID:(NSString *) s
++ (NSString *)stringToJID:(NSString *) s
 {
     NSString * converted = [s stringByReplacingOccurrencesOfString:@"@" withString:@"___"];
     
@@ -300,8 +298,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)openHomeView
 {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    HomeViewController* controller = [storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
     // TODO: SK: Fix view transitioning + figure out why this was here
-    //[navigationController setViewControllers:@[[storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"]]];
+    UINavigationController* rootviewController = (UINavigationController*)self.window.rootViewController;
+    [rootviewController pushViewController:controller animated:true];
 }
 
 - (void)addFbFriends
@@ -330,7 +331,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                 int y = arc4random_uniform(400);
                 friend.xValue = x; friend.yValue = y;
                 
-                [[RootEntity rootEntity].friendsSet addObject:friend];
+                [[RootEntity rEntity].friendsSet addObject:friend];
                 [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
                 
                 [xmppRoster addUser:jid withNickname:nil];
@@ -431,7 +432,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
     [self goOnline];
-    
+    [self openHomeView];
     [self addFbFriends];
 }
 
@@ -481,7 +482,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         DDXMLNode *propertyNode = hangoutNode.nextNode;
         
         Event *event = [Event MR_createEntity];
-        event.rootEntity = [RootEntity rootEntity];
+        event.rootEntity = [RootEntity rEntity];
         // TODO: Stop following line from triggering exception
         //event.friends = [NSSet setWithObject:message.from.description];
         

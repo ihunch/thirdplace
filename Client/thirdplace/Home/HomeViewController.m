@@ -15,9 +15,8 @@
 #import "CreateEventTableViewController.h"
 #import "PresentingAnimator.h"
 
-@interface HomeViewController () <FriendContainerViewDelegate, AddFriendViewControllerDelegate, UIViewControllerTransitioningDelegate>
-
-@property (weak, nonatomic) IBOutlet FriendContainerView *friendContainerView;
+@interface HomeViewController () <FriendContainerViewDelegate, AddFriendViewControllerDelegate, UIViewControllerTransitioningDelegate,
+    UITableViewDataSource, UITableViewDelegate>
 
 @end
 
@@ -26,18 +25,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    self.friendContainerView.me = [RootEntity rootEntity].me;
-    for (Friend *friend in [RootEntity rootEntity].friends)
-        [self.friendContainerView addFriend:friend];
-
-    self.friendContainerView.delegate = self;
+//
+//    self.friendContainerView.me = [RootEntity rootEntity].me;
+//    for (Friend *friend in [RootEntity rootEntity].friends)
+//        [self.friendContainerView addFriend:friend];
+//
+//    self.friendContainerView.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.friendContainerView updateLayout];
+   // [self.friendContainerView updateLayout];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -47,16 +46,16 @@
         AddFriendViewController *dest = segue.destinationViewController;
         dest.delegate = self;
     }
-    else if ([segue.identifier isEqualToString:@"CreateEventTableViewController"])
+    else if ([segue.identifier  isEqualToString:@"CreateEventTableViewController"])
     {
         CreateEventTableViewController *dest = segue.destinationViewController;
-        dest.friends = @[[RootEntity rootEntity].me, sender];
+        dest.friends = @[[RootEntity rEntity].me, sender];
     }
 }
 
 - (void)didAddFriend:(Friend *)friend
 {
-    [self.friendContainerView addFriend:friend];
+    //[self.friendContainerView addFriend:friend];
 }
 
 - (void)didTouchMe
@@ -79,8 +78,8 @@
     nvc.modalPresentationStyle = UIModalPresentationCustom;
 
     CreateEventTableViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"CreateEventTableViewController"];
-    vc.friends = @[[RootEntity rootEntity].me, friend];
-    vc.view.frame = [self.view convertRect:rect fromView:self.friendContainerView];
+    vc.friends = @[[RootEntity rEntity].me, friend];
+   // vc.view.frame = [self.view convertRect:rect fromView:self.friendContainerView];
 
     nvc.viewControllers = @[vc];
     [self presentViewController:nvc animated:YES completion:nil];
@@ -90,5 +89,6 @@
 {
     return [PresentingAnimator new];
 }
+
 
 @end
