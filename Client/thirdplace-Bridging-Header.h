@@ -7,7 +7,17 @@
 //
 
 #import "FriendContainerView.h"
-#import "RootEntity.h"
-#import "Friend.h"
-#import "AddFriendViewController.h"
 #import "FriendView.h"
+#import "AppDelegate.h"
+#import <FacebookSDK/FacebookSDK.h>
+#import <MagicalRecord/MagicalRecord.h>
+#import "DBHeaderFile.h"
+#import "DDXML.h"
+#import "DDXMLElement.h"
+#import "XMPPFramework.h"
+#import "DDLog.h"
+#import "XMPPLoggingWrapper.h"
+#import "AppConfig.h"
+#import "UITextView+Placeholder.h"
+#import "GCDMulticastDelegate.h"
+#import "NSDate+MTDates.h"

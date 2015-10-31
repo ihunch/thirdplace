@@ -8,16 +8,12 @@
 
 #import "HomeViewController.h"
 #import "FriendContainerView.h"
-#import "RootEntity.h"
-#import "Friend.h"
-#import "AddFriendViewController.h"
 #import "CreateEventViewController.h"
 #import "CreateEventTableViewController.h"
 #import "PresentingAnimator.h"
 
-@interface HomeViewController () <FriendContainerViewDelegate, AddFriendViewControllerDelegate, UIViewControllerTransitioningDelegate,
+@interface HomeViewController () <FriendContainerViewDelegate, UIViewControllerTransitioningDelegate,
     UITableViewDataSource, UITableViewDelegate>
-
 @end
 
 @implementation HomeViewController
@@ -43,17 +39,17 @@
 {
     if ([segue.identifier isEqualToString:@"AddFriendViewController"])
     {
-        AddFriendViewController *dest = segue.destinationViewController;
-        dest.delegate = self;
+//        AddFriendViewController *dest = segue.destinationViewController;
+//        dest.delegate = self;
     }
     else if ([segue.identifier  isEqualToString:@"CreateEventTableViewController"])
     {
         CreateEventTableViewController *dest = segue.destinationViewController;
-        dest.friends = @[[RootEntity rEntity].me, sender];
+       // dest.friends = @[[RootEntity rEntity].me, sender];
     }
 }
 
-- (void)didAddFriend:(Friend *)friend
+- (void)didAddFriend:(XMPPUserCoreDataStorageObject *)friend
 {
     //[self.friendContainerView addFriend:friend];
 }
@@ -68,7 +64,7 @@
     [self performSegueWithIdentifier:@"AddFriendViewController" sender:nil];
 }
 
-- (void)didTouchFriend:(Friend *)friend rect:(CGRect)rect
+- (void)didTouchFriend:(XMPPUserCoreDataStorageObject *)friend rect:(CGRect)rect
 {
     [self performSegueWithIdentifier:@"CreateEventTableViewController" sender:friend];
 
@@ -78,9 +74,8 @@
     nvc.modalPresentationStyle = UIModalPresentationCustom;
 
     CreateEventTableViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"CreateEventTableViewController"];
-    vc.friends = @[[RootEntity rEntity].me, friend];
-   // vc.view.frame = [self.view convertRect:rect fromView:self.friendContainerView];
-
+    //vc.friends = @[[RootEntity rEntity].me, friend];
+    // vc.view.frame = [self.view convertRect:rect fromView:self.friendContainerView];
     nvc.viewControllers = @[vc];
     [self presentViewController:nvc animated:YES completion:nil];
 }

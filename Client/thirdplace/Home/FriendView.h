@@ -5,7 +5,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class Friend;
+@class XMPPUserCoreDataStorageObject;
 @class FriendView;
 
 @protocol FriendViewDelegate
@@ -16,13 +16,13 @@
 
 @interface FriendView : UIView
 
-@property (nonatomic, strong) Friend *friend;
+@property (nonatomic, strong) XMPPUserCoreDataStorageObject *friend;
 @property (nonatomic, weak) id<FriendViewDelegate> delegate;
 
 @property (nonatomic, strong) UILabel *label;
 
 + (id)addFriendView;
 
-+ (id)friendViewWithFriend:(Friend *)aFriend;
++ (id)friendViewWithFriend:(XMPPUserCoreDataStorageObject *)aFriend;
 
 @end

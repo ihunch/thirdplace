@@ -39,6 +39,10 @@
 	<string>717605784963061</string>
 	<key>FacebookDisplayName</key>
 	<string>thirdplace</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbauth</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>

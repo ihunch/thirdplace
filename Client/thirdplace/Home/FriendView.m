@@ -4,8 +4,8 @@
 //
 
 #import "FriendView.h"
-#import "Friend.h"
 #import <NYXImagesKit/NYXImagesKit.h>
+#import "XMPPFramework.h"
 
 @interface FriendView ()
 
@@ -25,7 +25,7 @@
     return friendView;
 }
 
-+ (id)friendViewWithFriend:(Friend *)friend
++ (id)friendViewWithFriend:(XMPPUserCoreDataStorageObject *)friend
 {
     FriendView *friendView = [[self alloc] init];
     friendView.friend = friend;
@@ -57,7 +57,7 @@
     return self;
 }
 
-- (void)setFriend:(Friend *)friend
+- (void)setFriend:(XMPPUserCoreDataStorageObject *)friend
 {
     if (_friend)
         [friend removeObserver:self forKeyPath:@"imagePath"];
@@ -65,7 +65,7 @@
     _friend = friend;
     [friend addObserver:self forKeyPath:@"imagePath" options:NSKeyValueObservingOptionInitial context:nil];
 
-    self.label.text = friend.firstName;
+    self.label.text = friend.nickname;
 }
 
 - (UIImage *)styledFriendImage
@@ -119,7 +119,7 @@
 {
     if ([keyPath isEqualToString:@"imagePath"])
     {
-        self.friendImage = [UIImage imageWithContentsOfFile:self.friend.imagePath];
+        //self.friendImage = [UIImage imageWithContentsOfFile:self.friend.imagePath];
         [self setNeedsDisplay];
     }
 }

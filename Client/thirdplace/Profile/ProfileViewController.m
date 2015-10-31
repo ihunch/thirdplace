@@ -5,9 +5,6 @@
 
 #import "ProfileViewController.h"
 #import "FriendView.h"
-#import "RootEntity.h"
-#import "_Friend.h"
-#import "Friend.h"
 
 @interface ProfileViewController ()
 
@@ -24,25 +21,23 @@
 {
     [super viewDidLoad];
     
-    Friend *me = [RootEntity rEntity].me;
-    self.friendView.friend = me;
-    
-    self.travelDistanceSlider.value = me.travelDistanceValue;
-    self.travelDistanceLabel.text = [NSString stringWithFormat:@"%.2fkm", me.travelDistanceValue];
-    self.discoverNewPlacesSwitch.on = me.discoverNewPlacesValue;
+//    Friend *me = [RootEntity rEntity].me;
+//    self.friendView.friend = me;
+//    
+//    self.travelDistanceSlider.value = me.travelDistanceValue;
+//    self.travelDistanceLabel.text = [NSString stringWithFormat:@"%.2fkm", me.travelDistanceValue];
+//    self.discoverNewPlacesSwitch.on = me.discoverNewPlacesValue;
 }
 
 - (IBAction)changedTravelSlider:(UISlider *)slider
 {
     self.travelDistanceLabel.text = [NSString stringWithFormat:@"%.2fkm", slider.value];
-    [RootEntity rEntity].me.travelDistanceValue = slider.value;
-    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:nil];
 }
 
 - (IBAction)toggleDiscoverNewPlaces:(UISwitch *)_switch
 {
-    [RootEntity rEntity].me.discoverNewPlacesValue = _switch.on;
-    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:nil];
+//    [RootEntity rEntity].me.discoverNewPlacesValue = _switch.on;
+//    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:nil];
 }
 
 @end

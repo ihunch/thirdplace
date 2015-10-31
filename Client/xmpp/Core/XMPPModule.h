@@ -25,7 +25,6 @@
 
 @property (readonly) dispatch_queue_t moduleQueue;
 @property (readonly) void *moduleQueueTag;
-
 @property (strong, readonly) XMPPStream *xmppStream;
 
 - (id)init;
@@ -39,5 +38,5 @@
 - (void)removeDelegate:(id)delegate;
 
 - (NSString *)moduleName;
-
+- (id)multicastDelegate;
 @end

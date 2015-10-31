@@ -5,24 +5,23 @@
 
 #import <UIKit/UIKit.h>
 
-@class Friend;
+@class XMPPUserCoreDataStorageObject;
 
 @protocol FriendContainerViewDelegate
 
 - (void)didTouchMe;
 - (void)didTouchAddFriend;
-
-- (void)didTouchFriend:(Friend *)friend rect:(CGRect)rect;
+- (void)didTouchFriend:(XMPPUserCoreDataStorageObject *)friend rect:(CGRect)rect;
 
 @end
 
 @interface FriendContainerView : UIView <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) Friend *me;
+@property (nonatomic, strong) XMPPUserCoreDataStorageObject *me;
 @property (nonatomic, weak) id<FriendContainerViewDelegate> delegate;
 
-- (void)addFriend:(Friend *)friend;
-- (void)removeFriend:(Friend *)friend;
-
+- (void)addFriend:(XMPPUserCoreDataStorageObject *)friend;
+- (void)removeFriend:(XMPPUserCoreDataStorageObject *)friend;
 - (void)updateLayout;
+- (void)reloadFriendListData;
 @end

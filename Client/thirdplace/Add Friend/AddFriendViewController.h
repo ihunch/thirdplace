@@ -8,7 +8,7 @@
 @class Friend;
 
 @protocol AddFriendViewControllerDelegate
-- (void)didAddFriend:(Friend *)friend;
+//- (void)didAddFriend:(Friend *)friend;
 @end
 
 @interface AddFriendViewController : UIViewController

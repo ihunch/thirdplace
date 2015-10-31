@@ -7,7 +7,6 @@
 //
 
 #import "FriendsCollectionViewController.h"
-#import "Friend.h"
 #import "FriendCollectionViewCell.h"
 #import "FriendView.h"
 

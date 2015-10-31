@@ -6,7 +6,6 @@
 #import <MapKit/MapKit.h>
 #import "SocialCalendarTableViewController.h"
 #import "FriendsCollectionViewController.h"
-#import "Event.h"
 #import "PlaceCell.h"
 
 @interface SocialCalendarTableViewController ()

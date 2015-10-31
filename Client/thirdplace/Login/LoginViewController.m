@@ -4,8 +4,6 @@
 //
 
 #import "LoginViewController.h"
-#import "RootEntity.h"
-#import "Friend.h"
 
 @interface LoginViewController () <FBLoginViewDelegate>
 
@@ -33,14 +31,14 @@
     activityIndicatorView.center = loginView.center;
     [self.view addSubview:activityIndicatorView];
     [activityIndicatorView startAnimating];
-
-    RootEntity *rootEntity = [RootEntity rEntity];
-    if (!rootEntity.me)
-        rootEntity.me = [Friend MR_createEntity];
-
-    rootEntity.me.firstName = user.first_name;
-    rootEntity.me.lastName = user.last_name;
-
+//
+//    RootEntity *rootEntity = [RootEntity rEntity];
+//    if (!rootEntity.me)
+//        rootEntity.me = [Friend MR_createEntity];
+//
+//    rootEntity.me.firstName = user.first_name;
+//    rootEntity.me.lastName = user.last_name;
+//
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NSString *profilePictureURL = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", user.objectID];
         NSData *profilePictureData = [NSData dataWithContentsOfURL:[NSURL URLWithString:profilePictureURL]];
@@ -59,15 +57,15 @@
                 if (success)
                 {
                     dispatch_sync(dispatch_get_main_queue(), ^{
-                        rootEntity.me.imagePath = dest;
+                        //rootEntity.me.imagePath = dest;
                     });
                 }
             }
         }
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-              [self performSegueWithIdentifier:@"LoggedIn" sender:nil];
+//            [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+//              [self performSegueWithIdentifier:@"LoggedIn" sender:nil];
         });
     });
 }

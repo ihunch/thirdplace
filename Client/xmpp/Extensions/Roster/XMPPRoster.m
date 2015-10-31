@@ -408,9 +408,7 @@ enum XMPPRosterFlags
         // During roster population, we need to filter out items for users who aren't actually in our roster.
         // That is, those users who have requested to be our buddy, but we haven't approved yet.
         // This is described in more detail in the method isRosterItem above.
-        
         [multicastDelegate xmppRoster:self didReceiveRosterItem:item];
-        
         if (hasRoster || [self isRosterItem:item])
         {
             [xmppRosterStorage handleRosterItem:item xmppStream:xmppStream];

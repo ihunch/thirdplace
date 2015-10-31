@@ -7,11 +7,8 @@
 #import "FriendsCollectionViewController.h"
 #import "GCPlaceholderTextView.h"
 #import "TextFieldToolbar.h"
-#import "Event.h"
-#import "RootEntity.h"
 #import "AppDelegate.h"
 #import "XMPPIQ.h"
-#import "_Friend.h"
 
 @interface CreateEventTableViewController () <CLLocationManagerDelegate, UITextFieldDelegate, UITextViewDelegate>
 
@@ -93,11 +90,11 @@
 
 - (IBAction)pressedSend:(id)sender
 {
-    Event *event = [Event MR_createEntity];
-    event.rootEntity = [RootEntity rEntity];
-    event.date = self.datePicker.date;
-    event.friends = [[NSSet alloc] initWithArray:self.friends];
-    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+//    Event *event = [Event MR_createEntity];
+//    event.rootEntity = [RootEntity rEntity];
+//    event.date = self.datePicker.date;
+//    event.friends = [[NSSet alloc] initWithArray:self.friends];
+//    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 
@@ -110,18 +107,18 @@
     DDXMLElement *hangoutElement = [DDXMLElement elementWithName:@"hangout"];
     [hangoutElement addChild:[DDXMLElement elementWithName:@"description" stringValue:@"Test Desc"]]; // TODO
     DDXMLElement *usersElement = [DDXMLElement elementWithName:@"users"];
-    for (_Friend *f in [self friends])
-    {
-        if (f.email == nil)
-            continue;
-
-        [usersElement addChild:[DDXMLElement elementWithName:@"user" stringValue:f.email]]; // HACK: Email contains jid for now
-    }
+//    for (_Friend *f in [self friends])
+//    {
+//        if (f.email == nil)
+//            continue;
+//
+//        [usersElement addChild:[DDXMLElement elementWithName:@"user" stringValue:f.email]]; // HACK: Email contains jid for now
+//    }
     [hangoutElement addChild:usersElement];
-    [hangoutElement addChild:[DDXMLElement elementWithName:@"startdate" stringValue:[dateFormat stringFromDate:event.date]]];
-    [hangoutElement addChild:[DDXMLElement elementWithName:@"enddate" stringValue:[dateFormat stringFromDate:event.date]]];
-    [hangoutElement addChild:[DDXMLElement elementWithName:@"timedescription" stringValue:@"Test Time Desc"]]; // TODO
-    [hangoutElement addChild:[DDXMLElement elementWithName:@"message" stringValue:@"Hey"]]; // TODO
+//    [hangoutElement addChild:[DDXMLElement elementWithName:@"startdate" stringValue:[dateFormat stringFromDate:event.date]]];
+//    [hangoutElement addChild:[DDXMLElement elementWithName:@"enddate" stringValue:[dateFormat stringFromDate:event.date]]];
+//    [hangoutElement addChild:[DDXMLElement elementWithName:@"timedescription" stringValue:@"Test Time Desc"]]; // TODO
+//    [hangoutElement addChild:[DDXMLElement elementWithName:@"message" stringValue:@"Hey"]]; // TODO
     [hangoutElement addChild:[DDXMLElement elementWithName:@"locationid" stringValue:@"0"]]; // TODO
     [createElement addChild:hangoutElement];
     
@@ -129,7 +126,7 @@
     [iq addAttributeWithName:@"id" stringValue:kXMPPMessageId_InviteHangout];
     [iq addAttributeWithName:@"type" stringValue:@"set"];
     [iq addAttributeWithName:@"to" stringValue:@"thirdplacehangout.ip-172-31-1-174"];
-    [iq addAttributeWithName:@"from" stringValue:[[XMPPFramework jid] description]];
+    [iq addAttributeWithName:@"from" stringValue:[[AppConfig jid] description]];
     [iq addChild:createElement];
     [[appDelegate xmppStream] sendElement:iq];
     

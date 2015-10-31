@@ -15,4 +15,5 @@
     #import <Foundation/Foundation.h>
     #import <FacebookSDK/FacebookSDK.h>
     #import <MagicalRecord/MagicalRecord.h>
+    #import "AppConfig.h"
 #endif

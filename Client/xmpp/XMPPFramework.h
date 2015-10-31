@@ -16,16 +16,13 @@
 //  And they can automatically take advantage of it.
 //
 
+
+//  CUSTOMIZE ME !
+//  
+//  THIS HEADER FILE SHOULD BE TAILORED TO MATCH YOUR APPLICATION.
+
+
 #import "XMPP.h"
-
-extern NSString* const kXMPPHostName;
-extern NSString* const kXMPPServerName;
-
-extern NSString* const kXMPPHasDetailsKey;
-extern NSString* const kXMPPJIDKey;
-extern NSString* const kXMPPPasswordKey;
-
-extern NSString* const kXMPPMessageId_InviteHangout;
 
 // List the modules you're using here.
 
@@ -33,22 +30,14 @@ extern NSString* const kXMPPMessageId_InviteHangout;
 
 #import "XMPPRoster.h"
 #import "XMPPRosterCoreDataStorage.h"
+#import "XMPPRosterCoreDataStorage+Additions.h"
 
 #import "XMPPvCardTempModule.h"
+#import "XMPPvCardAvatarModule.h"
 #import "XMPPvCardCoreDataStorage.h"
 
 #import "XMPPCapabilities.h"
 #import "XMPPCapabilitiesCoreDataStorage.h"
 
-@interface XMPPFramework : NSObject
-
-+ (bool) hasLoginDetails;
-+ (NSString *) jid;
-+ (NSString *) password;
-+ (NSString *) name;
-+ (NSString *) email;
-
-+ (void) updateDetails:(NSString *)newJid withPassword:(NSString *)newPassword withName:(NSString *)newName withEmail:(NSString *)newEmail;
-+ (void) clearDetails;
-
-@end
+#import "XMPPMUC.h"
+#import "XMPPRoomCoreDataStorage.h"

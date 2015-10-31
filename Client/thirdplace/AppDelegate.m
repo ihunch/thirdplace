@@ -7,11 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "DatabaseManager.h"
-#import "Event.h"
-#import "Friend.h"
-#import "RootEntity.h"
-
 #import "DDLog.h"
 #import "DDTTYLogger.h"
 
@@ -23,6 +18,8 @@
 #import "XMPPvCardAvatarModule.h"
 #import "XMPPvCardCoreDataStorage.h"
 #import "HomeViewController.h"
+#import "thirdplace-Swift.h"
+#import "DBHeaderFile.h"
 
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
@@ -45,32 +42,23 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @synthesize xmppvCardAvatarModule;
 @synthesize xmppCapabilities;
 @synthesize xmppCapabilitiesStorage;
+@synthesize xmppHangoutStorage;
+@synthesize xmppHangout;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [DDLog addLogger:[DDTTYLogger sharedInstance] withLogLevel:XMPP_LOG_FLAG_SEND_RECV];
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [self setupXMPPStream];
     
-    [DatabaseManager setup];
+    [MagicalRecord setupCoreDataStack];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 
-    UIViewController *rootviewcontroller = [storyboard instantiateInitialViewController];
+    UIViewController* rootviewcontroller = [storyboard instantiateInitialViewController];
     self.window.rootViewController = rootviewcontroller;
-
-    if ([self isFbLoggedIn])
-    {
-        [self loginXMPP];
-    }
-    else
-    {
-      //  [navigationController setViewControllers:@[[storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"]]];
-        // TODO: Call [self loginXMPP] after fb login process
-    }
-    
     [self.window makeKeyAndVisible];
-
     return YES;
 }
 
@@ -106,10 +94,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     return [xmppCapabilitiesStorage mainThreadManagedObjectContext];
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#pragma mark Private
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 - (bool)isFbLoggedIn
 {
     if (FBSession.activeSession.isOpen)
@@ -124,11 +108,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark Private
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 - (void)loginXMPP:(void (^)(bool))completion
 {
-    if (XMPPFramework.hasLoginDetails)
+    if (AppConfig.hasLoginDetails)
     {
-        completion([self connectXMPP:XMPPFramework.jid withPassword:XMPPFramework.password]);
+        completion([self connectXMPP:AppConfig.jid withPassword:AppConfig.password]);
         return;
     }
     
@@ -149,7 +137,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             
             NSString *fbFullName = [NSString stringWithFormat:@"%@ %@", fbFirstName, fbLastName];
             
-            [XMPPFramework updateDetails:jid withPassword:password withName:fbFullName withEmail:fbEmail];
+            [AppConfig updateDetails:jid withPassword:password withName:fbFullName withEmail:fbEmail];
             
             success = [self connectXMPP:jid withPassword:password];
         }
@@ -200,6 +188,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     xmppCapabilities.autoFetchHashedCapabilities = YES;
     xmppCapabilities.autoFetchNonHashedCapabilities = NO;
     
+    // set up xmpp hangout
+    xmppHangoutStorage = [XMPPHangoutDataManager singleInstance];
+    xmppHangout = [[XMPPHangout alloc] initWithDb:xmppHangoutStorage];
     // Activate xmpp modules
     
     [xmppReconnect         activate:xmppStream];
@@ -207,12 +198,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [xmppvCardTempModule   activate:xmppStream];
     [xmppvCardAvatarModule activate:xmppStream];
     [xmppCapabilities      activate:xmppStream];
-    
+    [xmppHangout           activate:xmppStream];
     // Add ourself as a delegate to anything we may be interested in
     
     [xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
     [xmppRoster addDelegate:self delegateQueue:dispatch_get_main_queue()];
-    
+    [xmppHangout addDelegate:self delegateQueue:dispatch_get_main_queue()];
     // If you don't specify a hostPort, then the default (5222) will be used.
     
     [xmppStream setHostName:kXMPPHostName];
@@ -222,13 +213,14 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     [xmppStream removeDelegate:self];
     [xmppRoster removeDelegate:self];
+    [xmppHangout removeDelegate:self];
     
     [xmppReconnect         deactivate];
     [xmppRoster            deactivate];
     [xmppvCardTempModule   deactivate];
     [xmppvCardAvatarModule deactivate];
     [xmppCapabilities      deactivate];
-    
+    [xmppHangout           deactivate];
     [xmppStream disconnect];
     
     xmppStream = nil;
@@ -240,6 +232,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     xmppvCardAvatarModule = nil;
     xmppCapabilities = nil;
     xmppCapabilitiesStorage = nil;
+    xmppHangoutStorage = nil;
 }
 
 - (void)goOnline
@@ -296,15 +289,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     return [NSString stringWithFormat:@"%u", (uint)s.hash];
 }
 
-- (void)openHomeView
-{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    HomeViewController* controller = [storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
-    // TODO: SK: Fix view transitioning + figure out why this was here
-    UINavigationController* rootviewController = (UINavigationController*)self.window.rootViewController;
-    [rootviewController pushViewController:controller animated:true];
-}
-
 - (void)addFbFriends
 {
     // NOTE: This only gets friends who are already using the app
@@ -321,20 +305,25 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             // TOFIX: Is currently always nil, creating duplicate user every time
             if (user == nil)
             {
-                // TODO: This "auto-fill" is temp, the found FB friends should be easily addable to friends list from the add friends screen
-                Friend *friend = [Friend MR_createEntity];
-                friend.firstName = fbFriend.first_name;
-                friend.lastName = fbFriend.last_name;
-                friend.email = jid.description; // TODO: Add proper JID field to DB
-                
-                int x = arc4random_uniform(250);
-                int y = arc4random_uniform(400);
-                friend.xValue = x; friend.yValue = y;
-                
-                [[RootEntity rEntity].friendsSet addObject:friend];
-                [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-                
-                [xmppRoster addUser:jid withNickname:nil];
+                NSString* name = [NSString stringWithFormat:@"%@ %@", fbFriend.first_name,fbFriend.last_name];
+                [xmppRoster addUser:jid withNickname:name];
+
+                // save temp XMPPRosterFB
+                NSManagedObjectContext* localdb = [[DataManager singleInstance] getLocaldbContext];
+                XMPPRosterFB * rfb = [XMPPRosterFB MR_createEntityInContext:localdb];
+                float x = arc4random_uniform(280);
+                if (x < 30)
+                {
+                    x+=30;
+                }
+                float y = arc4random_uniform(400);
+                if (y < 30)
+                {
+                    y+=30;
+                }
+                rfb.axisxValue = x;
+                rfb.axisyValue = y;
+                rfb.jid = [jid bare];
             }
         }
     }];
@@ -394,8 +383,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    [DatabaseManager cleanUp];
-    
+    //[MagicalRecord cleanUp];
     [self teardownXMPPStream];
 }
 
@@ -416,10 +404,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     NSError *error = nil;
     
-    if (!XMPPFramework.hasLoginDetails)
+    if (!AppConfig.hasLoginDetails)
         return;
     
-    NSString *password = XMPPFramework.password;
+    NSString *password = AppConfig.password;
     
     if (![[self xmppStream] authenticateWithPassword:password error:&error])
     {
@@ -432,33 +420,26 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
     [self goOnline];
-    [self openHomeView];
-    [self addFbFriends];
+  //  [self addFbFriends];
 }
 
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
-    NSString *password = XMPPFramework.password;
+    NSString *password = AppConfig.password;
     
     NSError *nserror = nil;
     
     NSMutableArray *elements = [NSMutableArray array];
     [elements addObject:[NSXMLElement elementWithName:@"username" stringValue:[xmppStream myJID].user]];
     [elements addObject:[NSXMLElement elementWithName:@"password" stringValue:password]];
-    [elements addObject:[NSXMLElement elementWithName:@"name" stringValue:XMPPFramework.name]];
-    [elements addObject:[NSXMLElement elementWithName:@"email" stringValue:XMPPFramework.email]];
+    [elements addObject:[NSXMLElement elementWithName:@"name" stringValue:AppConfig.name]];
+    [elements addObject:[NSXMLElement elementWithName:@"email" stringValue:AppConfig.email]];
     
     if (![xmppStream registerWithElements:elements error:&nserror])
     {
         DDLogError(@"Error registering: %@", nserror);
-        return;
-    }
-    
-    if (![[self xmppStream] authenticateWithPassword:password error:&nserror])
-    {
-        DDLogError(@"Error authenticating: %@", nserror);
         return;
     }
 }
@@ -473,67 +454,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    
-    NSString *msgId = [message attributeStringValueForName:@"id"];
-    
-    if ([msgId isEqual:kXMPPMessageId_InviteHangout])
-    {
-        DDXMLNode *hangoutNode = message.nextNode;
-        DDXMLNode *propertyNode = hangoutNode.nextNode;
-        
-        Event *event = [Event MR_createEntity];
-        event.rootEntity = [RootEntity rEntity];
-        // TODO: Stop following line from triggering exception
-        //event.friends = [NSSet setWithObject:message.from.description];
-        
-        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm"];
-        
-        // TODO: Add parse helper to event class
-        if (propertyNode != nil)
-        {
-            do
-            {
-                NSString *name = propertyNode.name;
-                NSString *value = propertyNode.stringValue;
-                
-                if (value == nil)
-                    continue;
-                
-                if ([name isEqual:@"hangoutid"])
-                {
-                    int hangoutId = [value intValue]; // TODO: Add to event data
-                }
-                else if ([name isEqual:@"startdate"])
-                {
-                    event.date = [dateFormat dateFromString:value];
-                }
-                else if ([name isEqual:@"enddate"])
-                {
-                    NSDate *endDate = [dateFormat dateFromString:value]; // TODO: Add to event data
-                }
-                else if ([name isEqual:@"description"])
-                {
-                    NSString *desc = value; // TODO: Add to event data
-                }
-                else if ([name isEqual:@"timedescription"])
-                {
-                    NSString *timeDesc = value; // TODO: Add to event data
-                }
-                else if ([name isEqual:@"message"])
-                {
-                    NSString *message = value; // TODO: Add to event data
-                }
-                else if ([name isEqual:@"locationid"])
-                {
-                    int locationId = [value intValue]; // TODO: Add to event data
-                }
-            }
-            while ((propertyNode = propertyNode.nextSibling) != nil);
-        }
-
-        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-    }
 }
 
 - (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence
@@ -556,6 +476,35 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
 }
 
+- (void)xmppStreamDidRegister:(XMPPStream *)sender
+{
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    NSString *password = AppConfig.password;
+    NSError *nserror = nil;
+    if (![[self xmppStream] authenticateWithPassword:password error:&nserror])
+    {
+        DDLogError(@"Error authenticating: %@", nserror);
+        return;
+    }
+}
+
+- (void)xmppStream:(XMPPStream *)sender didNotRegister:(NSXMLElement *)error
+{
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    //when registering fails, and if connection is open. Close connection.
+    if([sender isConnected])
+    {
+        [self disconnect];
+    }
+}
+
+- (void)disconnect
+{
+    [self goOffline];
+    
+    [xmppStream disconnect];
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark XMPPRosterDelegate
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -567,7 +516,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     XMPPUserCoreDataStorageObject *user = [xmppRosterStorage userForJID:[presence from]
                                                              xmppStream:xmppStream
                                                    managedObjectContext:[self managedObjectContext_roster]];
-    
     NSString *displayName = [user displayName];
     NSString *jidStrBare = [presence fromStr];
     NSString *body = nil;
@@ -597,10 +545,21 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
         localNotification.alertAction = @"Not implemented";
         localNotification.alertBody = body;
-        
         [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
     }
-    
 }
 
+- (void)xmppRoster:(XMPPRoster *)sender didReceiveRosterItem:(NSXMLElement *)item
+{
+    DataManager* db = [DataManager singleInstance];
+    NSManagedObjectContext* localdb = [db getLocaldbContext];
+    [localdb MR_saveToPersistentStoreAndWait]; // push the temp fb info into persistent store.
+    [db releaseLocalContext];
+}
+
+- (void)xmppRosterDidEndPopulating:(XMPPRoster *)sender
+{
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    [xmppRosterStorage addMyJID:[[xmppStream myJID] bareJID] xmppStream:xmppStream managedObjectContext:self.managedObjectContext_roster];
+}
 @end

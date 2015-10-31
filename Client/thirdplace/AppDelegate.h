@@ -10,6 +10,8 @@
 
 #import "XMPPFramework.h"
 
+@class XMPPHangout;
+@class XMPPHangoutDataManager;
 @interface AppDelegate : UIResponder <UIApplicationDelegate, XMPPRosterDelegate>
 {
     XMPPStream *xmppStream;
@@ -21,8 +23,9 @@
     XMPPvCardAvatarModule *xmppvCardAvatarModule;
     XMPPCapabilities *xmppCapabilities;
     XMPPCapabilitiesCoreDataStorage *xmppCapabilitiesStorage;
-    
     bool isXmppConnected;
+    XMPPHangoutDataManager* xmppHangoutStorage;
+    XMPPHangout* xmppHangout;
 }
 
 @property (strong, nonatomic) UIWindow *window;
@@ -35,10 +38,11 @@
 @property (nonatomic, strong, readonly) XMPPvCardAvatarModule *xmppvCardAvatarModule;
 @property (nonatomic, strong, readonly) XMPPCapabilities *xmppCapabilities;
 @property (nonatomic, strong, readonly) XMPPCapabilitiesCoreDataStorage *xmppCapabilitiesStorage;
-
+@property (nonatomic, strong, readonly) XMPPHangout* xmppHangout;
+@property (nonatomic, strong, readonly) XMPPHangoutDataManager* xmppHangoutStorage;
 - (NSManagedObjectContext *)managedObjectContext_roster;
 - (NSManagedObjectContext *)managedObjectContext_capabilities;
 
 - (void)loginXMPP;
-
+- (bool)isFbLoggedIn;
 @end

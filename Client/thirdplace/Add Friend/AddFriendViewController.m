@@ -6,9 +6,7 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import "AddFriendViewController.h"
 #import "DZNPhotoPickerController.h"
-#import "Friend.h"
 #import "UIImagePickerController+Edit.h"
-#import "RootEntity.h"
 #import "TextFieldToolbar.h"
 #import <RHAddressBook/AddressBook.h>
 #import <NYXImagesKit/UIImage+Saving.h>

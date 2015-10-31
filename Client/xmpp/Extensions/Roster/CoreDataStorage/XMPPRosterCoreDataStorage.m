@@ -307,7 +307,6 @@ static XMPPRosterCoreDataStorage *sharedInstance;
 	XMPPLogTrace();
 	
 	[self scheduleBlock:^{
-		
 		[rosterPopulationSet removeObject:[NSNumber xmpp_numberWithPtr:(__bridge void *)stream]];
 	}];
 }

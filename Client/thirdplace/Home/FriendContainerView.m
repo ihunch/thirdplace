@@ -7,9 +7,17 @@
 #import "FriendView.h"
 #import "LinesView.h"
 #import "Line.h"
-#import "Friend.h"
-#import "RootEntity.h"
 #import "thirdplace-Swift.h"
+#import "XMPPFramework.h"
+#import "DDLog.h"
+
+// Log levels: off, error, warn, info, verbose
+#if DEBUG
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+#else
+static const int ddLogLevel = LOG_LEVEL_INFO;
+#endif
+
 
 @interface FriendContainerView () <FriendViewDelegate>
 
@@ -17,7 +25,6 @@
 @property (nonatomic, strong) FriendView *meView;
 @property (nonatomic, strong) FriendView *dragFriendView;
 @property (nonatomic, strong) FriendView *addFriendView;
-
 @property (nonatomic, strong) LinesView *linesView;
 
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPressGestureRecognizer;
@@ -25,14 +32,33 @@
 
 @end
 
+
 @implementation FriendContainerView
+-(AppDelegate*)appDelegate
+{
+    return (AppDelegate*)[[UIApplication sharedApplication] delegate];
+}
+
+-(XMPPRosterCoreDataStorage*)rosterCoreDataStorage
+{
+    return [[self appDelegate] xmppRosterStorage];
+}
+
+-(XMPPStream*)xmppStream
+{
+    return [[self appDelegate] xmppStream];
+}
+
+-(NSManagedObjectContext*)rosterDBContext
+{
+    return [[self appDelegate] managedObjectContext_roster];
+}
 
 - (void)awakeFromNib
 {
     [super awakeFromNib];
     self.friendViews = [NSMutableArray array];
     self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"patternBackground"]];
-
     self.linesView = [[LinesView alloc] init];
     [self addSubview:self.linesView];
 
@@ -41,13 +67,6 @@
     self.addFriendView.delegate = self;
     [self addSubview:self.addFriendView];
     [self setupGestureRecognizers];
-    
-    
-    self.me = [RootEntity rEntity].me;
-    for (Friend* friend in [RootEntity rEntity].friends)
-    {
-        [self addFriend:friend];
-    }
 }
 
 - (void)setupGestureRecognizers
@@ -109,13 +128,13 @@
     else if (gestureRecognizer.state == UIGestureRecognizerStateEnded || gestureRecognizer.state == UIGestureRecognizerStateCancelled)
     {
         tableview.scrollEnabled = YES;
-        
         FriendView *friendView = self.dragFriendView;
         self.dragFriendView = nil;
-        friendView.friend.xValue = friendView.center.x;
-        friendView.friend.yValue = friendView.center.y;
-        [friendView.friend.managedObjectContext MR_saveToPersistentStoreWithCompletion:nil];
-
+        [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+            XMPPRosterFB* rfb = [[DataManager singleInstance] getXMPPUserFBInfo:friendView.friend.jid dbcontext:localContext];
+            rfb.axisxValue = friendView.center.x;
+            rfb.axisyValue = friendView.center.y;
+        }];
         [UIView animateWithDuration:0.3 animations:^{
             friendView.transform = CGAffineTransformIdentity;
         }];
@@ -133,23 +152,31 @@
     [gestureRecognizer setTranslation:CGPointZero inView:self];
 }
 
-- (void)addFriend:(Friend *)friend
+- (void)addFriend:(XMPPUserCoreDataStorageObject *)friend
 {
     FriendView *friendView = [FriendView friendViewWithFriend:friend];
     friendView.delegate = self;
     [self.friendViews addObject:friendView];
-
+    XMPPRosterFB* rfb = [[DataManager singleInstance] getXMPPUserFBInfo:friend.jid dbcontext:nil];
+    
     friendView.frame = CGRectMake(0, 0, 60, 60);
-    friendView.center = CGPointMake(friend.xValue, friend.yValue);
-
+    friendView.center = CGPointMake(rfb.axisx.floatValue, rfb.axisy.floatValue);
     friendView.label.hidden = NO;
 
     [self addSubview:friendView];
-
     [self updateLines];
 }
 
-- (void)removeFriend:(Friend *)friend
+-(void)removeAllFriendViews
+{
+    for(FriendView* view in self.friendViews)
+    {
+        [view removeFromSuperview];
+    }
+    self.friendViews = [NSMutableArray array];
+}
+
+- (void)removeFriend:(XMPPUserCoreDataStorageObject *)friend
 {
     for (unsigned i = 0; i < self.friendViews.count; i++)
     {
@@ -163,7 +190,7 @@
     }
 }
 
-- (void)setMe:(Friend *)friend
+- (void)setMe:(XMPPUserCoreDataStorageObject *)friend
 {
     if (!self.meView)
     {
@@ -212,4 +239,17 @@
     }
 }
 
+-(void)reloadFriendListData
+{
+    DDLogCVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    [self removeAllFriendViews];
+    XMPPUserCoreDataStorageObject* me = [[self rosterCoreDataStorage] myUserForXMPPStream:[self xmppStream] managedObjectContext:[self rosterDBContext]];
+    self.me = me;
+    NSArray* friends = [[self rosterCoreDataStorage] rosterlistForJID:[XMPPJID jidWithString:[AppConfig jid]] xmppStream:[self xmppStream] managedObjectContext:[self rosterDBContext]];
+    DDLogCVerbose(@"FRIEND: %lu", (unsigned long)friends.count);
+    for (XMPPUserCoreDataStorageObject* u in friends)
+    {
+        [self addFriend:u];
+    }
+}
 @end

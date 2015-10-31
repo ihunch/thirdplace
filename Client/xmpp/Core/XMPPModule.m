@@ -221,4 +221,9 @@
 	return NSStringFromClass([self class]);
 }
 
+-(id)multicastDelegate
+{
+    return multicastDelegate;
+}
+
 @end

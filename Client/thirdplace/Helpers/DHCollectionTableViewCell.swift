@@ -30,21 +30,16 @@ class DHCollectionTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsetsMake(4, 5, 4, 5)
-        layout.minimumLineSpacing = 5
+        //layout.sectionInset = UIEdgeInsetsMake(4, 5, 4, 5)
+       // layout.minimumLineSpacing = 5
         layout.itemSize = CGSizeMake(91, 91)
         layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
         self.collectionView = DHIndexedCollectionView(frame: CGRectZero, collectionViewLayout: layout)
         self.collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: collectionViewCellIdentifier as String)
-        self.collectionView.backgroundColor = UIColor.whiteColor()
+        self.collectionView.backgroundColor = UIColor.lightGrayColor()
         self.collectionView.showsHorizontalScrollIndicator = false
         self.collectionView.pagingEnabled = true
         self.contentView.addSubview(self.collectionView)
-        if #available(iOS 8.0, *) {
-            self.layoutMargins = UIEdgeInsetsMake(10, 0, 10, 0)
-        } else {
-            // Fallback on earlier versions
-        }
     }
 
     required init?(coder aDecoder: NSCoder) {
