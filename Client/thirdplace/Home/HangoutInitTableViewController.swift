@@ -133,7 +133,6 @@ class HangoutInitTableViewController: DHCollectionTableViewController {
         hangouttime.updatetime = NSDate()
         hangouttime.hangout = hangout
         hangoutmodule.sendHangoutInvitation(hangout, sender: xmppStream.myJID)
-        
         //message
         let message = HangoutMessage.MR_createEntityInContext(p_context)
         if ((alternativeMessage != nil) && (alternativeMessage != ""))

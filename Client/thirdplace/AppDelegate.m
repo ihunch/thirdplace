@@ -47,6 +47,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [NSDate mt_setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
     [DDLog addLogger:[DDTTYLogger sharedInstance] withLogLevel:XMPP_LOG_FLAG_SEND_RECV];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [self setupXMPPStream];

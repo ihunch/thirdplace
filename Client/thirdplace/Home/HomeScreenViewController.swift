@@ -13,7 +13,7 @@ protocol HomeScreenDelegate
     func didFBLoginSuccess()
 }
 
-@objc class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FriendContainerViewDelegate,HomeScreenDelegate,NSFetchedResultsControllerDelegate {
+class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FriendContainerViewDelegate,HomeScreenDelegate,NSFetchedResultsControllerDelegate {
 
     @IBAction func touch(sender: AnyObject)
     {
@@ -25,6 +25,18 @@ protocol HomeScreenDelegate
     }
     
     @IBOutlet weak var hometablelistview: UITableView!
+    
+    var rosterStorage: XMPPRosterCoreDataStorage{
+        get{
+            return self.appDelegate!.xmppRosterStorage
+        }
+    }
+    
+    var rosterDBContext : NSManagedObjectContext{
+        get{
+            return self.appDelegate!.managedObjectContext_roster()
+        }
+    }
     
     let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate
     let xmppHangoutDB = XMPPHangoutDataManager.singleInstance
@@ -47,6 +59,7 @@ protocol HomeScreenDelegate
         xmppHangout = appDelegate!.xmppHangout
         appDelegate!.xmppRoster.addDelegate(self, delegateQueue: dispatch_get_main_queue())
         xmppHangout!.addDelegate(self, delegateQueue: dispatch_get_main_queue())
+        hometablelistview.estimatedRowHeight = 44.0
     }
     
     deinit
@@ -70,12 +83,18 @@ protocol HomeScreenDelegate
         }
         else
         {
-            let hangoutcell = tableView.dequeueReusableCellWithIdentifier("HangoutListTableViewCell") as? HangoutListTableViewCell
+            let hangoutcell :HangoutListTableViewCell = tableView.dequeueReusableCellWithIdentifier("HangoutListTableViewCell") as!HangoutListTableViewCell
             let indexpath = NSIndexPath(forRow: indexPath.row, inSection: 0)
             let hangout = self.hangoutFetchedRequestControler.objectAtIndexPath(indexpath) as! Hangout
             let message = hangout.getLatestMessage()
-            hangoutcell!.mainLabel.text = message?.content
-            return hangoutcell!
+            let time = hangout.getLatestTime()
+            //let location = hangout.getLocation()
+            hangoutcell.messageLabel.text = message?.content
+            hangoutcell.dateLabel.text = time?.timedescription
+            //TODO: LOOK UP FROM OTHER SOURCE TO GET THE LOCATION DESCRIPTION
+            //hangoutcell!.placeLabel.text = loc
+
+            return hangoutcell
         }
     }
     
@@ -87,6 +106,11 @@ protocol HomeScreenDelegate
             c!.setNeedsLayout()
             c!.setDelegate(self)
             c!.friendContainerView.updateLayout()
+        }
+        else
+        {
+            let collectionCell: HangoutListTableViewCell = cell as! HangoutListTableViewCell
+            collectionCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, index: indexPath.section)
         }
     }
     
@@ -123,7 +147,7 @@ protocol HomeScreenDelegate
         }
         else
         {
-            return 80
+            return UITableViewAutomaticDimension
         }
     }
     
@@ -227,11 +251,6 @@ protocol HomeScreenDelegate
         self.performSegueWithIdentifier("ProfileViewController", sender: nil)
     }
     
-    // MARK: AddFriendViewDelegate
-//    func didAddFriend(friend: Friend!) {
-//        
-//    }
-    
     //Mark: XMPPRosterDelegate
     func xmppRosterDidEndPopulating(sender:XMPPRoster)
     {
@@ -256,5 +275,34 @@ protocol HomeScreenDelegate
         XMPPLoggingWrapper.XMPPLogTrace()
         _hangoutFetchedResultsController = nil
         hometablelistview.reloadData()
+    }
+}
+
+// MARK: - Collection View Data source and Delegate
+extension HomeScreenViewController:UICollectionViewDataSource,UICollectionViewDelegate {
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    {
+        return 2
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
+    {
+        let cell: UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseCollectionViewCellIdentifier, forIndexPath: indexPath)
+        var friendView: UIView? = nil
+        if (indexPath.item == 0)
+        {
+            let me = rosterStorage.myUserForXMPPStream(xmppStream, managedObjectContext: rosterDBContext)
+            friendView = FriendView.friendViewWithFriend(me) as? UIView;
+        }
+        else
+        {
+            //friendView = FriendView.friendViewWithFriend(selectedHangoutFriend) as? UIView;
+            let me = rosterStorage.myUserForXMPPStream(xmppStream, managedObjectContext: rosterDBContext)
+            friendView = FriendView.friendViewWithFriend(me) as? UIView;
+        }
+        friendView!.frame = cell.bounds;
+        cell.addSubview(friendView!)
+        return cell
     }
 }

@@ -51,8 +51,8 @@ private let _SingletonInstance = XMPPHangoutDataManager()
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-        let startdate = dateFormatter.dateFromString(startdatestr)
-        let enddate = dateFormatter.dateFromString(enddatestr)
+        let startdate = dateFormatter.dateFromString(startdatestr)!.mt_inTimeZone(NSTimeZone.localTimeZone())
+        let enddate = dateFormatter.dateFromString(enddatestr)!.mt_inTimeZone(NSTimeZone.localTimeZone())
         let description = item.elementForName(HangoutConfig.descriptionkey).stringValue()
         let timedescription = item.elementForName(HangoutConfig.timedescriptionkey).stringValue()
         let message = item.elementForName(HangoutConfig.messagekeykey).stringValue()
@@ -128,15 +128,11 @@ private let _SingletonInstance = XMPPHangoutDataManager()
 //MARK: Public methods
 extension XMPPHangoutDataManager
 {
-    func getHangoutLists(myjid:XMPPJID?) -> [Hangout]?
-    {
-        let results = Hangout.MR_findAllSortedBy("hangoutid", ascending: true) as? [Hangout]
-        return results
-    }
-    
     func getHangoutListRequest(myjid: XMPPJID?) -> NSFetchRequest
     {
-        return Hangout.MR_requestAllSortedBy("hangoutid", ascending: true)
+        let now = NSDate()
+        let filter = NSPredicate(format: "Any self.user.jidstr == %@ && Any self.time.enddate >= %@", myjid!.bare(), now)
+        return Hangout.MR_requestAllSortedBy("hangoutid", ascending: true, withPredicate: filter)
     }
     
     //to check if the hangout dialog is active
@@ -160,6 +156,40 @@ extension XMPPHangoutDataManager
             return nil
         }
     }
+}
+//MARK: UTILITY
+extension XMPPHangoutDataManager
+{
+    class func initHangoutDayData() -> [Hangout_Day]{
+        return [Hangout_Day(day_description: "Weekend",dayvalue: 8),Hangout_Day(day_description: "Saturday", dayvalue:7),Hangout_Day(day_description: "Sunday",dayvalue:1)]
+    }
+    
+    class func  initHangoutTimeData() -> [Hangout_Time]
+    {
+        return [Hangout_Time(time_description: "Brunch", time: 10),Hangout_Time(time_description: "Lunch", time: 12),Hangout_Time(time_description: "Afvo", time: 14)]
+    }
+}
+class Hangout_Day
+{
+    var day_description: String?
+    var dayvalue: Int
+    init(day_description:String, dayvalue: Int)
+    {
+        self.day_description = day_description
+        self.dayvalue = dayvalue
+    }
+}
+
+class Hangout_Time
+{
+    init(time_description:String, time:Float)
+    {
+        self.time_description = time_description
+        self.time = time
+    }
+    
+    var time_description: String?
+    var time: Float?
 }
 
 struct HangoutConfig {

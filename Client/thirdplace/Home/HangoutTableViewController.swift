@@ -21,6 +21,8 @@ class HangoutTableViewController: DHCollectionTableViewController {
     var xmppHangout: XMPPHangout?
     var selectedHangoutID: Int?
     var hangoutDataManager = XMPPHangoutDataManager.singleInstance;
+    let dayrow = "1"
+    let timerow = "2"
     
     override func awakeFromNib()
     {
@@ -55,17 +57,58 @@ class HangoutTableViewController: DHCollectionTableViewController {
     
     func initDataSource()
     {
+        let dayarray = XMPPHangoutDataManager.initHangoutDayData()
+        let timearray = XMPPHangoutDataManager.initHangoutTimeData()
         let me = rosterStorage?.myUserForXMPPStream(xmppStream, managedObjectContext: rosterDBContext)
         self.sourceArray =
         [
             [me!,selectedHangoutFriend!],
-            ["Weekend","Saturday","Sunday"],
-            ["Afvo","Brunch","Lunch"],//brunch 10:30, lunch 12:00pm afvo 2:00pm
+            dayarray,
+            timearray,
             ["Place1","Place2","Place3"]
         ];
-        //TODO: - change the here by reading the data
-        self.contentOffsetDictionary.setValue(1, forKey: "1")
-        self.contentOffsetDictionary.setValue(1, forKey: "2")
+        //TODO: - change place data
+        let p_context = hangoutDataManager.privateContext()
+        let hangoutid = selectedHangoutID!
+        let hangout = Hangout.MR_findFirstByAttribute("hangoutid", withValue: NSNumber(integer: hangoutid), inContext: p_context)
+        let time = hangout.getLatestTime()
+        let startday = time?.startdate!.mt_weekdayOfWeek()
+        let endday =  time?.enddate!.mt_weekdayOfWeek()
+        let hour = time?.startdate!.mt_hourOfDay()
+        if(startday != endday)
+        {
+            self.contentOffsetDictionary.setValue(0, forKey: dayrow)
+        }
+        else
+        {
+            if(startday == 7) //Saturday
+            {
+                self.contentOffsetDictionary.setValue(1, forKey: dayrow)
+            }
+            else
+            {
+                self.contentOffsetDictionary.setValue(2, forKey: dayrow)
+            }
+        }
+        if (hour > 0)
+        {
+            if (hour == 10)
+            {
+                self.contentOffsetDictionary.setValue(0, forKey: timerow)
+            }
+            else if(hour == 14)
+            {
+                self.contentOffsetDictionary.setValue(2, forKey: timerow)
+            }
+            else
+            {
+                self.contentOffsetDictionary.setValue(1, forKey: timerow)
+            }
+        }
+        else
+        {
+             self.contentOffsetDictionary.setValue(0, forKey: timerow)
+        }
     }
     
     @IBAction func sendHangout(sender: AnyObject)
@@ -76,13 +119,36 @@ class HangoutTableViewController: DHCollectionTableViewController {
         let hangout = Hangout.MR_findFirstByAttribute("hangoutid", withValue: NSNumber(integer: hangoutid), inContext: p_context)
         let me = hangout.getUser(xmppStream!.myJID)
         me!.goingstatus = "going"
-        
-        let previoustime = hangout.getLatestTime()
-        //time
+        let previousHangouttime = hangout.getLatestTime()
+        let selectdayindex = self.contentOffsetDictionary[dayrow] as! Int
+        let selecttimeindex = self.contentOffsetDictionary[timerow] as! Int
+        let day = self.sourceArray[Int(dayrow)!][selectdayindex] as! Hangout_Day
+        let time = self.sourceArray[Int(timerow)!][selecttimeindex] as! Hangout_Time
         let hangouttime = HangoutTime.MR_createEntityInContext(p_context)
-        hangouttime.startdate = previoustime?.startdate //calculate this based on selection
-        hangouttime.enddate = previoustime?.enddate
-        hangouttime.timedescription = "Weekend"//based on the selection
+        let hangoutendtime = previousHangouttime!.enddate!
+        let year = hangoutendtime.mt_components().year
+        let month = hangoutendtime.mt_components().month
+        let startdateday = hangoutendtime.mt_components().day
+        let sundaymidnight = NSDate.mt_dateFromYear(year, month: month, day: startdateday)
+        if (day.dayvalue == 7) // Saturday
+        {
+            hangouttime.startdate = sundaymidnight.mt_dateDaysBefore(1).mt_dateHoursAfter(Int(time.time!))
+            hangouttime.enddate = previousHangouttime?.enddate?.mt_oneDayPrevious()
+        }
+        else if(day.dayvalue == 1) //Sunday
+        {
+       
+            hangouttime.startdate = sundaymidnight.mt_dateHoursAfter(Int(time.time!))
+            hangouttime.enddate = previousHangouttime?.enddate
+        }
+        else
+        {
+            //work out the time only
+            hangouttime.startdate = previousHangouttime?.startdate!.mt_dateHoursAfter(Int(time.time!))
+            hangouttime.enddate = previousHangouttime?.enddate
+        }
+        //time
+        hangouttime.timedescription = day.day_description//based on the selection
         hangouttime.updatejid = xmppStream!.myJID.bare()
         hangouttime.updatetime = NSDate()
         hangouttime.hangout = hangout
@@ -153,8 +219,9 @@ extension HangoutTableViewController {
         {
             let cell = tableView.dequeueReusableCellWithIdentifier("MultiLineTextInputTableViewCell", forIndexPath: indexPath) as? MultiLineTextInputTableViewCell
             cell!.textView?.delegate = self
-            cell!.titleLabel?.text = "Multi line cell"
-            cell!.textString = "Test String\nAnd another string\nAnd another"
+            cell!.textView?.placeholder = "Insert personal message"
+            cell!.titleLabel?.text = ""
+            cell!.textString = ""
             return cell!
         }
         else
@@ -277,7 +344,21 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
             let label = UILabel(frame: cell.bounds)
             label.backgroundColor = UIColor.redColor()
             label.textAlignment = NSTextAlignment.Center
-            label.text = self.sourceArray[collectionView.tag][indexPath.item] as? String
+            if (collectionView.tag == Int(dayrow))
+            {
+                let day = self.sourceArray[collectionView.tag][indexPath.item] as? Hangout_Day
+                label.text = day?.day_description
+            }
+            else if (collectionView.tag == Int(timerow))
+            {
+                let time = self.sourceArray[collectionView.tag][indexPath.item] as? Hangout_Time
+                label.text = time?.time_description
+            }
+            else
+            {
+                let place = self.sourceArray[collectionView.tag][indexPath.item] as? String //place
+                label.text = place
+            }
             cell.addSubview(label)
         }
         return cell
@@ -291,28 +372,6 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
         let horizontalOffset: CGFloat = CGFloat(value != nil ? value!.floatValue : 0)
         collectionView.setContentOffset(CGPointMake(horizontalOffset*width, 0), animated: false)
      }
-
-//
-//    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-//        let itemColor: UIColor = self.sourceArray[collectionView.tag][indexPath.item] as! UIColor
-//        //        let vc = UIViewController()
-//        //        vc.view.backgroundColor = itemColor
-//        //        vc.title = "Line-->\(collectionView.tag)"
-//        //        vc.navigationItem.prompt = "Item-->\(indexPath.item)"
-//        //        self.navigationController?.pushViewController(vc, animated: true)
-//        if UIDevice.currentDevice().systemVersion >= "8.0" {
-//            if #available(iOS 8.0, *) {
-//                let alert = UIAlertController(title: "第\(collectionView.tag)行", message: "第\(indexPath.item)个元素", preferredStyle: UIAlertControllerStyle.Alert)
-//            } else {
-//                // Fallback on earlier versions
-//            }
-//            // alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
-//            let v: UIView = UIView(frame: CGRectMake(10, 20, 50, 50))
-//            v.backgroundColor = itemColor
-//            //  alert.view.addSubview(v)
-//            // self.presentViewController(alert, animated: true, completion: nil)
-//        }
-//    }
     
     override func scrollViewDidScroll(scrollView: UIScrollView) {
         if !scrollView.isKindOfClass(UICollectionView) {
@@ -323,6 +382,14 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
         let width = self.view.frame.width
         let collectionView: UICollectionView = scrollView as! UICollectionView
         self.contentOffsetDictionary.setValue(horizontalOffset/width, forKey: collectionView.tag.description)
+    }
+}
+
+extension HangoutTableViewController
+{
+    func xmppHangout(sender:XMPPHangout, didUpdateHangout iq:XMPPIQ)
+    {
+        self.navigationController?.popViewControllerAnimated(true)
     }
 }
 

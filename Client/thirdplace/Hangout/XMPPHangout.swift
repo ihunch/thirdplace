@@ -10,6 +10,7 @@ import UIKit
 @objc protocol XMPPHangoutDelegate
 {
     func xmppHangout(sender:XMPPHangout, didCreateHangout iq:XMPPIQ);
+    func xmppHangout(sender:XMPPHangout, didUpdateHangout iq:XMPPIQ);
     func xmppHangout(sender:XMPPHangout, didReceiveMessage message:XMPPMessage);
 }
 
@@ -183,5 +184,4 @@ class XMPPHangout: XMPPModule
         dbmanager.handleHangout(hangoutquery, stream: sender, fromjid: jidfrom)
         self.multicastDelegate().xmppHangout(self, didReceiveMessage: message);
     }
-    
 }
