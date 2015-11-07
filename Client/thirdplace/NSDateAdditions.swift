@@ -14,6 +14,7 @@ extension NSDate
     {
         let dateformat = NSDateFormatter()
         dateformat.dateFormat = format
+        dateformat.timeZone = NSTimeZone(abbreviation: "GMT")
         return dateformat.stringFromDate(self)
     }
 }

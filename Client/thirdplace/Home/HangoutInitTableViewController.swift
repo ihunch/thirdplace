@@ -160,7 +160,7 @@ class HangoutInitTableViewController: DHCollectionTableViewController {
         let previoustime = hangout.getLatestTime()
         //time
         let hangouttime = HangoutTime.MR_createEntityInContext(p_context)
-        hangouttime.startdate = previoustime?.startdate //calculate this based on selection
+        hangouttime.startdate = previoustime?.startdate
         hangouttime.enddate = previoustime?.enddate
         hangouttime.timedescription = "Weekend"//based on the selection
         hangouttime.updatejid = xmppStream.myJID.bare()
