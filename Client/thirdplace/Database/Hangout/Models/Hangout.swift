@@ -23,6 +23,13 @@ public class Hangout: _Hangout {
         let hangoutTime = self.time.filteredSetUsingPredicate(filter).first as? HangoutTime
         return hangoutTime
     }
+        
+    func getInitTime() -> HangoutTime?
+    {
+        let filter = NSPredicate(format: "self.updatetime == %@.@min.updatetime",self.time)
+        let hangoutTime = self.time.filteredSetUsingPredicate(filter).first as? HangoutTime
+        return hangoutTime
+    }
     
     func getLocation() -> HangoutLocation?
     {

@@ -119,33 +119,32 @@ class HangoutTableViewController: DHCollectionTableViewController {
         let hangout = Hangout.MR_findFirstByAttribute("hangoutid", withValue: NSNumber(integer: hangoutid), inContext: p_context)
         let me = hangout.getUser(xmppStream!.myJID)
         me!.goingstatus = "going"
-        let previousHangouttime = hangout.getLatestTime()
         let selectdayindex = self.contentOffsetDictionary[dayrow] as! Int
         let selecttimeindex = self.contentOffsetDictionary[timerow] as! Int
         let day = self.sourceArray[Int(dayrow)!][selectdayindex] as! Hangout_Day
         let time = self.sourceArray[Int(timerow)!][selecttimeindex] as! Hangout_Time
         let hangouttime = HangoutTime.MR_createEntityInContext(p_context)
-        let hangoutendtime = previousHangouttime!.enddate!
-        let year = hangoutendtime.mt_components().year
-        let month = hangoutendtime.mt_components().month
-        let startdateday = hangoutendtime.mt_components().day
+        let inithangoutime = hangout.getInitTime()!
+        let inithangoutendtime = inithangoutime.enddate!
+        let year = inithangoutendtime.mt_components().year
+        let month = inithangoutendtime.mt_components().month
+        let startdateday = inithangoutendtime.mt_components().day
         let sundaymidnight = NSDate.mt_dateFromYear(year, month: month, day: startdateday)
         if (day.dayvalue == 7) // Saturday
         {
             hangouttime.startdate = sundaymidnight.mt_dateDaysBefore(1).mt_dateHoursAfter(Int(time.time!))
-            hangouttime.enddate = previousHangouttime?.enddate?.mt_oneDayPrevious()
+            hangouttime.enddate = inithangoutendtime.mt_oneDayPrevious()
         }
         else if(day.dayvalue == 1) //Sunday
         {
-       
             hangouttime.startdate = sundaymidnight.mt_dateHoursAfter(Int(time.time!))
-            hangouttime.enddate = previousHangouttime?.enddate
+            hangouttime.enddate = inithangoutendtime
         }
         else
         {
             //work out the time only
-            hangouttime.startdate = previousHangouttime?.startdate!.mt_dateHoursAfter(Int(time.time!))
-            hangouttime.enddate = previousHangouttime?.enddate
+            hangouttime.startdate = inithangoutime.startdate!.mt_dateHoursAfter(Int(time.time!))
+            hangouttime.enddate = inithangoutendtime
         }
         //time
         hangouttime.timedescription = day.day_description//based on the selection
