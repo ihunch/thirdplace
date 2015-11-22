@@ -128,11 +128,15 @@ private let _SingletonInstance = XMPPHangoutDataManager()
 //MARK: Public methods
 extension XMPPHangoutDataManager
 {
-    func getHangoutListRequest(myjid: XMPPJID?) -> NSFetchRequest
+    func getHangoutListRequest(myjid: XMPPJID?) -> NSFetchRequest?
     {
-        let now = NSDate()
-        let filter = NSPredicate(format: "Any self.user.jidstr == %@ && Any self.time.enddate >= %@", myjid!.bare(), now)
-        return Hangout.MR_requestAllSortedBy("hangoutid", ascending: true, withPredicate: filter)
+        if(myjid != nil)
+        {
+            let now = NSDate()
+            let filter = NSPredicate(format: "Any self.user.jidstr == %@ && Any self.time.enddate >= %@", myjid!.bare(), now)
+            return Hangout.MR_requestAllSortedBy("hangoutid", ascending: true, withPredicate: filter)
+        }
+        return nil
     }
     
     //to check if the hangout dialog is active

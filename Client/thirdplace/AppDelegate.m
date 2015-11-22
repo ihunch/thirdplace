@@ -20,7 +20,7 @@
 #import "HomeViewController.h"
 #import "thirdplace-Swift.h"
 #import "DBHeaderFile.h"
-
+#import "XMPPvCardTemp.h"
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -33,6 +33,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @implementation AppDelegate
+{
+    //local var
+    NSMutableDictionary* buddyRequest;
+}
 
 @synthesize xmppStream;
 @synthesize xmppReconnect;
@@ -60,6 +64,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     UIViewController* rootviewcontroller = [storyboard instantiateInitialViewController];
     self.window.rootViewController = rootviewcontroller;
     [self.window makeKeyAndVisible];
+    buddyRequest = [NSMutableDictionary dictionary];
     return YES;
 }
 
@@ -129,7 +134,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         {
             NSString *fbId = [user objectForKey:@"id"]; // App-scoped user id
             
-            NSString *jid = [[self class] stringToJID:fbId];
+            NSString *jid = [self stringToJID:fbId];
             NSString *password = [[self class] stringToXmppPassword:fbId];
             
             NSString *fbFirstName = [user objectForKey:@"first_name"];
@@ -274,7 +279,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [xmppStream disconnect];
 }
 
-+ (NSString *)stringToJID:(NSString *) s
+- (NSString *)stringToJID:(NSString *) s
 {
     NSString * converted = [s stringByReplacingOccurrencesOfString:@"@" withString:@"___"];
     
@@ -297,36 +302,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [friendsRequest startWithCompletionHandler: ^(FBRequestConnection *connection,
                                                   NSDictionary* result,
                                                   NSError *error) {
-        NSArray* friends = [result objectForKey:@"data"];
-        
-        for (NSDictionary<FBGraphUser>* fbFriend in friends) {
-            XMPPJID *jid = [XMPPJID jidWithString: [[self class] stringToJID:fbFriend.objectID]];
-            XMPPUserCoreDataStorageObject *user = [xmppRosterStorage userForJID:jid xmppStream:xmppStream managedObjectContext:[self managedObjectContext_roster]];
-
-            // TOFIX: Is currently always nil, creating duplicate user every time
-            if (user == nil)
-            {
-                NSString* name = [NSString stringWithFormat:@"%@ %@", fbFriend.first_name,fbFriend.last_name];
-                [xmppRoster addUser:jid withNickname:name];
-
-                // save temp XMPPRosterFB
-                NSManagedObjectContext* localdb = [[DataManager singleInstance] getLocaldbContext];
-                XMPPRosterFB * rfb = [XMPPRosterFB MR_createEntityInContext:localdb];
-                float x = arc4random_uniform(280);
-                if (x < 30)
-                {
-                    x+=30;
-                }
-                float y = arc4random_uniform(400);
-                if (y < 30)
-                {
-                    y+=30;
-                }
-                rfb.axisxValue = x;
-                rfb.axisyValue = y;
-                rfb.jid = [jid bare];
-            }
-        }
+       
     }];
 }
 
@@ -448,7 +424,19 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    
+    if ([iq isResultIQ])
+    {
+        NSXMLElement *query = [iq elementForName:@"vCard" xmlns:@"vcard-temp"];
+        if (query)
+        {
+            XMPPJID* jid = [buddyRequest objectForKey:[iq fromStr]];
+            if (jid != nil)
+            {
+                [buddyRequest removeObjectForKey:[iq fromStr]];
+                //Consume the database
+            }
+        }
+    }
     return NO;
 }
 
@@ -509,6 +497,24 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark XMPPRosterDelegate
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence
+{
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    XMPPJID* fromjid = presence.from;
+    XMPPvCardTemp* vcard = [self.xmppvCardTempModule vCardTempForJID:fromjid shouldFetch:YES];
+    if (vcard == nil)
+    {
+        [buddyRequest setObject:fromjid forKey:[fromjid bare]];
+    }
+    else
+    {
+        NSString* name = vcard.nickname;
+        NSString* message =
+            [NSString stringWithFormat:@"Buddy request from %@", name];
+
+        [self postAlert:@"Friend Request" body:message];
+    }
+}
 
 - (void)xmppRoster:(XMPPRoster *)sender didReceiveBuddyRequest:(XMPPPresence *)presence
 {
@@ -562,5 +568,42 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     [xmppRosterStorage addMyJID:[[xmppStream myJID] bareJID] xmppStream:xmppStream managedObjectContext:self.managedObjectContext_roster];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark UIAlert
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-(void)postAlert:(NSString*)displayName body:(NSString*)messagebody
+{
+    if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:displayName
+                                                            message:messagebody
+                                                           delegate:self
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"accept",@"deny",nil];
+        
+        [alertView show];
+    }
+    else
+    {
+        // We are not active, so use a local notification instead
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        localNotification.alertAction = @"Cancel";
+        localNotification.alertBody = messagebody;
+        [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
+    }
+}
+
+#pragma mark UIAlertDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0)
+    {
+        
+    }
+    else
+    {
+        [xmppRoster removeUser:<#(XMPPJID *)#>]
+    }
 }
 @end

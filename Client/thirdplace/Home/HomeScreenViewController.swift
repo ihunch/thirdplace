@@ -85,7 +85,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         {
             let hangoutcell :HangoutListTableViewCell = tableView.dequeueReusableCellWithIdentifier("HangoutListTableViewCell") as!HangoutListTableViewCell
             let indexpath = NSIndexPath(forRow: indexPath.row, inSection: 0)
-            let hangout = self.hangoutFetchedRequestControler.objectAtIndexPath(indexpath) as! Hangout
+            let hangout = self.hangoutFetchedRequestControler!.objectAtIndexPath(indexpath) as! Hangout
             let message = hangout.getLatestMessage()
             let time = hangout.getLatestTime()
             //let location = hangout.getLocation()
@@ -122,16 +122,20 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(section != 0)
         {
-            let sectionInfo = self.hangoutFetchedRequestControler.sections
-            if (sectionInfo != nil)
+            if (self.hangoutFetchedRequestControler != nil)
             {
-                let sections = sectionInfo![0]
-                return sections.numberOfObjects
+                let sectionInfo = self.hangoutFetchedRequestControler!.sections
+                if (sectionInfo != nil)
+                {
+                    let sections = sectionInfo![0]
+                    return sections.numberOfObjects
+                }
+                else
+                {
+                    return 0
+                }
             }
-            else
-            {
-                return 0
-            }
+            return 0
         }
         else
         {
@@ -152,25 +156,29 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     var _hangoutFetchedResultsController: NSFetchedResultsController? = nil
-    var hangoutFetchedRequestControler : NSFetchedResultsController
+    var hangoutFetchedRequestControler : NSFetchedResultsController?
     {
         if _hangoutFetchedResultsController != nil{
             return _hangoutFetchedResultsController!
         }
         let request =  xmppHangoutDB.getHangoutListRequest(xmppStream!.myJID)
-        let afetchedController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: NSManagedObjectContext.MR_context(), sectionNameKeyPath: nil, cacheName: nil)
-        afetchedController.delegate = self
-        _hangoutFetchedResultsController = afetchedController
-        
-        var error:NSError? = nil
-        do{
-            try _hangoutFetchedResultsController!.performFetch()
+        if (request != nil)
+        {
+            let afetchedController = NSFetchedResultsController(fetchRequest: request!, managedObjectContext: NSManagedObjectContext.MR_context(), sectionNameKeyPath: nil, cacheName: nil)
+            afetchedController.delegate = self
+            _hangoutFetchedResultsController = afetchedController
+            
+            var error:NSError? = nil
+            do{
+                try _hangoutFetchedResultsController!.performFetch()
+            }
+            catch let error1 as NSError{
+                error = error1
+                print("Unresolved error \(error) \(error?.userInfo)")
+            }
+
         }
-        catch let error1 as NSError{
-            error = error1
-            print("Unresolved error \(error) \(error?.userInfo)")
-        }
-        return _hangoutFetchedResultsController!
+        return _hangoutFetchedResultsController
     }
     
     // MARK: Action View
@@ -243,8 +251,17 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         self.displayCreateHangoutView(friend)
     }
     
-    func didTouchAddFriend() {
-        
+    func didTouchAddFriend()
+    {
+        let fbrequest = FBRequest.requestForMyFriends()
+        fbrequest.startWithCompletionHandler {
+            (connection:FBRequestConnection!,   result:AnyObject!, error:NSError!) -> Void in
+            let fblists = result.objectForKey("data") as? NSArray
+            let fbviewcontroller = self.storyboard?.instantiateViewControllerWithIdentifier("FBFriendListViewController") as! FBFriendListViewController?
+            fbviewcontroller!.friendlists = fblists
+            self.navigationController?.pushViewController(fbviewcontroller!, animated: true)
+        }
+
     }
 
     func didTouchMe() {

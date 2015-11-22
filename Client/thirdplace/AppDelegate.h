@@ -12,7 +12,7 @@
 
 @class XMPPHangout;
 @class XMPPHangoutDataManager;
-@interface AppDelegate : UIResponder <UIApplicationDelegate, XMPPRosterDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, XMPPRosterDelegate, UIAlertViewDelegate>
 {
     XMPPStream *xmppStream;
     XMPPReconnect *xmppReconnect;
@@ -45,4 +45,5 @@
 
 - (void)loginXMPP;
 - (bool)isFbLoggedIn;
+- (NSString *)stringToJID:(NSString *)s;
 @end
