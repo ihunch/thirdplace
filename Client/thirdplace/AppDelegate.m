@@ -433,7 +433,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             if (jid != nil)
             {
                 [buddyRequest removeObjectForKey:[iq fromStr]];
-                //Consume the database
+                //consume the database
+                XMPPvCardTemp* vcard = [self.xmppvCardTempModule vCardTempForJID:jid shouldFetch:NO];
+                NSString* name = vcard.nickname;
+                NSString* message =
+                [NSString stringWithFormat:@"Request from %@", name];
+                [self postAlert:@"Friend Request" body:message passobject:jid];
             }
         }
     }
@@ -508,51 +513,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
     else
     {
-        NSString* name = vcard.nickname;
+        NSString* name = vcard.formattedName;
         NSString* message =
-            [NSString stringWithFormat:@"Buddy request from %@", name];
+            [NSString stringWithFormat:@"Request from %@", name];
 
-        [self postAlert:@"Friend Request" body:message];
-    }
-}
-
-- (void)xmppRoster:(XMPPRoster *)sender didReceiveBuddyRequest:(XMPPPresence *)presence
-{
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    
-    XMPPUserCoreDataStorageObject *user = [xmppRosterStorage userForJID:[presence from]
-                                                             xmppStream:xmppStream
-                                                   managedObjectContext:[self managedObjectContext_roster]];
-    NSString *displayName = [user displayName];
-    NSString *jidStrBare = [presence fromStr];
-    NSString *body = nil;
-    
-    if (![displayName isEqualToString:jidStrBare])
-    {
-        body = [NSString stringWithFormat:@"Buddy request from %@ <%@>", displayName, jidStrBare];
-    }
-    else
-    {
-        body = [NSString stringWithFormat:@"Buddy request from %@", displayName];
-    }
-    
-    
-    if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
-    {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:displayName
-                                                            message:body
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Not implemented"
-                                                  otherButtonTitles:nil];
-        [alertView show];
-    }
-    else
-    {
-        // We are not active, so use a local notification instead
-        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-        localNotification.alertAction = @"Not implemented";
-        localNotification.alertBody = body;
-        [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
+        [self postAlert:@"Friend Request" body:message passobject:fromjid];
     }
 }
 
@@ -573,16 +538,16 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark UIAlert
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
--(void)postAlert:(NSString*)displayName body:(NSString*)messagebody
+-(void)postAlert:(NSString*)displayName body:(NSString*)messagebody passobject:(XMPPJID*)jid
 {
     if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
     {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:displayName
+        CustomUIAlertView *alertView = [[CustomUIAlertView alloc] initWithTitle:displayName
                                                             message:messagebody
                                                            delegate:self
                                                   cancelButtonTitle:nil
                                                   otherButtonTitles:@"accept",@"deny",nil];
-        
+        alertView.customobject = jid;
         [alertView show];
     }
     else
@@ -596,14 +561,39 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 }
 
 #pragma mark UIAlertDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+- (void)alertView:(CustomUIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    XMPPJID* fromjid = alertView.customobject;
+    
     if (buttonIndex == 0)
     {
-        
+        XMPPvCardTemp* vcard = [self.xmppvCardTempModule vCardTempForJID:fromjid shouldFetch:NO];
+        NSString* name = vcard.formattedName;
+        [[self xmppRoster] acceptPresenceSubscriptionRequestFrom:fromjid andAddToRoster:YES nickname:name];
+        [self createTempXMPPFBUser:fromjid];                                            
     }
     else
     {
-        [xmppRoster removeUser:<#(XMPPJID *)#>]
+        [[self xmppRoster] rejectPresenceSubscriptionRequestFrom:fromjid];
     }
 }
+
+-(void)createTempXMPPFBUser:(XMPPJID*)fromjid
+{
+    NSManagedObjectContext* localdb = [[DataManager singleInstance] getLocaldbContext];
+    XMPPRosterFB * rfb = [XMPPRosterFB MR_createEntityInContext:localdb];
+    float x = arc4random_uniform(280);
+    if (x < 30)
+    {
+        x+=30;
+    }
+    float y = arc4random_uniform(400);
+    if (y < 30)
+    {
+        y+=30;
+    }
+    rfb.axisxValue = x;
+    rfb.axisyValue = y;
+    rfb.jid = [fromjid bare];
+}
+
 @end
