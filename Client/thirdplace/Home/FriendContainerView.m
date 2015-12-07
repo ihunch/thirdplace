@@ -249,7 +249,18 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     DDLogCVerbose(@"FRIEND: %lu", (unsigned long)friends.count);
     for (XMPPUserCoreDataStorageObject* u in friends)
     {
-        [self addFriend:u];
+        if ([u.ask isEqualToString:@"subscribe"])
+        {
+            [self addFriend:u];
+        }
+        else
+        {
+            if(![u.subscription isEqualToString:@"none"])
+            {
+                [self addFriend:u];
+            }
+        }
+
     }
 }
 @end

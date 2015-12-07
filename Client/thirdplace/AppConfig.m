@@ -16,7 +16,7 @@ NSString *const kXMPPJIDKey = @"kXMPPJID";
 NSString *const kXMPPPasswordKey = @"kXMPPPassword";
 NSString *const kXMPPNameKey = @"kXMPPName";
 NSString *const kXMPPEmailKey = @"kXMPPEmail";
-
+NSString *const kNotificationKey = @"NotificationKey";
 NSString *const kXMPPMessageId_InviteHangout = @"xmpp_msg_invite";
 
 @implementation AppConfig
@@ -37,12 +37,14 @@ NSString *const kXMPPMessageId_InviteHangout = @"xmpp_msg_invite";
 {
     [self update:newJid withPassword:newPassword withName:newName withEmail:newEmail];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kXMPPHasDetailsKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (void) clearDetails
 {
     [self update:nil withPassword:nil withName:nil withEmail:nil];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kXMPPHasDetailsKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 +(void) update:(NSString *)newJid withPassword:(NSString *)newPassword withName:(NSString *)newName withEmail:(NSString *)newEmail
@@ -70,6 +72,20 @@ NSString *const kXMPPMessageId_InviteHangout = @"xmpp_msg_invite";
     } else {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:kXMPPEmailKey];
     }
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
++ (NSString*) notificationid
+{
+  @synchronized(self) { return [[NSUserDefaults standardUserDefaults] stringForKey:kNotificationKey]; }
+}
+
++ (void) updatenotificationid:(NSString*)notificationid
+{
+    [[NSUserDefaults standardUserDefaults] setObject:notificationid forKey:kNotificationKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+
 
 @end

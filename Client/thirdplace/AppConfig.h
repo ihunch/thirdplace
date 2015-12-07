@@ -26,5 +26,7 @@ extern NSString* const kXMPPMessageId_InviteHangout;
 + (void) updateDetails:(NSString *)newJid withPassword:(NSString *)newPassword withName:(NSString *)newName withEmail:(NSString *)newEmail;
 + (void) clearDetails;
 + (NSString*) thirdplaceModule;
++ (NSString*) notificationid;
++ (void) updatenotificationid:(NSString*)notificationid;
 
 @end

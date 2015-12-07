@@ -21,6 +21,7 @@
 #import "thirdplace-Swift.h"
 #import "DBHeaderFile.h"
 #import "XMPPvCardTemp.h"
+#import "NSData+XMPP.h"
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -65,6 +66,16 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     self.window.rootViewController = rootviewcontroller;
     [self.window makeKeyAndVisible];
     buddyRequest = [NSMutableDictionary dictionary];
+    
+    //push notification register
+    UIUserNotificationType types = UIUserNotificationTypeBadge |
+    UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    
+    UIUserNotificationSettings *mySettings =
+    [UIUserNotificationSettings settingsForTypes:types categories:nil];
+    
+    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
     return YES;
 }
 
@@ -295,17 +306,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     return [NSString stringWithFormat:@"%u", (uint)s.hash];
 }
 
-- (void)addFbFriends
-{
-    // NOTE: This only gets friends who are already using the app
-    FBRequest* friendsRequest = [FBRequest requestForMyFriends];
-    [friendsRequest startWithCompletionHandler: ^(FBRequestConnection *connection,
-                                                  NSDictionary* result,
-                                                  NSError *error) {
-       
-    }];
-}
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark UIApplicationDelegate
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -429,17 +429,47 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         NSXMLElement *query = [iq elementForName:@"vCard" xmlns:@"vcard-temp"];
         if (query)
         {
-            XMPPJID* jid = [buddyRequest objectForKey:[iq fromStr]];
-            if (jid != nil)
+            // check if it's my own JID
+            if ([[iq fromStr] isEqualToString:[[self.xmppStream myJID] bare]])
             {
-                [buddyRequest removeObjectForKey:[iq fromStr]];
-                //consume the database
-                XMPPvCardTemp* vcard = [self.xmppvCardTempModule vCardTempForJID:jid shouldFetch:NO];
-                NSString* name = vcard.nickname;
-                NSString* message =
-                [NSString stringWithFormat:@"Request from %@", name];
-                [self postAlert:@"Friend Request" body:message passobject:jid];
+                XMPPvCardTemp* vcard = [XMPPvCardTemp vCardTempFromElement:query];
+                BOOL needsUpdate = false;
+                if(vcard.formattedName == nil)
+                {
+                    [vcard setFormattedName:[AppConfig name]];
+                    needsUpdate = true;
+                }
+                NSString* token = [vcard getNotificationToken];
+                if (token == nil)
+                {
+                    NSString* mytoken = [AppConfig notificationid];
+                    if (mytoken != nil)
+                    {
+                        needsUpdate = true;
+                        [vcard addNotificationToken:mytoken];
+                    }
+                }
+                if(needsUpdate)
+                {
+                    [xmppvCardTempModule updateMyvCardTemp:vcard];
+                }
             }
+            else
+            {
+                XMPPJID* jid = [buddyRequest objectForKey:[iq fromStr]];
+                if (jid != nil)
+                {
+                    [buddyRequest removeObjectForKey:[iq fromStr]];
+                    //consume the database
+                    XMPPvCardTemp* vcard = [self.xmppvCardTempModule vCardTempForJID:jid shouldFetch:NO];
+                    NSString* name = vcard.formattedName;
+                    NSString* message =
+                    [NSString stringWithFormat:@"Request from %@", name];
+                    [self postAlert:@"Friend Request" body:message passobject:jid];
+                }
+                
+            }
+            
         }
     }
     return NO;
@@ -594,6 +624,31 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     rfb.axisxValue = x;
     rfb.axisyValue = y;
     rfb.jid = [fromjid bare];
+}
+
+#pragma mark UINotificationDelegate
+// Called if registration is successful
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    NSString* devicetoken = [deviceToken xmpp_hexStringValue];
+    [AppConfig updatenotificationid:devicetoken];
+    DDLogVerbose(@"Device Registration %@", devicetoken);
+}
+
+// Called if we fail to register for a device token
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    DDLogVerbose(@"Error in registration. Error: %@", error);
+}
+
+
+// Called if notification is received while app is active
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    DDLogVerbose(@"Received Notification (Active): %@", userInfo);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    DDLogVerbose(@"Received Notification (Active): %@", userInfo);
 }
 
 @end
