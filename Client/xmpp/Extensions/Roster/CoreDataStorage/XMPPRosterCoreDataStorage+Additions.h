@@ -15,4 +15,7 @@
         managedObjectContext:(NSManagedObjectContext *)moc;
 
 - (void)addMyJID:(XMPPJID *)jid xmppStream:(XMPPStream *)stream  managedObjectContext:(NSManagedObjectContext *)moc;
+
+- (void)setFBPhoto:(UIImage *)image forUserWithJID:(XMPPJID *)jid xmppStream:(XMPPStream *)stream
+managedObjectContext:(NSManagedObjectContext *)moc;
 @end

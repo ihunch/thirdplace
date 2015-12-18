@@ -56,7 +56,13 @@ private let _SingletonInstance = XMPPHangoutDataManager()
         let description = item.elementForName(HangoutConfig.descriptionkey).stringValue()
         let timedescription = item.elementForName(HangoutConfig.timedescriptionkey).stringValue()
         let message = item.elementForName(HangoutConfig.messagekeykey).stringValue()
-        let locationid = Int(item.elementForName(HangoutConfig.locationidkey).stringValue())
+        var locationid : Int? = nil
+        if let locationelement = item.elementForName(HangoutConfig.locationidkey)
+        {
+            //#TO FIX locaiton here
+            locationid = Int(locationelement.stringValue())
+        }
+        let preferlocation = item.elementForName(HangoutConfig.preferredlocationkey).stringValue()
         
         MagicalRecord.saveWithBlockAndWait({ (localContext : NSManagedObjectContext!) in
             
@@ -68,6 +74,7 @@ private let _SingletonInstance = XMPPHangoutDataManager()
                 newhangout.hangoutdescription = description
                 newhangout.createtime = NSDate()
                 newhangout.createUserJID = fromjid.bare()
+                newhangout.preferedlocation = preferlocation
                 
                 let hangoutmessage = HangoutMessage.MR_createEntityInContext(localContext)
                 hangoutmessage.content = message
@@ -93,12 +100,14 @@ private let _SingletonInstance = XMPPHangoutDataManager()
                 me.username = stream.myJID.bare()
                 me.jidstr =  stream.myJID.bare()
                 me.hangout = newhangout
-                
-                let hangoutlocation = HangoutLocation.MR_createEntityInContext(localContext)
-                hangoutlocation.updatetime = NSDate()
-                hangoutlocation.updatejid = fromjid.bare()
-                hangoutlocation.locationid = NSNumber(integer: locationid!)
-                hangoutlocation.hangout = newhangout
+                if locationid != nil
+                {
+                    let hangoutlocation = HangoutLocation.MR_createEntityInContext(localContext)
+                    hangoutlocation.updatetime = NSDate()
+                    hangoutlocation.updatejid = fromjid.bare()
+                    hangoutlocation.locationid = NSNumber(integer: locationid!)
+                    hangoutlocation.hangout = newhangout
+                }
             }
             else
             {
@@ -172,7 +181,35 @@ extension XMPPHangoutDataManager
     {
         return [Hangout_Time(time_description: "Brunch", time: 10),Hangout_Time(time_description: "Lunch", time: 12),Hangout_Time(time_description: "Afvo", time: 14)]
     }
+    
+    class func initLocationData() -> NSArray?
+    {
+        let path = NSBundle.mainBundle().pathForResource("cafe_au", ofType: "plist")
+        let lists = NSArray(contentsOfFile: path!)
+        return lists;
+    }
+    
+    class func getRandomThreeDigital(range: Int) -> NSArray
+    {
+        let array = NSMutableArray()
+        while(array.count != 3)
+        {
+            let num = RandomInt(min: 0, max: range)
+            if(!array.containsObject(num))
+            {
+                array.addObject(num)
+            }
+        }
+        return array as NSArray
+    }
+    
+    class func RandomInt(min min: Int, max: Int) -> Int {
+        if max < min { return min }
+        return Int(arc4random_uniform(UInt32((max - min) + 1))) + min
+    }
+    
 }
+
 class Hangout_Day
 {
     var day_description: String?
@@ -205,4 +242,5 @@ struct HangoutConfig {
     static var timedescriptionkey = "timedescription"
     static var messagekeykey = "message"
     static var locationidkey = "locationid"
+    static var preferredlocationkey = "preferredlocation"
 }

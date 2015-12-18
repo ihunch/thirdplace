@@ -8,7 +8,9 @@
 
 import UIKit
 
-class HangoutInitTableViewController: DHCollectionTableViewController {
+class HangoutInitTableViewController: DHCollectionTableViewController
+{
+    let aumaxlocations = 18
     let leftmargin: CGFloat = 30
     var displayKeyboard = false
     var offset:CGPoint?
@@ -69,8 +71,8 @@ class HangoutInitTableViewController: DHCollectionTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.registerNib(UINib(nibName: "MultiLineTextInputTableViewCell", bundle: nil), forCellReuseIdentifier: "MultiLineTextInputTableViewCell")
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 50
+        //tableView.rowHeight = UITableViewAutomaticDimension
+        //tableView.estimatedRowHeight = 50
         hangoutmodule.addDelegate(self, delegateQueue: dispatch_get_main_queue())
     }
     
@@ -108,7 +110,8 @@ class HangoutInitTableViewController: DHCollectionTableViewController {
         hangout.createtime = NSDate()
         hangout.createUserJID = xmppStream.myJID.bare()
         hangout.hangoutid = NSNumber(integer: HangoutConfig.tempHangoutID)
-        
+        let array = XMPPHangoutDataManager.getRandomThreeDigital(aumaxlocations)
+        hangout.preferedlocation = "\(array[0]),\(array[1]),\(array[2])"
         //user 
         let sender = HangoutUser.MR_createEntityInContext(p_context)
         sender.goingstatus = "maybe"
@@ -180,13 +183,9 @@ class HangoutInitTableViewController: DHCollectionTableViewController {
         {
             message.content = defaultConfirmMessage
         }
-        //location to do it later
         hangoutmodule.updateHangout(hangout, sender: xmppStream.myJID)
     }
 }
-
-
-
 
 // MARK: - Table view data source
 extension HangoutInitTableViewController {
@@ -202,6 +201,7 @@ extension HangoutInitTableViewController {
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
+
         if (indexPath.section == 0)
         {
             return 70
@@ -222,6 +222,10 @@ extension HangoutInitTableViewController {
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 10.0
+    }
+    
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 50.0
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
@@ -356,6 +360,23 @@ extension HangoutInitTableViewController: UITextViewDelegate
 {
     func textViewDidChange(textView: UITextView) {
         alternativeMessage = textView.text
+        
+        let size = textView.bounds.size
+        let newSize = textView.sizeThatFits(CGSize(width: size.width, height: CGFloat.max))
+        
+        // Resize the cell only when cell's size is changed
+        if size.height != newSize.height {
+            UIView.setAnimationsEnabled(false)
+            tableView.beginUpdates()
+            tableView.endUpdates()
+            UIView.setAnimationsEnabled(true)
+            if let tableviewcell = textView.superview!.superview as? UITableViewCell
+            {
+                if let thisIndexPath = tableView.indexPathForCell(tableviewcell) {
+                    tableView?.scrollToRowAtIndexPath(thisIndexPath, atScrollPosition: .Bottom, animated: false)
+                }
+            }
+        }
     }
 }
 

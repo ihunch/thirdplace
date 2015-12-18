@@ -23,6 +23,7 @@ class DHIndexedCollectionView: UICollectionView {
 }
 
 let collectionViewCellIdentifier: NSString = "CollectionViewCell"
+let locationViewCellIdentifier: NSString = "LocationCollectionViewCell"
 class DHCollectionTableViewCell: UITableViewCell {
 
     var collectionView: DHIndexedCollectionView!
@@ -36,7 +37,9 @@ class DHCollectionTableViewCell: UITableViewCell {
         layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
         self.collectionView = DHIndexedCollectionView(frame: CGRectZero, collectionViewLayout: layout)
         self.collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: collectionViewCellIdentifier as String)
-        self.collectionView.backgroundColor = UIColor.lightGrayColor()
+       
+        self.collectionView.registerNib(UINib(nibName: "LocationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: locationViewCellIdentifier as String)
+       // self.collectionView.registerClass(LocationCollectionViewCell.self, forCellWithReuseIdentifier: locationViewCellIdentifier as String)
         self.collectionView.showsHorizontalScrollIndicator = false
         self.collectionView.pagingEnabled = true
         self.contentView.addSubview(self.collectionView)

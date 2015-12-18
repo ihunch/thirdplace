@@ -1,4 +1,5 @@
-    @objc(Hangout)
+
+@objc(Hangout)
 public class Hangout: _Hangout {
 
 	// Custom logic goes here.
@@ -6,7 +7,6 @@ public class Hangout: _Hangout {
     {
         let filter = NSPredicate(format: "self.updatetime == %@.@max.updatetime",self.message)
         let hangoutmessage = self.message.filteredSetUsingPredicate(filter).first as? HangoutMessage
-        print(self.message)
         return hangoutmessage
     }
     
@@ -31,10 +31,10 @@ public class Hangout: _Hangout {
         return hangoutTime
     }
     
-    func getLocation() -> HangoutLocation?
+    func getLatestLocation() -> HangoutLocation?
     {
-        let filter = NSPredicate(format: "self.updatetime == %@.@max.updatetime",self.time)
-        let hangoutlocation = self.location.filteredSetUsingPredicate(filter).first as? HangoutLocation
-        return hangoutlocation
+        let filter = NSPredicate(format: "self.updatetime == %@.@max.updatetime",self.location)
+        let mylocation = self.location.filteredSetUsingPredicate(filter).first as? HangoutLocation
+        return mylocation
     }
 }

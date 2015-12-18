@@ -9,7 +9,7 @@
 
 //NSString* const kXMPPHostName = @"54.206.75.197";
 //NSString* const kXMPPServerName = @"ip-172-31-1-174";
-NSString* const kXMPPHostName = @"192.168.0.8";
+NSString* const kXMPPHostName = @"192.168.0.5";
 NSString* const kXMPPServerName = @"Macintosh.local";
 NSString *const kXMPPHasDetailsKey = @"kXMPPHasDetails";
 NSString *const kXMPPJIDKey = @"kXMPPJID";
@@ -18,6 +18,7 @@ NSString *const kXMPPNameKey = @"kXMPPName";
 NSString *const kXMPPEmailKey = @"kXMPPEmail";
 NSString *const kNotificationKey = @"NotificationKey";
 NSString *const kXMPPMessageId_InviteHangout = @"xmpp_msg_invite";
+NSString *const kLoginUserPhotoPath = @"LoginUserPhotoPath";
 
 @implementation AppConfig
 
@@ -86,6 +87,19 @@ NSString *const kXMPPMessageId_InviteHangout = @"xmpp_msg_invite";
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
++ (UIColor*)themebgcolour
+{
+    return [UIColor colorWithRed:235.0/255.0 green:235.0/255.0 blue:245.0/255.0 alpha:1.0];
+}
 
++ (NSString*)loginUserPhotoPath
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:kLoginUserPhotoPath];
+}
 
++ (void)updateLoginUserPhotoPath:(NSString*)path
+{
+    [[NSUserDefaults standardUserDefaults] setObject:path forKey:kLoginUserPhotoPath];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 @end

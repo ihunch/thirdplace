@@ -28,5 +28,7 @@ extern NSString* const kXMPPMessageId_InviteHangout;
 + (NSString*) thirdplaceModule;
 + (NSString*) notificationid;
 + (void) updatenotificationid:(NSString*)notificationid;
-
++ (UIColor*)themebgcolour;
++ (NSString*)loginUserPhotoPath;
++ (void)updateLoginUserPhotoPath:(NSString*)path;
 @end

@@ -60,10 +60,10 @@
 - (void)setFriend:(XMPPUserCoreDataStorageObject *)friend
 {
     if (_friend)
-        [friend removeObserver:self forKeyPath:@"imagePath"];
+        [friend removeObserver:self forKeyPath:@"photo"];
 
     _friend = friend;
-    [friend addObserver:self forKeyPath:@"imagePath" options:NSKeyValueObservingOptionInitial context:nil];
+    [friend addObserver:self forKeyPath:@"photo" options:NSKeyValueObservingOptionInitial context:nil];
 
     self.label.text = friend.nickname;
 }
@@ -117,16 +117,16 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if ([keyPath isEqualToString:@"imagePath"])
+    if ([keyPath isEqualToString:@"photo"])
     {
-        //self.friendImage = [UIImage imageWithContentsOfFile:self.friend.imagePath];
+        self.friendImage = self.friend.photo;
         [self setNeedsDisplay];
     }
 }
 
 - (void)dealloc
 {
-    [self.friend removeObserver:self forKeyPath:@"imagePath"];
+    [self.friend removeObserver:self forKeyPath:@"photo"];
 }
 
 - (UIColor *)outlineColor

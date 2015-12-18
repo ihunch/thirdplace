@@ -154,11 +154,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)addFriend:(XMPPUserCoreDataStorageObject *)friend
 {
+    DataManager* dbm = [DataManager singleInstance];
     FriendView *friendView = [FriendView friendViewWithFriend:friend];
     friendView.delegate = self;
     [self.friendViews addObject:friendView];
-    XMPPRosterFB* rfb = [[DataManager singleInstance] getXMPPUserFBInfo:friend.jid dbcontext:nil];
-    
+    XMPPRosterFB* rfb = [dbm getXMPPUserFBInfo:friend.jid dbcontext:nil];
+    [dbm fetchFBPhoto:rfb.fbid :friend];
     friendView.frame = CGRectMake(0, 0, 60, 60);
     friendView.center = CGPointMake(rfb.axisx.floatValue, rfb.axisy.floatValue);
     friendView.label.hidden = NO;
@@ -244,6 +245,19 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     DDLogCVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     [self removeAllFriendViews];
     XMPPUserCoreDataStorageObject* me = [[self rosterCoreDataStorage] myUserForXMPPStream:[self xmppStream] managedObjectContext:[self rosterDBContext]];
+    if (me.photo == nil)
+    {
+        NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString *subfolder = [documentsDirectory stringByAppendingPathComponent:@"profile_pictures"];
+        
+        NSString *dest = [subfolder stringByAppendingPathComponent:[AppConfig loginUserPhotoPath]];
+    
+        UIImage* image = [UIImage imageWithContentsOfFile:dest];
+        if (image != nil)
+        {
+            [self.rosterCoreDataStorage setFBPhoto:image forUserWithJID:me.jid xmppStream:[self xmppStream] managedObjectContext:self.rosterDBContext];
+        }
+    }
     self.me = me;
     NSArray* friends = [[self rosterCoreDataStorage] rosterlistForJID:[XMPPJID jidWithString:[AppConfig jid]] xmppStream:[self xmppStream] managedObjectContext:[self rosterDBContext]];
     DDLogCVerbose(@"FRIEND: %lu", (unsigned long)friends.count);
@@ -260,7 +274,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                 [self addFriend:u];
             }
         }
-
     }
 }
 @end

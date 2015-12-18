@@ -10,6 +10,7 @@ import UIKit
 
 let reuseTableViewCellIdentifier = "TableViewCell"
 let reuseCollectionViewCellIdentifier = "CollectionViewCell"
+let reuseLocationCollectionViewCellIdentifier = "LocationCollectionViewCell"
 
 class DHCollectionTableViewController: UITableViewController {
 

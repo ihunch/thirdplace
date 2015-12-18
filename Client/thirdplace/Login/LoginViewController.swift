@@ -41,13 +41,13 @@ class LoginViewController: UIViewController,FBLoginViewDelegate {
                 let documentsDirectory = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as NSString
                 let subfolder = documentsDirectory.stringByAppendingPathComponent("profile_pictures") as NSString
                 
-                do{
-                try NSFileManager.defaultManager().createDirectoryAtPath(subfolder as String, withIntermediateDirectories: true, attributes: nil)
-                    let dest = subfolder.stringByAppendingPathComponent(NSProcessInfo.processInfo().globallyUniqueString)
-                    profilePictureData!.writeToFile(dest, atomically: true);
-                    //                    dispatch_sync(dispatch_get_main_queue(), ^{
-                    //                        //rootEntity.me.imagePath = dest;
-                    //                    });
+                do
+                {
+                    try NSFileManager.defaultManager().createDirectoryAtPath(subfolder as String, withIntermediateDirectories: true, attributes: nil)
+                    let filename = NSProcessInfo.processInfo().globallyUniqueString
+                    let dest = subfolder.stringByAppendingPathComponent(filename)
+                    profilePictureData!.writeToFile(dest, atomically: true)
+                    AppConfig.updateLoginUserPhotoPath(filename)
                 }
                 catch let error as NSError
                 {
@@ -59,7 +59,7 @@ class LoginViewController: UIViewController,FBLoginViewDelegate {
         dispatch_async(dispatch_get_main_queue(),
         {
             self.delegate.didFBLoginSuccess()
-        });
+        })
     }
     
     func loginView(loginView : FBLoginView!, error: NSError)

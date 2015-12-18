@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="15A284" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Xcode 7.0">
     <entity name="Hangout" representedClassName="Hangout" syncable="YES">
         <attribute name="createtime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="createUserJID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="hangoutdescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="hangoutid" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="locationconfirmed" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="preferedlocation" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timeconfirmed" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <relationship name="location" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HangoutLocation" inverseName="hangout" inverseEntity="HangoutLocation" syncable="YES"/>
         <relationship name="message" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HangoutMessage" inverseName="hangout" inverseEntity="HangoutMessage" syncable="YES"/>
@@ -47,7 +48,7 @@
         <relationship name="hangout" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Hangout" inverseName="version" inverseEntity="Hangout" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Hangout" positionX="-4761" positionY="-558" width="128" height="208"/>
+        <element name="Hangout" positionX="-4761" positionY="-558" width="128" height="223"/>
         <element name="HangoutLocation" positionX="-4536" positionY="-531" width="128" height="118"/>
         <element name="HangoutMessage" positionX="-4725" positionY="-265" width="128" height="103"/>
         <element name="HangoutTime" positionX="-4538" positionY="-369" width="128" height="148"/>

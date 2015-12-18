@@ -9,6 +9,7 @@ public enum HangoutAttributes: String {
     case hangoutdescription = "hangoutdescription"
     case hangoutid = "hangoutid"
     case locationconfirmed = "locationconfirmed"
+    case preferedlocation = "preferedlocation"
     case timeconfirmed = "timeconfirmed"
 }
 
@@ -72,6 +73,11 @@ class _Hangout: NSManagedObject {
     // func validateLocationconfirmed(value: AutoreleasingUnsafeMutablePointer<AnyObject>, error: NSErrorPointer) -> Bool {}
 
     @NSManaged public
+    var preferedlocation: String?
+
+    // func validatePreferedlocation(value: AutoreleasingUnsafeMutablePointer<AnyObject>, error: NSErrorPointer) -> Bool {}
+
+    @NSManaged public
     var timeconfirmed: NSNumber?
 
     // func validateTimeconfirmed(value: AutoreleasingUnsafeMutablePointer<AnyObject>, error: NSErrorPointer) -> Bool {}
@@ -99,13 +105,13 @@ extension _Hangout {
 
     func addLocation(objects: NSSet) {
         let mutable = self.location.mutableCopy() as! NSMutableSet
-        mutable.unionSet(objects as Set<NSObject>)
+        mutable.unionSet(objects as! Set<NSObject>)
         self.location = mutable.copy() as! NSSet
     }
 
     func removeLocation(objects: NSSet) {
         let mutable = self.location.mutableCopy() as! NSMutableSet
-        mutable.minusSet(objects as Set<NSObject>)
+        mutable.minusSet(objects as! Set<NSObject>)
         self.location = mutable.copy() as! NSSet
     }
 
@@ -127,13 +133,13 @@ extension _Hangout {
 
     func addMessage(objects: NSSet) {
         let mutable = self.message.mutableCopy() as! NSMutableSet
-        mutable.unionSet(objects as Set<NSObject>)
+        mutable.unionSet(objects as! Set<NSObject>)
         self.message = mutable.copy() as! NSSet
     }
 
     func removeMessage(objects: NSSet) {
         let mutable = self.message.mutableCopy() as! NSMutableSet
-        mutable.minusSet(objects as Set<NSObject>)
+        mutable.minusSet(objects as! Set<NSObject>)
         self.message = mutable.copy() as! NSSet
     }
 
@@ -155,13 +161,13 @@ extension _Hangout {
 
     func addTime(objects: NSSet) {
         let mutable = self.time.mutableCopy() as! NSMutableSet
-        mutable.unionSet(objects as Set<NSObject>)
+        mutable.unionSet(objects as! Set<NSObject>)
         self.time = mutable.copy() as! NSSet
     }
 
     func removeTime(objects: NSSet) {
         let mutable = self.time.mutableCopy() as! NSMutableSet
-        mutable.minusSet(objects as Set<NSObject>)
+        mutable.minusSet(objects as! Set<NSObject>)
         self.time = mutable.copy() as! NSSet
     }
 
@@ -183,13 +189,13 @@ extension _Hangout {
 
     func addUser(objects: NSSet) {
         let mutable = self.user.mutableCopy() as! NSMutableSet
-        mutable.unionSet(objects as Set<NSObject>)
+        mutable.unionSet(objects as! Set<NSObject>)
         self.user = mutable.copy() as! NSSet
     }
 
     func removeUser(objects: NSSet) {
         let mutable = self.user.mutableCopy() as! NSMutableSet
-        mutable.minusSet(objects as Set<NSObject>)
+        mutable.minusSet(objects as! Set<NSObject>)
         self.user = mutable.copy() as! NSSet
     }
 
@@ -211,13 +217,13 @@ extension _Hangout {
 
     func addVersion(objects: NSSet) {
         let mutable = self.version.mutableCopy() as! NSMutableSet
-        mutable.unionSet(objects as Set<NSObject>)
+        mutable.unionSet(objects as! Set<NSObject>)
         self.version = mutable.copy() as! NSSet
     }
 
     func removeVersion(objects: NSSet) {
         let mutable = self.version.mutableCopy() as! NSMutableSet
-        mutable.minusSet(objects as Set<NSObject>)
+        mutable.minusSet(objects as! Set<NSObject>)
         self.version = mutable.copy() as! NSSet
     }
 

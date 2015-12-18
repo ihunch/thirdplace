@@ -23,6 +23,13 @@ class HangoutTableViewController: DHCollectionTableViewController {
     var hangoutDataManager = XMPPHangoutDataManager.singleInstance;
     let dayrow = "1"
     let timerow = "2"
+    let placerow = "3"
+    let placelocationtag = 999
+    let ownphototag = 1000
+    let friendtag = 1001
+    let placelocationimagetag = 1002
+    let placelocatinaddresstag = 1003
+    var locationdata: NSArray?
     
     override func awakeFromNib()
     {
@@ -59,18 +66,22 @@ class HangoutTableViewController: DHCollectionTableViewController {
     {
         let dayarray = XMPPHangoutDataManager.initHangoutDayData()
         let timearray = XMPPHangoutDataManager.initHangoutTimeData()
+        locationdata = XMPPHangoutDataManager.initLocationData()
         let me = rosterStorage?.myUserForXMPPStream(xmppStream, managedObjectContext: rosterDBContext)
-        self.sourceArray =
-        [
-            [me!,selectedHangoutFriend!],
-            dayarray,
-            timearray,
-            ["Place1","Place2","Place3"]
-        ];
+ 
         //TODO: - change place data
         let p_context = hangoutDataManager.privateContext()
         let hangoutid = selectedHangoutID!
         let hangout = Hangout.MR_findFirstByAttribute("hangoutid", withValue: NSNumber(integer: hangoutid), inContext: p_context)
+        let preferlocation = hangout.preferedlocation
+        let locationstring = preferlocation!.componentsSeparatedByString(",")
+        self.sourceArray =
+            [
+                [me!,selectedHangoutFriend!],
+                dayarray,
+                timearray,
+                [locationstring[0],locationstring[1],locationstring[2]]
+        ];
         let time = hangout.getLatestTime()
         let startday = time?.startdate!.mt_weekdayOfWeek()
         let endday =  time?.enddate!.mt_weekdayOfWeek()
@@ -109,6 +120,15 @@ class HangoutTableViewController: DHCollectionTableViewController {
         {
              self.contentOffsetDictionary.setValue(0, forKey: timerow)
         }
+        if let location = hangout.getLatestLocation()
+        {
+            let index = sourceArray[3].indexOfObject((location.locationid?.stringValue)!)
+            self.contentOffsetDictionary.setValue(index, forKey: placerow)
+        }
+        else
+        {
+            self.contentOffsetDictionary.setValue(0, forKey: placerow)
+        }
     }
     
     @IBAction func sendHangout(sender: AnyObject)
@@ -121,8 +141,10 @@ class HangoutTableViewController: DHCollectionTableViewController {
         me!.goingstatus = "going"
         let selectdayindex = self.contentOffsetDictionary[dayrow] as! Int
         let selecttimeindex = self.contentOffsetDictionary[timerow] as! Int
+        let selectlocationindex = self.contentOffsetDictionary[placerow] as! Int
         let day = self.sourceArray[Int(dayrow)!][selectdayindex] as! Hangout_Day
         let time = self.sourceArray[Int(timerow)!][selecttimeindex] as! Hangout_Time
+        let locationid = self.sourceArray[Int(placerow)!][selectlocationindex] as! String
         let hangouttime = HangoutTime.MR_createEntityInContext(p_context)
         let inithangoutime = hangout.getInitTime()!
         let inithangoutendtime = inithangoutime.enddate!
@@ -152,6 +174,15 @@ class HangoutTableViewController: DHCollectionTableViewController {
         hangouttime.updatetime = NSDate()
         hangouttime.hangout = hangout
 
+        
+        //location to do it later
+        let location = HangoutLocation.MR_createEntityInContext(p_context)
+        location.updatejid = xmppStream!.myJID.bare()
+        location.updatetime = NSDate()
+        location.locationconfirm = NSNumber(bool: false)
+        location.locationid = NSNumber(integer: Int(locationid)!)
+        location.hangout = hangout
+        
         //message
         let message = HangoutMessage.MR_createEntityInContext(p_context)
         message.updatetime = NSDate()
@@ -159,7 +190,6 @@ class HangoutTableViewController: DHCollectionTableViewController {
         message.hangout = hangout
         message.content = messageContent
         
-        //location to do it later
         xmppHangout!.updateHangout(hangout, sender: xmppStream!.myJID)
     }
     
@@ -254,20 +284,9 @@ extension HangoutTableViewController {
         {
             let collectionCell: DHCollectionTableViewCell = cell as! DHCollectionTableViewCell
             collectionCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, index: indexPath.section)
-            if(indexPath.section == 1)
-            {
-                collectionCell.collectionView.backgroundColor = UIColor.yellowColor()
-            }
-            else if (indexPath.section == 2 )
-            {
-                collectionCell.collectionView.backgroundColor = UIColor.blackColor()
-            }
-            else
-            {
-                collectionCell.collectionView.backgroundColor = UIColor.blueColor()
-            }
+            collectionCell.collectionView.backgroundColor = UIColor.clearColor()
         }
-        cell.backgroundColor = UIColor.lightGrayColor()
+        cell.backgroundColor = AppConfig.themebgcolour()
     }
     
     // MARK: ////////////////////////////////////////
@@ -307,6 +326,23 @@ extension HangoutTableViewController: UITextViewDelegate
 {
     func textViewDidChange(textView: UITextView) {
         messageContent = textView.text
+        
+        let size = textView.bounds.size
+        let newSize = textView.sizeThatFits(CGSize(width: size.width, height: CGFloat.max))
+        
+        // Resize the cell only when cell's size is changed
+        if size.height != newSize.height {
+            UIView.setAnimationsEnabled(false)
+            tableView.beginUpdates()
+            tableView.endUpdates()
+            UIView.setAnimationsEnabled(true)
+            if let tableviewcell = textView.superview!.superview as? UITableViewCell
+            {
+                if let thisIndexPath = tableView.indexPathForCell(tableviewcell) {
+                    tableView?.scrollToRowAtIndexPath(thisIndexPath, atScrollPosition: .Bottom, animated: false)
+                }
+            }
+        }
     }
 }
 
@@ -322,45 +358,118 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
-        let cell: UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseCollectionViewCellIdentifier, forIndexPath: indexPath)
-        if (collectionView.tag == 0)
+        
+        if (collectionView.tag == Int(placerow))
         {
-            var friendView: UIView? = nil
-            if (indexPath.item == 0)
-            {
-               let me = rosterStorage!.myUserForXMPPStream(xmppStream!, managedObjectContext: rosterDBContext!)
-               friendView = FriendView.friendViewWithFriend(me) as? UIView;
+            let cell: LocationCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseLocationCollectionViewCellIdentifier, forIndexPath: indexPath) as!LocationCollectionViewCell
+            
+//            var imageview: UIImageView?
+//            let content_imageview = cell.contentView.subviews.filter({
+//                $0.tag == placelocationimagetag
+//            })
+//            if (content_imageview.count == 0)
+//            {
+//                imageview = UIImageView(frame: cell.bounds)
+//                imageview?.tag = placelocationimagetag
+//                cell.contentView.addSubview(imageview!)
+//            }
+//            else
+//            {
+//                imageview = content_imageview[0] as? UIImageView
+//            }
+//            var addresslabel:UILabel?
+//            let content_addresslabel = cell.contentView.subviews.filter({
+//                $0.tag == placelocatinaddresstag
+//            })
+//            if (content_addresslabel.count == 0)
+//            {
+//                addresslabel = UILabel(frame: cell.bounds)
+//                imageview?.tag = placelocationimagetag
+//                cell.contentView.addSubview(imageview!)
+//            }
+//            else
+//            {
+//                addresslabel = content_addresslabel[0] as? UILabel
+//            }
+//            
+            if let placeidstr = self.sourceArray[collectionView.tag][indexPath.item] as? String{
+                let placeid = Int(placeidstr)
+                let locationdic = locationdata!.objectAtIndex(Int(placeid!)) as? NSDictionary
+                let name = locationdic!.objectForKey("name") as! String
+                let address = locationdic!.objectForKey("address") as! String
+                let photopath = locationdic!.objectForKey("photopath") as! String
+                cell.locationImageView.image = UIImage(named: photopath)
+                cell.namelabel.text = name
+                cell.addresslabel.text = address
             }
-            else
-            {
-                friendView = FriendView.friendViewWithFriend(selectedHangoutFriend) as? UIView;
-            }
-            friendView!.frame = cell.bounds;
-            cell.addSubview(friendView!)
+            return cell
         }
         else
         {
-            let label = UILabel(frame: cell.bounds)
-            label.backgroundColor = UIColor.redColor()
-            label.textAlignment = NSTextAlignment.Center
-            if (collectionView.tag == Int(dayrow))
+            let cell: UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseCollectionViewCellIdentifier, forIndexPath: indexPath)
+            var label: UILabel? = nil
+            var array = cell.contentView.subviews.filter({
+                $0.tag == placelocationtag
+            })
+            if (array.count == 0)
             {
-                let day = self.sourceArray[collectionView.tag][indexPath.item] as? Hangout_Day
-                label.text = day?.day_description
-            }
-            else if (collectionView.tag == Int(timerow))
-            {
-                let time = self.sourceArray[collectionView.tag][indexPath.item] as? Hangout_Time
-                label.text = time?.time_description
+                label = UILabel(frame: cell.bounds)
+                label?.tag = placelocationtag
+                cell.contentView.addSubview(label!)
             }
             else
             {
-                let place = self.sourceArray[collectionView.tag][indexPath.item] as? String //place
-                label.text = place
+                label = array[0] as? UILabel
             }
-            cell.addSubview(label)
+            
+            if (collectionView.tag == 0)
+            {
+                var friendView: UIView? = nil
+                if (indexPath.item == 0)
+                {
+                    let me = rosterStorage!.myUserForXMPPStream(xmppStream!, managedObjectContext: rosterDBContext!)
+                    let sarray = cell.contentView.subviews.filter({
+                        $0.tag == ownphototag
+                    })
+                    if (sarray.count == 0)
+                    {
+                        friendView = FriendView.friendViewWithFriend(me) as? UIView
+                        friendView!.frame = cell.bounds
+                        friendView?.tag = ownphototag
+                        cell.contentView.addSubview(friendView!)
+                    }
+                }
+                else
+                {
+                    let sarray = cell.contentView.subviews.filter({
+                        $0.tag == friendtag
+                    })
+                    if (sarray.count == 0)
+                    {
+                        friendView = FriendView.friendViewWithFriend(selectedHangoutFriend) as? UIView
+                        friendView?.tag = friendtag
+                        friendView!.frame = cell.bounds
+                        cell.contentView.addSubview(friendView!)
+                    }
+                }
+            }
+            else
+            {
+                label!.backgroundColor = UIColor.redColor()
+                label!.textAlignment = NSTextAlignment.Center
+                if (collectionView.tag == Int(dayrow))
+                {
+                    let day = self.sourceArray[collectionView.tag][indexPath.item] as? Hangout_Day
+                    label!.text = day?.day_description
+                }
+                else if (collectionView.tag == Int(timerow))
+                {
+                    let time = self.sourceArray[collectionView.tag][indexPath.item] as? Hangout_Time
+                    label!.text = time?.time_description
+                }
+            }
+            return cell
         }
-        return cell
     }
     
      func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath)

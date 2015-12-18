@@ -42,6 +42,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     let xmppHangoutDB = XMPPHangoutDataManager.singleInstance
     var xmppStream: XMPPStream?
     var xmppHangout: XMPPHangout?
+    var locationlists: NSArray?
     override func viewDidLoad()
     {
         if (appDelegate!.isFbLoggedIn())
@@ -60,6 +61,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         appDelegate!.xmppRoster.addDelegate(self, delegateQueue: dispatch_get_main_queue())
         xmppHangout!.addDelegate(self, delegateQueue: dispatch_get_main_queue())
         hometablelistview.estimatedRowHeight = 44.0
+        locationlists = XMPPHangoutDataManager.initLocationData()
     }
     
     deinit
@@ -88,12 +90,18 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             let hangout = self.hangoutFetchedRequestControler!.objectAtIndexPath(indexpath) as! Hangout
             let message = hangout.getLatestMessage()
             let time = hangout.getLatestTime()
-            //let location = hangout.getLocation()
             hangoutcell.messageLabel.text = message?.content
             hangoutcell.dateLabel.text = time?.timedescription
-            //TODO: LOOK UP FROM OTHER SOURCE TO GET THE LOCATION DESCRIPTION
-            //hangoutcell!.placeLabel.text = loc
-
+            if let location = hangout.getLatestLocation() as HangoutLocation?
+            {
+                if let locationdic = locationlists!.objectAtIndex((location.locationid?.integerValue)!) as? NSDictionary
+                {
+                    let address = locationdic.objectForKey("address") as! String
+                    let photopath = locationdic.objectForKey("photopath") as! String
+                    hangoutcell.placeLabel.text = address
+                    hangoutcell.bgimageview.image = UIImage(named: photopath)
+                }
+            }
             return hangoutcell
         }
     }
@@ -261,7 +269,6 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             fbviewcontroller!.friendlists = fblists
             self.navigationController?.pushViewController(fbviewcontroller!, animated: true)
         }
-
     }
 
     func didTouchMe() {

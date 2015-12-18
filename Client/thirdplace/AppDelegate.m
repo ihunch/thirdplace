@@ -397,7 +397,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
     [self goOnline];
-  //  [self addFbFriends];
 }
 
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error
@@ -467,9 +466,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                     [NSString stringWithFormat:@"Request from %@", name];
                     [self postAlert:@"Friend Request" body:message passobject:jid];
                 }
-                
             }
-            
         }
     }
     return NO;
@@ -546,7 +543,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         NSString* name = vcard.formattedName;
         NSString* message =
             [NSString stringWithFormat:@"Request from %@", name];
-
         [self postAlert:@"Friend Request" body:message passobject:fromjid];
     }
 }
@@ -610,20 +606,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 -(void)createTempXMPPFBUser:(XMPPJID*)fromjid
 {
     NSManagedObjectContext* localdb = [[DataManager singleInstance] getLocaldbContext];
-    XMPPRosterFB * rfb = [XMPPRosterFB MR_createEntityInContext:localdb];
-    float x = arc4random_uniform(280);
-    if (x < 30)
-    {
-        x+=30;
-    }
-    float y = arc4random_uniform(400);
-    if (y < 30)
-    {
-        y+=30;
-    }
-    rfb.axisxValue = x;
-    rfb.axisyValue = y;
-    rfb.jid = [fromjid bare];
+    [[DataManager singleInstance] createXMPPRoster:localdb :fromjid];
 }
 
 #pragma mark UINotificationDelegate

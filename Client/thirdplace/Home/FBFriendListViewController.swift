@@ -111,27 +111,12 @@ class FBFriendListViewController: UIViewController,UITableViewDataSource, UITabl
             let k = key as! NSNumber
             let fbuser = friendlists?.objectAtIndex(k.integerValue) as! FBGraphObject
             let user = rosterStorage.userForJID(jid, xmppStream: self.xmppStream, managedObjectContext: self.rosterDBContext)
-            // TOFIX: Is currently always nil, creating duplicate user every time
             if (user == nil)
             {
                 let name =  fbuser["name"] as! String
                 self.xmppRoster.addUser(jid, withNickname: name)
                 let localdb = DataManager.singleInstance.getLocaldbContext()
-                let rfb = XMPPRosterFB.MR_createEntityInContext(localdb)
-                var x = arc4random_uniform(280)
-                if (x < 30)
-                {
-                    x+=30
-                }
-                var y = arc4random_uniform(400)
-                if (y < 30)
-                {
-                    y+=30
-                }
-                rfb.axisxValue = Float(x)
-                rfb.axisyValue = Float(y)
-                rfb.jid = jid.bare()
-                rfb.fbid = fbuser["id"] as! String
+                DataManager.singleInstance.createXMPPRoster(localdb, jid)
             }
         }
     }

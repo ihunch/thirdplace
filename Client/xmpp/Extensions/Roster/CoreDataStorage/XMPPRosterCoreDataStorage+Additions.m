@@ -72,4 +72,18 @@ NSAssert(dispatch_get_specific(storageQueueTag), @"Private method: MUST run on s
     }
 }
 
+
+- (void)setFBPhoto:(UIImage *)image forUserWithJID:(XMPPJID *)jid xmppStream:(XMPPStream *)stream
+managedObjectContext:(NSManagedObjectContext *)moc
+{
+    XMPPLogTrace();
+    [self scheduleBlock:^{
+        XMPPUserCoreDataStorageObject *user = [self userForJID:jid xmppStream:stream managedObjectContext:moc];
+        
+        if (user)
+        {
+            user.photo = image;
+        }
+    }];
+}
 @end
