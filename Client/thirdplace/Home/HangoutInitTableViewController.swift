@@ -71,8 +71,6 @@ class HangoutInitTableViewController: DHCollectionTableViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.registerNib(UINib(nibName: "MultiLineTextInputTableViewCell", bundle: nil), forCellReuseIdentifier: "MultiLineTextInputTableViewCell")
-        //tableView.rowHeight = UITableViewAutomaticDimension
-        //tableView.estimatedRowHeight = 50
         hangoutmodule.addDelegate(self, delegateQueue: dispatch_get_main_queue())
     }
     
@@ -92,6 +90,16 @@ class HangoutInitTableViewController: DHCollectionTableViewController
 
     @IBAction func backButton(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    @IBAction func declineButton(sender: AnyObject) {
+        //lookup a temp hangout
+        let p_context = hangoutDataManager.privateContext()
+        let hangoutid = selectedHangoutid!
+        let hangout = Hangout.MR_findFirstByAttribute("hangoutid", withValue: NSNumber(integer: hangoutid), inContext: p_context)
+        let me = hangout.getUser(xmppStream.myJID)
+        me!.goingstatus = "notgoing"
+        hangoutmodule.cancelHangoutInvitation(hangout, sender: xmppStream.myJID)
     }
     
     @IBAction func sendButton(sender: AnyObject)
@@ -153,7 +161,7 @@ class HangoutInitTableViewController: DHCollectionTableViewController
     
     @IBAction func confirmButton(sender: AnyObject)
     {
-        //create a temp hangout
+        //lookup a temp hangout
         let p_context = hangoutDataManager.privateContext()
         let hangoutid = selectedHangoutid!
         let hangout = Hangout.MR_findFirstByAttribute("hangoutid", withValue: NSNumber(integer: hangoutid), inContext: p_context)
@@ -383,6 +391,16 @@ extension HangoutInitTableViewController: UITextViewDelegate
 extension HangoutInitTableViewController
 {
     func xmppHangout(sender:XMPPHangout, didCreateHangout iq:XMPPIQ)
+    {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func xmppHangout(sender:XMPPHangout, didCloseHangout iq:XMPPIQ)
+    {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func xmppHangout(sender:XMPPHangout, didUpdateHangout iq:XMPPIQ)
     {
         self.navigationController?.popViewControllerAnimated(true)
     }

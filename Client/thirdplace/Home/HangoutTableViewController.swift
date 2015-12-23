@@ -31,11 +31,21 @@ class HangoutTableViewController: DHCollectionTableViewController {
     let placelocatinaddresstag = 1003
     var locationdata: NSArray?
     
+    var hangoutmodule : XMPPHangout{
+        get{
+            return self.appDelegate!.xmppHangout
+        }
+    }
+    
     override func awakeFromNib()
     {
        super.awakeFromNib()
     }
     
+    deinit
+    {
+        hangoutmodule.removeDelegate(self)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.registerNib(UINib(nibName: "MultiLineTextInputTableViewCell", bundle: nil), forCellReuseIdentifier: "MultiLineTextInputTableViewCell")
@@ -45,6 +55,7 @@ class HangoutTableViewController: DHCollectionTableViewController {
         rosterDBContext = self.appDelegate!.managedObjectContext_roster()
         xmppHangout = self.appDelegate!.xmppHangout
         rosterStorage = self.appDelegate!.xmppRosterStorage
+        hangoutmodule.addDelegate(self, delegateQueue: dispatch_get_main_queue())
     }
     
     override func viewWillAppear(animated: Bool) {

@@ -21,3 +21,5 @@
 #import "UITextView+Placeholder.h"
 #import "GCDMulticastDelegate.h"
 #import "NSDate+MTDates.h"
+#import "UIImage+Filtering.h"
+#import <MBProgressHUD/MBProgressHUD.h>

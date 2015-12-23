@@ -43,6 +43,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     var xmppStream: XMPPStream?
     var xmppHangout: XMPPHangout?
     var locationlists: NSArray?
+    
     override func viewDidLoad()
     {
         if (appDelegate!.isFbLoggedIn())
@@ -90,16 +91,61 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             let hangout = self.hangoutFetchedRequestControler!.objectAtIndexPath(indexpath) as! Hangout
             let message = hangout.getLatestMessage()
             let time = hangout.getLatestTime()
-            hangoutcell.messageLabel.text = message?.content
-            hangoutcell.dateLabel.text = time?.timedescription
+            let otheruser = hangout.getUser(xmppStream!.myJID)
+            if (otheruser!.goingstatus != "notgoing")
+            {
+                hangoutcell.messageLabel.text = message?.content
+                hangoutcell.dateLabel.text = time?.timedescription
+            }
+            else
+            {
+                hangoutcell.dateLabel.text = time?.timedescription
+                if (hangout.createUserJID != xmppStream!.myJID.bare())
+                {
+                    hangoutcell.messageLabel.text = "You are not avaiable"
+                }
+                else
+                {
+                    let jid = XMPPJID.jidWithString(otheruser?.jidstr)
+                    if let user = rosterStorage.userForJID(jid, xmppStream: xmppStream!, managedObjectContext: rosterDBContext)
+                    {
+                        if (user.nickname != nil)
+                        {
+                            hangoutcell.messageLabel.text = "\(user.nickname) can not catch up this weekend"
+                        }
+                    }
+                }
+            }
+
+            hangoutcell.collectionView.indexPath = indexpath
             if let location = hangout.getLatestLocation() as HangoutLocation?
             {
+                hangoutcell.locationViewContainer.hidden = false
                 if let locationdic = locationlists!.objectAtIndex((location.locationid?.integerValue)!) as? NSDictionary
                 {
                     let address = locationdic.objectForKey("address") as! String
                     let photopath = locationdic.objectForKey("photopath") as! String
                     hangoutcell.placeLabel.text = address
-                    hangoutcell.bgimageview.image = UIImage(named: photopath)
+                    if (otheruser!.goingstatus != "notgoing")
+                    {
+                        hangoutcell.bgimageview.image = UIImage(named: photopath)
+                    }
+                    else
+                    {
+                        hangoutcell.bgimageview.image = UIImage(named: photopath)?.grayscale()
+                    }
+                }
+            }
+            else
+            {
+                hangoutcell.locationViewContainer.hidden = true
+                if (otheruser!.goingstatus != "notgoing")
+                {
+                    hangoutcell.bgimageview.image = UIImage(named: "bbb.jpg")
+                }
+                else
+                {
+                    hangoutcell.bgimageview.image = UIImage(named: "bbb.jpg")?.grayscale()
                 }
             }
             return hangoutcell
@@ -196,8 +242,19 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         let activeHangout = xmppHangoutDB.hasActiveHangout(friend.jid, xmppstream: xmppStream!)
         if (activeHangout != nil)
         {
+            let otheruser = activeHangout!.getUser(xmppStream!.myJID)
+            if otheruser?.goingstatus == "notgoing"
+            {
+                ErrorHandler.showPopupMessage(self.view, text: "Try another time")
+                return
+            }
             if (activeHangout!.createUserJID == xmppStream!.myJID.bare())
             {
+                if (activeHangout!.message.count == 1)
+                {
+                    ErrorHandler.showPopupMessage(self.view, text: "Please wait your friend response")
+                    return
+                }
                 let hangoutviewcontroller = self.storyboard?.instantiateViewControllerWithIdentifier("HangoutTableViewController") as! HangoutTableViewController?
                 hangoutviewcontroller?.title = "Hangout"
                 hangoutviewcontroller?.selectedHangoutID = activeHangout!.hangoutid?.integerValue
@@ -255,8 +312,16 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
 // MARK: FriendContainerDelegate
     
-    func didTouchFriend(friend: XMPPUserCoreDataStorageObject!, rect: CGRect) {
-        self.displayCreateHangoutView(friend)
+    func didTouchFriend(friend: XMPPUserCoreDataStorageObject!, rect: CGRect)
+    {
+        if (friend.subscription  == "both")
+        {
+            self.displayCreateHangoutView(friend)
+        }
+        else
+        {
+            ErrorHandler.showPopupMessage(self.view, text: "Waiting for friend invitation  response")
+        }
     }
     
     func didTouchAddFriend()
@@ -271,7 +336,8 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
 
-    func didTouchMe() {
+    func didTouchMe()
+    {
         self.performSegueWithIdentifier("ProfileViewController", sender: nil)
     }
     
@@ -300,6 +366,20 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         _hangoutFetchedResultsController = nil
         hometablelistview.reloadData()
     }
+    
+    func xmppHangout(sender:XMPPHangout, didCloseHangout iq:XMPPIQ)
+    {
+        XMPPLoggingWrapper.XMPPLogTrace()
+        _hangoutFetchedResultsController = nil
+        hometablelistview.reloadData()
+    }
+    
+    func xmppHangout(sender:XMPPHangout, didUpdateHangout iq:XMPPIQ)
+    {
+        XMPPLoggingWrapper.XMPPLogTrace()
+        _hangoutFetchedResultsController = nil
+        hometablelistview.reloadData()
+    }
 }
 
 // MARK: - Collection View Data source and Delegate
@@ -321,9 +401,18 @@ extension HomeScreenViewController:UICollectionViewDataSource,UICollectionViewDe
         }
         else
         {
-            //friendView = FriendView.friendViewWithFriend(selectedHangoutFriend) as? UIView;
-            let me = rosterStorage.myUserForXMPPStream(xmppStream, managedObjectContext: rosterDBContext)
-            friendView = FriendView.friendViewWithFriend(me) as? UIView;
+            if let me = rosterStorage.myUserForXMPPStream(xmppStream, managedObjectContext: rosterDBContext)
+            {
+                let dhcollectionview = collectionView as! DHIndexedCollectionView
+                let cellindexpath = dhcollectionview.indexPath
+                let hangout = self.hangoutFetchedRequestControler!.objectAtIndexPath(cellindexpath) as! Hangout
+                let otheruser = XMPPJID.jidWithString(hangout.getUser(me.jid)!.jidstr!)
+                let friend = rosterStorage.userForJID(otheruser, xmppStream: self.xmppStream, managedObjectContext: rosterDBContext)
+                friendView = FriendView.friendViewWithFriend(friend) as? UIView
+            }
+            else{
+                friendView = FriendView.friendViewWithFriend(nil) as? UIView
+            }
         }
         friendView!.frame = cell.bounds;
         cell.addSubview(friendView!)

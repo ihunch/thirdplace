@@ -44,6 +44,12 @@ private let _SingletonInstance = XMPPHangoutDataManager()
     
     func handleHangout(item: DDXMLElement, stream: XMPPStream, fromjid: XMPPJID)
     {
+        if let closeElement = item.elementForName(HangoutConfig.closekey)
+        {
+            let closehangoutid = Int(closeElement.stringValue())
+            self.updateCloseHangout(closehangoutid!, xmppStream: stream)
+            return
+        }
         //hangoutid
         let hangoutid = Int(item.elementForName(HangoutConfig.hangoutkey).stringValue())
         let startdatestr = item.elementForName(HangoutConfig.startdatekey).stringValue()
@@ -59,7 +65,6 @@ private let _SingletonInstance = XMPPHangoutDataManager()
         var locationid : Int? = nil
         if let locationelement = item.elementForName(HangoutConfig.locationidkey)
         {
-            //#TO FIX locaiton here
             locationid = Int(locationelement.stringValue())
         }
         let preferlocation = item.elementForName(HangoutConfig.preferredlocationkey).stringValue()
@@ -111,7 +116,6 @@ private let _SingletonInstance = XMPPHangoutDataManager()
             }
             else
             {
-                //TODO ADD HANGOUT + UPDATE
                 let hangoutmessage = HangoutMessage.MR_createEntityInContext(localContext)
                 hangoutmessage.content = message
                 hangoutmessage.updatetime = NSDate()
@@ -125,15 +129,31 @@ private let _SingletonInstance = XMPPHangoutDataManager()
                 hangouttime.timedescription = timedescription
                 hangouttime.updatetime = NSDate()
                 
-                let hangoutlocation = HangoutLocation.MR_createEntityInContext(localContext)
-                hangoutlocation.updatetime = NSDate()
-                hangoutlocation.updatejid = fromjid.bare()
-                hangoutlocation.locationid = NSNumber(integer: locationid!)
-                hangoutlocation.hangout = hangout
+                if (locationid != nil)
+                {
+                    let hangoutlocation = HangoutLocation.MR_createEntityInContext(localContext)
+                    hangoutlocation.updatetime = NSDate()
+                    hangoutlocation.updatejid = fromjid.bare()
+                    hangoutlocation.locationid = NSNumber(integer: locationid!)
+                    hangoutlocation.hangout = hangout
+                }
+            }
+        })
+    }
+    
+    func updateCloseHangout(hangoutid:Int, xmppStream: XMPPStream)
+    {
+        MagicalRecord.saveWithBlockAndWait({ (localContext : NSManagedObjectContext!) in
+            let hangout = Hangout.MR_findFirstByAttribute("hangoutid", withValue:  NSNumber(integer: hangoutid), inContext: localContext)
+            if hangout != nil
+            {
+                let otheruser = hangout.getUser(xmppStream.myJID)
+                otheruser?.goingstatus = "notgoing"
             }
         })
     }
 }
+
 //MARK: Public methods
 extension XMPPHangoutDataManager
 {
@@ -143,7 +163,7 @@ extension XMPPHangoutDataManager
         {
             let now = NSDate()
             let filter = NSPredicate(format: "Any self.user.jidstr == %@ && Any self.time.enddate >= %@", myjid!.bare(), now)
-            return Hangout.MR_requestAllSortedBy("hangoutid", ascending: true, withPredicate: filter)
+            return Hangout.MR_requestAllSortedBy("createtime", ascending: false, withPredicate: filter)
         }
         return nil
     }
@@ -243,4 +263,5 @@ struct HangoutConfig {
     static var messagekeykey = "message"
     static var locationidkey = "locationid"
     static var preferredlocationkey = "preferredlocation"
+    static var closekey = "close"
 }

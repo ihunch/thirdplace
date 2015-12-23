@@ -245,9 +245,6 @@ Melbourne VIC 3000</string>
                                                             <state key="normal" image="btn_icn_Zoo-Map">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
-                                                            <connections>
-                                                                <action selector="pressedMapButton:" destination="AmC-Tr-YQk" eventType="touchUpInside" id="NnJ-da-B5M"/>
-                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -295,9 +292,11 @@ Melbourne VIC 3000</string>
                                             </variation>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="bgimageview" destination="aGN-1g-ZZK" id="F0p-8i-Kfb"/>
                                             <outlet property="collectionView" destination="5HJ-UA-mN4" id="7w1-kD-15r"/>
                                             <outlet property="dateLabel" destination="z3z-lq-K55" id="kJl-3y-MCX"/>
                                             <outlet property="labelViewContainer" destination="H9W-wQ-k66" id="MqI-rm-YSH"/>
+                                            <outlet property="locationViewContainer" destination="Jo8-zh-Px1" id="lmJ-OV-F9S"/>
                                             <outlet property="messageLabel" destination="JVd-fr-ze8" id="rhD-Qa-ito"/>
                                             <outlet property="placeLabel" destination="rWU-7f-NWP" id="4Jf-SH-I4K"/>
                                         </connections>
@@ -1134,9 +1133,9 @@ Melbourne VIC 3000</string>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="100" id="kC2-VT-2OY"/>
                                             </constraints>
-                                            <state key="normal" title="Back"/>
+                                            <state key="normal" title="Decline"/>
                                             <connections>
-                                                <action selector="backButton:" destination="5BB-3U-6Fe" eventType="touchUpInside" id="4iK-9l-lbN"/>
+                                                <action selector="declineButton:" destination="5BB-3U-6Fe" eventType="touchUpInside" id="DvD-J0-XY7"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4o8-lg-u8N">

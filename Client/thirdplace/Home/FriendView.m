@@ -6,7 +6,7 @@
 #import "FriendView.h"
 #import <NYXImagesKit/NYXImagesKit.h>
 #import "XMPPFramework.h"
-
+#import "AppConfig.h"
 @interface FriendView ()
 
 @property (nonatomic, strong) UIImage *friendImage;
@@ -119,7 +119,20 @@
 {
     if ([keyPath isEqualToString:@"photo"])
     {
-        self.friendImage = self.friend.photo;
+        if ([self.friend.jidStr isEqualToString:[AppConfig jid]])
+        {
+             self.friendImage = self.friend.photo;
+        }
+        else
+        {
+            if ([self.friend.subscription isEqualToString:@"both"])
+            {
+                self.friendImage = self.friend.photo;
+            }
+            else{
+                self.friendImage = [self.friend.photo grayscale];
+            }
+        }
         [self setNeedsDisplay];
     }
 }

@@ -11,6 +11,7 @@ import UIKit
 {
     func xmppHangout(sender:XMPPHangout, didCreateHangout iq:XMPPIQ);
     func xmppHangout(sender:XMPPHangout, didUpdateHangout iq:XMPPIQ);
+    func xmppHangout(sender:XMPPHangout, didCloseHangout iq:XMPPIQ);
     func xmppHangout(sender:XMPPHangout, didReceiveMessage message:XMPPMessage);
 }
 
@@ -147,6 +148,36 @@ class XMPPHangout: XMPPModule
         }
     }
     
+    func cancelHangoutInvitation(hangout:Hangout, sender:XMPPJID)
+    {
+        let block = {
+            autoreleasepool {
+                let close = DDXMLElement(name: "close", xmlns: self.hangout_xmlns)
+                let iq = XMPPIQ.iqWithType("set", elementID: self.xmppStream.generateUUID())
+                iq.addAttributeWithName("from", stringValue: sender.bare())
+                iq.addAttributeWithName("to", stringValue:AppConfig.thirdplaceModule())
+                //hangout
+                let hangoutElement = DDXMLElement(name: "hangout")
+                hangoutElement.addAttributeWithName("id", stringValue: hangout.hangoutid!.stringValue)
+                let usersElement = DDXMLElement(name: "users")
+                let user = DDXMLElement(name: "user", stringValue: hangout.getUser(sender)?.jidstr)
+                usersElement.addChild(user)
+                hangoutElement.addChild(usersElement)
+                close.addChild(hangoutElement)
+                iq.addChild(close)
+                self.xmppStream.sendElement(iq)
+            }
+        }
+        if (dispatch_get_specific(moduleQueueTag) != nil)
+        {
+            block()
+        }
+        else
+        {
+            dispatch_async(moduleQueue, block)
+        }
+    }
+    
     func xmppStream(sender:XMPPStream, didReceiveIQ iq: XMPPIQ) -> Bool
     {
         XMPPLoggingWrapper.XMPPLogTrace()
@@ -171,7 +202,16 @@ class XMPPHangout: XMPPModule
             let pcontext = XMPPHangoutDataManager.singleInstance.privateContext()
             pcontext.MR_saveToPersistentStoreAndWait()
             XMPPHangoutDataManager.singleInstance.resetPrivateContext()
-            self.multicastDelegate().xmppHangout(self, didCreateHangout: iq);
+            self.multicastDelegate().xmppHangout(self, didUpdateHangout: iq);
+            return true
+        }
+        let closeQuery = iq.elementForName("close", xmlns: self.hangout_xmlns)
+        if (closeQuery != nil)
+        {
+            let pcontext = XMPPHangoutDataManager.singleInstance.privateContext()
+            pcontext.MR_saveToPersistentStoreAndWait()
+            XMPPHangoutDataManager.singleInstance.resetPrivateContext()
+            self.multicastDelegate().xmppHangout(self, didCloseHangout: iq);
             return true
         }
         return false

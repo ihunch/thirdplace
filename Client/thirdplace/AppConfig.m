@@ -10,7 +10,7 @@
 //NSString* const kXMPPHostName = @"54.206.75.197";
 //NSString* const kXMPPServerName = @"ip-172-31-1-174";
 NSString* const kXMPPHostName = @"192.168.0.5";
-NSString* const kXMPPServerName = @"Macintosh.local";
+NSString* const kXMPPServerName = @"macintosh.local";
 NSString *const kXMPPHasDetailsKey = @"kXMPPHasDetails";
 NSString *const kXMPPJIDKey = @"kXMPPJID";
 NSString *const kXMPPPasswordKey = @"kXMPPPassword";

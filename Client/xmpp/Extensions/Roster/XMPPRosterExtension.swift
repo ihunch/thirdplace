@@ -14,7 +14,7 @@ extension XMPPRoster{
         let element = XMPPPresence.init(type: "subscribed", to: jid)
         self.xmppStream.sendElement(element)
       
-        // Add optionally add user to our roster
+        // Add optionally user to our roster
         
         if (flag)
         {
