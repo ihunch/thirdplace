@@ -159,13 +159,16 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     friendView.delegate = self;
     [self.friendViews addObject:friendView];
     XMPPRosterFB* rfb = [dbm getXMPPUserFBInfo:friend.jid dbcontext:nil];
-    [dbm fetchFBPhoto:rfb.fbid :friend];
+    if (friend.photo == nil)
+    {
+        [dbm fetchFBPhoto:rfb.fbid :friend];
+    }
     friendView.frame = CGRectMake(0, 0, 60, 60);
     friendView.center = CGPointMake(rfb.axisx.floatValue, rfb.axisy.floatValue);
     friendView.label.hidden = NO;
-
     [self addSubview:friendView];
     [self updateLines];
+    
 }
 
 -(void)removeAllFriendViews
@@ -191,19 +194,21 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
 }
 
-- (void)setMe:(XMPPUserCoreDataStorageObject *)friend
+- (void)setMe:(XMPPUserCoreDataStorageObject *)me
 {
     if (!self.meView)
     {
-        self.meView = [FriendView friendViewWithFriend:friend];
+        self.meView = [FriendView friendViewWithFriend:me];
         self.meView.delegate = self;
         self.meView.frame = CGRectMake(0, 0, 75, 75);
         [self addSubview:self.meView];
     }
     else
     {
-        [self.meView setFriend:friend];
+        [self.meView setFriend:me];
     }
+    DataManager* dbm = [DataManager singleInstance];
+    
 }
 
 - (void)updateLayout
@@ -245,20 +250,24 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     DDLogCVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     [self removeAllFriendViews];
     XMPPUserCoreDataStorageObject* me = [[self rosterCoreDataStorage] myUserForXMPPStream:[self xmppStream] managedObjectContext:[self rosterDBContext]];
-    if (me.photo == nil)
+    if (me != nil)
     {
-        NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        NSString *subfolder = [documentsDirectory stringByAppendingPathComponent:@"profile_pictures"];
-        
-        NSString *dest = [subfolder stringByAppendingPathComponent:[AppConfig loginUserPhotoPath]];
-    
-        UIImage* image = [UIImage imageWithContentsOfFile:dest];
-        if (image != nil)
+        if (me.photo == nil)
         {
-            [self.rosterCoreDataStorage setFBPhoto:image forUserWithJID:me.jid xmppStream:[self xmppStream] managedObjectContext:self.rosterDBContext];
+            NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+            NSString *subfolder = [documentsDirectory stringByAppendingPathComponent:@"profile_pictures"];
+            
+            NSString *dest = [subfolder stringByAppendingPathComponent:[AppConfig loginUserPhotoPath]];
+            
+            UIImage* image = [UIImage imageWithContentsOfFile:dest];
+            if (image != nil)
+            {
+                [self.rosterCoreDataStorage setFBPhoto:image forUserWithJID:me.jid xmppStream:[self xmppStream] managedObjectContext:self.rosterDBContext];
+            }
         }
+        self.me = me;
     }
-    self.me = me;
+    
     NSArray* friends = [[self rosterCoreDataStorage] rosterlistForJID:[XMPPJID jidWithString:[AppConfig jid]] xmppStream:[self xmppStream] managedObjectContext:[self rosterDBContext]];
     DDLogCVerbose(@"FRIEND: %lu", (unsigned long)friends.count);
     for (XMPPUserCoreDataStorageObject* u in friends)

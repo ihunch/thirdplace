@@ -8,11 +8,15 @@
 
 import UIKit
 
-class LoginViewController: UIViewController,FBLoginViewDelegate {
+class LoginViewController: UIViewController,FBLoginViewDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
 
     @IBOutlet weak var loginView: FBLoginView!
+    var pagecontentController: UIPageViewController!
     var delegate: HomeScreenDelegate!
     let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+    // Create the data model
+    let pageTitles = ["Welcome Thirdplace", "page2", "page3", "page4"]
+    let pageImages = ["page1.png", "page2.png", "page3.png", "page4.png"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +25,20 @@ class LoginViewController: UIViewController,FBLoginViewDelegate {
         activityIndicatorView.center = loginView.center;
         activityIndicatorView.hidesWhenStopped = true
         self.view.addSubview(activityIndicatorView)
+        if (pagecontentController == nil)
+        {
+            pagecontentController = self.storyboard?.instantiateViewControllerWithIdentifier("LoginPageViewController") as? UIPageViewController
+            pagecontentController.delegate = self
+            pagecontentController.dataSource = self
+            
+            let contentview = self.viewControllerAtIndex(0)
+            let viewControllers = [contentview]
+            pagecontentController.setViewControllers(viewControllers, direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
+            self.addChildViewController(pagecontentController!)
+            self.view.addSubview(pagecontentController.view)
+            self.pagecontentController.didMoveToParentViewController(self)
+        }
+        self.view.bringSubviewToFront(loginView)
     }
 
     override func didReceiveMemoryWarning() {
@@ -110,4 +128,52 @@ class LoginViewController: UIViewController,FBLoginViewDelegate {
     {
         print("User Logged Out")
     }
+    
+    // MARK: Page View Controller
+    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController?
+    {
+        if let pcontroller = viewController as? LoginContentViewController
+        {
+            var index = pcontroller.pageIndex
+            if (index == 0  || index == NSNotFound) {
+                return nil
+            }
+            index--
+            return self.viewControllerAtIndex(index)
+        }
+        return nil
+    }
+
+    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+        if let pcontroller = viewController as? LoginContentViewController
+        {
+            var index = pcontroller.pageIndex
+            if (index == NSNotFound) {
+                return nil;
+            }
+            index++
+            if (index == self.pageTitles.count) {
+                return nil;
+            }
+            return self.viewControllerAtIndex(index)
+        }
+        return nil
+    }
+    
+    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+        return self.pageTitles.count
+    }
+    
+    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+        return 0
+    }
+    
+    func viewControllerAtIndex(index:Int) -> LoginContentViewController
+    {
+        let contentController = self.storyboard?.instantiateViewControllerWithIdentifier("LoginContentViewController") as? LoginContentViewController
+        contentController!.imageFile = pageImages[index]
+        contentController!.titletext = pageTitles[index]
+        return contentController!
+    }
+
 }

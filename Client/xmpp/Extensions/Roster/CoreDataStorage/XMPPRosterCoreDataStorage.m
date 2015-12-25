@@ -422,7 +422,6 @@ static XMPPRosterCoreDataStorage *sharedInstance;
 		
 		NSManagedObjectContext *moc = [self managedObjectContext];
 		XMPPUserCoreDataStorageObject *user = [self userForJID:jid xmppStream:stream managedObjectContext:moc];
-		
 		if (user)
 		{
 			user.photo = photo;
@@ -435,7 +434,6 @@ static XMPPRosterCoreDataStorage *sharedInstance;
 	XMPPLogTrace();
 	
 	[self scheduleBlock:^{
-		
 		[self _clearAllResourcesForXMPPStream:stream];
 	}];
 }

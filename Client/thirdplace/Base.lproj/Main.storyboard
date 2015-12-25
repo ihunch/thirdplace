@@ -48,7 +48,7 @@
         <!--Login-->
         <scene sceneID="Qra-qA-eUb">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="b3F-Wx-JzR" customClass="LoginViewController" customModule="thirdplace" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="b3F-Wx-JzR" customClass="LoginViewController" customModule="thirdplace" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3v2-Os-Eon"/>
                         <viewControllerLayoutGuide type="bottom" id="bsu-jI-pDR"/>
@@ -58,47 +58,19 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PmS-1j-9Aq" customClass="FBLoginView">
-                                <rect key="frame" x="160" y="226" width="280" height="64"/>
+                                <rect key="frame" x="160" y="506" width="280" height="64"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="UVe-dL-sex"/>
                                     <constraint firstAttribute="width" constant="280" id="b7p-sF-zd8"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Shg-cQ-2sU">
-                                <rect key="frame" x="214" y="177" width="172" height="21"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="welcome to ">
-                                        <attributes>
-                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="thirdplace">
-                                        <attributes>
-                                            <color key="NSColor" red="0.52941176470588236" green="0.56470588235294117" blue="0.80784313725490198" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="17" name="HelveticaNeue-Medium"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.95172787408759119" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="PmS-1j-9Aq" firstAttribute="top" secondItem="qyN-Mk-YBq" secondAttribute="topMargin" constant="226" id="JWL-th-sJy"/>
-                            <constraint firstItem="Shg-cQ-2sU" firstAttribute="centerX" secondItem="qyN-Mk-YBq" secondAttribute="centerX" id="Te9-84-B5f"/>
-                            <constraint firstItem="PmS-1j-9Aq" firstAttribute="top" secondItem="Shg-cQ-2sU" secondAttribute="bottom" constant="28" id="TsJ-Hq-TPC"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="PmS-1j-9Aq" secondAttribute="bottom" constant="322" id="Veh-JQ-Unn"/>
-                            <constraint firstItem="PmS-1j-9Aq" firstAttribute="centerX" secondItem="qyN-Mk-YBq" secondAttribute="centerX" id="YSI-FR-PHA"/>
-                            <constraint firstAttribute="bottom" secondItem="PmS-1j-9Aq" secondAttribute="bottom" constant="310" id="ZAm-J0-dzq"/>
+                            <constraint firstItem="bsu-jI-pDR" firstAttribute="top" secondItem="PmS-1j-9Aq" secondAttribute="bottom" constant="30" id="VTW-YP-ZQl"/>
+                            <constraint firstItem="PmS-1j-9Aq" firstAttribute="centerX" secondItem="qyN-Mk-YBq" secondAttribute="centerX" id="dpJ-iv-xrm"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="Veh-JQ-Unn"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="GzY-re-DhI"/>
                     <connections>
@@ -108,6 +80,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IsK-Zp-Jzg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="399" y="758"/>
+        </scene>
+        <!--Login Content View Controller-->
+        <scene sceneID="l7L-ba-Agm">
+            <objects>
+                <viewController storyboardIdentifier="LoginContentViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="d3G-Ap-ItK" customClass="LoginContentViewController" customModule="thirdplace" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="d78-fj-ogz"/>
+                        <viewControllerLayoutGuide type="bottom" id="ilF-Qj-hwW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ngw-OB-W7I">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MiN-vi-T2a">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rqA-We-SgB">
+                                <rect key="frame" x="279" y="65.5" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="MiN-vi-T2a" firstAttribute="top" secondItem="Ngw-OB-W7I" secondAttribute="topMargin" id="Fbj-OY-oi9"/>
+                            <constraint firstAttribute="trailing" secondItem="MiN-vi-T2a" secondAttribute="trailing" id="RhI-Ql-B8J"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="MiN-vi-T2a" secondAttribute="bottom" id="X97-zg-90q"/>
+                            <constraint firstItem="rqA-We-SgB" firstAttribute="centerX" secondItem="MiN-vi-T2a" secondAttribute="centerX" id="XFV-Z7-Gu2"/>
+                            <constraint firstItem="MiN-vi-T2a" firstAttribute="leading" secondItem="Ngw-OB-W7I" secondAttribute="leading" id="Zos-8M-GFM"/>
+                            <constraint firstItem="rqA-We-SgB" firstAttribute="top" secondItem="d78-fj-ogz" secondAttribute="bottom" constant="45.5" id="fmp-9D-i6O"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageview" destination="MiN-vi-T2a" id="NyD-lv-0ga"/>
+                        <outlet property="titleLabel" destination="rqA-We-SgB" id="F2Q-At-RP8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BfW-lk-8hw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="399" y="1441"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="Bf8-Du-FtE">
+            <objects>
+                <pageViewController storyboardIdentifier="LoginPageViewController" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="XQ6-Ra-Lon" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WWg-Wq-yit" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1081" y="777"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="ZWl-L7-oEO">
@@ -125,7 +146,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Loc-Hl-2Ux" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="251" y="1760"/>
+            <point key="canvasLocation" x="497" y="2160"/>
         </scene>
         <!--HomeScreen-->
         <scene sceneID="6Q7-dU-ziM">

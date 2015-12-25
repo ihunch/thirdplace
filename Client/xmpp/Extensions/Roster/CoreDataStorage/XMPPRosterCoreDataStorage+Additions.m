@@ -67,7 +67,17 @@ NSAssert(dispatch_get_specific(storageQueueTag), @"Private method: MUST run on s
     {
         [self scheduleBlock:^{
             
-            [XMPPUserCoreDataStorageObject insertInManagedObjectContext:moc withJID:jid streamBareJidStr:[[self myJIDForXMPPStream:stream] bare]];
+            XMPPUserCoreDataStorageObject* me =[XMPPUserCoreDataStorageObject insertInManagedObjectContext:moc withJID:jid streamBareJidStr:[[self myJIDForXMPPStream:stream] bare]];
+            NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+            NSString *subfolder = [documentsDirectory stringByAppendingPathComponent:@"profile_pictures"];
+            
+            NSString *dest = [subfolder stringByAppendingPathComponent:[AppConfig loginUserPhotoPath]];
+            
+            UIImage* image = [UIImage imageWithContentsOfFile:dest];
+            if (image != nil)
+            {
+                me.photo = image;
+            }
         }];
     }
 }
