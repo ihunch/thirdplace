@@ -207,8 +207,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     {
         [self.meView setFriend:me];
     }
-    DataManager* dbm = [DataManager singleInstance];
-    
 }
 
 - (void)updateLayout

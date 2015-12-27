@@ -63,6 +63,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         xmppHangout!.addDelegate(self, delegateQueue: dispatch_get_main_queue())
         hometablelistview.estimatedRowHeight = 44.0
         locationlists = XMPPHangoutDataManager.initLocationData()
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "patternBackground")!)
     }
     
     deinit
