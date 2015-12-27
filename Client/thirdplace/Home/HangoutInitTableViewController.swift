@@ -134,11 +134,28 @@ class HangoutInitTableViewController: DHCollectionTableViewController
         invitor.hangout = hangout
         //time
         let hangouttime = HangoutTime.MR_createEntityInContext(p_context)
-        let now = NSDate()
-        let sat = now.getNextSaturday()?.mt_inTimeZone(NSTimeZone.localTimeZone())
-        let sun = now.getNextSaturday()?.mt_inTimeZone(NSTimeZone.localTimeZone()).mt_dateHoursAfter(24).mt_dateHoursAfter(23).mt_dateMinutesAfter(59)
-        hangouttime.startdate = sat
-        hangouttime.enddate = sun
+        let now = NSDate().mt_inTimeZone(NSTimeZone.localTimeZone())
+        if (now.mt_weekdayOfWeek() == Weekday.Sat.rawValue)
+        {
+            let startdate = now.mt_startOfCurrentDay()
+            let enddate = now.mt_endOfNextDay()
+            hangouttime.startdate = startdate
+            hangouttime.enddate = enddate
+        }
+        else if(now.mt_weekdayOfWeek() == Weekday.Sun.rawValue)
+        {
+            let startdate = now.mt_startOfPreviousDay()
+            let enddate = now.mt_endOfCurrentDay()
+            hangouttime.startdate = startdate
+            hangouttime.enddate = enddate
+        }
+        else
+        {
+            let sat = now.getNextSaturday()?.mt_inTimeZone(NSTimeZone.localTimeZone())
+            let sun = now.getNextSaturday()?.mt_inTimeZone(NSTimeZone.localTimeZone()).mt_dateHoursAfter(24).mt_dateHoursAfter(23).mt_dateMinutesAfter(59)
+            hangouttime.startdate = sat
+            hangouttime.enddate = sun
+        }
         hangouttime.timedescription = "Weekend"
         hangouttime.updatejid = xmppStream.myJID.bare()
         hangouttime.updatetime = NSDate()

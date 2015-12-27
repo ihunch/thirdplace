@@ -18,3 +18,7 @@ extension NSDate
         return dateformat.stringFromDate(self)
     }
 }
+
+enum Weekday : Int{
+    case Sun = 1, Mon, Tus, Wed, Thu, Fri, Sat
+}

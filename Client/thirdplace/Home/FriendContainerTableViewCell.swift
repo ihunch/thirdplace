@@ -22,4 +22,5 @@ class FriendContainerTableViewCell: UITableViewCell
             self.friendContainerView.delegate = delegate
         }
     }
+    
 }

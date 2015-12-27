@@ -17,11 +17,11 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
 
     @IBAction func touch(sender: AnyObject)
     {
-        MagicalRecord.saveWithBlockAndWait({ (localContext : NSManagedObjectContext!) in
-            Hangout.MR_truncateAllInContext(localContext)
-        })
-        _hangoutFetchedResultsController = nil
-        hometablelistview.reloadData()
+//        MagicalRecord.saveWithBlockAndWait({ (localContext : NSManagedObjectContext!) in
+//            Hangout.MR_truncateAllInContext(localContext)
+//        })
+//        _hangoutFetchedResultsController = nil
+//        hometablelistview.reloadData()
     }
     
     @IBOutlet weak var hometablelistview: UITableView!
@@ -321,13 +321,14 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         else
         {
-            ErrorHandler.showPopupMessage(self.view, text: "Waiting for friend invitation  response")
+            ErrorHandler.showPopupMessage(self.view, text: "Waiting for friend invitation response")
         }
     }
     
     func didTouchAddFriend()
     {
-        let fbrequest = FBRequest.requestForMyFriends()
+        FBRequest.requestForMyFriends()
+        let fbrequest = FBRequest(graphPath: "me/friendlists", parameters: nil, HTTPMethod: "GET")
         fbrequest.startWithCompletionHandler {
             (connection:FBRequestConnection!,   result:AnyObject!, error:NSError!) -> Void in
             let fblists = result.objectForKey("data") as? NSArray

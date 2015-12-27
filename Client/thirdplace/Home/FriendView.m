@@ -60,10 +60,14 @@
 - (void)setFriend:(XMPPUserCoreDataStorageObject *)friend
 {
     if (_friend)
+    {
         [friend removeObserver:self forKeyPath:@"photo"];
-
+        [friend removeObserver:self forKeyPath:@"subscription"];
+    }
+    
     _friend = friend;
     [friend addObserver:self forKeyPath:@"photo" options:NSKeyValueObservingOptionInitial context:nil];
+    [friend addObserver:self forKeyPath:@"subscription" options:NSKeyValueObservingOptionInitial context:nil];
 
     self.label.text = friend.nickname;
 }
@@ -117,7 +121,7 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if ([keyPath isEqualToString:@"photo"])
+    if ([keyPath isEqualToString:@"photo"] || [keyPath isEqualToString:@"subscription"])
     {
         if ([self.friend.jidStr isEqualToString:[AppConfig jid]])
         {
@@ -140,6 +144,7 @@
 - (void)dealloc
 {
     [self.friend removeObserver:self forKeyPath:@"photo"];
+    [self.friend removeObserver:self forKeyPath:@"subscription"];
 }
 
 - (UIColor *)outlineColor

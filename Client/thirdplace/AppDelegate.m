@@ -445,10 +445,18 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                     needsUpdate = true;
                 }
                 NSString* token = [vcard getNotificationToken];
+                NSString* mytoken = [AppConfig notificationid];
                 if (token == nil)
                 {
-                    NSString* mytoken = [AppConfig notificationid];
                     if (mytoken != nil)
+                    {
+                        needsUpdate = true;
+                        [vcard addNotificationToken:mytoken];
+                    }
+                }
+                else
+                {
+                    if (mytoken != nil && ![token isEqualToString:mytoken])
                     {
                         needsUpdate = true;
                         [vcard addNotificationToken:mytoken];

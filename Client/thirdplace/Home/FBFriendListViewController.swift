@@ -88,7 +88,7 @@ class FBFriendListViewController: UIViewController,UITableViewDataSource, UITabl
         let jidstr = self.appDelegate!.stringToJID(fid)
         let jid = XMPPJID.jidWithString(jidstr)
         let xmppuser = rosterStorage.userForJID(jid, xmppStream: self.xmppStream, managedObjectContext: rosterDBContext)
-        if (xmppuser == nil)
+        if (xmppuser == nil || xmppuser.subscription != "both")
         {
             if (selectfb.objectForKey(fid!) == nil)
             {
@@ -111,13 +111,21 @@ class FBFriendListViewController: UIViewController,UITableViewDataSource, UITabl
             let k = key as! NSNumber
             let fbuser = friendlists?.objectAtIndex(k.integerValue) as! FBGraphObject
             let user = rosterStorage.userForJID(jid, xmppStream: self.xmppStream, managedObjectContext: self.rosterDBContext)
-            if (user == nil)
+            if (user == nil )
             {
                 let name =  fbuser["name"] as! String
                 self.xmppRoster.addUser(jid, withNickname: name)
                 let localdb = DataManager.singleInstance.getLocaldbContext()
                 DataManager.singleInstance.createXMPPRoster(localdb, jid)
             }
+            else
+            {
+                if (user.subscription != "from")
+                {
+                    self.xmppRoster.subscribePresenceToUser(jid)
+                }
+            }
         }
+        self.navigationController?.popViewControllerAnimated(true)
     }
 }

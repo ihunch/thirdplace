@@ -60,11 +60,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     self.friendViews = [NSMutableArray array];
     self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"patternBackground"]];
     self.linesView = [[LinesView alloc] init];
+    self.linesView.hidden = true;
     [self addSubview:self.linesView];
 
     self.addFriendView = [FriendView addFriendView];
     self.addFriendView.frame = CGRectMake(0, 0, 50, 50);
     self.addFriendView.delegate = self;
+    self.addFriendView.hidden = true;
     [self addSubview:self.addFriendView];
     [self setupGestureRecognizers];
 }
@@ -250,6 +252,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     XMPPUserCoreDataStorageObject* me = [[self rosterCoreDataStorage] myUserForXMPPStream:[self xmppStream] managedObjectContext:[self rosterDBContext]];
     if (me != nil)
     {
+        self.linesView.hidden = false;
+        self.addFriendView.hidden = false;
         if (me.photo == nil)
         {
             NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];

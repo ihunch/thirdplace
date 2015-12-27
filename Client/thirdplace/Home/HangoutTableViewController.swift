@@ -103,7 +103,7 @@ class HangoutTableViewController: DHCollectionTableViewController {
         }
         else
         {
-            if(startday == 7) //Saturday
+            if(startday == Weekday.Sat.rawValue) //Saturday
             {
                 self.contentOffsetDictionary.setValue(1, forKey: dayrow)
             }

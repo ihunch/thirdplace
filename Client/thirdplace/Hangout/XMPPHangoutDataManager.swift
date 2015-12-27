@@ -161,7 +161,7 @@ extension XMPPHangoutDataManager
     {
         if(myjid != nil)
         {
-            let now = NSDate()
+            let now = NSDate().mt_inTimeZone(NSTimeZone.localTimeZone())
             let filter = NSPredicate(format: "Any self.user.jidstr == %@ && Any self.time.enddate >= %@", myjid!.bare(), now)
             return Hangout.MR_requestAllSortedBy("createtime", ascending: false, withPredicate: filter)
         }
@@ -172,7 +172,7 @@ extension XMPPHangoutDataManager
     //active is based on the the date
     func hasActiveHangout(senderjid: XMPPJID, xmppstream: XMPPStream) -> Hangout?
     {
-        let now = NSDate()
+        let now = NSDate().mt_inTimeZone(NSTimeZone.localTimeZone())
         let filter = NSPredicate(format: "Any self.user.jidstr == %@ && Any self.time.enddate >= %@", senderjid.bare(), now)
         let lists = Hangout.MR_findAllWithPredicate(filter)
         if (lists.count == 1)
