@@ -13,6 +13,7 @@ import UIKit
     func xmppHangout(sender:XMPPHangout, didUpdateHangout iq:XMPPIQ);
     func xmppHangout(sender:XMPPHangout, didCloseHangout iq:XMPPIQ);
     func xmppHangout(sender:XMPPHangout, didReceiveMessage message:XMPPMessage);
+    func xmppHangout(sender:XMPPHangout, didHangoutLists iq:XMPPIQ);
 }
 
 class XMPPHangout: XMPPModule
@@ -20,6 +21,7 @@ class XMPPHangout: XMPPModule
     let dbmanager: XMPPHangoutStorage
     let hangout_xmlns = "hangout:iq:detail"
     let hangout_message_detail_xmlns = "hangout:message:detail"
+    let hangout_lists_xmlns = "hangout:iq:list"
     
     init(db: XMPPHangoutStorage)
     {
@@ -178,6 +180,29 @@ class XMPPHangout: XMPPModule
         }
     }
     
+    func getHangoutlists(sender:XMPPJID)
+    {
+        XMPPLoggingWrapper.XMPPLogTrace()
+        let block = {
+            autoreleasepool {
+                let query = DDXMLElement(name: "query", xmlns: self.hangout_lists_xmlns)
+                let iq = XMPPIQ.iqWithType("get", elementID: self.xmppStream.generateUUID())
+                iq.addAttributeWithName("from", stringValue: sender.bare())
+                iq.addAttributeWithName("to", stringValue:AppConfig.thirdplaceModule())
+                iq.addChild(query)
+                self.xmppStream.sendElement(iq)
+            }
+        }
+        if (dispatch_get_specific(moduleQueueTag) != nil)
+        {
+            block()
+        }
+        else
+        {
+            dispatch_async(moduleQueue, block)
+        }
+    }
+    
     func xmppStream(sender:XMPPStream, didReceiveIQ iq: XMPPIQ) -> Bool
     {
         XMPPLoggingWrapper.XMPPLogTrace()
@@ -192,7 +217,7 @@ class XMPPHangout: XMPPModule
                 hangout.hangoutid = Int(newid)
                 pcontext.MR_saveToPersistentStoreAndWait()
                 XMPPHangoutDataManager.singleInstance.resetPrivateContext()
-                self.multicastDelegate().xmppHangout(self, didCreateHangout: iq);
+                self.multicastDelegate().xmppHangout(self, didCreateHangout: iq)
                 return true
             };
         }
@@ -202,7 +227,7 @@ class XMPPHangout: XMPPModule
             let pcontext = XMPPHangoutDataManager.singleInstance.privateContext()
             pcontext.MR_saveToPersistentStoreAndWait()
             XMPPHangoutDataManager.singleInstance.resetPrivateContext()
-            self.multicastDelegate().xmppHangout(self, didUpdateHangout: iq);
+            self.multicastDelegate().xmppHangout(self, didUpdateHangout: iq)
             return true
         }
         let closeQuery = iq.elementForName("close", xmlns: self.hangout_xmlns)
@@ -211,7 +236,16 @@ class XMPPHangout: XMPPModule
             let pcontext = XMPPHangoutDataManager.singleInstance.privateContext()
             pcontext.MR_saveToPersistentStoreAndWait()
             XMPPHangoutDataManager.singleInstance.resetPrivateContext()
-            self.multicastDelegate().xmppHangout(self, didCloseHangout: iq);
+            self.multicastDelegate().xmppHangout(self, didCloseHangout: iq)
+            return true
+        }
+        let listQuery = iq.elementForName("result", xmlns: self.hangout_lists_xmlns)
+        if (listQuery != nil)
+        {
+            //feed the data into hangout message
+            let lists = listQuery.elementsForName("hangout")
+            XMPPHangoutDataManager.singleInstance.handleHangoutLists(lists, stream: sender)
+            self.multicastDelegate().xmppHangout(self, didHangoutLists: iq)
             return true
         }
         return false
@@ -223,6 +257,14 @@ class XMPPHangout: XMPPModule
         let jidfrom = message.from()
         let hangoutquery = message.elementForName("hangout", xmlns: hangout_message_detail_xmlns)
         dbmanager.handleHangout(hangoutquery, stream: sender, fromjid: jidfrom)
-        self.multicastDelegate().xmppHangout(self, didReceiveMessage: message);
+        self.multicastDelegate().xmppHangout(self, didReceiveMessage: message)
+    }
+    
+    func xmppStreamDidAuthenticate(sender: XMPPStream)
+    {
+        MagicalRecord.saveWithBlockAndWait({ (localContext : NSManagedObjectContext!) in
+            Hangout.MR_truncateAllInContext(localContext)
+        })
+        self.getHangoutlists(sender.myJID)
     }
 }

@@ -8,6 +8,7 @@
 
 #import "FriendContainerView.h"
 #import "FriendView.h"
+#import "FriendNormalView.h"
 #import "AppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <MagicalRecord/MagicalRecord.h>
@@ -23,3 +24,4 @@
 #import "NSDate+MTDates.h"
 #import "UIImage+Filtering.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "UIView+AUISelectiveBorder.h"

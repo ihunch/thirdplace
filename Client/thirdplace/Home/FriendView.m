@@ -7,10 +7,9 @@
 #import <NYXImagesKit/NYXImagesKit.h>
 #import "XMPPFramework.h"
 #import "AppConfig.h"
-@interface FriendView ()
+#import "CustomBadge.h"
 
-@property (nonatomic, strong) UIImage *friendImage;
-@property (nonatomic, strong) UIImage *styledFriendImage;
+@interface FriendView ()
 
 @property (nonatomic) BOOL touching;
 
@@ -48,10 +47,14 @@
         self.label.textAlignment = NSTextAlignmentCenter;
         self.label.minimumScaleFactor = 0.1;
         self.label.textColor = [UIColor lightGrayColor];
-
         self.label.hidden = YES;
 
         [self addSubview:self.label];
+        
+        self.badge = [CustomBadge customBadgeWithString:@"" withStyle:[BadgeStyle defaultStyle]];
+        self.badge.hidden = YES;
+        [self addSubview:self.badge];
+        
     }
 
     return self;
@@ -63,11 +66,13 @@
     {
         [friend removeObserver:self forKeyPath:@"photo"];
         [friend removeObserver:self forKeyPath:@"subscription"];
+        [friend removeObserver:self forKeyPath:@"unreadMessages"];
     }
     
     _friend = friend;
     [friend addObserver:self forKeyPath:@"photo" options:NSKeyValueObservingOptionInitial context:nil];
     [friend addObserver:self forKeyPath:@"subscription" options:NSKeyValueObservingOptionInitial context:nil];
+    [friend addObserver:self forKeyPath:@"unreadMessages" options:NSKeyValueObservingOptionInitial context:nil];
 
     self.label.text = friend.nickname;
 }
@@ -81,7 +86,6 @@
         CGSize doubleSize = CGSizeMake(imageRect.size.width*2, imageRect.size.height*2);
         _styledFriendImage = [[self.friendImage scaleToCoverSize:doubleSize] cropToSize:doubleSize usingMode:NYXCropModeCenter];
     }
-
     return _styledFriendImage;
 }
 
@@ -139,12 +143,28 @@
         }
         [self setNeedsDisplay];
     }
+    else if ([keyPath isEqualToString:@"unreadMessages"] )
+    {
+        NSNumber* unreadmessage = self.friend.unreadMessages;
+        if (unreadmessage.intValue > 0)
+        {
+            NSString* message = [unreadmessage stringValue];
+            self.badge.badgeText = message;
+            self.badge.hidden = NO;
+        }
+        else
+        {
+            self.badge.badgeText = nil;
+            self.badge.hidden = YES;
+        }
+    }
 }
 
 - (void)dealloc
 {
     [self.friend removeObserver:self forKeyPath:@"photo"];
     [self.friend removeObserver:self forKeyPath:@"subscription"];
+    [self.friend removeObserver:self forKeyPath:@"unreadMessages"];
 }
 
 - (UIColor *)outlineColor

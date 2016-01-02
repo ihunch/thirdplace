@@ -102,4 +102,5 @@ NSString *const kLoginUserPhotoPath = @"LoginUserPhotoPath";
     [[NSUserDefaults standardUserDefaults] setObject:path forKey:kLoginUserPhotoPath];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
 @end

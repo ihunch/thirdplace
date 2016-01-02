@@ -96,4 +96,12 @@ managedObjectContext:(NSManagedObjectContext *)moc
         }
     }];
 }
+
+-(void)updateUneadMessage:(NSInteger)unmessages user:(XMPPUserCoreDataStorageObject *)user xmppStream:(XMPPStream *)stream managedObjectContext:(NSManagedObjectContext *)moc
+{
+    XMPPLogTrace();
+    [self scheduleBlock:^{
+        user.unreadMessages = [NSNumber numberWithInt:unmessages];
+    }];
+}
 @end

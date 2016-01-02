@@ -9,6 +9,10 @@
 import UIKit
 
 class HangoutTableViewController: DHCollectionTableViewController {
+    
+    @IBOutlet weak var pagebackbutton: UIButton!
+    @IBOutlet weak var sendbutton: UIButton!
+    
     var displayKeyboard = false
     var offset:CGPoint?
     var messageContent: String?
@@ -56,6 +60,7 @@ class HangoutTableViewController: DHCollectionTableViewController {
         xmppHangout = self.appDelegate!.xmppHangout
         rosterStorage = self.appDelegate!.xmppRosterStorage
         hangoutmodule.addDelegate(self, delegateQueue: dispatch_get_main_queue())
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -144,6 +149,7 @@ class HangoutTableViewController: DHCollectionTableViewController {
     
     @IBAction func sendHangout(sender: AnyObject)
     {
+        let createtime = NSDate().mt_inTimeZone(NSTimeZone.localTimeZone())
         //create a temp hangout
         let p_context = hangoutDataManager.privateContext()
         let hangoutid = selectedHangoutID!
@@ -180,23 +186,22 @@ class HangoutTableViewController: DHCollectionTableViewController {
             hangouttime.enddate = inithangoutendtime
         }
         //time
-        hangouttime.timedescription = day.day_description//based on the selection
+        hangouttime.timedescription = "\(day.day_description!) \(time.time_description!)"//based on the selection
         hangouttime.updatejid = xmppStream!.myJID.bare()
-        hangouttime.updatetime = NSDate()
+        hangouttime.updatetime = createtime
         hangouttime.hangout = hangout
 
-        
         //location to do it later
         let location = HangoutLocation.MR_createEntityInContext(p_context)
         location.updatejid = xmppStream!.myJID.bare()
-        location.updatetime = NSDate()
+        location.updatetime = createtime
         location.locationconfirm = NSNumber(bool: false)
         location.locationid = NSNumber(integer: Int(locationid)!)
         location.hangout = hangout
         
         //message
         let message = HangoutMessage.MR_createEntityInContext(p_context)
-        message.updatetime = NSDate()
+        message.updatetime = createtime
         message.updatejid = xmppStream!.myJID.bare()
         message.hangout = hangout
         message.content = messageContent
@@ -248,6 +253,7 @@ extension HangoutTableViewController {
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 10.0
     }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         if (indexPath.section > 4)
@@ -262,6 +268,15 @@ extension HangoutTableViewController {
             cell!.textView?.placeholder = "Insert personal message"
             cell!.titleLabel?.text = ""
             cell!.textString = ""
+            cell!.bgview.selectiveBorderFlag = UInt(AUISelectiveBordersFlagTop | AUISelectiveBordersFlagBottom | AUISelectiveBordersFlagLeft | AUISelectiveBordersFlagRight)
+            cell!.bgview.selectiveBordersColor = UIColor.lightGrayColor()
+            cell!.bgview.selectiveBordersWidth = 1
+            
+            cell!.bgview.layer.shadowColor = UIColor.grayColor().CGColor
+            cell!.bgview.layer.shadowOffset = CGSizeMake(1,3)
+            cell!.bgview.layer.shadowOpacity = 1
+            cell!.bgview.layer.shadowRadius = 3.0
+            cell!.bgview.layer.masksToBounds = false
             return cell!
         }
         else
@@ -284,6 +299,7 @@ extension HangoutTableViewController {
                 layout.itemSize = CGSizeMake(cell.bounds.size.height - 10, cell.bounds.size.height - 10)
                 layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
                 cell.collectionView.collectionViewLayout = layout
+                cell.frameView.hidden = true
             }
             return cell
         }
@@ -298,6 +314,12 @@ extension HangoutTableViewController {
             collectionCell.collectionView.backgroundColor = UIColor.clearColor()
         }
         cell.backgroundColor = AppConfig.themebgcolour()
+    }
+    
+    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = AppConfig.themebgcolour()
+        return view
     }
     
     // MARK: ////////////////////////////////////////
@@ -357,7 +379,6 @@ extension HangoutTableViewController: UITextViewDelegate
     }
 }
 
-
 // MARK: - Collection View Data source and Delegate
 extension HangoutTableViewController:UICollectionViewDataSource,UICollectionViewDelegate {
     
@@ -373,36 +394,6 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
         if (collectionView.tag == Int(placerow))
         {
             let cell: LocationCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseLocationCollectionViewCellIdentifier, forIndexPath: indexPath) as!LocationCollectionViewCell
-            
-//            var imageview: UIImageView?
-//            let content_imageview = cell.contentView.subviews.filter({
-//                $0.tag == placelocationimagetag
-//            })
-//            if (content_imageview.count == 0)
-//            {
-//                imageview = UIImageView(frame: cell.bounds)
-//                imageview?.tag = placelocationimagetag
-//                cell.contentView.addSubview(imageview!)
-//            }
-//            else
-//            {
-//                imageview = content_imageview[0] as? UIImageView
-//            }
-//            var addresslabel:UILabel?
-//            let content_addresslabel = cell.contentView.subviews.filter({
-//                $0.tag == placelocatinaddresstag
-//            })
-//            if (content_addresslabel.count == 0)
-//            {
-//                addresslabel = UILabel(frame: cell.bounds)
-//                imageview?.tag = placelocationimagetag
-//                cell.contentView.addSubview(imageview!)
-//            }
-//            else
-//            {
-//                addresslabel = content_addresslabel[0] as? UILabel
-//            }
-//            
             if let placeidstr = self.sourceArray[collectionView.tag][indexPath.item] as? String{
                 let placeid = Int(placeidstr)
                 let locationdic = locationdata!.objectAtIndex(Int(placeid!)) as? NSDictionary
@@ -457,7 +448,7 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
                     })
                     if (sarray.count == 0)
                     {
-                        friendView = FriendView.friendViewWithFriend(selectedHangoutFriend) as? UIView
+                        friendView = FriendNormalView.friendViewWithFriend(selectedHangoutFriend) as? UIView
                         friendView?.tag = friendtag
                         friendView!.frame = cell.bounds
                         cell.contentView.addSubview(friendView!)
@@ -466,7 +457,7 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
             }
             else
             {
-                label!.backgroundColor = UIColor.redColor()
+                label!.backgroundColor = UIColor.whiteColor()
                 label!.textAlignment = NSTextAlignment.Center
                 if (collectionView.tag == Int(dayrow))
                 {

@@ -44,6 +44,7 @@ private let _SingletonInstance = XMPPHangoutDataManager()
     
     func handleHangout(item: DDXMLElement, stream: XMPPStream, fromjid: XMPPJID)
     {
+        let createtime = NSDate().mt_inTimeZone(NSTimeZone.localTimeZone())
         if let closeElement = item.elementForName(HangoutConfig.closekey)
         {
             let closehangoutid = Int(closeElement.stringValue())
@@ -61,14 +62,13 @@ private let _SingletonInstance = XMPPHangoutDataManager()
         let enddate = dateFormatter.dateFromString(enddatestr)!.mt_inTimeZone(NSTimeZone.localTimeZone())
         let description = item.elementForName(HangoutConfig.descriptionkey).stringValue()
         let timedescription = item.elementForName(HangoutConfig.timedescriptionkey).stringValue()
-        let message = item.elementForName(HangoutConfig.messagekeykey).stringValue()
+        let message = item.elementForName(HangoutConfig.messagekey).stringValue()
         var locationid : Int? = nil
         if let locationelement = item.elementForName(HangoutConfig.locationidkey)
         {
             locationid = Int(locationelement.stringValue())
         }
         let preferlocation = item.elementForName(HangoutConfig.preferredlocationkey).stringValue()
-        
         MagicalRecord.saveWithBlockAndWait({ (localContext : NSManagedObjectContext!) in
             
             let hangout = Hangout.MR_findFirstByAttribute("hangoutid", withValue:  NSNumber(integer: hangoutid!), inContext: localContext)
@@ -77,13 +77,13 @@ private let _SingletonInstance = XMPPHangoutDataManager()
                 let newhangout = Hangout.MR_createEntityInContext(localContext)
                 newhangout.hangoutid = NSNumber(integer: hangoutid!)
                 newhangout.hangoutdescription = description
-                newhangout.createtime = NSDate()
+                newhangout.createtime = createtime
                 newhangout.createUserJID = fromjid.bare()
                 newhangout.preferedlocation = preferlocation
                 
                 let hangoutmessage = HangoutMessage.MR_createEntityInContext(localContext)
                 hangoutmessage.content = message
-                hangoutmessage.updatetime = NSDate()
+                hangoutmessage.updatetime = createtime
                 hangoutmessage.updatejid = fromjid.bare()
                 hangoutmessage.hangout = newhangout
                 
@@ -92,7 +92,8 @@ private let _SingletonInstance = XMPPHangoutDataManager()
                 hangouttime.startdate = startdate
                 hangouttime.enddate = enddate
                 hangouttime.timedescription = timedescription
-                hangouttime.updatetime = NSDate()
+                hangouttime.updatetime = createtime
+                hangouttime.updatejid = fromjid.bare()
                 
                 let hangoutUser = HangoutUser.MR_createEntityInContext(localContext)
                 hangoutUser.goingstatus = "maybe"
@@ -105,10 +106,11 @@ private let _SingletonInstance = XMPPHangoutDataManager()
                 me.username = stream.myJID.bare()
                 me.jidstr =  stream.myJID.bare()
                 me.hangout = newhangout
+                
                 if locationid != nil
                 {
                     let hangoutlocation = HangoutLocation.MR_createEntityInContext(localContext)
-                    hangoutlocation.updatetime = NSDate()
+                    hangoutlocation.updatetime = createtime
                     hangoutlocation.updatejid = fromjid.bare()
                     hangoutlocation.locationid = NSNumber(integer: locationid!)
                     hangoutlocation.hangout = newhangout
@@ -118,7 +120,7 @@ private let _SingletonInstance = XMPPHangoutDataManager()
             {
                 let hangoutmessage = HangoutMessage.MR_createEntityInContext(localContext)
                 hangoutmessage.content = message
-                hangoutmessage.updatetime = NSDate()
+                hangoutmessage.updatetime = createtime
                 hangoutmessage.updatejid = fromjid.bare()
                 hangoutmessage.hangout = hangout
                 
@@ -127,12 +129,12 @@ private let _SingletonInstance = XMPPHangoutDataManager()
                 hangouttime.startdate = startdate
                 hangouttime.enddate = enddate
                 hangouttime.timedescription = timedescription
-                hangouttime.updatetime = NSDate()
+                hangouttime.updatetime = createtime
                 
                 if (locationid != nil)
                 {
                     let hangoutlocation = HangoutLocation.MR_createEntityInContext(localContext)
-                    hangoutlocation.updatetime = NSDate()
+                    hangoutlocation.updatetime = createtime
                     hangoutlocation.updatejid = fromjid.bare()
                     hangoutlocation.locationid = NSNumber(integer: locationid!)
                     hangoutlocation.hangout = hangout
@@ -150,6 +152,100 @@ private let _SingletonInstance = XMPPHangoutDataManager()
                 let otheruser = hangout.getUser(xmppStream.myJID)
                 otheruser?.goingstatus = "notgoing"
             }
+        })
+    }
+    
+    func handleHangoutLists(items: NSArray, stream: XMPPStream)
+    {
+        MagicalRecord.saveWithBlockAndWait({ (localContext : NSManagedObjectContext!) in
+            
+        for eachelement in items
+        {
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+            //General hangout
+            let item = eachelement as! DDXMLElement
+            let hangoutid = Int(item.attributeStringValueForName("id"))
+            let existinghangout = Hangout.MR_findFirstByAttribute("hangoutid", withValue:  NSNumber(integer: hangoutid!), inContext: localContext)
+            if (existinghangout != nil)
+            {
+                return
+            }
+            let createuser = item.elementForName(HangoutConfig.createuser).stringValue()
+            let createTimeStr = item.elementForName(HangoutConfig.createtime).stringValue()
+            let createTime = dateFormatter.dateFromString(createTimeStr)!.mt_inTimeZone(NSTimeZone.localTimeZone())
+            let preferlocation = item.elementForName(HangoutConfig.preferredlocationkey).stringValue()
+            let description = item.elementForName(HangoutConfig.descriptionkey).stringValue()
+            let newhangout = Hangout.MR_createEntityInContext(localContext)
+            newhangout.hangoutid = NSNumber(integer: hangoutid!)
+            newhangout.hangoutdescription = description
+            newhangout.createtime = createTime
+            newhangout.createUserJID = createuser
+            newhangout.preferedlocation = preferlocation
+            
+            if let messagesElement = item.elementForName(HangoutConfig.messageskey)
+            {
+                let messages = messagesElement.elementsForName(HangoutConfig.messagekey)
+                for eachmessage in messages
+                {
+                    let messagecreatetimestr = eachmessage.elementForName(HangoutConfig.createtime).stringValue()
+                    let messagecreatetime = dateFormatter.dateFromString(messagecreatetimestr)!.mt_inTimeZone(NSTimeZone.localTimeZone())
+                    let hangoutmessage = HangoutMessage.MR_createEntityInContext(localContext)
+                    hangoutmessage.content = eachmessage.elementForName("content").stringValue()
+                    hangoutmessage.updatetime = messagecreatetime
+                    hangoutmessage.updatejid = eachmessage.elementForName(HangoutConfig.createuser).stringValue()
+                    hangoutmessage.hangout = newhangout
+                }
+            }
+            
+            if let timeElement = item.elementForName(HangoutConfig.timekey)
+            {
+                let startdatestr = timeElement.elementForName(HangoutConfig.startdatekey).stringValue()
+                let enddatestr = timeElement.elementForName(HangoutConfig.enddatekey).stringValue()
+                let startdate = dateFormatter.dateFromString(startdatestr)!.mt_inTimeZone(NSTimeZone.localTimeZone())
+                let enddate = dateFormatter.dateFromString(enddatestr)!.mt_inTimeZone(NSTimeZone.localTimeZone())
+                let timedescription = timeElement.elementForName(HangoutConfig.timedescriptionkey).stringValue()
+                let hangouttime = HangoutTime.MR_createEntityInContext(localContext)
+                let timecreatetimestr = timeElement.elementForName(HangoutConfig.createtime).stringValue()
+                let timecreatetime = dateFormatter.dateFromString(timecreatetimestr)!.mt_inTimeZone(NSTimeZone.localTimeZone())
+                
+                hangouttime.hangout = newhangout
+                hangouttime.startdate = startdate
+                hangouttime.enddate = enddate
+                hangouttime.timedescription = timedescription
+                hangouttime.updatetime = timecreatetime
+                hangouttime.updatejid = timeElement.elementForName(HangoutConfig.createuser).stringValue()
+            }
+            
+            if let locationelement = item.elementForName(HangoutConfig.locationkey)
+            {
+                let locationidelement = locationelement.elementForName(HangoutConfig.locationidkey)
+                let locationid = Int(locationidelement.stringValue())
+                let hangoutlocation = HangoutLocation.MR_createEntityInContext(localContext)
+                let locationcreatetimestr = locationelement.elementForName(HangoutConfig.createtime).stringValue()
+                let locationcreatetime = dateFormatter.dateFromString(locationcreatetimestr)!.mt_inTimeZone(NSTimeZone.localTimeZone())
+                hangoutlocation.updatetime = locationcreatetime
+                hangoutlocation.updatejid = locationelement.elementForName(HangoutConfig.createuser).stringValue()
+                hangoutlocation.locationid = NSNumber(integer: locationid!)
+                hangoutlocation.hangout = newhangout
+            }
+            
+            if let userlement = item.elementForName(HangoutConfig.userskey)
+            {
+                let userlists = userlement.elementsForName(HangoutConfig.eachuserkey)
+                for u in userlists
+                {
+                    let eachuserelement = u as! DDXMLElement
+                    let hangoutUser = HangoutUser.MR_createEntityInContext(localContext)
+                    let jidstr = eachuserelement.attributeStringValueForName("jid")
+                    let goingstatus = eachelement.attributeStringValueForName("goingstatus")
+                    hangoutUser.goingstatus = goingstatus
+                    hangoutUser.username = jidstr
+                    hangoutUser.jidstr =  jidstr
+                    hangoutUser.hangout = newhangout
+                }
+            }
+        }
         })
     }
 }
@@ -259,9 +355,17 @@ struct HangoutConfig {
     static var startdatekey = "startdate"
     static var enddatekey = "enddate"
     static var descriptionkey = "description"
+    static var timekey = "time"
     static var timedescriptionkey = "timedescription"
-    static var messagekeykey = "message"
+    static var messageskey = "messages"
+    static var messagekey = "message"
+    static var locationkey = "location"
     static var locationidkey = "locationid"
     static var preferredlocationkey = "preferredlocation"
     static var closekey = "close"
+    static var goingstatuskey = "goingstatus"
+    static var createuser = "createUser"
+    static var createtime = "createTime"
+    static var userskey = "users"
+    static var eachuserkey = "user"
 }

@@ -7,6 +7,7 @@
 
 @class XMPPUserCoreDataStorageObject;
 @class FriendView;
+@class CustomBadge;
 
 @protocol FriendViewDelegate
 
@@ -18,9 +19,10 @@
 
 @property (nonatomic, strong) XMPPUserCoreDataStorageObject *friend;
 @property (nonatomic, weak) id<FriendViewDelegate> delegate;
-
 @property (nonatomic, strong) UILabel *label;
-
+@property (nonatomic, strong) UIImage *friendImage;
+@property (nonatomic, strong) UIImage *styledFriendImage;
+@property (nonatomic, strong) CustomBadge* badge;
 + (id)addFriendView;
 
 + (id)friendViewWithFriend:(XMPPUserCoreDataStorageObject *)aFriend;

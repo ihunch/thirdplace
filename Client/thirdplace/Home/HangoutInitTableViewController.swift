@@ -26,10 +26,16 @@ class HangoutInitTableViewController: DHCollectionTableViewController
         }
     }
     
+    @IBOutlet weak var declinebutton: UIButton!
+    @IBOutlet weak var confirmbutton: UIButton!
+    @IBOutlet weak var pagebackbutton: UIButton!
+    @IBOutlet weak var sendbutton: UIButton!
+    
     let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate
     var defaultMessage: String {
-        get {
-            return String(format: "Want to chat up with %@ this weekend", selectedHangoutFriend.nickname)
+        get
+        {
+            return String(format: "Want to catch up with %@ this weekend?",   AppConfig.name())
         }
     }
     var defaultConfirmMessage: String {
@@ -37,6 +43,7 @@ class HangoutInitTableViewController: DHCollectionTableViewController
             return "Let's catch up this weekend"
         }
     }
+    
     var alternativeMessage: String?
     
     var rosterStorage: XMPPRosterCoreDataStorage{
@@ -104,6 +111,7 @@ class HangoutInitTableViewController: DHCollectionTableViewController
     
     @IBAction func sendButton(sender: AnyObject)
     {
+        let createtime = NSDate().mt_inTimeZone(NSTimeZone.localTimeZone())
         //create a temp hangout 
         let p_context = hangoutDataManager.privateContext()
         let hangout = Hangout.MR_createEntityInContext(p_context)
@@ -115,7 +123,7 @@ class HangoutInitTableViewController: DHCollectionTableViewController
         {
             hangout.hangoutdescription = defaultMessage
         }
-        hangout.createtime = NSDate()
+        hangout.createtime = createtime
         hangout.createUserJID = xmppStream.myJID.bare()
         hangout.hangoutid = NSNumber(integer: HangoutConfig.tempHangoutID)
         let array = XMPPHangoutDataManager.getRandomThreeDigital(aumaxlocations)
@@ -134,7 +142,7 @@ class HangoutInitTableViewController: DHCollectionTableViewController
         invitor.hangout = hangout
         //time
         let hangouttime = HangoutTime.MR_createEntityInContext(p_context)
-        let now = NSDate().mt_inTimeZone(NSTimeZone.localTimeZone())
+        let now = createtime
         if (now.mt_weekdayOfWeek() == Weekday.Sat.rawValue)
         {
             let startdate = now.mt_startOfCurrentDay()
@@ -158,9 +166,10 @@ class HangoutInitTableViewController: DHCollectionTableViewController
         }
         hangouttime.timedescription = "Weekend"
         hangouttime.updatejid = xmppStream.myJID.bare()
-        hangouttime.updatetime = NSDate()
+        hangouttime.updatetime = createtime
         hangouttime.hangout = hangout
         hangoutmodule.sendHangoutInvitation(hangout, sender: xmppStream.myJID)
+        
         //message
         let message = HangoutMessage.MR_createEntityInContext(p_context)
         if ((alternativeMessage != nil) && (alternativeMessage != ""))
@@ -171,13 +180,15 @@ class HangoutInitTableViewController: DHCollectionTableViewController
         {
             message.content = defaultMessage
         }
-        message.updatetime = NSDate()
+        message.updatetime = createtime
         message.updatejid = xmppStream.myJID.bare()
         message.hangout = hangout
     }
     
     @IBAction func confirmButton(sender: AnyObject)
     {
+        let createtime = NSDate().mt_inTimeZone(NSTimeZone.localTimeZone())
+        
         //lookup a temp hangout
         let p_context = hangoutDataManager.privateContext()
         let hangoutid = selectedHangoutid!
@@ -192,14 +203,16 @@ class HangoutInitTableViewController: DHCollectionTableViewController
         hangouttime.enddate = previoustime?.enddate
         hangouttime.timedescription = "Weekend"//based on the selection
         hangouttime.updatejid = xmppStream.myJID.bare()
-        hangouttime.updatetime = NSDate()
+        hangouttime.updatetime = createtime
         hangouttime.hangout = hangout
         
         //message
         let message = HangoutMessage.MR_createEntityInContext(p_context)
-        message.updatetime = NSDate()
+        message.updatetime = createtime
         message.updatejid = xmppStream.myJID.bare()
         message.hangout = hangout
+        
+        
         if ((alternativeMessage != nil) && (alternativeMessage != ""))
         {
             message.content = alternativeMessage
@@ -264,6 +277,8 @@ extension HangoutInitTableViewController {
             layout.itemSize = CGSizeMake(cell.bounds.size.height - 10, cell.bounds.size.height - 10)
             layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
             cell.collectionView.collectionViewLayout = layout
+            cell.frameView.hidden = true
+            cell.collectionView.backgroundColor = UIColor.clearColor()
             return cell
         }
         else if (indexPath.section == 1 )
@@ -271,6 +286,15 @@ extension HangoutInitTableViewController {
             let textcell = tableView.dequeueReusableCellWithIdentifier("MultiLineTextInputTableViewCell", forIndexPath: indexPath) as? MultiLineTextInputTableViewCell
             textcell!.textString = self.defaultMessage
             textcell!.textView!.editable = false
+            textcell!.bgview.selectiveBorderFlag = UInt(AUISelectiveBordersFlagTop | AUISelectiveBordersFlagBottom | AUISelectiveBordersFlagLeft | AUISelectiveBordersFlagRight)
+            textcell!.bgview.selectiveBordersColor = UIColor.lightGrayColor()
+            textcell!.bgview.selectiveBordersWidth = 1
+            
+            textcell!.bgview.layer.shadowColor = UIColor.grayColor().CGColor
+            textcell!.bgview.layer.shadowOffset = CGSizeMake(1,3)
+            textcell!.bgview.layer.shadowOpacity = 1
+            textcell!.bgview.layer.shadowRadius = 3.0
+            textcell!.bgview.layer.masksToBounds = false
             return textcell!
         }
         else if (indexPath.section == 2)
@@ -280,6 +304,15 @@ extension HangoutInitTableViewController {
             textcell!.textView!.delegate = self
             textcell!.titleLabel?.text = ""
             textcell!.textString = ""
+            textcell!.bgview.selectiveBorderFlag = UInt(AUISelectiveBordersFlagTop | AUISelectiveBordersFlagBottom | AUISelectiveBordersFlagLeft | AUISelectiveBordersFlagRight)
+            textcell!.bgview.selectiveBordersColor = UIColor.lightGrayColor()
+            textcell!.bgview.selectiveBordersWidth = 1
+            
+            textcell!.bgview.layer.shadowColor = UIColor.grayColor().CGColor
+            textcell!.bgview.layer.shadowOffset = CGSizeMake(1,3)
+            textcell!.bgview.layer.shadowOpacity = 1
+            textcell!.bgview.layer.shadowRadius = 3.0
+            textcell!.bgview.layer.masksToBounds = false
             return textcell!
         }
         else
@@ -297,6 +330,12 @@ extension HangoutInitTableViewController {
         }
     }
     
+    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = AppConfig.themebgcolour()
+        return view
+    }
+    
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
     {
         if (indexPath.section == 0)
@@ -308,7 +347,7 @@ extension HangoutInitTableViewController {
             let horizontalOffset: CGFloat = CGFloat(value != nil ? value!.floatValue : 0)
             collectionCell.collectionView.setContentOffset(CGPointMake(horizontalOffset, 0), animated: false)
         }
-        cell.backgroundColor = UIColor.lightGrayColor()
+        cell.backgroundColor = AppConfig.themebgcolour()
     }
 }
 
@@ -331,7 +370,7 @@ extension HangoutInitTableViewController:UICollectionViewDataSource,UICollection
         }
         else
         {
-            friendView = FriendView.friendViewWithFriend(selectedHangoutFriend) as? UIView;
+            friendView = FriendNormalView.friendViewWithFriend(selectedHangoutFriend) as? UIView;
         }
         friendView!.frame = cell.bounds;
         cell.addSubview(friendView!)

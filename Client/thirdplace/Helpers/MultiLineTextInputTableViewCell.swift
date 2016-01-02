@@ -12,6 +12,7 @@ class MultiLineTextInputTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel?
     @IBOutlet var textView: UITextView?
+    @IBOutlet weak var bgview: UIView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
