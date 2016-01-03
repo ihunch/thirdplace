@@ -17,6 +17,7 @@ class HangoutListTableViewCell: UITableViewCell {
     @IBOutlet weak var labelViewContainer: UIView!
     @IBOutlet weak var bgimageview: UIImageView!
     @IBOutlet weak var locationViewContainer: UIView!
+    @IBOutlet weak var mapbutton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         self.collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: collectionViewCellIdentifier as String)

@@ -15,13 +15,21 @@ protocol HomeScreenDelegate
 
 class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FriendContainerViewDelegate,HomeScreenDelegate,NSFetchedResultsControllerDelegate {
 
-    @IBAction func touch(sender: AnyObject)
+    @IBAction func touchMapbutton(sender: UIButton, hangout: Hangout)
     {
-//        MagicalRecord.saveWithBlockAndWait({ (localContext : NSManagedObjectContext!) in
-//            Hangout.MR_truncateAllInContext(localContext)
-//        })
-//        _hangoutFetchedResultsController = nil
-//        hometablelistview.reloadData()
+        let row = sender.tag
+        let indexpath = NSIndexPath(forRow: row, inSection: 0)
+        let hangout = self.hangoutFetchedRequestControler!.objectAtIndexPath(indexpath) as! Hangout
+        if let location = hangout.getLatestLocation() as HangoutLocation?
+        {
+            if let locationdic = locationlists!.objectAtIndex((location.locationid?.integerValue)!) as? NSDictionary
+            {
+                let name = locationdic.objectForKey("address") as! String
+                let map =  MapViewController(nibName: "MapViewController", bundle: nil)
+                map.address = name
+                self.navigationController?.pushViewController(map, animated: true)
+            }
+        }
     }
     
     @IBOutlet weak var hometablelistview: UITableView!
@@ -90,59 +98,61 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             let hangoutcell :HangoutListTableViewCell = tableView.dequeueReusableCellWithIdentifier("HangoutListTableViewCell") as!HangoutListTableViewCell
             let indexpath = NSIndexPath(forRow: indexPath.row, inSection: 0)
             let hangout = self.hangoutFetchedRequestControler!.objectAtIndexPath(indexpath) as! Hangout
+            hangoutcell.mapbutton.tag = indexPath.row
             let message = hangout.getLatestMessage()
             let time = hangout.getLatestTime()
-            let otheruser = hangout.getUser(xmppStream!.myJID)
+            let otheruser = hangout.getOtherUser(xmppStream!.myJID)
+            let me = hangout.getUser(xmppStream!.myJID)
             if (otheruser!.goingstatus != "notgoing")
             {
-                var fullnamearray: NSArray?
-                let sender = message!.updatejid!
-                if (sender == AppConfig.jid())
+                hangoutcell.dateLabel.text = time?.timedescription
+                if (me!.goingstatus == "notgoing")
                 {
-                    fullnamearray = AppConfig.name().characters.split{$0 == " "}.map(String.init)
+                     hangoutcell.messageLabel.text = "You are not available"
                 }
                 else
                 {
-                    let senderjid = XMPPJID.jidWithString(sender as String)
-                    let xmppuser = rosterStorage.userForJID(senderjid, xmppStream: self.xmppStream, managedObjectContext: rosterDBContext)
-                    if (xmppuser != nil && xmppuser.nickname != nil)
+                    var fullnamearray: NSArray?
+                    let sender = message!.updatejid!
+                    if (sender == AppConfig.jid())
                     {
-                        fullnamearray = xmppuser.nickname.characters.split{$0 == " "}.map(String.init)
-                    }
-                }
-                if (fullnamearray != nil)
-                {
-                    if (message!.content != nil)
-                    {
-                        hangoutcell.messageLabel.text = "\(fullnamearray![0]): \(message!.content!)"
+                        fullnamearray = AppConfig.name().characters.split{$0 == " "}.map(String.init)
                     }
                     else
                     {
-                        hangoutcell.messageLabel.text = "\(fullnamearray![0]):)"
-                    }
-                }
-                hangoutcell.dateLabel.text = time?.timedescription
-            }
-            else
-            {
-                hangoutcell.dateLabel.text = time?.timedescription
-                if (hangout.createUserJID != xmppStream!.myJID.bare())
-                {
-                    hangoutcell.messageLabel.text = "You are not avaiable"
-                }
-                else
-                {
-                    let jid = XMPPJID.jidWithString(otheruser?.jidstr)
-                    if let user = rosterStorage.userForJID(jid, xmppStream: xmppStream!, managedObjectContext: rosterDBContext)
-                    {
-                        if (user.nickname != nil)
+                        let senderjid = XMPPJID.jidWithString(sender as String)
+                        let xmppuser = rosterStorage.userForJID(senderjid, xmppStream: self.xmppStream, managedObjectContext: rosterDBContext)
+                        if (xmppuser != nil && xmppuser.nickname != nil)
                         {
-                            hangoutcell.messageLabel.text = "\(user.nickname) can not catch up this weekend"
+                            fullnamearray = xmppuser.nickname.characters.split{$0 == " "}.map(String.init)
+                        }
+                    }
+                    if (fullnamearray != nil)
+                    {
+                        if (message!.content != nil)
+                        {
+                            hangoutcell.messageLabel.text = "\(fullnamearray![0]): \(message!.content!)"
+                        }
+                        else
+                        {
+                            hangoutcell.messageLabel.text = "\(fullnamearray![0]):)"
                         }
                     }
                 }
             }
-
+            else
+            {
+                hangoutcell.dateLabel.text = time?.timedescription
+                let jid = XMPPJID.jidWithString(otheruser?.jidstr)
+                if let user = rosterStorage.userForJID(jid, xmppStream: xmppStream!, managedObjectContext: rosterDBContext)
+                {
+                    if (user.nickname != nil)
+                    {
+                        hangoutcell.messageLabel.text = "\(user.nickname) can not catch up this weekend"
+                    }
+                }
+            }
+            
             hangoutcell.collectionView.indexPath = indexpath
             if let location = hangout.getLatestLocation() as HangoutLocation?
             {
@@ -154,7 +164,14 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                     hangoutcell.placeLabel.text = name
                     if (otheruser!.goingstatus != "notgoing")
                     {
-                        hangoutcell.bgimageview.image = UIImage(named: photopath)
+                        if (me!.goingstatus == "notgoing")
+                        {
+                            hangoutcell.bgimageview.image = UIImage(named: photopath)?.grayscale()
+                        }
+                        else
+                        {
+                            hangoutcell.bgimageview.image = UIImage(named: photopath)
+                        }
                     }
                     else
                     {
@@ -167,7 +184,14 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                 hangoutcell.locationViewContainer.hidden = true
                 if (otheruser!.goingstatus != "notgoing")
                 {
-                    hangoutcell.bgimageview.image = UIImage(named: "bbb.jpg")
+                    if (me!.goingstatus == "notgoing")
+                    {
+                        hangoutcell.bgimageview.image = UIImage(named: "bbb.jpg")?.grayscale()
+                    }
+                    else
+                    {
+                        hangoutcell.bgimageview.image = UIImage(named: "bbb.jpg")
+                    }
                 }
                 else
                 {
@@ -287,12 +311,19 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         rosterStorage.updateUneadMessage(0, user: friend, xmppStream: self.xmppStream, managedObjectContext: rosterDBContext)
         if (activeHangout != nil)
         {
-            let otheruser = activeHangout!.getUser(xmppStream!.myJID)
+            let otheruser = activeHangout!.getOtherUser(xmppStream!.myJID)
+            let me = activeHangout!.getUser(xmppStream!.myJID)
             if otheruser?.goingstatus == "notgoing"
             {
                 ErrorHandler.showPopupMessage(self.view, text: "Try another time")
                 return
             }
+            if me?.goingstatus == "notgoing"
+            {
+                ErrorHandler.showPopupMessage(self.view, text: "You are not available")
+                return
+            }
+            
             if (activeHangout!.createUserJID == xmppStream!.myJID.bare())
             {
                 if (activeHangout!.message.count == 1)
@@ -373,8 +404,8 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func didTouchAddFriend()
     {
-        FBRequest.requestForMyFriends()
-        let fbrequest = FBRequest(graphPath: "me/friendlists", parameters: nil, HTTPMethod: "GET")
+       
+        let fbrequest =  FBRequest.requestForMyFriends()
         fbrequest.startWithCompletionHandler {
             (connection:FBRequestConnection!,   result:AnyObject!, error:NSError!) -> Void in
             let fblists = result.objectForKey("data") as? NSArray
@@ -470,7 +501,7 @@ extension HomeScreenViewController:UICollectionViewDataSource,UICollectionViewDe
                 let dhcollectionview = collectionView as! DHIndexedCollectionView
                 let cellindexpath = dhcollectionview.indexPath
                 let hangout = self.hangoutFetchedRequestControler!.objectAtIndexPath(cellindexpath) as! Hangout
-                let otheruser = XMPPJID.jidWithString(hangout.getUser(me.jid)!.jidstr!)
+                let otheruser = XMPPJID.jidWithString(hangout.getOtherUser(me.jid)!.jidstr!)
                 let friend = rosterStorage.userForJID(otheruser, xmppStream: self.xmppStream, managedObjectContext: rosterDBContext)
                 friendView = FriendNormalView.friendViewWithFriend(friend) as? UIView
             }

@@ -43,7 +43,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J4C-su-nsJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2388.75" y="777.46478873239425"/>
+            <point key="canvasLocation" x="2393" y="909"/>
         </scene>
         <!--Login-->
         <scene sceneID="Qra-qA-eUb">
@@ -266,6 +266,9 @@ Melbourne VIC 3000</string>
                                                             <state key="normal" image="btn_icn_Zoo-Map">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="touchMapbutton:hangout:" destination="gug-qu-Q9o" eventType="touchUpInside" id="Sem-ID-83D"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -318,6 +321,7 @@ Melbourne VIC 3000</string>
                                             <outlet property="dateLabel" destination="z3z-lq-K55" id="kJl-3y-MCX"/>
                                             <outlet property="labelViewContainer" destination="H9W-wQ-k66" id="MqI-rm-YSH"/>
                                             <outlet property="locationViewContainer" destination="Jo8-zh-Px1" id="lmJ-OV-F9S"/>
+                                            <outlet property="mapbutton" destination="Acm-U8-SaP" id="Nqs-6z-94g"/>
                                             <outlet property="messageLabel" destination="JVd-fr-ze8" id="rhD-Qa-ito"/>
                                             <outlet property="placeLabel" destination="rWU-7f-NWP" id="4Jf-SH-I4K"/>
                                         </connections>
@@ -436,7 +440,7 @@ Melbourne VIC 3000</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MKb-yj-2qT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2388" y="207"/>
+            <point key="canvasLocation" x="2343" y="139"/>
         </scene>
         <!--Add Friend-->
         <scene sceneID="GCM-Ws-9Cv">
@@ -883,7 +887,7 @@ Melbourne VIC 3000</string>
             <objects>
                 <collectionViewController storyboardIdentifier="FriendsCollectionViewController" autoresizesArchivedViewToFullSize="NO" id="FLu-n2-mM7" sceneMemberID="viewController">
                     <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="VZ0-6A-u2n">
-                        <rect key="frame" x="0.0" y="0.0" width="280" height="102"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" id="cND-31-9Ut">
@@ -1000,7 +1004,7 @@ Melbourne VIC 3000</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UVy-NB-aHS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1770" y="795"/>
+            <point key="canvasLocation" x="1714" y="777"/>
         </scene>
         <!--Hangout Table View Controller-->
         <scene sceneID="Bzy-ES-9gX">
@@ -1149,7 +1153,7 @@ Melbourne VIC 3000</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mvo-r8-46D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1239" y="1484"/>
+            <point key="canvasLocation" x="1236" y="1556"/>
         </scene>
         <!--Hangout Init Table View Controller-->
         <scene sceneID="xNo-Hg-Ira">
@@ -1467,6 +1471,6 @@ Melbourne VIC 3000</string>
         <image name="notification" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yOx-Ux-68I"/>
+        <segue reference="2SJ-8U-WjU"/>
     </inferredMetricsTieBreakers>
 </document>

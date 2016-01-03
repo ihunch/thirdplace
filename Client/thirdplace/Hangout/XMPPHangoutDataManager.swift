@@ -149,7 +149,7 @@ private let _SingletonInstance = XMPPHangoutDataManager()
             let hangout = Hangout.MR_findFirstByAttribute("hangoutid", withValue:  NSNumber(integer: hangoutid), inContext: localContext)
             if hangout != nil
             {
-                let otheruser = hangout.getUser(xmppStream.myJID)
+                let otheruser = hangout.getOtherUser(xmppStream.myJID)
                 otheruser?.goingstatus = "notgoing"
             }
         })
@@ -238,7 +238,7 @@ private let _SingletonInstance = XMPPHangoutDataManager()
                     let eachuserelement = u as! DDXMLElement
                     let hangoutUser = HangoutUser.MR_createEntityInContext(localContext)
                     let jidstr = eachuserelement.attributeStringValueForName("jid")
-                    let goingstatus = eachelement.attributeStringValueForName("goingstatus")
+                    let goingstatus = eachuserelement.attributeStringValueForName("goingstatus")
                     hangoutUser.goingstatus = goingstatus
                     hangoutUser.username = jidstr
                     hangoutUser.jidstr =  jidstr

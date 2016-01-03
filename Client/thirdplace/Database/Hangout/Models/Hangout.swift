@@ -12,11 +12,18 @@ public class Hangout: _Hangout {
     
     func getUser(sender:XMPPJID) ->  HangoutUser?
     {
-        let filter = NSPredicate(format: "jidstr != %@", sender.bare())
+        let filter = NSPredicate(format: "jidstr == %@", sender.bare())
         let user = self.user.filteredSetUsingPredicate(filter).first as? HangoutUser
         return user
     }
   
+    func getOtherUser(sender:XMPPJID) ->  HangoutUser?
+    {
+        let filter = NSPredicate(format: "jidstr != %@", sender.bare())
+        let user = self.user.filteredSetUsingPredicate(filter).first as? HangoutUser
+        return user
+    }
+    
     func getLatestTime() -> HangoutTime?
     {
         let filter = NSPredicate(format: "self.updatetime == %@.@max.updatetime",self.time)
