@@ -42,7 +42,7 @@ class DHCollectionTableViewCell: UITableViewCell {
         self.collectionView.registerNib(UINib(nibName: "LocationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: locationViewCellIdentifier as String)
        // self.collectionView.registerClass(LocationCollectionViewCell.self, forCellWithReuseIdentifier: locationViewCellIdentifier as String)
         self.collectionView.showsHorizontalScrollIndicator = false
-        self.collectionView.pagingEnabled = true
+       // self.collectionView.pagingEnabled = true
         
         self.contentView.addSubview(self.collectionView)
         self.frameView = UIView(frame: CGRectZero)

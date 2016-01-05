@@ -16,7 +16,9 @@ class HangoutTableViewController: DHCollectionTableViewController {
     var displayKeyboard = false
     var offset:CGPoint?
     var messageContent: String?
-    let leftmargin: CGFloat = 30
+    let leftmargin: CGFloat = 0
+    let offsetLeftMargin: CGFloat = 30
+    let offsetRightMargin: CGFloat = 30
     var selectedHangoutFriend : XMPPUserCoreDataStorageObject?
     let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate
     var rosterStorage: XMPPRosterCoreDataStorage?
@@ -149,6 +151,7 @@ class HangoutTableViewController: DHCollectionTableViewController {
     
     @IBAction func sendHangout(sender: AnyObject)
     {
+        self.showloadscreen()
         let createtime = NSDate().mt_inTimeZone(NSTimeZone.localTimeZone())
         //create a temp hangout
         let p_context = hangoutDataManager.privateContext()
@@ -163,27 +166,24 @@ class HangoutTableViewController: DHCollectionTableViewController {
         let time = self.sourceArray[Int(timerow)!][selecttimeindex] as! Hangout_Time
         let locationid = self.sourceArray[Int(placerow)!][selectlocationindex] as! String
         let hangouttime = HangoutTime.MR_createEntityInContext(p_context)
-        let inithangoutime = hangout.getInitTime()!
-        let inithangoutendtime = inithangoutime.enddate!
-        let year = inithangoutendtime.mt_components().year
-        let month = inithangoutendtime.mt_components().month
-        let startdateday = inithangoutendtime.mt_components().day
-        let sundaymidnight = NSDate.mt_dateFromYear(year, month: month, day: startdateday)
+        let sundaymidnight = hangout.getLatestTime()!.enddate!.calculateSundayMidnightTime()
+        let sundayendtime = sundaymidnight.mt_dateHoursAfter(23).mt_dateMinutesAfter(59)
         if (day.dayvalue == 7) // Saturday
         {
             hangouttime.startdate = sundaymidnight.mt_dateDaysBefore(1).mt_dateHoursAfter(Int(time.time!))
-            hangouttime.enddate = inithangoutendtime.mt_oneDayPrevious()
+            hangouttime.enddate = sundayendtime.mt_oneDayPrevious()
         }
         else if(day.dayvalue == 1) //Sunday
         {
             hangouttime.startdate = sundaymidnight.mt_dateHoursAfter(Int(time.time!))
-            hangouttime.enddate = inithangoutendtime
+            hangouttime.enddate = sundayendtime
         }
         else
         {
             //work out the time only
-            hangouttime.startdate = inithangoutime.startdate!.mt_dateHoursAfter(Int(time.time!))
-            hangouttime.enddate = inithangoutendtime
+            let satmid = sundaymidnight.mt_dateDaysBefore(1)
+            hangouttime.startdate = satmid.mt_dateHoursAfter(Int(time.time!))
+            hangouttime.enddate = sundayendtime
         }
         //time
         hangouttime.timedescription = "\(day.day_description!) \(time.time_description!)"//based on the selection
@@ -211,6 +211,18 @@ class HangoutTableViewController: DHCollectionTableViewController {
     
     @IBAction func goback(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func showloadscreen()
+    {
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.removeFromSuperViewOnHide = true
+        hud.hide(true, afterDelay: 10.0)
+    }
+    
+    func dismissloadscreen()
+    {
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
     }
 }
 
@@ -285,9 +297,9 @@ extension HangoutTableViewController {
             if (indexPath.section != 0)
             {
                 let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()  
-                layout.minimumLineSpacing = leftmargin*2
-                layout.sectionInset = UIEdgeInsetsMake(0, leftmargin, 0, leftmargin)
-                layout.itemSize = CGSizeMake(cell.bounds.size.width - leftmargin*2, cell.bounds.size.height - 1)
+                layout.minimumLineSpacing = 15
+                layout.sectionInset = UIEdgeInsetsMake(0, offsetLeftMargin, 0, offsetRightMargin)
+                layout.itemSize = CGSizeMake(cell.bounds.size.width - 60, cell.bounds.size.height - 2)
                 layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
                 cell.collectionView.collectionViewLayout = layout
             }
@@ -295,7 +307,7 @@ extension HangoutTableViewController {
             {
                 let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
                 layout.minimumLineSpacing = 10
-                layout.sectionInset = UIEdgeInsetsMake(0, leftmargin, 0, 0)
+                layout.sectionInset = UIEdgeInsetsMake(0, offsetLeftMargin, 0, 0)
                 layout.itemSize = CGSizeMake(cell.bounds.size.height - 10, cell.bounds.size.height - 10)
                 layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
                 cell.collectionView.collectionViewLayout = layout
@@ -476,22 +488,45 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
     
      func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath)
      {
-        let width = cell.bounds.size.width + leftmargin*2
+        let width = cell.bounds.size.width+15
         let index: NSInteger = collectionView.tag
         let value: AnyObject? = self.contentOffsetDictionary.valueForKey(index.description)
         let horizontalOffset: CGFloat = CGFloat(value != nil ? value!.floatValue : 0)
-        collectionView.setContentOffset(CGPointMake(horizontalOffset*width, 0), animated: false)
+         collectionView.setContentOffset(CGPointMake(horizontalOffset*width, 0), animated: false)
      }
     
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
+    override func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
         if !scrollView.isKindOfClass(UICollectionView) {
             return
         }
-        let horizontalOffset: CGFloat = scrollView.contentOffset.x
-        
-        let width = self.view.frame.width
         let collectionView: UICollectionView = scrollView as! UICollectionView
-        self.contentOffsetDictionary.setValue(horizontalOffset/width, forKey: collectionView.tag.description)
+        
+        let pageWidth: CGFloat = self.view.frame.width - 45
+        let currentOffset: CGFloat = scrollView.contentOffset.x
+        let targetOffset = targetContentOffset.memory.x
+        var newTargetOffset:CGFloat = 0
+        
+        if (targetOffset > currentOffset)
+        {
+            newTargetOffset = CGFloat(ceilf(Float(currentOffset / pageWidth))) * pageWidth
+        }
+        else
+        {
+            newTargetOffset = CGFloat(floorf(Float(currentOffset / pageWidth))) * pageWidth
+        }
+        
+        if (newTargetOffset < 0)
+        {
+            newTargetOffset = 0
+        }
+        else if (newTargetOffset > scrollView.contentSize.width)
+        {
+            newTargetOffset = scrollView.contentSize.width
+        }
+        self.contentOffsetDictionary.setValue(newTargetOffset/pageWidth, forKey: collectionView.tag.description)
+        targetContentOffset.memory.x = currentOffset
+        scrollView.setContentOffset(CGPointMake(newTargetOffset, 0), animated: true)
     }
 }
 
@@ -499,6 +534,7 @@ extension HangoutTableViewController
 {
     func xmppHangout(sender:XMPPHangout, didUpdateHangout iq:XMPPIQ)
     {
+        dismissloadscreen()
         self.navigationController?.popViewControllerAnimated(true)
     }
 }

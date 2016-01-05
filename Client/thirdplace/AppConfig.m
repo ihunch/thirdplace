@@ -92,6 +92,11 @@ NSString *const kLoginUserPhotoPath = @"LoginUserPhotoPath";
     return [UIColor colorWithRed:235.0/255.0 green:235.0/255.0 blue:245.0/255.0 alpha:1.0];
 }
 
++ (UIColor*)blueColour
+{
+     return [UIColor colorWithRed:0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.0];
+}
+
 + (NSString*)loginUserPhotoPath
 {
     return [[NSUserDefaults standardUserDefaults] objectForKey:kLoginUserPhotoPath];

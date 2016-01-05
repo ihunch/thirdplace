@@ -18,6 +18,7 @@ class HangoutListTableViewCell: UITableViewCell {
     @IBOutlet weak var bgimageview: UIImageView!
     @IBOutlet weak var locationViewContainer: UIView!
     @IBOutlet weak var mapbutton: UIButton!
+    @IBOutlet weak var middlesection: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         self.collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: collectionViewCellIdentifier as String)
@@ -29,6 +30,9 @@ class HangoutListTableViewCell: UITableViewCell {
         layout.itemSize = CGSizeMake(65, 65)
         layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
         self.collectionView.collectionViewLayout = layout
+        let image = UIImage(named: "btn_icn_Zoo-Map")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        mapbutton.setImage(image, forState: UIControlState.Normal)
+        mapbutton.tintColor = AppConfig.blueColour()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

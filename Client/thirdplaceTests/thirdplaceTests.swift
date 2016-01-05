@@ -29,7 +29,8 @@ class thirdplaceTests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         let formatter = NSDateFormatter()
         formatter.dateFormat = "MM/dd/yyyy hh:mma"
-        let result2 = formatter.dateFromString("12/26/2015 10:00pm")?.mt_inTimeZone(NSTimeZone.localTimeZone())
+        formatter.timeZone = NSTimeZone(name: "GMT")
+        let result2 = formatter.dateFromString("12/26/2015 10:00pm")
         let date = result2?.mt_dateDaysAfter(1)
         print(result2!.mt_weekdayOfWeek())
         print(date!.mt_weekdayOfWeek())

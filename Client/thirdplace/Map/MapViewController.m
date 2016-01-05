@@ -40,7 +40,13 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [self forwardGeoLocation];
+    self.navigationController.navigationBarHidden = NO;
     [super viewWillAppear:animated];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)didReceiveMemoryWarning

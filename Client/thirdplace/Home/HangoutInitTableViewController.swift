@@ -99,7 +99,9 @@ class HangoutInitTableViewController: DHCollectionTableViewController
         self.navigationController?.popViewControllerAnimated(true)
     }
     
-    @IBAction func declineButton(sender: AnyObject) {
+    @IBAction func declineButton(sender: AnyObject)
+    {
+        self.showloadscreen()
         //lookup a temp hangout
         let p_context = hangoutDataManager.privateContext()
         let hangoutid = selectedHangoutid!
@@ -111,6 +113,7 @@ class HangoutInitTableViewController: DHCollectionTableViewController
     
     @IBAction func sendButton(sender: AnyObject)
     {
+        self.showloadscreen()
         let createtime = NSDate().mt_inTimeZone(NSTimeZone.localTimeZone())
         //create a temp hangout 
         let p_context = hangoutDataManager.privateContext()
@@ -187,6 +190,7 @@ class HangoutInitTableViewController: DHCollectionTableViewController
     
     @IBAction func confirmButton(sender: AnyObject)
     {
+        self.showloadscreen()
         let createtime = NSDate().mt_inTimeZone(NSTimeZone.localTimeZone())
         
         //lookup a temp hangout
@@ -222,6 +226,18 @@ class HangoutInitTableViewController: DHCollectionTableViewController
             message.content = defaultConfirmMessage
         }
         hangoutmodule.updateHangout(hangout, sender: xmppStream.myJID)
+    }
+    
+    func showloadscreen()
+    {
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.removeFromSuperViewOnHide = true
+        hud.hide(true, afterDelay: 10.0)
+    }
+    
+    func dismissloadscreen()
+    {
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
     }
 }
 
@@ -448,16 +464,19 @@ extension HangoutInitTableViewController
 {
     func xmppHangout(sender:XMPPHangout, didCreateHangout iq:XMPPIQ)
     {
+        self.dismissloadscreen()
         self.navigationController?.popViewControllerAnimated(true)
     }
     
     func xmppHangout(sender:XMPPHangout, didCloseHangout iq:XMPPIQ)
     {
+        self.dismissloadscreen()
         self.navigationController?.popViewControllerAnimated(true)
     }
     
     func xmppHangout(sender:XMPPHangout, didUpdateHangout iq:XMPPIQ)
     {
+        self.dismissloadscreen()
         self.navigationController?.popViewControllerAnimated(true)
     }
 }

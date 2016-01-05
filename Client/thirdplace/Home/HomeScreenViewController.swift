@@ -135,7 +135,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                         }
                         else
                         {
-                            hangoutcell.messageLabel.text = "\(fullnamearray![0]):)"
+                            hangoutcell.messageLabel.text = "\(fullnamearray![0]): "
                         }
                     }
                 }

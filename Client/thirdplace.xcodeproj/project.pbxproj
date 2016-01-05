@@ -2588,6 +2588,7 @@
 					"\"${PODS_ROOT}/Headers/Public/pop\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/thirdplace/thirdplace-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2670,6 +2671,7 @@
 					"\"${PODS_ROOT}/Headers/Public/pop\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/thirdplace/thirdplace-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

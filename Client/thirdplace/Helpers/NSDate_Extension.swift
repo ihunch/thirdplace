@@ -17,4 +17,24 @@ extension NSDate
         saturday.weekday = 7
         return calendar.nextDateAfterDate(self, matchingComponents: saturday, options: NSCalendarOptions.MatchNextTime)
     }
+    
+    func calculateSundayMidnightTime() -> NSDate
+    {
+        let day = self.mt_components().weekday
+        if (day == Weekday.Sun.rawValue)
+        {
+            let year = self.mt_components().year
+            let month = self.mt_components().month
+            let day = self.mt_components().day
+            return NSDate.mt_dateFromYear(year, month: month, day: day)
+        }
+        else
+        {
+            let sundaytime = self.mt_dateDaysAfter(1)
+            let year = sundaytime.mt_components().year
+            let month = sundaytime.mt_components().month
+            let day = sundaytime.mt_components().day
+            return NSDate.mt_dateFromYear(year, month: month, day: day)
+        }
+    }
 }
