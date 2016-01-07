@@ -64,22 +64,36 @@ class DataManager: NSObject {
         }
         if (result == nil)
         {
-            result = createXMPPRoster(dbcontext, jid)
+            result = createXMPPRosterMainContext(jid)
         }
         return result
+    }
+   
+    func createXMPPRosterMainContext(jid: XMPPJID) -> XMPPRosterFB
+    {
+        let result = XMPPRosterFB.MR_createEntity()
+        var x = arc4random_uniform(280)
+        if (x < 30)
+        {
+            x+=30
+        }
+        var y = arc4random_uniform(400)
+        if (y < 30)
+        {
+            y+=30
+        }
+        result!.axisxValue = Float(x)
+        result!.axisyValue = Float(y)
+        result!.jid = jid.bare()
+        result!.fbid = jid.bare().componentsSeparatedByString("@")[0]
+        NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+        return result!
+
     }
     
     func createXMPPRoster(dbcontext: NSManagedObjectContext?, _ jid: XMPPJID) -> XMPPRosterFB
     {
-        var result:XMPPRosterFB? = nil
-        if dbcontext != nil
-        {
-            result = XMPPRosterFB.MR_createEntityInContext(dbcontext)
-        }
-        else
-        {
-            result = XMPPRosterFB.MR_createEntity()
-        }
+        let result = XMPPRosterFB.MR_createEntityInContext(dbcontext)
         var x = arc4random_uniform(280)
         if (x < 30)
         {

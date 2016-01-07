@@ -137,6 +137,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             rfb.axisxValue = friendView.center.x;
             rfb.axisyValue = friendView.center.y;
         }];
+        
         [UIView animateWithDuration:0.3 animations:^{
             friendView.transform = CGAffineTransformIdentity;
         }];

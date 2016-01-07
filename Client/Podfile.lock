@@ -27,6 +27,8 @@ PODS:
   - Bolts/AppLinks (1.5.1):
     - Bolts/Tasks
   - Bolts/Tasks (1.5.1)
+  - Crashlytics (3.4.1):
+    - Fabric (~> 1.6.0)
   - CustomBadge (3.0.0)
   - DZNEmptyDataSet (1.7.3)
   - DZNPhotoPickerController (1.5):
@@ -38,6 +40,7 @@ PODS:
     - AFNetworking (~> 2.3.1)
     - DZNEmptyDataSet
     - SDWebImage (~> 3.7)
+  - Fabric (1.6.1)
   - Facebook-iOS-SDK (3.23.2):
     - Bolts (~> 1.0)
   - MagicalRecord (2.3.0)
@@ -55,8 +58,10 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - AUISelectiveBordersView
+  - Crashlytics
   - CustomBadge
   - DZNPhotoPickerController
+  - Fabric
   - Facebook-iOS-SDK (= 3.23.2)
   - MagicalRecord
   - MBProgressHUD
@@ -71,9 +76,11 @@ SPEC CHECKSUMS:
   AFNetworking: 05b9f6e3aa5ac45bc383b4bb108ef338080a26c7
   AUISelectiveBordersView: 37b7c7b3a3c52777a5f82e1f2296b58a6526263f
   Bolts: a12663244b1d3351c738882e71902fc74db54f64
+  Crashlytics: 41574a245bc6ae10c55d57f385ebd2004e5bee05
   CustomBadge: c60738d213e7ef019b0bf1caa7948333f280ea9b
   DZNEmptyDataSet: dd7cca17c1d07dfa78956859b1e70a52505678ef
   DZNPhotoPickerController: ef61d459db0a8f2709303a47d3e48c8a1635c1af
+  Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
   Facebook-iOS-SDK: cd87f0b2f0c1d9574b44e8fa2baacc275524bac3
   MagicalRecord: 89eb7d7ead39fb37f01c3d010665ee94d17f8dba
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1

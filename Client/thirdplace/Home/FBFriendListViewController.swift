@@ -41,6 +41,17 @@ class FBFriendListViewController: UIViewController,UITableViewDataSource, UITabl
         rosterDBContext = self.appDelegate!.managedObjectContext_roster()
     }
     
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController!.navigationBarHidden = false
+        
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.navigationController!.navigationBarHidden = true
+        
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.friendlists != nil
         {

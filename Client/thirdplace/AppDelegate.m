@@ -22,6 +22,8 @@
 #import "DBHeaderFile.h"
 #import "XMPPvCardTemp.h"
 #import "NSData+XMPP.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 // Log levels: off, error, warn, info, verbose
 #if DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -52,6 +54,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [Fabric with:@[[Crashlytics class]]];
     // Override point for customization after application launch.
     UIPageControl *pageControl = [UIPageControl appearance];
     pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
@@ -64,7 +67,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self setupXMPPStream];
     
     [MagicalRecord setupCoreDataStack];
-    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 
@@ -366,7 +368,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    //[MagicalRecord cleanUp];
     [self teardownXMPPStream];
 }
 

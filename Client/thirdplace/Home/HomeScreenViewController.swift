@@ -156,7 +156,8 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             hangoutcell.collectionView.indexPath = indexpath
             if let location = hangout.getLatestLocation() as HangoutLocation?
             {
-                hangoutcell.locationViewContainer.hidden = false
+                hangoutcell.mapbutton.hidden = false
+                hangoutcell.placeLabel.hidden = false
                 if let locationdic = locationlists!.objectAtIndex((location.locationid?.integerValue)!) as? NSDictionary
                 {
                     let name = locationdic.objectForKey("name") as! String
@@ -181,7 +182,8 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             }
             else
             {
-                hangoutcell.locationViewContainer.hidden = true
+                hangoutcell.mapbutton.hidden = true
+                hangoutcell.placeLabel.hidden = true
                 if (otheruser!.goingstatus != "notgoing")
                 {
                     if (me!.goingstatus == "notgoing")
@@ -190,7 +192,21 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                     }
                     else
                     {
-                        hangoutcell.bgimageview.image = UIImage(named: "bbb.jpg")
+                        if (hangout.createUserJID == xmppStream!.myJID.bare())
+                        {
+                            if (hangout.message.count == 1)
+                            {
+                                  hangoutcell.bgimageview.image = UIImage(named: "bbb.jpg")?.grayscale()
+                            }
+                            else
+                            {
+                                hangoutcell.bgimageview.image = UIImage(named: "bbb.jpg")
+                            }
+                        }
+                        else
+                        {
+                            hangoutcell.bgimageview.image = UIImage(named: "bbb.jpg")
+                        }
                     }
                 }
                 else
@@ -263,19 +279,30 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     {
         if (indexPath.section == 1)
         {
-            let indexpath = NSIndexPath(forRow: indexPath.row, inSection: 0)
-            let hangout = hangoutFetchedRequestControler?.objectAtIndexPath(indexpath) as! Hangout
-            var users = hangout.user.allObjects.filter{
-                $0.jidstr != xmppStream!.myJID.bare()
-            }
-            if (users.count > 0)
+            if (self.xmppStream!.isConnected())
             {
-                let jidstr = users[0].jidstr
-                let jid = XMPPJID.jidWithString(jidstr)
-                let xmppuser = rosterStorage.userForJID(jid, xmppStream: xmppStream!, managedObjectContext: rosterDBContext)
-                self.displayCreateHangoutView(xmppuser, activeHangout: hangout)
+                
+                let indexpath = NSIndexPath(forRow: indexPath.row, inSection: 0)
+                let hangout = hangoutFetchedRequestControler?.objectAtIndexPath(indexpath) as! Hangout
+                var users = hangout.user.allObjects.filter{
+                    $0.jidstr != xmppStream!.myJID.bare()
+                }
+                if (users.count > 0)
+                {
+                    let jidstr = users[0].jidstr
+                    let jid = XMPPJID.jidWithString(jidstr)
+                    let xmppuser = rosterStorage.userForJID(jid, xmppStream: xmppStream!, managedObjectContext: rosterDBContext)
+                    if (xmppuser != nil)
+                    {
+                        self.displayCreateHangoutView(xmppuser, activeHangout: hangout)
+                    }
+                }
+                tableView.deselectRowAtIndexPath(indexPath, animated: true)
             }
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            else{
+                ErrorHandler.showPopupMessage(self.view, text: "Please wait for connection")
+                
+            }
         }
     }
     
@@ -383,22 +410,28 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     func didFBLoginSuccess()
     {
         appDelegate!.loginXMPP()
-        self.dismissViewControllerAnimated(true, completion: nil)
+        //self.dismissViewControllerAnimated(true, completion: nil)
     }
     
 // MARK: FriendContainerDelegate
     
     func didTouchFriend(friend: XMPPUserCoreDataStorageObject!, rect: CGRect)
     {
-        if (friend.subscription  == "both")
+        if (self.xmppStream!.isConnected())
         {
-            //TODO: check the database and decide which view shall be called
-            let hangout = xmppHangoutDB.hasActiveHangout(friend.jid, xmppstream: xmppStream!)
-            self.displayCreateHangoutView(friend, activeHangout:hangout)
+            if (friend != nil && friend.subscription  == "both")
+            {
+                let hangout = xmppHangoutDB.hasActiveHangout(friend.jid, xmppstream: xmppStream!)
+                self.displayCreateHangoutView(friend, activeHangout:hangout)
+            }
+            else
+            {
+                ErrorHandler.showPopupMessage(self.view, text: "Waiting for friend invitation response")
+            }
         }
         else
         {
-            ErrorHandler.showPopupMessage(self.view, text: "Waiting for friend invitation response")
+            ErrorHandler.showPopupMessage(self.view, text: "Please wait for connection")
         }
     }
     
