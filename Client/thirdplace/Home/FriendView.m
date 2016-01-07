@@ -133,11 +133,12 @@
         }
         else
         {
-            if ([self.friend.subscription isEqualToString:@"both"])
+            if (![self.friend.subscription isEqualToString:@"none"])
             {
                 self.friendImage = self.friend.photo;
             }
-            else{
+            else
+            {
                 self.friendImage = [self.friend.photo grayscale];
             }
         }

@@ -410,7 +410,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     func didFBLoginSuccess()
     {
         appDelegate!.loginXMPP()
-        //self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
 // MARK: FriendContainerDelegate
@@ -419,7 +419,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     {
         if (self.xmppStream!.isConnected())
         {
-            if (friend != nil && friend.subscription  == "both")
+            if (friend != nil && friend.subscription  != "none")
             {
                 let hangout = xmppHangoutDB.hasActiveHangout(friend.jid, xmppstream: xmppStream!)
                 self.displayCreateHangoutView(friend, activeHangout:hangout)
