@@ -236,7 +236,49 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
-        return 2
+        if (self.hangoutFetchedRequestControler != nil)
+        {
+            let sectionInfo = self.hangoutFetchedRequestControler!.sections
+            if (sectionInfo != nil)
+            {
+                let sections = sectionInfo![0]
+                if ( sections.numberOfObjects > 0)
+                {
+                    return 2
+                }
+            }
+        }
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if (section == 0)
+        {
+            return 0
+        }
+        else
+        {
+            return 44
+        }
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    {
+        if (section == 0)
+        {
+            return UIView()
+        }
+        else
+        {
+            let rect = CGRectMake(0, 0, tableView.frame.size.width, 44)
+            let labelrect = CGRectMake(10, 0, tableView.frame.size.width, 44)
+            let view = UIView(frame: rect)
+            let label = UILabel(frame: labelrect)
+            label.text = "Hangouts"
+            label.font = UIFont (name: "HelveticaNeue-Medium", size: 24)
+            view.addSubview(label)
+            return view
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -281,7 +323,6 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         {
             if (self.xmppStream!.isConnected())
             {
-                
                 let indexpath = NSIndexPath(forRow: indexPath.row, inSection: 0)
                 let hangout = hangoutFetchedRequestControler?.objectAtIndexPath(indexpath) as! Hangout
                 var users = hangout.user.allObjects.filter{
@@ -437,13 +478,17 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func didTouchAddFriend()
     {
-       
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.removeFromSuperViewOnHide = true
+        hud.hide(true, afterDelay: 10.0)
+        
         let fbrequest =  FBRequest.requestForMyFriends()
         fbrequest.startWithCompletionHandler {
             (connection:FBRequestConnection!,   result:AnyObject!, error:NSError!) -> Void in
             let fblists = result.objectForKey("data") as? NSArray
             let fbviewcontroller = self.storyboard?.instantiateViewControllerWithIdentifier("FBFriendListViewController") as! FBFriendListViewController?
             fbviewcontroller!.friendlists = fblists
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
             self.navigationController?.pushViewController(fbviewcontroller!, animated: true)
         }
     }

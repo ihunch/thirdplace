@@ -5,6 +5,7 @@ import CoreData
 
 public enum HangoutMessageAttributes: String {
     case content = "content"
+    case messageid = "messageid"
     case updatejid = "updatejid"
     case updatetime = "updatetime"
 }
@@ -43,6 +44,11 @@ class _HangoutMessage: NSManagedObject {
     var content: String?
 
     // func validateContent(value: AutoreleasingUnsafeMutablePointer<AnyObject>, error: NSErrorPointer) -> Bool {}
+
+    @NSManaged public
+    var messageid: NSNumber?
+
+    // func validateMessageid(value: AutoreleasingUnsafeMutablePointer<AnyObject>, error: NSErrorPointer) -> Bool {}
 
     @NSManaged public
     var updatejid: String?

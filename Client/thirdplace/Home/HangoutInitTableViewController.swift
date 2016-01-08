@@ -167,7 +167,7 @@ class HangoutInitTableViewController: DHCollectionTableViewController
             hangouttime.startdate = sat
             hangouttime.enddate = sun
         }
-        hangouttime.timedescription = "Weekend"
+        hangouttime.timedescription = "This Weekend"
         hangouttime.updatejid = xmppStream.myJID.bare()
         hangouttime.updatetime = createtime
         hangouttime.hangout = hangout
@@ -205,7 +205,7 @@ class HangoutInitTableViewController: DHCollectionTableViewController
         let hangouttime = HangoutTime.MR_createEntityInContext(p_context)
         hangouttime.startdate = previoustime?.startdate
         hangouttime.enddate = previoustime?.enddate
-        hangouttime.timedescription = "Weekend"//based on the selection
+        hangouttime.timedescription = "This Weekend"//based on the selection
         hangouttime.updatejid = xmppStream.myJID.bare()
         hangouttime.updatetime = createtime
         hangouttime.hangout = hangout
@@ -262,7 +262,7 @@ extension HangoutInitTableViewController {
         }
         else if(indexPath.section == 1)
         {
-            return 50
+            return UITableViewAutomaticDimension
         }
         else if(indexPath.section == 2)
         {
@@ -305,7 +305,7 @@ extension HangoutInitTableViewController {
             textcell!.bgview.selectiveBorderFlag = UInt(AUISelectiveBordersFlagTop | AUISelectiveBordersFlagBottom | AUISelectiveBordersFlagLeft | AUISelectiveBordersFlagRight)
             textcell!.bgview.selectiveBordersColor = UIColor.lightGrayColor()
             textcell!.bgview.selectiveBordersWidth = 1
-            
+            textcell!.titleLabel?.text = ""
             textcell!.bgview.layer.shadowColor = UIColor.grayColor().CGColor
             textcell!.bgview.layer.shadowOffset = CGSizeMake(1,3)
             textcell!.bgview.layer.shadowOpacity = 1

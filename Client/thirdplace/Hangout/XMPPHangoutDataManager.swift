@@ -63,6 +63,8 @@ private let _SingletonInstance = XMPPHangoutDataManager()
         let description = item.elementForName(HangoutConfig.descriptionkey).stringValue()
         let timedescription = item.elementForName(HangoutConfig.timedescriptionkey).stringValue()
         let message = item.elementForName(HangoutConfig.messagekey).stringValue()
+        let messageid = item.elementForName(HangoutConfig.messageIDkey).stringValue()
+        
         var locationid : Int? = nil
         if let locationelement = item.elementForName(HangoutConfig.locationidkey)
         {
@@ -82,7 +84,12 @@ private let _SingletonInstance = XMPPHangoutDataManager()
                 newhangout.createUserJID = createuser
                 newhangout.preferedlocation = preferlocation
                 
-                let hangoutmessage = HangoutMessage.MR_createEntityInContext(localContext)
+                var hangoutmessage =  HangoutMessage.MR_findFirstByAttribute("messageid", withValue: NSNumber(integer: Int(messageid)!), inContext: localContext)
+                if (hangoutmessage == nil)
+                {
+                    hangoutmessage = HangoutMessage.MR_createEntityInContext(localContext)
+                    hangoutmessage.messageid = NSNumber(integer: Int(messageid)!)
+                }
                 hangoutmessage.content = message
                 hangoutmessage.updatetime = createtime
                 hangoutmessage.updatejid = fromjid.bare()
@@ -119,7 +126,12 @@ private let _SingletonInstance = XMPPHangoutDataManager()
             }
             else
             {
-                let hangoutmessage = HangoutMessage.MR_createEntityInContext(localContext)
+                var hangoutmessage =  HangoutMessage.MR_findFirstByAttribute("messageid", withValue: NSNumber(integer: Int(messageid)!), inContext: localContext)
+                if (hangoutmessage == nil)
+                {
+                    hangoutmessage = HangoutMessage.MR_createEntityInContext(localContext)
+                    hangoutmessage.messageid = NSNumber(integer: Int(messageid)!)
+                }
                 hangoutmessage.content = message
                 hangoutmessage.updatetime = createtime
                 hangoutmessage.updatejid = fromjid.bare()
@@ -196,7 +208,13 @@ private let _SingletonInstance = XMPPHangoutDataManager()
                 {
                     let messagecreatetimestr = eachmessage.elementForName(HangoutConfig.createtime).stringValue()
                     let messagecreatetime = dateFormatter.dateFromString(messagecreatetimestr)!.mt_inTimeZone(NSTimeZone.localTimeZone())
-                    let hangoutmessage = HangoutMessage.MR_createEntityInContext(localContext)
+                    let messageid = eachmessage.elementForName(HangoutConfig.messageIDkey).stringValue()
+                    var hangoutmessage =  HangoutMessage.MR_findFirstByAttribute("messageid", withValue: NSNumber(integer: Int(messageid)!), inContext: localContext)
+                    if (hangoutmessage == nil)
+                    {
+                        hangoutmessage = HangoutMessage.MR_createEntityInContext(localContext)
+                        hangoutmessage.messageid = NSNumber(integer: Int(messageid)!)
+                    }
                     hangoutmessage.content = eachmessage.elementForName("content").stringValue()
                     hangoutmessage.updatetime = messagecreatetime
                     hangoutmessage.updatejid = eachmessage.elementForName(HangoutConfig.createuser).stringValue()
@@ -365,6 +383,7 @@ struct HangoutConfig {
     static var timedescriptionkey = "timedescription"
     static var messageskey = "messages"
     static var messagekey = "message"
+    static var messageIDkey = "messageid"
     static var locationkey = "location"
     static var locationidkey = "locationid"
     static var preferredlocationkey = "preferredlocation"

@@ -246,7 +246,7 @@ extension HangoutTableViewController {
         }
         else if(indexPath.section == 1 || indexPath.section == 2)
         {
-            return 44
+            return 50
         }
         else if(indexPath.section == 3)
         {
