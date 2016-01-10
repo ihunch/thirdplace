@@ -216,10 +216,11 @@
 		2FC2335F1BDE5EFA003EA48B /* NSDate_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC233441BDE4591003EA48B /* NSDate_Extension.swift */; };
 		2FC233661BDF054F003EA48B /* TestsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC233651BDF054F003EA48B /* TestsAppDelegate.m */; };
 		2FC233671BDF063C003EA48B /* TestsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC233651BDF054F003EA48B /* TestsAppDelegate.m */; };
+		2FD476BF1C424AD40013C330 /* cafe_au.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2FD476BE1C424AD40013C330 /* cafe_au.plist */; };
+		2FD476C01C4251570013C330 /* NSDateAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA43F9F1BCA8A2900F9FBBD /* NSDateAdditions.swift */; };
 		2FDD10161C0335D100B1AC75 /* XMPPRosterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD10151C0335D100B1AC75 /* XMPPRosterExtension.swift */; };
 		2FDD101A1C033ED700B1AC75 /* UIAlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD10191C033ED700B1AC75 /* UIAlertExtension.swift */; };
 		2FDD101E1C10508300B1AC75 /* XMPPvCardTempExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD101D1C10508300B1AC75 /* XMPPvCardTempExtension.swift */; };
-		2FDD10251C15A7B600B1AC75 /* cafe_au.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2FDD10241C15A7B600B1AC75 /* cafe_au.plist */; };
 		2FE85D121B9AA71F00537455 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE85D111B9AA71F00537455 /* libPods.a */; };
 		2FEF8CCD1C1DA30100AF1D95 /* LocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEF8CCC1C1DA30100AF1D95 /* LocationCollectionViewCell.swift */; };
 		2FEF8CCF1C1DAC2400AF1D95 /* LocationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FEF8CCE1C1DAC2400AF1D95 /* LocationCollectionViewCell.xib */; };
@@ -625,10 +626,10 @@
 		2FC233631BDF054F003EA48B /* thirdplaceTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "thirdplaceTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		2FC233641BDF054F003EA48B /* TestsAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestsAppDelegate.h; sourceTree = "<group>"; };
 		2FC233651BDF054F003EA48B /* TestsAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestsAppDelegate.m; sourceTree = "<group>"; };
+		2FD476BE1C424AD40013C330 /* cafe_au.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cafe_au.plist; sourceTree = "<group>"; };
 		2FDD10151C0335D100B1AC75 /* XMPPRosterExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMPPRosterExtension.swift; sourceTree = "<group>"; };
 		2FDD10191C033ED700B1AC75 /* UIAlertExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertExtension.swift; sourceTree = "<group>"; };
 		2FDD101D1C10508300B1AC75 /* XMPPvCardTempExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMPPvCardTempExtension.swift; sourceTree = "<group>"; };
-		2FDD10241C15A7B600B1AC75 /* cafe_au.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = cafe_au.plist; path = ../../../../../Downloads/cafe_au.plist; sourceTree = "<group>"; };
 		2FE85D111B9AA71F00537455 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/../build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		2FEF8CCC1C1DA30100AF1D95 /* LocationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCollectionViewCell.swift; sourceTree = "<group>"; };
 		2FEF8CCE1C1DAC2400AF1D95 /* LocationCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1843,7 +1844,7 @@
 		63626B051962B02D00FA58D5 = {
 			isa = PBXGroup;
 			children = (
-				2FDD10241C15A7B600B1AC75 /* cafe_au.plist */,
+				2FD476BE1C424AD40013C330 /* cafe_au.plist */,
 				2F1982971BBD1D570036AF53 /* Media.xcassets */,
 				2F1EC6F51BB195310079A438 /* Launch Screen.storyboard */,
 				2F9A2E701BAAEFE1008D4797 /* thirdplace-Bridging-Header.h */,
@@ -2034,8 +2035,8 @@
 				2FEF8CCF1C1DAC2400AF1D95 /* LocationCollectionViewCell.xib in Resources */,
 				2F1EC6F61BB195310079A438 /* Launch Screen.storyboard in Resources */,
 				63D13E4619666F3B00D17CF5 /* bbb1.jpg in Resources */,
-				2FDD10251C15A7B600B1AC75 /* cafe_au.plist in Resources */,
 				2F6766621BBD717200F866F5 /* build-libidn.sh in Resources */,
+				2FD476BF1C424AD40013C330 /* cafe_au.plist in Resources */,
 				63626B1C1962B02D00FA58D5 /* InfoPlist.strings in Resources */,
 				5AF0E49DC97B0157DBB62221 /* Main.storyboard in Resources */,
 				2F1982981BBD1D570036AF53 /* Media.xcassets in Resources */,
@@ -2169,6 +2170,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FD476C01C4251570013C330 /* NSDateAdditions.swift in Sources */,
 				2FC233661BDF054F003EA48B /* TestsAppDelegate.m in Sources */,
 				2FC2335F1BDE5EFA003EA48B /* NSDate_Extension.swift in Sources */,
 				2FC2335B1BDE5AF0003EA48B /* thirdplace-Bridging-Header.h in Sources */,

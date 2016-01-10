@@ -56,4 +56,18 @@ class thirdplaceTests: XCTestCase {
         }
     }
     
+    func testCafeAUData()
+    {
+        let path = NSBundle.mainBundle().pathForResource("cafe_au", ofType: "plist")
+        let lists = NSArray(contentsOfFile: path!)
+        for l in lists!
+        {
+            let locationdic = l as! NSDictionary
+            let photopath = locationdic.objectForKey("photopath") as! String
+            let image = UIImage(named: photopath)
+            assert(image != nil)
+        }
+        
+    }
+    
 }
