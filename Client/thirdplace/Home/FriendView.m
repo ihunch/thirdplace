@@ -20,7 +20,8 @@
 + (id)addFriendView
 {
     FriendView *friendView = [[self alloc] init];
-    friendView.friendImage = [UIImage imageNamed:@"plus"];
+    friendView.friendImage = [[UIImage imageNamed:@"plus"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    friendView.tintColor = [UIColor blueColor];
     return friendView;
 }
 
@@ -41,7 +42,7 @@
         self.backgroundColor = [UIColor clearColor];
         self.opaque = NO;
 
-        self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, 102, 100, 10)];
+        self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, 102, 100, 15)];
         self.label.font = [UIFont systemFontOfSize:11];
         self.label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
         self.label.textAlignment = NSTextAlignmentCenter;

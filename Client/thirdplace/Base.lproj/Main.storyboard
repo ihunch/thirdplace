@@ -58,7 +58,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PmS-1j-9Aq" customClass="FBLoginView">
-                                <rect key="frame" x="160" y="506" width="280" height="64"/>
+                                <rect key="frame" x="160" y="516" width="280" height="64"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="UVe-dL-sex"/>
@@ -66,9 +66,9 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.95172787408759119" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="bsu-jI-pDR" firstAttribute="top" secondItem="PmS-1j-9Aq" secondAttribute="bottom" constant="30" id="VTW-YP-ZQl"/>
+                            <constraint firstItem="bsu-jI-pDR" firstAttribute="top" secondItem="PmS-1j-9Aq" secondAttribute="bottom" constant="20" id="VTW-YP-ZQl"/>
                             <constraint firstItem="PmS-1j-9Aq" firstAttribute="centerX" secondItem="qyN-Mk-YBq" secondAttribute="centerX" id="dpJ-iv-xrm"/>
                         </constraints>
                     </view>
@@ -94,28 +94,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MiN-vi-T2a">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="40" width="600" height="560"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rqA-We-SgB">
-                                <rect key="frame" x="279" y="66" width="42" height="20"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="MiN-vi-T2a" firstAttribute="top" secondItem="Ngw-OB-W7I" secondAttribute="topMargin" id="Fbj-OY-oi9"/>
+                            <constraint firstItem="MiN-vi-T2a" firstAttribute="top" secondItem="Ngw-OB-W7I" secondAttribute="topMargin" constant="40" id="Fbj-OY-oi9"/>
                             <constraint firstAttribute="trailing" secondItem="MiN-vi-T2a" secondAttribute="trailing" id="RhI-Ql-B8J"/>
                             <constraint firstAttribute="bottomMargin" secondItem="MiN-vi-T2a" secondAttribute="bottom" id="X97-zg-90q"/>
-                            <constraint firstItem="rqA-We-SgB" firstAttribute="centerX" secondItem="MiN-vi-T2a" secondAttribute="centerX" id="XFV-Z7-Gu2"/>
                             <constraint firstItem="MiN-vi-T2a" firstAttribute="leading" secondItem="Ngw-OB-W7I" secondAttribute="leading" id="Zos-8M-GFM"/>
-                            <constraint firstItem="rqA-We-SgB" firstAttribute="top" secondItem="d78-fj-ogz" secondAttribute="bottom" constant="45.5" id="fmp-9D-i6O"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="imageview" destination="MiN-vi-T2a" id="NyD-lv-0ga"/>
-                        <outlet property="titleLabel" destination="rqA-We-SgB" id="F2Q-At-RP8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BfW-lk-8hw" userLabel="First Responder" sceneMemberID="firstResponder"/>

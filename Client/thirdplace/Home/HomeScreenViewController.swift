@@ -317,7 +317,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     {
         if (indexPath.section == 0)
         {
-            return 400
+            return 350
         }
         else
         {

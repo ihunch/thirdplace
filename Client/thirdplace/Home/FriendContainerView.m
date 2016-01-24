@@ -216,8 +216,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     [self layoutIfNeeded];
     self.linesView.frame = self.bounds;
-    self.meView.center = CGPointMake(self.center.x, self.center.y - 50);
-    self.addFriendView.center = CGPointMake(self.center.x, self.center.y + 50);
+    self.meView.center = CGPointMake(self.center.x, self.center.y);
+    self.addFriendView.center = CGPointMake(self.center.x, self.center.y + 100);
     [self updateLines];
 }
 

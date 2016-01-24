@@ -419,6 +419,7 @@ extension HangoutTableViewController: UITextViewDelegate
 }
 
 // MARK: - Collection View Data source and Delegate
+//TODO - it's better to use customcollectioncell for the day / time 
 extension HangoutTableViewController:UICollectionViewDataSource,UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
@@ -431,6 +432,7 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
     {
         if (collectionView.tag == Int(placerow))
         {
+            let currentplacerow = self.contentOffsetDictionary[placerow] as! Int
             let cell: LocationCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseLocationCollectionViewCellIdentifier, forIndexPath: indexPath) as!LocationCollectionViewCell
             if let placeidstr = self.sourceArray[collectionView.tag][indexPath.item] as? String{
                 let placeid = Int(placeidstr)
@@ -445,6 +447,29 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
                 cell.labelContainer.backgroundColor = UIColor(white: 1, alpha: 0.6)
                 cell.addresslabel.textColor = UIColor.blackColor()
                 cell.addressContainer.backgroundColor = UIColor(white: 1, alpha: 0.6)
+                if (indexPath.row == currentplacerow)
+                {
+                    if (currentplacerow == 0)
+                    {
+                        cell.leftarrow.hidden = true
+                        cell.rightarrow.hidden = false
+                    }
+                    else if(currentplacerow == 2)
+                    {
+                        cell.leftarrow.hidden = false
+                        cell.rightarrow.hidden = true
+                    }
+                    else
+                    {
+                        cell.leftarrow.hidden = false
+                        cell.rightarrow.hidden = false
+                    }
+                }
+                else
+                {
+                    cell.leftarrow.hidden = true
+                    cell.rightarrow.hidden = true
+                }
             }
             return cell
         }
@@ -493,8 +518,9 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
             }
             return cell
         }
-        else
+        else if (collectionView.tag.description == self.timerow)
         {
+            let currenttimerow = self.contentOffsetDictionary[timerow] as! Int
             let cell: UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseCollectionViewCellIdentifier, forIndexPath: indexPath)
             var label: UILabel? = nil
             let rightimage = UIImage(named: "chevron")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
@@ -523,29 +549,160 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
             let leftarrowarray = cell.contentView.subviews.filter({
                 $0.tag == leftarrowtag
             })
-            if (leftarrowarray.count == 0)
+            if (leftarrowarray.count == 0 && indexPath.row != 0)
             {
+                if (indexPath.row != currenttimerow){
+                    leftarrow.hidden = true
+                }
+                else
+                {
+                    leftarrow.hidden = false
+                }
                 cell.contentView.addSubview(leftarrow)
             }
             let rightarrowarray = cell.contentView.subviews.filter({
                 $0.tag == rightarrowtag
             })
-            if (rightarrowarray.count == 0)
+            if (rightarrowarray.count == 0 && indexPath.row != 2)
             {
+                if (indexPath.row != currenttimerow)
+                {
+                    rightarrow.hidden = true
+                }
+                else
+                {
+                    rightarrow.hidden = false
+                }
                 cell.contentView.addSubview(rightarrow)
+            }
+            if (indexPath.row == currenttimerow)
+            {
+                if (rightarrowarray.count > 0)
+                {
+                    if (currenttimerow == 2)
+                    {
+                        rightarrowarray[0].hidden = true
+                    }
+                    else
+                    {
+                        rightarrowarray[0].hidden = false
+                    }
+
+                }
+                if (leftarrowarray.count > 0)
+                {
+                    leftarrowarray[0].hidden = false
+                }
+            }
+            else
+            {
+                if (rightarrowarray.count > 0)
+                {
+                    rightarrowarray[0].hidden = true
+                }
+                if (leftarrowarray.count > 0)
+                {
+                    leftarrowarray[0].hidden = true
+                }
+            }
+            
+            label!.backgroundColor = UIColor.whiteColor()
+            label!.textAlignment = NSTextAlignment.Center
+            let time = self.sourceArray[collectionView.tag][indexPath.item] as? Hangout_Time
+            label!.text = time?.time_description
+            return cell
+        }
+        else
+        {
+            let currentdayrow = self.contentOffsetDictionary[dayrow] as! Int
+            let cell: UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseCollectionViewCellIdentifier, forIndexPath: indexPath)
+            var label: UILabel? = nil
+            let rightimage = UIImage(named: "chevron")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+            let leftimage = UIImage(named: "chevron_left")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+            let rightarrow: UIImageView = UIImageView(image: rightimage)
+            rightarrow.tintColor = UIColor(white: 0, alpha: 0.5)
+            rightarrow.frame.origin = CGPoint(x: cell.frame.size.width - rightarrow.frame.width - 5, y: 8)
+            rightarrow.tag = rightarrowtag
+            let  leftarrow: UIImageView = UIImageView(image: leftimage)
+            leftarrow.frame.origin = CGPoint(x: 5, y: 8)
+            leftarrow.tag = leftarrowtag
+            leftarrow.tintColor = UIColor(white: 0, alpha: 0.5)
+            var array = cell.contentView.subviews.filter({
+                $0.tag == placelocationtag
+            })
+            if (array.count == 0)
+            {
+                label = UILabel(frame: cell.bounds)
+                label?.tag = placelocationtag
+                cell.contentView.addSubview(label!)
+            }
+            else
+            {
+                label = array[0] as? UILabel
+            }
+            let leftarrowarray = cell.contentView.subviews.filter({
+                $0.tag == leftarrowtag
+            })
+            if (leftarrowarray.count == 0 && indexPath.row != 0)
+            {
+                if (indexPath.row != currentdayrow){
+                    leftarrow.hidden = true
+                }
+                else
+                {
+                    leftarrow.hidden = false
+                }
+                cell.contentView.addSubview(leftarrow)
+            }
+            
+            let rightarrowarray = cell.contentView.subviews.filter({
+                $0.tag == rightarrowtag
+            })
+            if (rightarrowarray.count == 0 && indexPath.row != 2)
+            {
+                if (indexPath.row != currentdayrow)
+                {
+                    rightarrow.hidden = true
+                }
+                else
+                {
+                    rightarrow.hidden = false
+                }
+                cell.contentView.addSubview(rightarrow)
+            }
+            if (indexPath.row == currentdayrow)
+            {
+                if (rightarrowarray.count > 0)
+                {
+                    if (currentdayrow == 2)
+                    {
+                        rightarrowarray[0].hidden = true
+                    }
+                    else
+                    {
+                        rightarrowarray[0].hidden = false
+                    }
+                }
+                if (leftarrowarray.count > 0)
+                {
+                    leftarrowarray[0].hidden = false
+                }
+            }
+            else
+            {
+                if (rightarrowarray.count > 0)
+                {
+                    rightarrowarray[0].hidden = true
+                }
+                if (leftarrowarray.count > 0)
+                {
+                    leftarrowarray[0].hidden = true
+                }
             }
             label!.backgroundColor = UIColor.whiteColor()
             label!.textAlignment = NSTextAlignment.Center
-            if (collectionView.tag == Int(dayrow))
-            {
-                let day = self.sourceArray[collectionView.tag][indexPath.item] as? Hangout_Day
-                label!.text = day?.day_description
-            }
-            else if (collectionView.tag == Int(timerow))
-            {
-                let time = self.sourceArray[collectionView.tag][indexPath.item] as? Hangout_Time
-                label!.text = time?.time_description
-            }
+            let day = self.sourceArray[collectionView.tag][indexPath.item] as? Hangout_Day
+            label!.text = day?.day_description
             return cell
         }
     }
@@ -564,8 +721,7 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
         if !scrollView.isKindOfClass(UICollectionView) {
             return
         }
-        let collectionView: UICollectionView = scrollView as! UICollectionView
-        
+        let collectionView: DHIndexedCollectionView = scrollView as! DHIndexedCollectionView
         let pageWidth: CGFloat = self.view.frame.width - 44
         let currentOffset: CGFloat = scrollView.contentOffset.x
         let targetOffset = targetContentOffset.memory.x
@@ -591,6 +747,7 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
         self.contentOffsetDictionary.setValue(newTargetOffset/pageWidth, forKey: collectionView.tag.description)
         targetContentOffset.memory.x = currentOffset
         scrollView.setContentOffset(CGPointMake(newTargetOffset, 0), animated: true)
+        collectionView.reloadData()
     }
 }
 

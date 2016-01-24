@@ -77,7 +77,7 @@ class DataManager: NSObject {
         {
             x+=30
         }
-        var y = arc4random_uniform(400)
+        var y = arc4random_uniform(290)
         if (y < 30)
         {
             y+=30
@@ -99,7 +99,7 @@ class DataManager: NSObject {
         {
             x+=30
         }
-        var y = arc4random_uniform(400)
+        var y = arc4random_uniform(290)
         if (y < 30)
         {
             y+=30

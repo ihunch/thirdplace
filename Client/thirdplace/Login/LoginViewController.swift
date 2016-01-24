@@ -16,7 +16,7 @@ class LoginViewController: UIViewController,FBLoginViewDelegate, UIPageViewContr
     let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
     // Create the data model
     let pageTitles = ["Welcome Thirdplace", "page2", "page3", "page4"]
-    let pageImages = ["page1.png", "page2.png", "page3.png", "page4.png"]
+    let pageImages = ["page1", "page2", "page3", "page4"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -142,7 +142,7 @@ class LoginViewController: UIViewController,FBLoginViewDelegate, UIPageViewContr
                 return nil;
             }
             index++
-            if (index == self.pageTitles.count) {
+            if (index == self.pageImages.count) {
                 return nil;
             }
             return self.viewControllerAtIndex(index)
@@ -162,7 +162,7 @@ class LoginViewController: UIViewController,FBLoginViewDelegate, UIPageViewContr
     {
         let contentController = self.storyboard?.instantiateViewControllerWithIdentifier("LoginContentViewController") as? LoginContentViewController
         contentController!.imageFile = pageImages[index]
-        contentController!.titletext = pageTitles[index]
+        contentController!.pageIndex = index
         return contentController!
     }
 

@@ -17,7 +17,7 @@ class LoginContentViewController: UIViewController {
     var titletext: String?
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.titleLabel.text = titletext
+       // self.titleLabel.text = titletext
         self.imageview.image = UIImage(named: imageFile!)
     }
 
