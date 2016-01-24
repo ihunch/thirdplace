@@ -89,7 +89,8 @@ NSString *const kLoginUserPhotoPath = @"LoginUserPhotoPath";
 
 + (UIColor*)themebgcolour
 {
-    return [UIColor colorWithRed:235.0/255.0 green:235.0/255.0 blue:245.0/255.0 alpha:1.0];
+    //return [UIColor colorWithRed:235.0/255.0 green:235.0/255.0 blue:245.0/255.0 alpha:1.0];
+    return [UIColor blackColor];
 }
 
 + (UIColor*)blueColour

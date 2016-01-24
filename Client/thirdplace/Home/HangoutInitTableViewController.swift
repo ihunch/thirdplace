@@ -38,6 +38,12 @@ class HangoutInitTableViewController: DHCollectionTableViewController
             return String(format: "Want to catch up with %@ this weekend?",   AppConfig.name())
         }
     }
+    var defaultSendMessage: String {
+        get
+        {
+            return String(format: "Want to catch up this weekend?")
+        }
+    }
     var defaultConfirmMessage: String {
         get {
             return "Let's catch up this weekend"
@@ -124,7 +130,7 @@ class HangoutInitTableViewController: DHCollectionTableViewController
         }
         else
         {
-            hangout.hangoutdescription = defaultMessage
+            hangout.hangoutdescription = defaultSendMessage
         }
         hangout.createtime = createtime
         hangout.createUserJID = xmppStream.myJID.bare()
@@ -181,7 +187,7 @@ class HangoutInitTableViewController: DHCollectionTableViewController
         }
         else
         {
-            message.content = defaultMessage
+            message.content = defaultSendMessage
         }
         message.updatetime = createtime
         message.updatejid = xmppStream.myJID.bare()

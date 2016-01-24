@@ -84,6 +84,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
     [[UIApplication sharedApplication] registerForRemoteNotifications];
+    
+    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+        [Hangout MR_truncateAllInContext:localContext];
+    }];
     return YES;
 }
 
@@ -369,6 +373,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [self teardownXMPPStream];
+    
+    
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

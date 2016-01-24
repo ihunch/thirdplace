@@ -32,24 +32,20 @@ class DHCollectionTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        //layout.sectionInset = UIEdgeInsetsMake(4, 5, 4, 5)
-       // layout.minimumLineSpacing = 5
         layout.itemSize = CGSizeMake(91, 91)
         layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
         self.collectionView = DHIndexedCollectionView(frame: CGRectZero, collectionViewLayout: layout)
         self.collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: collectionViewCellIdentifier as String)
        
         self.collectionView.registerNib(UINib(nibName: "LocationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: locationViewCellIdentifier as String)
-       // self.collectionView.registerClass(LocationCollectionViewCell.self, forCellWithReuseIdentifier: locationViewCellIdentifier as String)
         self.collectionView.showsHorizontalScrollIndicator = false
-       // self.collectionView.pagingEnabled = true
         
         self.contentView.addSubview(self.collectionView)
         self.frameView = UIView(frame: CGRectZero)
         self.frameView.backgroundColor = UIColor.clearColor()
         self.frameView.selectiveBorderFlag =  UInt(AUISelectiveBordersFlagTop | AUISelectiveBordersFlagBottom | AUISelectiveBordersFlagLeft | AUISelectiveBordersFlagRight)
         frameView.selectiveBordersColor = UIColor.yellowColor()
-        frameView.selectiveBordersWidth = 1
+        frameView.selectiveBordersWidth = 3
         frameView!.layer.shadowColor = UIColor.grayColor().CGColor
         frameView!.layer.shadowOffset = CGSizeMake(1, 3)
         frameView!.layer.shadowOpacity = 1
@@ -66,8 +62,8 @@ class DHCollectionTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         let frame = self.contentView.bounds
-        self.collectionView.frame = CGRectMake(0, 1, frame.size.width, frame.size.height - 5)
-        self.frameView.frame = CGRectMake(29, 0, frame.size.width - 58, frame.size.height - 2)
+        self.collectionView.frame = CGRectMake(0, 3, frame.size.width, frame.size.height-6)
+        self.frameView.frame = CGRectMake(30, 0, frame.size.width - 58, frame.size.height)
     }
     
     func setCollectionViewDataSourceDelegate(dataSourceDelegate delegate: protocol<UICollectionViewDelegate,UICollectionViewDataSource>, index: NSInteger) {

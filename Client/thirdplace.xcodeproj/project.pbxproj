@@ -203,6 +203,7 @@
 		2F6766631BBD717200F866F5 /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F6765D41BBD717200F866F5 /* libidn.a */; };
 		2F6766651BBD74C000F866F5 /* AppConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6766641BBD74C000F866F5 /* AppConfig.m */; };
 		2F6766751BBD7A6000F866F5 /* XMPPRosterCoreDataStorage+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6766741BBD7A6000F866F5 /* XMPPRosterCoreDataStorage+Additions.m */; };
+		2F97F2731C5382B700B723B6 /* App.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F97F2721C5382B700B723B6 /* App.png */; };
 		2F9A2E691BA99D25008D4797 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9A2E681BA99D25008D4797 /* HomeScreenViewController.swift */; };
 		2F9A2E6D1BA9BB89008D4797 /* FriendContainerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9A2E6C1BA9BB89008D4797 /* FriendContainerTableViewCell.swift */; };
 		2FA43F9E1BC128E900F9FBBD /* XMPPLoggingWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA43F9D1BC128E900F9FBBD /* XMPPLoggingWrapper.m */; };
@@ -216,6 +217,7 @@
 		2FC2335F1BDE5EFA003EA48B /* NSDate_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC233441BDE4591003EA48B /* NSDate_Extension.swift */; };
 		2FC233661BDF054F003EA48B /* TestsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC233651BDF054F003EA48B /* TestsAppDelegate.m */; };
 		2FC233671BDF063C003EA48B /* TestsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC233651BDF054F003EA48B /* TestsAppDelegate.m */; };
+		2FC558BA1C51AF7F00D54810 /* HangoutFriendViewStaticCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC558B91C51AF7F00D54810 /* HangoutFriendViewStaticCell.swift */; };
 		2FD476BF1C424AD40013C330 /* cafe_au.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2FD476BE1C424AD40013C330 /* cafe_au.plist */; };
 		2FD476C01C4251570013C330 /* NSDateAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA43F9F1BCA8A2900F9FBBD /* NSDateAdditions.swift */; };
 		2FDD10161C0335D100B1AC75 /* XMPPRosterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD10151C0335D100B1AC75 /* XMPPRosterExtension.swift */; };
@@ -610,6 +612,7 @@
 		2F6766661BBD74D000F866F5 /* AppConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
 		2F6766731BBD7A6000F866F5 /* XMPPRosterCoreDataStorage+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XMPPRosterCoreDataStorage+Additions.h"; sourceTree = "<group>"; };
 		2F6766741BBD7A6000F866F5 /* XMPPRosterCoreDataStorage+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XMPPRosterCoreDataStorage+Additions.m"; sourceTree = "<group>"; };
+		2F97F2721C5382B700B723B6 /* App.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = App.png; sourceTree = "<group>"; };
 		2F9A2E681BA99D25008D4797 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 		2F9A2E6C1BA9BB89008D4797 /* FriendContainerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendContainerTableViewCell.swift; sourceTree = "<group>"; };
 		2F9A2E701BAAEFE1008D4797 /* thirdplace-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "thirdplace-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -626,6 +629,7 @@
 		2FC233631BDF054F003EA48B /* thirdplaceTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "thirdplaceTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		2FC233641BDF054F003EA48B /* TestsAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestsAppDelegate.h; sourceTree = "<group>"; };
 		2FC233651BDF054F003EA48B /* TestsAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestsAppDelegate.m; sourceTree = "<group>"; };
+		2FC558B91C51AF7F00D54810 /* HangoutFriendViewStaticCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HangoutFriendViewStaticCell.swift; sourceTree = "<group>"; };
 		2FD476BE1C424AD40013C330 /* cafe_au.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cafe_au.plist; sourceTree = "<group>"; };
 		2FDD10151C0335D100B1AC75 /* XMPPRosterExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMPPRosterExtension.swift; sourceTree = "<group>"; };
 		2FDD10191C033ED700B1AC75 /* UIAlertExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertExtension.swift; sourceTree = "<group>"; };
@@ -1789,6 +1793,7 @@
 				2F1EC6F71BB2F08C0079A438 /* HangoutTableViewController.swift */,
 				2FA43FA11BCB304100F9FBBD /* HangoutInitTableViewController.swift */,
 				2F60DFB41BFC96A7009408C0 /* FBFriendListViewController.swift */,
+				2FC558B91C51AF7F00D54810 /* HangoutFriendViewStaticCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1844,6 +1849,7 @@
 		63626B051962B02D00FA58D5 = {
 			isa = PBXGroup;
 			children = (
+				2F97F2721C5382B700B723B6 /* App.png */,
 				2FD476BE1C424AD40013C330 /* cafe_au.plist */,
 				2F1982971BBD1D570036AF53 /* Media.xcassets */,
 				2F1EC6F51BB195310079A438 /* Launch Screen.storyboard */,
@@ -2035,6 +2041,7 @@
 				2FEF8CCF1C1DAC2400AF1D95 /* LocationCollectionViewCell.xib in Resources */,
 				2F1EC6F61BB195310079A438 /* Launch Screen.storyboard in Resources */,
 				63D13E4619666F3B00D17CF5 /* bbb1.jpg in Resources */,
+				2F97F2731C5382B700B723B6 /* App.png in Resources */,
 				2F6766621BBD717200F866F5 /* build-libidn.sh in Resources */,
 				2FD476BF1C424AD40013C330 /* cafe_au.plist in Resources */,
 				63626B1C1962B02D00FA58D5 /* InfoPlist.strings in Resources */,
@@ -2217,6 +2224,7 @@
 				2F6766611BBD717200F866F5 /* DDXMLNode.m in Sources */,
 				2F6766231BBD717200F866F5 /* XMPPIQ+XEP_0066.m in Sources */,
 				2F6766491BBD717200F866F5 /* NSXMLElement+XEP_0297.m in Sources */,
+				2FC558BA1C51AF7F00D54810 /* HangoutFriendViewStaticCell.swift in Sources */,
 				2F67663D1BBD717200F866F5 /* XMPPStreamManagementStanzas.m in Sources */,
 				2F67662B1BBD717200F866F5 /* NSString+XEP_0106.m in Sources */,
 				2F6766511BBD717200F866F5 /* XMPPSRVResolver.m in Sources */,

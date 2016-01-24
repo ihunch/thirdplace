@@ -58,7 +58,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     [super awakeFromNib];
     self.friendViews = [NSMutableArray array];
-    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"patternBackground"]];
+    self.backgroundColor = [UIColor blackColor];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"patternBackground"]];
     self.linesView = [[LinesView alloc] init];
     self.linesView.hidden = true;
     [self addSubview:self.linesView];

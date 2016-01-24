@@ -262,9 +262,6 @@ class XMPPHangout: XMPPModule
     
     func xmppStreamDidAuthenticate(sender: XMPPStream)
     {
-        MagicalRecord.saveWithBlockAndWait({ (localContext : NSManagedObjectContext!) in
-            Hangout.MR_truncateAllInContext(localContext)
-        })
         self.getHangoutlists(sender.myJID)
     }
 }

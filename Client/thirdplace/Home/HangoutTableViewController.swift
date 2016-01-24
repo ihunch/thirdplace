@@ -12,7 +12,7 @@ class HangoutTableViewController: DHCollectionTableViewController {
     
     @IBOutlet weak var pagebackbutton: UIButton!
     @IBOutlet weak var sendbutton: UIButton!
-    
+    let reuseFriendCellIdentifier = "friendstaticcell"
     var displayKeyboard = false
     var offset:CGPoint?
     var messageContent: String?
@@ -35,6 +35,8 @@ class HangoutTableViewController: DHCollectionTableViewController {
     let friendtag = 1001
     let placelocationimagetag = 1002
     let placelocatinaddresstag = 1003
+    let leftarrowtag = 1004
+    let rightarrowtag = 1005
     var locationdata: NSArray?
     
     var hangoutmodule : XMPPHangout{
@@ -91,6 +93,7 @@ class HangoutTableViewController: DHCollectionTableViewController {
         let p_context = hangoutDataManager.privateContext()
         let hangoutid = selectedHangoutID!
         let hangout = Hangout.MR_findFirstByAttribute("hangoutid", withValue: NSNumber(integer: hangoutid), inContext: p_context)
+        
         let preferlocation = hangout.preferedlocation
         let locationstring = preferlocation!.componentsSeparatedByString(",")
         self.sourceArray =
@@ -185,8 +188,22 @@ class HangoutTableViewController: DHCollectionTableViewController {
             hangouttime.startdate = satmid.mt_dateHoursAfter(Int(time.time!))
             hangouttime.enddate = sundayendtime
         }
+        
+        let startdatedes = hangouttime.startdate?.mt_stringFromDateWithFormat("dd/MM", localized: true)
+        var daydes = day.day_description!
+        if (daydes == "Weekend")
+        {
+            daydes = "This \(daydes)"
+        }
         //time
-        hangouttime.timedescription = "\(day.day_description!) \(time.time_description!)"//based on the selection
+        if (startdatedes != nil)
+        {
+            hangouttime.timedescription = "\(daydes), \(time.time_description!) (\(startdatedes!))"//based on the selection
+        }
+        else
+        {
+            hangouttime.timedescription = "\(daydes), \(time.time_description!)"
+        }
         hangouttime.updatejid = xmppStream!.myJID.bare()
         hangouttime.updatetime = createtime
         hangouttime.hangout = hangout
@@ -250,7 +267,7 @@ extension HangoutTableViewController {
         }
         else if(indexPath.section == 3)
         {
-            return 150
+            return 180
         }
         else if(indexPath.section == 4)
         {
@@ -293,27 +310,28 @@ extension HangoutTableViewController {
         }
         else
         {
-            let cell = tableView.dequeueReusableCellWithIdentifier(reuseTableViewCellIdentifier, forIndexPath: indexPath) as! DHCollectionTableViewCell
             if (indexPath.section != 0)
             {
+                let cell = tableView.dequeueReusableCellWithIdentifier(reuseTableViewCellIdentifier, forIndexPath: indexPath) as! DHCollectionTableViewCell
                 let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()  
                 layout.minimumLineSpacing = 15
                 layout.sectionInset = UIEdgeInsetsMake(0, offsetLeftMargin, 0, offsetRightMargin)
-                layout.itemSize = CGSizeMake(cell.bounds.size.width - 60, cell.bounds.size.height - 2)
+                layout.itemSize = CGSizeMake(cell.bounds.size.width - 60, cell.bounds.size.height - 6)
                 layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
                 cell.collectionView.collectionViewLayout = layout
+                return cell
             }
             else
             {
+                let cell = tableView.dequeueReusableCellWithIdentifier(reuseFriendCellIdentifier, forIndexPath: indexPath) as! HangoutFriendViewStaticCell
                 let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
                 layout.minimumLineSpacing = 10
                 layout.sectionInset = UIEdgeInsetsMake(0, offsetLeftMargin, 0, 0)
                 layout.itemSize = CGSizeMake(cell.bounds.size.height - 10, cell.bounds.size.height - 10)
                 layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
                 cell.collectionView.collectionViewLayout = layout
-                cell.frameView.hidden = true
+                return cell
             }
-            return cell
         }
     }
         
@@ -321,9 +339,18 @@ extension HangoutTableViewController {
     {
         if (indexPath.section <= 3)
         {
-            let collectionCell: DHCollectionTableViewCell = cell as! DHCollectionTableViewCell
-            collectionCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, index: indexPath.section)
-            collectionCell.collectionView.backgroundColor = UIColor.clearColor()
+            if (indexPath.section == 0)
+            {
+                let friendCell: HangoutFriendViewStaticCell = cell as! HangoutFriendViewStaticCell
+                friendCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, index: indexPath.section)
+                friendCell.collectionView.backgroundColor = UIColor.clearColor()
+            }
+            else
+            {
+                let collectionCell: DHCollectionTableViewCell = cell as! DHCollectionTableViewCell
+                collectionCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, index: indexPath.section)
+                collectionCell.collectionView.backgroundColor = UIColor.clearColor()
+            }
         }
         cell.backgroundColor = AppConfig.themebgcolour()
     }
@@ -402,7 +429,6 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
-        
         if (collectionView.tag == Int(placerow))
         {
             let cell: LocationCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseLocationCollectionViewCellIdentifier, forIndexPath: indexPath) as!LocationCollectionViewCell
@@ -415,6 +441,55 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
                 cell.locationImageView.image = UIImage(named: photopath)
                 cell.namelabel.text = name
                 cell.addresslabel.text = address
+                cell.namelabel.textColor = UIColor.blackColor()
+                cell.labelContainer.backgroundColor = UIColor(white: 1, alpha: 0.6)
+                cell.addresslabel.textColor = UIColor.blackColor()
+                cell.addressContainer.backgroundColor = UIColor(white: 1, alpha: 0.6)
+            }
+            return cell
+        }
+        else if (collectionView.tag == 0)
+        {
+            let cell: UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseCollectionViewCellIdentifier, forIndexPath: indexPath)
+            var friendView: UIView? = nil
+            if (indexPath.item == 0)
+            {
+                let me = rosterStorage!.myUserForXMPPStream(xmppStream!, managedObjectContext: rosterDBContext!)
+                let sarray = cell.contentView.subviews.filter({
+                    $0.tag == ownphototag
+                })
+                if (sarray.count == 0)
+                {
+                    friendView = FriendView.friendViewWithFriend(me) as? UIView
+                    friendView!.frame = cell.bounds
+                    friendView?.tag = ownphototag
+                    cell.contentView.addSubview(friendView!)
+                }
+                else
+                {
+                    friendView = sarray[0] as UIView
+                    friendView!.frame = cell.bounds
+                    friendView?.tag = ownphototag
+                }
+            }
+            else
+            {
+                let sarray = cell.contentView.subviews.filter({
+                    $0.tag == friendtag
+                })
+                if (sarray.count == 0)
+                {
+                    friendView = FriendNormalView.friendViewWithFriend(selectedHangoutFriend) as? UIView
+                    friendView?.tag = friendtag
+                    friendView!.frame = cell.bounds
+                    cell.contentView.addSubview(friendView!)
+                }
+                else
+                {
+                    friendView = sarray[0] as UIView
+                    friendView!.frame = cell.bounds
+                    friendView?.tag = ownphototag
+                }
             }
             return cell
         }
@@ -422,6 +497,16 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
         {
             let cell: UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseCollectionViewCellIdentifier, forIndexPath: indexPath)
             var label: UILabel? = nil
+            let rightimage = UIImage(named: "chevron")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+            let leftimage = UIImage(named: "chevron_left")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+            let rightarrow: UIImageView = UIImageView(image: rightimage)
+            rightarrow.tintColor = UIColor(white: 0, alpha: 0.5)
+            rightarrow.frame.origin = CGPoint(x: cell.frame.size.width - rightarrow.frame.width - 5, y: 8)
+            rightarrow.tag = rightarrowtag
+            let  leftarrow: UIImageView = UIImageView(image: leftimage)
+            leftarrow.frame.origin = CGPoint(x: 5, y: 8)
+            leftarrow.tag = leftarrowtag
+            leftarrow.tintColor = UIColor(white: 0, alpha: 0.5)
             var array = cell.contentView.subviews.filter({
                 $0.tag == placelocationtag
             })
@@ -435,52 +520,31 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
             {
                 label = array[0] as? UILabel
             }
-            
-            if (collectionView.tag == 0)
+            let leftarrowarray = cell.contentView.subviews.filter({
+                $0.tag == leftarrowtag
+            })
+            if (leftarrowarray.count == 0)
             {
-                var friendView: UIView? = nil
-                if (indexPath.item == 0)
-                {
-                    let me = rosterStorage!.myUserForXMPPStream(xmppStream!, managedObjectContext: rosterDBContext!)
-                    let sarray = cell.contentView.subviews.filter({
-                        $0.tag == ownphototag
-                    })
-                    if (sarray.count == 0)
-                    {
-                        friendView = FriendView.friendViewWithFriend(me) as? UIView
-                        friendView!.frame = cell.bounds
-                        friendView?.tag = ownphototag
-                        cell.contentView.addSubview(friendView!)
-                    }
-                }
-                else
-                {
-                    let sarray = cell.contentView.subviews.filter({
-                        $0.tag == friendtag
-                    })
-                    if (sarray.count == 0)
-                    {
-                        friendView = FriendNormalView.friendViewWithFriend(selectedHangoutFriend) as? UIView
-                        friendView?.tag = friendtag
-                        friendView!.frame = cell.bounds
-                        cell.contentView.addSubview(friendView!)
-                    }
-                }
+                cell.contentView.addSubview(leftarrow)
             }
-            else
+            let rightarrowarray = cell.contentView.subviews.filter({
+                $0.tag == rightarrowtag
+            })
+            if (rightarrowarray.count == 0)
             {
-                label!.backgroundColor = UIColor.whiteColor()
-                label!.textAlignment = NSTextAlignment.Center
-                if (collectionView.tag == Int(dayrow))
-                {
-                    let day = self.sourceArray[collectionView.tag][indexPath.item] as? Hangout_Day
-                    label!.text = day?.day_description
-                }
-                else if (collectionView.tag == Int(timerow))
-                {
-                    let time = self.sourceArray[collectionView.tag][indexPath.item] as? Hangout_Time
-                    label!.text = time?.time_description
-                }
+                cell.contentView.addSubview(rightarrow)
+            }
+            label!.backgroundColor = UIColor.whiteColor()
+            label!.textAlignment = NSTextAlignment.Center
+            if (collectionView.tag == Int(dayrow))
+            {
+                let day = self.sourceArray[collectionView.tag][indexPath.item] as? Hangout_Day
+                label!.text = day?.day_description
+            }
+            else if (collectionView.tag == Int(timerow))
+            {
+                let time = self.sourceArray[collectionView.tag][indexPath.item] as? Hangout_Time
+                label!.text = time?.time_description
             }
             return cell
         }
@@ -502,7 +566,7 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
         }
         let collectionView: UICollectionView = scrollView as! UICollectionView
         
-        let pageWidth: CGFloat = self.view.frame.width - 45
+        let pageWidth: CGFloat = self.view.frame.width - 44
         let currentOffset: CGFloat = scrollView.contentOffset.x
         let targetOffset = targetContentOffset.memory.x
         var newTargetOffset:CGFloat = 0

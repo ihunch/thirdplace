@@ -71,11 +71,13 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         xmppHangout!.addDelegate(self, delegateQueue: dispatch_get_main_queue())
         hometablelistview.estimatedRowHeight = 44.0
         locationlists = XMPPHangoutDataManager.initLocationData()
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "patternBackground")!)
+        self.view.backgroundColor = UIColor.blackColor()//UIColor(patternImage: UIImage(named: "patternBackground")!)
+        appDelegate!.xmppStream.addDelegate(self, delegateQueue: dispatch_get_main_queue())
     }
     
     deinit
     {
+        appDelegate!.xmppStream.removeDelegate(self)
         appDelegate!.xmppRoster.removeDelegate(self)
         xmppHangout!.removeDelegate(self)
     }
@@ -96,6 +98,8 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         else
         {
             let hangoutcell :HangoutListTableViewCell = tableView.dequeueReusableCellWithIdentifier("HangoutListTableViewCell") as!HangoutListTableViewCell
+            hangoutcell.mapheightconstraint.constant = 50
+            hangoutcell.topvalueconstraint.constant = 0
             let indexpath = NSIndexPath(forRow: indexPath.row, inSection: 0)
             let hangout = self.hangoutFetchedRequestControler!.objectAtIndexPath(indexpath) as! Hangout
             hangoutcell.mapbutton.tag = indexPath.row
@@ -184,6 +188,8 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             {
                 hangoutcell.mapbutton.hidden = true
                 hangoutcell.placeLabel.hidden = true
+                hangoutcell.mapheightconstraint.constant = 0
+                hangoutcell.topvalueconstraint.constant = 0
                 if (otheruser!.goingstatus != "notgoing")
                 {
                     if (me!.goingstatus == "notgoing")
@@ -196,7 +202,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                         {
                             if (hangout.message.count == 1)
                             {
-                                  hangoutcell.bgimageview.image = UIImage(named: "bbb.jpg")?.grayscale()
+                                hangoutcell.bgimageview.image = UIImage(named: "bbb.jpg")?.grayscale()
                             }
                             else
                             {
@@ -258,7 +264,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         else
         {
-            return 44
+            return 70
         }
     }
     
@@ -270,12 +276,14 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         else
         {
-            let rect = CGRectMake(0, 0, tableView.frame.size.width, 44)
-            let labelrect = CGRectMake(10, 0, tableView.frame.size.width, 44)
+            let rect = CGRectMake(0, 0, tableView.frame.size.width, 70)
+            let labelrect = CGRectMake(10, 0, tableView.frame.size.width, 70)
             let view = UIView(frame: rect)
             let label = UILabel(frame: labelrect)
-            label.text = "Hangouts"
-            label.font = UIFont (name: "HelveticaNeue-Medium", size: 24)
+            label.text = "Hangouts↓"
+            label.textColor = UIColor.whiteColor()
+            label.textAlignment = NSTextAlignment.Center
+            label.font = UIFont (name: "HelveticaNeue-Thin", size: 48)
             view.addSubview(label)
             return view
         }
@@ -495,7 +503,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
 
     func didTouchMe()
     {
-        self.performSegueWithIdentifier("ProfileViewController", sender: nil)
+        //self.performSegueWithIdentifier("ProfileViewController", sender: nil)
     }
     
     //Mark: XMPPRosterDelegate
@@ -529,7 +537,6 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             var unreadmessage = user.unreadMessages.integerValue
             unreadmessage++
             rosterStorage.updateUneadMessage(unreadmessage, user: user, xmppStream: self.xmppStream, managedObjectContext: rosterDBContext)
-            
         }
     }
     
@@ -552,6 +559,11 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         XMPPLoggingWrapper.XMPPLogTrace()
         _hangoutFetchedResultsController = nil
         hometablelistview.reloadData()
+    }
+    
+    func xmppStreamDidConnect(sender: XMPPStream)
+    {
+
     }
 }
 
@@ -583,7 +595,8 @@ extension HomeScreenViewController:UICollectionViewDataSource,UICollectionViewDe
                 let friend = rosterStorage.userForJID(otheruser, xmppStream: self.xmppStream, managedObjectContext: rosterDBContext)
                 friendView = FriendNormalView.friendViewWithFriend(friend) as? UIView
             }
-            else{
+            else
+            {
                 friendView = FriendView.friendViewWithFriend(nil) as? UIView
             }
         }

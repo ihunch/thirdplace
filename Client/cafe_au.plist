@@ -9,8 +9,8 @@
 		<string>Miss Marmalade</string>
 		<key>address</key>
 		<string>126 Union St Brunswick VIC 3056</string>
-        <key>photopath</key>
-        <string>Miss Marmalade</string>
+		<key>photopath</key>
+		<string>Miss Marmalade</string>
 	</dict>
 	<dict>
 		<key>map</key>
@@ -19,8 +19,8 @@
 		<string>Operator 25</string>
 		<key>address</key>
 		<string>25 Wills St，Melbourne VIC 3000</string>
-        <key>photopath</key>
-        <string>Operator25</string>
+		<key>photopath</key>
+		<string>Operator25</string>
 	</dict>
 	<dict>
 		<key>map</key>
@@ -29,8 +29,8 @@
 		<string>Chez Dre</string>
 		<key>address</key>
 		<string>285-287 Coventry St South Melbourne VIC 3205</string>
-        <key>photopath</key>
-        <string>Chez Dre</string>
+		<key>photopath</key>
+		<string>Chez Dre</string>
 	</dict>
 	<dict>
 		<key>map</key>
@@ -39,8 +39,8 @@
 		<string>Hardware Société</string>
 		<key>address</key>
 		<string>118-120 Hardware St  Melbourne, VIC 3000</string>
-        <key>photopath</key>
-        <string>Hardware Society</string>
+		<key>photopath</key>
+		<string>Hardware Society</string>
 	</dict>
 	<dict>
 		<key>map</key>
@@ -49,8 +49,8 @@
 		<string>East Elevation</string>
 		<key>address</key>
 		<string>440 Lygon St Brunswick East VIC 3057</string>
-        <key>photopath</key>
-        <string>east elevation</string>
+		<key>photopath</key>
+		<string>east elevation</string>
 	</dict>
 	<dict>
 		<key>map</key>
@@ -59,8 +59,8 @@
 		<string>Hammer &amp; Tong</string>
 		<key>address</key>
 		<string>412 Brunswick St Fitzroy VIC 3065</string>
-        <key>photopath</key>
-        <string>Hammer and Tong</string>
+		<key>photopath</key>
+		<string>Hammer and Tong</string>
 	</dict>
 	<dict>
 		<key>map</key>
@@ -69,8 +69,8 @@
 		<string>Patricia Coffee Brewers</string>
 		<key>address</key>
 		<string>493-495 Little Bourke St Melbourne VIC 3000</string>
-        <key>photopath</key>
-        <string>Patrica</string>
+		<key>photopath</key>
+		<string>Patrica</string>
 	</dict>
 	<dict>
 		<key>map</key>
@@ -79,8 +79,8 @@
 		<string>Cobb Lane</string>
 		<key>address</key>
 		<string>13 Anderson St Yarraville VIC 3013</string>
-        <key>photopath</key>
-        <string>Cobb Lane</string>
+		<key>photopath</key>
+		<string>Cobb Lane</string>
 	</dict>
 	<dict>
 		<key>map</key>
@@ -89,8 +89,8 @@
 		<string>The Premises</string>
 		<key>address</key>
 		<string>202 Bellair St Kensington VIC 3031</string>
-        <key>photopath</key>
-        <string>Premises</string>
+		<key>photopath</key>
+		<string>Premises</string>
 	</dict>
 	<dict>
 		<key>map</key>
@@ -99,8 +99,8 @@
 		<string>Everyday Coffee</string>
 		<key>address</key>
 		<string>33 Johnston St Collingwood VIC 3066</string>
-        <key>photopath</key>
-        <string>everyday</string>
+		<key>photopath</key>
+		<string>everyday</string>
 	</dict>
 	<dict>
 		<key>map</key>
@@ -109,8 +109,8 @@
 		<string>Monk Bodhi Dharma</string>
 		<key>address</key>
 		<string>202 Carlisle St Balaclava VIC 3183</string>
-        <key>photopath</key>
-        <string>everyday</string>
+		<key>photopath</key>
+		<string>everyday</string>
 	</dict>
 	<dict>
 		<key>map</key>
@@ -119,8 +119,8 @@
 		<string>12-18 Yarra Pl South Melbourne VIC 3205</string>
 		<key>name</key>
 		<string>St Ali</string>
-        <key>photopath</key>
-        <string>St Ali</string>
+		<key>photopath</key>
+		<string>St Ali</string>
 	</dict>
 	<dict>
 		<key>map</key>
@@ -129,8 +129,8 @@
 		<string>103-107 Errol St North Melbourne VIC 3051</string>
 		<key>name</key>
 		<string>Auction Rooms</string>
-        <key>photopath</key>
-        <string>Auction Room</string>
+		<key>photopath</key>
+		<string>Auction Room</string>
 	</dict>
 	<dict>
 		<key>map</key>
@@ -139,8 +139,8 @@
 		<string>106-114 Berkeley St Carlton VIC 3053</string>
 		<key>name</key>
 		<string>Seven Seeds</string>
-        <key>photopath</key>
-        <string>Seven Seeds</string>
+		<key>photopath</key>
+		<string>Seven Seeds</string>
 	</dict>
 	<dict>
 		<key>map</key>
@@ -149,8 +149,8 @@
 		<string>Market Lane</string>
 		<key>address</key>
 		<string>Shop 13, Prahran Market/163 Commercial Rd South Yarra VIC 3141</string>
-        <key>photopath</key>
-        <string>Market Lane</string>
+		<key>photopath</key>
+		<string>Market Lane</string>
 	</dict>
 	<dict>
 		<key>map</key>
@@ -159,8 +159,8 @@
 		<string>172 Oxford St Collingwood VIC 3066</string>
 		<key>name</key>
 		<string>Proud Mary</string>
-        <key>photopath</key>
-        <string>Proud Mary</string>
+		<key>photopath</key>
+		<string>Proud Mary</string>
 	</dict>
 	<dict>
 		<key>map</key>
@@ -169,8 +169,8 @@
 		<string>Sun Moth</string>
 		<key>address</key>
 		<string>28 Niagara Ln, Melbourne VIC 3000, Australia</string>
-        <key>photopath</key>
-        <string>Sun Moth</string>
+		<key>photopath</key>
+		<string>Sun Moth</string>
 	</dict>
 	<dict>
 		<key>map</key>
@@ -178,19 +178,19 @@
 		<key>name</key>
 		<string>Short Stop</string>
 		<key>address</key>
-        <string>12 Sutherland St, Melbourne VIC 3000, Australia</string>
-        <key>photopath</key>
-        <string>Shot Stop</string>
+		<string>12 Sutherland St, Melbourne VIC 3000, Australia</string>
+		<key>photopath</key>
+		<string>Shot Stop</string>
 	</dict>
 	<dict>
 		<key>map</key>
 		<string>-37.80277, 144.98701</string>
-		<key>Name</key>
+		<key>name</key>
 		<string>Aunty Pegs</string>
-		<key>Address</key>
+		<key>address</key>
 		<string>200 Wellington St, Collingwood VIC 3066, Australia</string>
-        <key>photopath</key>
-        <string>Aunty Pegs</string>
+		<key>photopath</key>
+		<string>Aunty Pegs</string>
 	</dict>
 </array>
 </plist>
