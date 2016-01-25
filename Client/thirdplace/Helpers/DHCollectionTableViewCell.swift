@@ -24,6 +24,7 @@ class DHIndexedCollectionView: UICollectionView {
 
 let collectionViewCellIdentifier: NSString = "CollectionViewCell"
 let locationViewCellIdentifier: NSString = "LocationCollectionViewCell"
+let daytimeViewCellIdentifier: NSString = "DateTimeCollectionViewCell"
 class DHCollectionTableViewCell: UITableViewCell {
 
     var collectionView: DHIndexedCollectionView!
@@ -38,6 +39,7 @@ class DHCollectionTableViewCell: UITableViewCell {
         self.collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: collectionViewCellIdentifier as String)
        
         self.collectionView.registerNib(UINib(nibName: "LocationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: locationViewCellIdentifier as String)
+        self.collectionView.registerNib(UINib(nibName: "DateTimeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: daytimeViewCellIdentifier as String)
         self.collectionView.showsHorizontalScrollIndicator = false
         
         self.contentView.addSubview(self.collectionView)

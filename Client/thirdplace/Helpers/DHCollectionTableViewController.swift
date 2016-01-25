@@ -11,7 +11,7 @@ import UIKit
 let reuseTableViewCellIdentifier = "TableViewCell"
 let reuseCollectionViewCellIdentifier = "CollectionViewCell"
 let reuseLocationCollectionViewCellIdentifier = "LocationCollectionViewCell"
-
+let reuseDayTimeCollectionViewCellIdentifier = "DateTimeCollectionViewCell"
 class DHCollectionTableViewController: UITableViewController {
 
     var sourceArray: NSArray!

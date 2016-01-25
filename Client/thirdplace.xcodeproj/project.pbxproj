@@ -218,6 +218,8 @@
 		2FC233661BDF054F003EA48B /* TestsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC233651BDF054F003EA48B /* TestsAppDelegate.m */; };
 		2FC233671BDF063C003EA48B /* TestsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC233651BDF054F003EA48B /* TestsAppDelegate.m */; };
 		2FC558BA1C51AF7F00D54810 /* HangoutFriendViewStaticCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC558B91C51AF7F00D54810 /* HangoutFriendViewStaticCell.swift */; };
+		2FCA14431C55B0D500EEC045 /* DateTimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCA14421C55B0D500EEC045 /* DateTimeCollectionViewCell.swift */; };
+		2FCA14451C55B1D800EEC045 /* DateTimeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FCA14441C55B1D800EEC045 /* DateTimeCollectionViewCell.xib */; };
 		2FD476BF1C424AD40013C330 /* cafe_au.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2FD476BE1C424AD40013C330 /* cafe_au.plist */; };
 		2FD476C01C4251570013C330 /* NSDateAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA43F9F1BCA8A2900F9FBBD /* NSDateAdditions.swift */; };
 		2FDD10161C0335D100B1AC75 /* XMPPRosterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD10151C0335D100B1AC75 /* XMPPRosterExtension.swift */; };
@@ -630,6 +632,8 @@
 		2FC233641BDF054F003EA48B /* TestsAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestsAppDelegate.h; sourceTree = "<group>"; };
 		2FC233651BDF054F003EA48B /* TestsAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestsAppDelegate.m; sourceTree = "<group>"; };
 		2FC558B91C51AF7F00D54810 /* HangoutFriendViewStaticCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HangoutFriendViewStaticCell.swift; sourceTree = "<group>"; };
+		2FCA14421C55B0D500EEC045 /* DateTimeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimeCollectionViewCell.swift; sourceTree = "<group>"; };
+		2FCA14441C55B1D800EEC045 /* DateTimeCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DateTimeCollectionViewCell.xib; sourceTree = "<group>"; };
 		2FD476BE1C424AD40013C330 /* cafe_au.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cafe_au.plist; sourceTree = "<group>"; };
 		2FDD10151C0335D100B1AC75 /* XMPPRosterExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMPPRosterExtension.swift; sourceTree = "<group>"; };
 		2FDD10191C033ED700B1AC75 /* UIAlertExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertExtension.swift; sourceTree = "<group>"; };
@@ -1818,6 +1822,8 @@
 				2F3DAA1C1C2ACBBB0030BB33 /* ErrorHandler.swift */,
 				2F4A0BA21C37694D002A54D9 /* CALayer+Additions.h */,
 				2F4A0BA31C37694D002A54D9 /* CALayer+Additions.m */,
+				2FCA14421C55B0D500EEC045 /* DateTimeCollectionViewCell.swift */,
+				2FCA14441C55B1D800EEC045 /* DateTimeCollectionViewCell.xib */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -2041,6 +2047,7 @@
 				2FEF8CCF1C1DAC2400AF1D95 /* LocationCollectionViewCell.xib in Resources */,
 				2F1EC6F61BB195310079A438 /* Launch Screen.storyboard in Resources */,
 				63D13E4619666F3B00D17CF5 /* bbb1.jpg in Resources */,
+				2FCA14451C55B1D800EEC045 /* DateTimeCollectionViewCell.xib in Resources */,
 				2F97F2731C5382B700B723B6 /* App.png in Resources */,
 				2F6766621BBD717200F866F5 /* build-libidn.sh in Resources */,
 				2FD476BF1C424AD40013C330 /* cafe_au.plist in Resources */,
@@ -2268,6 +2275,7 @@
 				5AF0E574DE478411C00127B8 /* CreateEventViewController.m in Sources */,
 				2F3E7EEC1BBFEE7400729894 /* HangoutUser.swift in Sources */,
 				5AF0EC5A3E30BE2514D758A2 /* FriendsCollectionViewController.m in Sources */,
+				2FCA14431C55B0D500EEC045 /* DateTimeCollectionViewCell.swift in Sources */,
 				2F3E7EE91BBFEE7400729894 /* HangoutLocation.swift in Sources */,
 				5AF0E83AAC648434D7421248 /* FriendCollectionViewCell.m in Sources */,
 				2F6765FE1BBD717200F866F5 /* XMPPIQ+JabberRPCResonse.m in Sources */,
