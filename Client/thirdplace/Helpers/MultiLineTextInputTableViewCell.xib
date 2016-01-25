@@ -15,21 +15,24 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yaw-5g-Tep">
-                        <rect key="frame" x="32" y="0.0" width="256" height="147.5"/>
+                        <rect key="frame" x="28" y="0.0" width="264" height="147.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wza-U7-ppt">
-                        <rect key="frame" x="32" y="1" width="256" height="18"/>
+                        <rect key="frame" x="28" y="1" width="264" height="18"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="geJ-kV-dYz"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.32156862749999998" green="0.40000000000000002" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OKX-zc-H03">
-                        <rect key="frame" x="32" y="19" width="256" height="125.5"/>
+                        <rect key="frame" x="28" y="19" width="264" height="125.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="49" id="gwl-su-CMR"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="90" id="gwl-su-CMR"/>
                         </constraints>
                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -39,10 +42,10 @@
                 <constraints>
                     <constraint firstItem="yaw-5g-Tep" firstAttribute="trailing" secondItem="Wza-U7-ppt" secondAttribute="trailing" id="0fl-iR-U8U"/>
                     <constraint firstAttribute="bottom" secondItem="yaw-5g-Tep" secondAttribute="bottom" constant="2" id="MUp-Gd-9vx"/>
-                    <constraint firstAttribute="trailing" secondItem="OKX-zc-H03" secondAttribute="trailing" constant="32" id="Tmg-5a-JKH"/>
-                    <constraint firstAttribute="trailing" secondItem="Wza-U7-ppt" secondAttribute="trailing" constant="32" id="gVV-9a-F3b"/>
-                    <constraint firstItem="OKX-zc-H03" firstAttribute="leading" secondItem="bFw-mW-LxI" secondAttribute="leading" constant="32" id="kBC-sc-c7J"/>
-                    <constraint firstItem="Wza-U7-ppt" firstAttribute="leading" secondItem="bFw-mW-LxI" secondAttribute="leading" constant="32" id="nM9-yW-vc1"/>
+                    <constraint firstAttribute="trailing" secondItem="OKX-zc-H03" secondAttribute="trailing" constant="28" id="Tmg-5a-JKH"/>
+                    <constraint firstAttribute="trailing" secondItem="Wza-U7-ppt" secondAttribute="trailing" constant="28" id="gVV-9a-F3b"/>
+                    <constraint firstItem="OKX-zc-H03" firstAttribute="leading" secondItem="bFw-mW-LxI" secondAttribute="leading" constant="28" id="kBC-sc-c7J"/>
+                    <constraint firstItem="Wza-U7-ppt" firstAttribute="leading" secondItem="bFw-mW-LxI" secondAttribute="leading" constant="28" id="nM9-yW-vc1"/>
                     <constraint firstAttribute="bottom" secondItem="OKX-zc-H03" secondAttribute="bottom" constant="5" id="oCn-Kk-RQl"/>
                     <constraint firstItem="Wza-U7-ppt" firstAttribute="top" secondItem="bFw-mW-LxI" secondAttribute="top" constant="1" id="pF5-Ru-drc"/>
                     <constraint firstItem="OKX-zc-H03" firstAttribute="top" secondItem="Wza-U7-ppt" secondAttribute="bottom" id="pHY-h2-WeP"/>

@@ -35,7 +35,16 @@ class HangoutInitTableViewController: DHCollectionTableViewController
     var defaultMessage: String {
         get
         {
-            return String(format: "Want to catch up with %@ this weekend?",   AppConfig.name())
+            let fullnamearray: NSArray? = AppConfig.name().characters.split{$0 == " "}.map(String.init)
+            if (fullnamearray != nil)
+            {
+                 return String(format: "%@: Want to catch up with this weekend?",   fullnamearray![0] as! String)
+            }
+            else
+            {
+               return String(format: "Want to catch up with %@ this weekend?",  AppConfig.name() )
+            }
+           
         }
     }
     var defaultSendMessage: String {
@@ -264,7 +273,7 @@ extension HangoutInitTableViewController {
 
         if (indexPath.section == 0)
         {
-            return 70
+            return 110
         }
         else if(indexPath.section == 1)
         {
@@ -281,20 +290,29 @@ extension HangoutInitTableViewController {
     }
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 10.0
+        return 17.0
     }
     
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 50.0
     }
     
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if (section == 0)
+        {
+            return 80
+        }
+        else{
+            return 0
+        }
+    }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         if (indexPath.section == 0)
         {
             let cell = tableView.dequeueReusableCellWithIdentifier(reuseTableViewCellIdentifier, forIndexPath: indexPath) as! DHCollectionTableViewCell
             let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-            layout.minimumLineSpacing = 10
+            layout.minimumLineSpacing = 25
             layout.sectionInset = UIEdgeInsetsMake(0, leftmargin, 0, 0)
             layout.itemSize = CGSizeMake(cell.bounds.size.height - 10, cell.bounds.size.height - 10)
             layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
@@ -355,6 +373,12 @@ extension HangoutInitTableViewController {
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
         view.backgroundColor = AppConfig.themebgcolour()
+        return view
+    }
+    
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.clearColor()
         return view
     }
     

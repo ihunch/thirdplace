@@ -58,7 +58,7 @@ class HangoutTableViewController: DHCollectionTableViewController {
         super.viewDidLoad()
         tableView.registerNib(UINib(nibName: "MultiLineTextInputTableViewCell", bundle: nil), forCellReuseIdentifier: "MultiLineTextInputTableViewCell")
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 44
+        tableView.estimatedRowHeight = 60
         xmppStream = self.appDelegate!.xmppStream
         rosterDBContext = self.appDelegate!.managedObjectContext_roster()
         xmppHangout = self.appDelegate!.xmppHangout
@@ -259,15 +259,15 @@ extension HangoutTableViewController {
     {
         if (indexPath.section == 0)
         {
-            return 70
+            return 60
         }
         else if(indexPath.section == 1 || indexPath.section == 2)
         {
-            return 50
+            return 60
         }
         else if(indexPath.section == 3)
         {
-            return 180
+            return 120
         }
         else if(indexPath.section == 4)
         {
@@ -280,9 +280,19 @@ extension HangoutTableViewController {
     }
 
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 10.0
+        return 17.0
     }
-    
+   
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if (section == 0)
+        {
+            return 40
+        }
+        else
+        {
+            return 0
+        }
+    }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         if (indexPath.section > 4)
@@ -327,7 +337,7 @@ extension HangoutTableViewController {
                 let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
                 layout.minimumLineSpacing = 10
                 layout.sectionInset = UIEdgeInsetsMake(0, offsetLeftMargin, 0, 0)
-                layout.itemSize = CGSizeMake(cell.bounds.size.height - 10, cell.bounds.size.height - 10)
+                layout.itemSize = CGSizeMake(cell.bounds.size.height, cell.bounds.size.height )
                 layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
                 cell.collectionView.collectionViewLayout = layout
                 return cell
@@ -358,6 +368,13 @@ extension HangoutTableViewController {
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
         view.backgroundColor = AppConfig.themebgcolour()
+        return view
+    }
+    
+    
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.clearColor()
         return view
     }
     

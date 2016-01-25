@@ -1075,13 +1075,13 @@ Melbourne VIC 3000</string>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b1O-XN-6qc">
-                                            <rect key="frame" x="32" y="0.0" width="100" height="43"/>
+                                            <rect key="frame" x="28" y="0.0" width="90" height="43"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="100" id="GD3-23-69a"/>
+                                                <constraint firstAttribute="width" constant="90" id="GD3-23-69a"/>
                                             </constraints>
                                             <size key="titleShadowOffset" width="0.0" height="2.2250738585072014e-308"/>
-                                            <state key="normal" title="Back">
+                                            <state key="normal" title="&lt; Back">
                                                 <color key="titleShadowColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <userDefinedRuntimeAttributes>
@@ -1103,12 +1103,12 @@ Melbourne VIC 3000</string>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gB3-M7-xae">
-                                            <rect key="frame" x="468" y="0.0" width="100" height="44"/>
+                                            <rect key="frame" x="482" y="0.0" width="90" height="44"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="100" id="nDp-jE-eF6"/>
+                                                <constraint firstAttribute="width" constant="90" id="nDp-jE-eF6"/>
                                             </constraints>
-                                            <state key="normal" title="Send"/>
+                                            <state key="normal" title="Send &gt;"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                     <integer key="value" value="1"/>
@@ -1130,11 +1130,11 @@ Melbourne VIC 3000</string>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="b1O-XN-6qc" secondAttribute="bottom" id="KCG-fX-aQy"/>
-                                        <constraint firstAttribute="trailing" secondItem="gB3-M7-xae" secondAttribute="trailing" constant="32" id="Y6A-wk-053"/>
+                                        <constraint firstAttribute="trailing" secondItem="gB3-M7-xae" secondAttribute="trailing" constant="28" id="Y6A-wk-053"/>
                                         <constraint firstItem="b1O-XN-6qc" firstAttribute="top" secondItem="eKR-w6-rIq" secondAttribute="top" id="cjY-go-pzV"/>
                                         <constraint firstItem="gB3-M7-xae" firstAttribute="top" secondItem="eKR-w6-rIq" secondAttribute="top" id="gXS-DS-KVw"/>
                                         <constraint firstItem="gB3-M7-xae" firstAttribute="centerY" secondItem="eKR-w6-rIq" secondAttribute="centerY" id="lvR-Pm-S4e"/>
-                                        <constraint firstItem="b1O-XN-6qc" firstAttribute="leading" secondItem="eKR-w6-rIq" secondAttribute="leading" constant="32" id="vzq-ZT-SgW"/>
+                                        <constraint firstItem="b1O-XN-6qc" firstAttribute="leading" secondItem="eKR-w6-rIq" secondAttribute="leading" constant="28" id="vzq-ZT-SgW"/>
                                     </constraints>
                                     <edgeInsets key="layoutMargins" top="50" left="50" bottom="0.0" right="0.0"/>
                                 </tableViewCellContentView>
@@ -1216,18 +1216,18 @@ Melbourne VIC 3000</string>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EditHangoutControlPanel" id="tkC-RC-KxB">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EditHangoutControlPanel" rowHeight="131" id="tkC-RC-KxB">
+                                <rect key="frame" x="0.0" y="28" width="414" height="131"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tkC-RC-KxB" id="Tbp-dC-p5F">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="130.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r3h-YQ-Tzk">
-                                            <rect key="frame" x="32" y="8" width="100" height="28"/>
+                                            <rect key="frame" x="28" y="0.0" width="90" height="130.5"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="100" id="EqX-nl-Zek"/>
+                                                <constraint firstAttribute="width" constant="90" id="EqX-nl-Zek"/>
                                             </constraints>
                                             <state key="normal" title="&lt; Back"/>
                                             <userDefinedRuntimeAttributes>
@@ -1249,10 +1249,10 @@ Melbourne VIC 3000</string>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Lv-bk-hBc">
-                                            <rect key="frame" x="282" y="8" width="100" height="28"/>
+                                            <rect key="frame" x="296" y="0.0" width="90" height="130.5"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="100" id="Jq9-Cc-OYv"/>
+                                                <constraint firstAttribute="width" constant="90" id="Jq9-Cc-OYv"/>
                                             </constraints>
                                             <state key="normal" title="Send &gt;"/>
                                             <userDefinedRuntimeAttributes>
@@ -1275,26 +1275,26 @@ Melbourne VIC 3000</string>
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottomMargin" secondItem="r3h-YQ-Tzk" secondAttribute="bottom" id="1f4-Cj-II0"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="5Lv-bk-hBc" secondAttribute="bottom" id="QC6-Rd-X2f"/>
-                                        <constraint firstItem="5Lv-bk-hBc" firstAttribute="top" secondItem="Tbp-dC-p5F" secondAttribute="topMargin" id="Rdg-LV-fdZ"/>
+                                        <constraint firstAttribute="bottom" secondItem="r3h-YQ-Tzk" secondAttribute="bottom" id="1f4-Cj-II0"/>
+                                        <constraint firstAttribute="bottom" secondItem="5Lv-bk-hBc" secondAttribute="bottom" id="QC6-Rd-X2f"/>
+                                        <constraint firstItem="5Lv-bk-hBc" firstAttribute="top" secondItem="Tbp-dC-p5F" secondAttribute="top" id="Rdg-LV-fdZ"/>
                                         <constraint firstItem="5Lv-bk-hBc" firstAttribute="centerY" secondItem="Tbp-dC-p5F" secondAttribute="centerY" id="pEO-4Z-0k1"/>
-                                        <constraint firstItem="r3h-YQ-Tzk" firstAttribute="leading" secondItem="Tbp-dC-p5F" secondAttribute="leading" constant="32" id="pH9-O1-R1X"/>
+                                        <constraint firstItem="r3h-YQ-Tzk" firstAttribute="leading" secondItem="Tbp-dC-p5F" secondAttribute="leading" constant="28" id="pH9-O1-R1X"/>
                                         <constraint firstItem="r3h-YQ-Tzk" firstAttribute="centerY" secondItem="Tbp-dC-p5F" secondAttribute="centerY" id="wwu-I6-JBa"/>
-                                        <constraint firstItem="r3h-YQ-Tzk" firstAttribute="top" secondItem="Tbp-dC-p5F" secondAttribute="topMargin" id="yIz-4p-xS7"/>
-                                        <constraint firstAttribute="trailing" secondItem="5Lv-bk-hBc" secondAttribute="trailing" constant="32" id="ziH-Aw-YYa"/>
+                                        <constraint firstItem="r3h-YQ-Tzk" firstAttribute="top" secondItem="Tbp-dC-p5F" secondAttribute="top" id="yIz-4p-xS7"/>
+                                        <constraint firstAttribute="trailing" secondItem="5Lv-bk-hBc" secondAttribute="trailing" constant="28" id="ziH-Aw-YYa"/>
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ConfirmHangoutControlPanel" id="xrH-RG-voU">
-                                <rect key="frame" x="0.0" y="72" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="159" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xrH-RG-voU" id="Xxb-va-vzo">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DPR-5b-ZFl">
-                                            <rect key="frame" x="32" y="7" width="80" height="30"/>
+                                            <rect key="frame" x="32" y="0.0" width="80" height="43.5"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" title="&lt; Back"/>
@@ -1317,7 +1317,7 @@ Melbourne VIC 3000</string>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jWE-Jb-Izi">
-                                            <rect key="frame" x="167" y="7" width="80" height="30"/>
+                                            <rect key="frame" x="167" y="0.5" width="80" height="43.5"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="5Y0-fR-K7l"/>
@@ -1349,7 +1349,7 @@ Melbourne VIC 3000</string>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4o8-lg-u8N">
-                                            <rect key="frame" x="302" y="7" width="80" height="30"/>
+                                            <rect key="frame" x="302" y="0.5" width="80" height="43.5"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" title="Yes &gt;"/>
@@ -1378,8 +1378,10 @@ Melbourne VIC 3000</string>
                                         <constraint firstItem="jWE-Jb-Izi" firstAttribute="centerX" secondItem="Xxb-va-vzo" secondAttribute="centerX" id="Apb-Fj-G3L"/>
                                         <constraint firstItem="DPR-5b-ZFl" firstAttribute="centerY" secondItem="Xxb-va-vzo" secondAttribute="centerY" id="Hv0-vB-llA"/>
                                         <constraint firstAttribute="trailing" secondItem="4o8-lg-u8N" secondAttribute="trailing" constant="32" id="QS4-KC-gko"/>
+                                        <constraint firstItem="DPR-5b-ZFl" firstAttribute="top" secondItem="Xxb-va-vzo" secondAttribute="top" id="ZBO-i8-efM"/>
                                         <constraint firstItem="DPR-5b-ZFl" firstAttribute="leading" secondItem="Xxb-va-vzo" secondAttribute="leadingMargin" constant="24" id="fWF-w9-IRj"/>
                                         <constraint firstItem="jWE-Jb-Izi" firstAttribute="height" secondItem="4o8-lg-u8N" secondAttribute="height" id="feQ-xS-kNG"/>
+                                        <constraint firstAttribute="bottom" secondItem="DPR-5b-ZFl" secondAttribute="bottom" id="flQ-CT-TSv"/>
                                         <constraint firstItem="4o8-lg-u8N" firstAttribute="centerY" secondItem="Xxb-va-vzo" secondAttribute="centerY" id="oel-GS-MmO"/>
                                         <constraint firstItem="jWE-Jb-Izi" firstAttribute="centerY" secondItem="Xxb-va-vzo" secondAttribute="centerY" id="tP1-hX-ftN"/>
                                         <constraint firstItem="DPR-5b-ZFl" firstAttribute="height" secondItem="jWE-Jb-Izi" secondAttribute="height" id="w2h-W5-rOe"/>
