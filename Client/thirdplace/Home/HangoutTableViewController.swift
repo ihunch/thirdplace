@@ -260,7 +260,7 @@ extension HangoutTableViewController {
     {
         if (indexPath.section == 0)
         {
-            return 60
+            return 70
         }
         else if(indexPath.section == 1 || indexPath.section == 2)
         {
@@ -280,8 +280,16 @@ extension HangoutTableViewController {
         }
     }
 
-    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 17.0
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
+    {
+        if (section == 0)
+        {
+            return 7
+        }
+        else
+        {
+            return 17.0
+        }
     }
    
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -310,12 +318,12 @@ extension HangoutTableViewController {
             cell!.textString = ""
             cell!.bgview.selectiveBorderFlag = UInt(AUISelectiveBordersFlagTop | AUISelectiveBordersFlagBottom | AUISelectiveBordersFlagLeft | AUISelectiveBordersFlagRight)
             cell!.bgview.selectiveBordersColor = UIColor.lightGrayColor()
-            cell!.bgview.selectiveBordersWidth = 1
+            cell!.bgview.selectiveBordersWidth = 0
             
             cell!.bgview.layer.shadowColor = UIColor.grayColor().CGColor
             cell!.bgview.layer.shadowOffset = CGSizeMake(1,3)
             cell!.bgview.layer.shadowOpacity = 1
-            cell!.bgview.layer.shadowRadius = 3.0
+            cell!.bgview.layer.shadowRadius = 2.0
             cell!.bgview.layer.masksToBounds = false
             return cell!
         }
@@ -338,7 +346,7 @@ extension HangoutTableViewController {
                 let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
                 layout.minimumLineSpacing = 10
                 layout.sectionInset = UIEdgeInsetsMake(0, offsetLeftMargin, 0, 0)
-                layout.itemSize = CGSizeMake(cell.bounds.size.height, cell.bounds.size.height )
+                layout.itemSize = CGSizeMake(cell.bounds.size.height - 10, cell.bounds.size.height - 10)
                 layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
                 cell.collectionView.collectionViewLayout = layout
                 return cell
@@ -354,7 +362,12 @@ extension HangoutTableViewController {
             {
                 let friendCell: HangoutFriendViewStaticCell = cell as! HangoutFriendViewStaticCell
                 friendCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, index: indexPath.section)
+                let index: NSInteger = friendCell.collectionView.tag
+                let value: AnyObject? = self.contentOffsetDictionary.valueForKey(index.description)
+                let horizontalOffset: CGFloat = CGFloat(value != nil ? value!.floatValue : 0)
+                friendCell.collectionView.setContentOffset(CGPointMake(horizontalOffset, 0), animated: false)
                 friendCell.collectionView.backgroundColor = UIColor.clearColor()
+                
             }
             else
             {

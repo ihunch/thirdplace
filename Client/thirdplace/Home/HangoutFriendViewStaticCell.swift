@@ -24,6 +24,13 @@ class HangoutFriendViewStaticCell: UITableViewCell {
         layout.itemSize = CGSizeMake(65, 65)
         layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
         self.collectionView.collectionViewLayout = layout
+        self.collectionView.showsHorizontalScrollIndicator = false
+        collectionView!.layer.shadowColor = UIColor.grayColor().CGColor
+        collectionView!.layer.shadowOffset = CGSizeMake(1, 3)
+        collectionView!.layer.shadowOpacity = 1
+        collectionView!.layer.shadowRadius = 2.0
+        collectionView!.layer.masksToBounds = false
+        
     }
     
     func setCollectionViewDataSourceDelegate(dataSourceDelegate delegate: protocol<UICollectionViewDelegate,UICollectionViewDataSource>, index: NSInteger) {

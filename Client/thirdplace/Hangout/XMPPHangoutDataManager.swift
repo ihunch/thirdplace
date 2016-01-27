@@ -286,7 +286,7 @@ extension XMPPHangoutDataManager
             let now = NSDate().mt_inTimeZone(NSTimeZone.localTimeZone())
             let filter = NSPredicate(format: "Any self.user.jidstr == %@ && Any self.time.enddate >= %@", myjid!.bare(), now)
             let request = Hangout.MR_requestAllWithPredicate(filter)
-            let sort = NSSortDescriptor(key: "sorttime", ascending: false)
+            let sort = NSSortDescriptor(key: "sorttime", ascending: true)
             request.sortDescriptors = [sort]
             return request
         }

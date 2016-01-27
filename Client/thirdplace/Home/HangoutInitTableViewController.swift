@@ -329,12 +329,12 @@ extension HangoutInitTableViewController {
             textcell!.textView!.editable = false
             textcell!.bgview.selectiveBorderFlag = UInt(AUISelectiveBordersFlagTop | AUISelectiveBordersFlagBottom | AUISelectiveBordersFlagLeft | AUISelectiveBordersFlagRight)
             textcell!.bgview.selectiveBordersColor = UIColor.lightGrayColor()
-            textcell!.bgview.selectiveBordersWidth = 1
+            textcell!.bgview.selectiveBordersWidth = 0
             textcell!.titleLabel?.text = ""
             textcell!.bgview.layer.shadowColor = UIColor.grayColor().CGColor
             textcell!.bgview.layer.shadowOffset = CGSizeMake(1,3)
             textcell!.bgview.layer.shadowOpacity = 1
-            textcell!.bgview.layer.shadowRadius = 3.0
+            textcell!.bgview.layer.shadowRadius = 2.0
             textcell!.bgview.layer.masksToBounds = false
             return textcell!
         }
@@ -347,12 +347,12 @@ extension HangoutInitTableViewController {
             textcell!.textString = ""
             textcell!.bgview.selectiveBorderFlag = UInt(AUISelectiveBordersFlagTop | AUISelectiveBordersFlagBottom | AUISelectiveBordersFlagLeft | AUISelectiveBordersFlagRight)
             textcell!.bgview.selectiveBordersColor = UIColor.lightGrayColor()
-            textcell!.bgview.selectiveBordersWidth = 1
+            textcell!.bgview.selectiveBordersWidth = 0
             
             textcell!.bgview.layer.shadowColor = UIColor.grayColor().CGColor
             textcell!.bgview.layer.shadowOffset = CGSizeMake(1,3)
             textcell!.bgview.layer.shadowOpacity = 1
-            textcell!.bgview.layer.shadowRadius = 3.0
+            textcell!.bgview.layer.shadowRadius = 2.0
             textcell!.bgview.layer.masksToBounds = false
             return textcell!
         }

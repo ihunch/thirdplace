@@ -53,6 +53,8 @@
         [self addSubview:self.label];
         
         self.badge = [CustomBadge customBadgeWithString:@"" withStyle:[BadgeStyle defaultStyle]];
+        CGRect frame = self.badge.frame;
+        self.badge.frame = CGRectMake(45, 0, frame.size.width, frame.size.height);
         self.badge.hidden = YES;
         [self addSubview:self.badge];
         
@@ -171,7 +173,7 @@
 
 - (UIColor *)outlineColor
 {
-    return [UIColor colorWithRed:187.0/255.0 green:189.0/255.0 blue:192.0/255.0 alpha:1.0];
+    return [UIColor whiteColor];//[UIColor colorWithRed:187.0/255.0 green:189.0/255.0 blue:192.0/255.0 alpha:1.0];
 }
 
 - (void)drawRect:(CGRect)rect

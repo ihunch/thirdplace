@@ -32,15 +32,11 @@
     [super viewDidLoad];
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;
-
-    UIBarButtonItem* switchMapItem = [[UIBarButtonItem alloc] initWithTitle:@"Hybrid View" style:UIBarButtonItemStylePlain target:self action:@selector(switchMap:)];
-    self.navigationItem.rightBarButtonItem =  switchMapItem;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [self forwardGeoLocation];
-    self.navigationController.navigationBarHidden = NO;
     [super viewWillAppear:animated];
 }
 
@@ -116,9 +112,14 @@
     return nil;
 }
 
--(void)switchMap:(id)button
+- (IBAction)Back:(id)sender
 {
-    UIBarButtonItem* b = button;
+    [self.navigationController popViewControllerAnimated:true];
+}
+
+- (IBAction)switchmap:(id)sender
+{
+    UIBarButtonItem* b = sender;
     if(self.mapView.mapType == MKMapTypeHybrid)
     {
         [b setTitle:@"Hybrid View"];
