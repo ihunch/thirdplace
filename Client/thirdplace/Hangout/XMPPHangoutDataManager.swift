@@ -83,7 +83,7 @@ private let _SingletonInstance = XMPPHangoutDataManager()
                 newhangout.createtime = createtime
                 newhangout.createUserJID = createuser
                 newhangout.preferedlocation = preferlocation
-                
+                newhangout.sorttime = startdate
                 var hangoutmessage =  HangoutMessage.MR_findFirstByAttribute("messageid", withValue: NSNumber(integer: Int(messageid)!), inContext: localContext)
                 if (hangoutmessage == nil)
                 {
@@ -126,6 +126,7 @@ private let _SingletonInstance = XMPPHangoutDataManager()
             }
             else
             {
+                hangout.sorttime = startdate
                 var hangoutmessage =  HangoutMessage.MR_findFirstByAttribute("messageid", withValue: NSNumber(integer: Int(messageid)!), inContext: localContext)
                 if (hangoutmessage == nil)
                 {
@@ -239,6 +240,7 @@ private let _SingletonInstance = XMPPHangoutDataManager()
                 hangouttime.timedescription = timedescription
                 hangouttime.updatetime = timecreatetime
                 hangouttime.updatejid = timeElement.elementForName(HangoutConfig.createuser).stringValue()
+                myhangout!.sorttime = startdate
             }
             
             if let locationelement = item.elementForName(HangoutConfig.locationkey)
@@ -283,7 +285,10 @@ extension XMPPHangoutDataManager
         {
             let now = NSDate().mt_inTimeZone(NSTimeZone.localTimeZone())
             let filter = NSPredicate(format: "Any self.user.jidstr == %@ && Any self.time.enddate >= %@", myjid!.bare(), now)
-            return Hangout.MR_requestAllSortedBy("createtime", ascending: false, withPredicate: filter)
+            let request = Hangout.MR_requestAllWithPredicate(filter)
+            let sort = NSSortDescriptor(key: "sorttime", ascending: false)
+            request.sortDescriptors = [sort]
+            return request
         }
         return nil
     }

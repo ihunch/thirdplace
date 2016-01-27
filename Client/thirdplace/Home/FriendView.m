@@ -41,7 +41,7 @@
 
         self.backgroundColor = [UIColor clearColor];
         self.opaque = NO;
-
+        
         self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, 102, 100, 15)];
         self.label.font = [UIFont systemFontOfSize:11];
         self.label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
@@ -171,13 +171,12 @@
 
 - (UIColor *)outlineColor
 {
-    return [UIColor whiteColor];
+    return [UIColor colorWithRed:187.0/255.0 green:189.0/255.0 blue:192.0/255.0 alpha:1.0];
 }
 
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-
     CGContextSetFillColorWithColor(ctx, [self outlineColor].CGColor);
     CGContextFillEllipseInRect(ctx, rect);
 

@@ -73,6 +73,11 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         locationlists = XMPPHangoutDataManager.initLocationData()
         self.view.backgroundColor = UIColor.blackColor()//UIColor(patternImage: UIImage(named: "patternBackground")!)
         appDelegate!.xmppStream.addDelegate(self, delegateQueue: dispatch_get_main_queue())
+        
+        let dummyViewHeight: CGFloat = 70.0
+        let dummyView = UIView(frame: CGRectMake(0, 0, self.hometablelistview.bounds.size.width, dummyViewHeight))
+        self.hometablelistview.tableHeaderView = dummyView;
+        self.hometablelistview.contentInset = UIEdgeInsetsMake(-dummyViewHeight, 0, 0, 0);
     }
     
     deinit
@@ -228,6 +233,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         if indexPath.section == 0
         {
             let c = cell as? FriendContainerTableViewCell
+            cell.backgroundColor = UIColor.blackColor()
             c!.friendContainerView.reloadFriendListData()
             c!.setNeedsLayout()
             c!.setDelegate(self)
@@ -279,6 +285,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             let rect = CGRectMake(0, 0, tableView.frame.size.width, 70)
             let labelrect = CGRectMake(10, 0, tableView.frame.size.width, 70)
             let view = UIView(frame: rect)
+            view.backgroundColor = UIColor.blackColor()
             let label = UILabel(frame: labelrect)
             label.text = "Hangouts↓"
             label.textColor = UIColor.whiteColor()

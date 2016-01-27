@@ -634,6 +634,7 @@
 		2FC558B91C51AF7F00D54810 /* HangoutFriendViewStaticCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HangoutFriendViewStaticCell.swift; sourceTree = "<group>"; };
 		2FCA14421C55B0D500EEC045 /* DateTimeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		2FCA14441C55B1D800EEC045 /* DateTimeCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DateTimeCollectionViewCell.xib; sourceTree = "<group>"; };
+		2FCA14461C57D0FF00EEC045 /* HangoutDataModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "HangoutDataModel 2.xcdatamodel"; sourceTree = "<group>"; };
 		2FD476BE1C424AD40013C330 /* cafe_au.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cafe_au.plist; sourceTree = "<group>"; };
 		2FDD10151C0335D100B1AC75 /* XMPPRosterExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMPPRosterExtension.swift; sourceTree = "<group>"; };
 		2FDD10191C033ED700B1AC75 /* UIAlertExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertExtension.swift; sourceTree = "<group>"; };
@@ -2800,9 +2801,10 @@
 		2F3E7E991BBE627F00729894 /* HangoutDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2FCA14461C57D0FF00EEC045 /* HangoutDataModel 2.xcdatamodel */,
 				2F3E7E9A1BBE627F00729894 /* HangoutDataModel.xcdatamodel */,
 			);
-			currentVersion = 2F3E7E9A1BBE627F00729894 /* HangoutDataModel.xcdatamodel */;
+			currentVersion = 2FCA14461C57D0FF00EEC045 /* HangoutDataModel 2.xcdatamodel */;
 			name = HangoutDataModel.xcdatamodeld;
 			path = Hangout/HangoutDataModel.xcdatamodeld;
 			sourceTree = "<group>";

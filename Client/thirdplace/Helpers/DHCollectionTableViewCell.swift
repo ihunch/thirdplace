@@ -41,18 +41,18 @@ class DHCollectionTableViewCell: UITableViewCell {
         self.collectionView.registerNib(UINib(nibName: "LocationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: locationViewCellIdentifier as String)
         self.collectionView.registerNib(UINib(nibName: "DateTimeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: daytimeViewCellIdentifier as String)
         self.collectionView.showsHorizontalScrollIndicator = false
-        
+        collectionView!.layer.shadowColor = UIColor.grayColor().CGColor
+        collectionView!.layer.shadowOffset = CGSizeMake(1, 3)
+        collectionView!.layer.shadowOpacity = 1
+        collectionView!.layer.shadowRadius = 2.0
+        collectionView!.layer.masksToBounds = false
         self.contentView.addSubview(self.collectionView)
+        
         self.frameView = UIView(frame: CGRectZero)
         self.frameView.backgroundColor = UIColor.clearColor()
         self.frameView.selectiveBorderFlag =  UInt(AUISelectiveBordersFlagTop | AUISelectiveBordersFlagBottom | AUISelectiveBordersFlagLeft | AUISelectiveBordersFlagRight)
         frameView.selectiveBordersColor = UIColor.yellowColor()
         frameView.selectiveBordersWidth = 3
-        frameView!.layer.shadowColor = UIColor.grayColor().CGColor
-        frameView!.layer.shadowOffset = CGSizeMake(1, 3)
-        frameView!.layer.shadowOpacity = 1
-        frameView!.layer.shadowRadius = 3.0
-        frameView!.layer.masksToBounds = false
         self.contentView.addSubview(frameView)
         self.contentView.bringSubviewToFront(self.collectionView)
     }

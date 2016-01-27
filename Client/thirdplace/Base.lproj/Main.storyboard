@@ -153,7 +153,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" canCancelContentTouches="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="156" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hrJ-fW-mXX">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="FriendContainerTableViewCell" rowHeight="156" id="Xgc-rG-C9Z" customClass="FriendContainerTableViewCell" customModule="thirdplace">
                                         <rect key="frame" x="0.0" y="28" width="600" height="156"/>
@@ -188,6 +188,7 @@
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="friendContainerView" destination="klY-x8-y7K" id="8SY-zI-9DU"/>
                                         </connections>
@@ -207,7 +208,7 @@
                                                             <subviews>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="229" translatesAutoresizingMaskIntoConstraints="NO" id="rWU-7f-NWP">
                                                                     <rect key="frame" x="10" y="1" width="524" height="50"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Acm-U8-SaP">
@@ -279,7 +280,7 @@
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brother Baba Budanfhfg" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="JVd-fr-ze8">
                                                             <rect key="frame" x="10" y="5" width="574" height="34"/>
-                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -943,7 +944,7 @@ Melbourne VIC 3000</string>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Js-cd-02a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2472" y="1286.5"/>
+            <point key="canvasLocation" x="2444" y="1458"/>
         </scene>
         <!--Create Event-->
         <scene sceneID="Csj-zh-o28">
@@ -1041,8 +1042,8 @@ Melbourne VIC 3000</string>
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="AZq-ls-k0b">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="friendstaticcell" id="351-tr-jLz" customClass="HangoutFriendViewStaticCell" customModule="thirdplace" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
@@ -1080,6 +1081,7 @@ Melbourne VIC 3000</string>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="90" id="GD3-23-69a"/>
                                             </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
                                             <size key="titleShadowOffset" width="0.0" height="2.2250738585072014e-308"/>
                                             <state key="normal" title="&lt; Back">
                                                 <color key="titleShadowColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1108,6 +1110,7 @@ Melbourne VIC 3000</string>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="90" id="nDp-jE-eF6"/>
                                             </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
                                             <state key="normal" title="Send &gt;"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -1213,7 +1216,7 @@ Melbourne VIC 3000</string>
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="VwU-Ju-0Z1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EditHangoutControlPanel" rowHeight="131" id="tkC-RC-KxB">
@@ -1229,6 +1232,7 @@ Melbourne VIC 3000</string>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="90" id="EqX-nl-Zek"/>
                                             </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
                                             <state key="normal" title="&lt; Back"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -1254,6 +1258,7 @@ Melbourne VIC 3000</string>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="90" id="Jq9-Cc-OYv"/>
                                             </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
                                             <state key="normal" title="Send &gt;"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -1296,6 +1301,7 @@ Melbourne VIC 3000</string>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DPR-5b-ZFl">
                                             <rect key="frame" x="32" y="0.0" width="80" height="43.5"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
                                             <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" title="&lt; Back"/>
                                             <userDefinedRuntimeAttributes>
@@ -1323,6 +1329,7 @@ Melbourne VIC 3000</string>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="5Y0-fR-K7l"/>
                                                 <constraint firstAttribute="width" constant="100" id="kC2-VT-2OY"/>
                                             </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
                                             <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" title="No"/>
                                             <userDefinedRuntimeAttributes>
@@ -1351,6 +1358,7 @@ Melbourne VIC 3000</string>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4o8-lg-u8N">
                                             <rect key="frame" x="302" y="0.5" width="80" height="43.5"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
                                             <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" title="Yes &gt;"/>
                                             <userDefinedRuntimeAttributes>

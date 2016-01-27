@@ -188,7 +188,8 @@ class HangoutTableViewController: DHCollectionTableViewController {
             hangouttime.startdate = satmid.mt_dateHoursAfter(Int(time.time!))
             hangouttime.enddate = sundayendtime
         }
-        
+        //update sorttime
+        hangout.sorttime = hangouttime.startdate
         let startdatedes = hangouttime.startdate?.mt_stringFromDateWithFormat("dd/MM", localized: true)
         var daydes = day.day_description!
         if (daydes == "Weekend")
@@ -362,12 +363,12 @@ extension HangoutTableViewController {
                 collectionCell.collectionView.backgroundColor = UIColor.clearColor()
             }
         }
-        cell.backgroundColor = AppConfig.themebgcolour()
+        cell.backgroundColor = UIColor.whiteColor()//AppConfig.themebgcolour()
     }
     
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
-        view.backgroundColor = AppConfig.themebgcolour()
+        view.backgroundColor = UIColor.whiteColor()//AppConfig.themebgcolour()
         return view
     }
     

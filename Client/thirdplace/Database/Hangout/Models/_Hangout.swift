@@ -10,6 +10,7 @@ public enum HangoutAttributes: String {
     case hangoutid = "hangoutid"
     case locationconfirmed = "locationconfirmed"
     case preferedlocation = "preferedlocation"
+    case sorttime = "sorttime"
     case timeconfirmed = "timeconfirmed"
 }
 
@@ -76,6 +77,11 @@ class _Hangout: NSManagedObject {
     var preferedlocation: String?
 
     // func validatePreferedlocation(value: AutoreleasingUnsafeMutablePointer<AnyObject>, error: NSErrorPointer) -> Bool {}
+
+    @NSManaged public
+    var sorttime: NSDate?
+
+    // func validateSorttime(value: AutoreleasingUnsafeMutablePointer<AnyObject>, error: NSErrorPointer) -> Bool {}
 
     @NSManaged public
     var timeconfirmed: NSNumber?

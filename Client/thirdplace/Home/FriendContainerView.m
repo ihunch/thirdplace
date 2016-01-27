@@ -58,7 +58,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     [super awakeFromNib];
     self.friendViews = [NSMutableArray array];
-    self.backgroundColor = [UIColor blackColor];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"patternBackground"]];
     self.linesView = [[LinesView alloc] init];
     self.linesView.hidden = true;
     [self addSubview:self.linesView];
@@ -250,9 +249,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     DDLogCVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     [self removeAllFriendViews];
+    
     XMPPUserCoreDataStorageObject* me = [[self rosterCoreDataStorage] myUserForXMPPStream:[self xmppStream] managedObjectContext:[self rosterDBContext]];
     if (me != nil)
     {
+         self.backgroundColor = [UIColor blackColor];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"patternBackground"]];
         self.linesView.hidden = false;
         self.addFriendView.hidden = false;
         if (me.photo == nil)

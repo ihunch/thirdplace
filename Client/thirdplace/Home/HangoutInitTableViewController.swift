@@ -167,6 +167,7 @@ class HangoutInitTableViewController: DHCollectionTableViewController
             let enddate = now.mt_endOfNextDay()
             hangouttime.startdate = startdate
             hangouttime.enddate = enddate
+            hangout.sorttime = startdate
         }
         else if(now.mt_weekdayOfWeek() == Weekday.Sun.rawValue)
         {
@@ -372,7 +373,7 @@ extension HangoutInitTableViewController {
     
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
-        view.backgroundColor = AppConfig.themebgcolour()
+        view.backgroundColor = UIColor.whiteColor()
         return view
     }
     
@@ -393,7 +394,7 @@ extension HangoutInitTableViewController {
             let horizontalOffset: CGFloat = CGFloat(value != nil ? value!.floatValue : 0)
             collectionCell.collectionView.setContentOffset(CGPointMake(horizontalOffset, 0), animated: false)
         }
-        cell.backgroundColor = AppConfig.themebgcolour()
+        cell.backgroundColor = UIColor.whiteColor()//AppConfig.themebgcolour()
     }
 }
 
