@@ -10,6 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController,FBLoginViewDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loginView: FBLoginView!
     var pagecontentController: UIPageViewController!
     var delegate: HomeScreenDelegate!
@@ -38,6 +39,7 @@ class LoginViewController: UIViewController,FBLoginViewDelegate, UIPageViewContr
             self.view.addSubview(pagecontentController.view)
             self.pagecontentController.didMoveToParentViewController(self)
         }
+        self.view.bringSubviewToFront(activityIndicator)
         self.view.bringSubviewToFront(loginView)
     }
 
@@ -77,6 +79,7 @@ class LoginViewController: UIViewController,FBLoginViewDelegate, UIPageViewContr
         dispatch_async(dispatch_get_main_queue(),
         {
             self.delegate.didFBLoginSuccess()
+            loginView.hidden = true
         })
     }
     

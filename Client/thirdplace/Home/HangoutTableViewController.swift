@@ -268,7 +268,7 @@ extension HangoutTableViewController {
         }
         else if(indexPath.section == 3)
         {
-            return 120
+            return 150
         }
         else if(indexPath.section == 4)
         {
@@ -475,7 +475,6 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
                 cell.namelabel.text = name
                 cell.addresslabel.text = address
                 cell.namelabel.textColor = UIColor.blackColor()
-                cell.labelContainer.backgroundColor = UIColor(white: 1, alpha: 0.6)
                 cell.addresslabel.textColor = UIColor.blackColor()
                 cell.addressContainer.backgroundColor = UIColor(white: 1, alpha: 0.6)
                 if (indexPath.row == currentplacerow)

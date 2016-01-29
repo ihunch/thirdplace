@@ -15,6 +15,7 @@ protocol HomeScreenDelegate
 
 class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FriendContainerViewDelegate,HomeScreenDelegate,NSFetchedResultsControllerDelegate {
 
+    @IBOutlet weak var LoadingScreen: UIView!
     @IBAction func touchMapbutton(sender: UIButton, hangout: Hangout)
     {
         let row = sender.tag
@@ -51,6 +52,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     var xmppStream: XMPPStream?
     var xmppHangout: XMPPHangout?
     var locationlists: NSArray?
+    var fbloginview: Bool = false
     
     override func viewDidLoad()
     {
@@ -64,6 +66,8 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             let loginController = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as? LoginViewController
             loginController?.delegate = self
             self.presentViewController(loginController!, animated: false, completion: nil)
+            LoadingScreen.removeFromSuperview()
+            fbloginview = true
         }
         xmppStream = appDelegate!.xmppStream
         xmppHangout = appDelegate!.xmppHangout
@@ -105,6 +109,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             let hangoutcell :HangoutListTableViewCell = tableView.dequeueReusableCellWithIdentifier("HangoutListTableViewCell") as!HangoutListTableViewCell
             hangoutcell.mapheightconstraint.constant = 50
             hangoutcell.topvalueconstraint.constant = 0
+            hangoutcell.bgimageview.alpha = 1.0
             let indexpath = NSIndexPath(forRow: indexPath.row, inSection: 0)
             let hangout = self.hangoutFetchedRequestControler!.objectAtIndexPath(indexpath) as! Hangout
             hangoutcell.mapbutton.tag = indexPath.row
@@ -216,7 +221,15 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                         }
                         else
                         {
-                            hangoutcell.bgimageview.image = UIImage(named: "bbb.jpg")
+                            if (hangout.message.count == 1)
+                            {
+                                hangoutcell.bgimageview.image = UIImage(named: "bbb.jpg")
+                                hangoutcell.bgimageview.alpha = 0.4
+                            }
+                            else
+                            {
+                                hangoutcell.bgimageview.image = UIImage(named: "bbb.jpg")
+                            }
                         }
                     }
                 }
@@ -466,7 +479,6 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     func didFBLoginSuccess()
     {
         appDelegate!.loginXMPP()
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
 // MARK: FriendContainerDelegate
@@ -513,14 +525,35 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         //self.performSegueWithIdentifier("ProfileViewController", sender: nil)
     }
     
+    func fadeoutloadingscreen()
+    {
+        if (fbloginview)
+        {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        UIView.animateWithDuration(1.0, animations: {
+            if (self.LoadingScreen != nil)
+            {
+                self.LoadingScreen.alpha = 0.0
+            }
+        }, completion:{ finished in
+            if (self.LoadingScreen != nil)
+            {
+                self.LoadingScreen.removeFromSuperview()
+            }
+        })
+    }
+    
     //Mark: XMPPRosterDelegate
     func xmppRosterDidEndPopulating(sender:XMPPRoster)
     {
+        self.fadeoutloadingscreen()
         hometablelistview.reloadData()
     }
     
     func xmppRoster(sender:XMPPRoster, didReceiveRosterPush iq:XMPPIQ)
     {
+        self.fadeoutloadingscreen()
         hometablelistview.reloadData()
     }
     

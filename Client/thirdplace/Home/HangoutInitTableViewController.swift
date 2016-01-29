@@ -38,7 +38,7 @@ class HangoutInitTableViewController: DHCollectionTableViewController
             let fullnamearray: NSArray? = AppConfig.name().characters.split{$0 == " "}.map(String.init)
             if (fullnamearray != nil)
             {
-                 return String(format: "%@: Want to catch up with this weekend?",   fullnamearray![0] as! String)
+                 return String(format: "%@: Want to catch up this weekend?",   fullnamearray![0] as! String)
             }
             else
             {
