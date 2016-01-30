@@ -2001,6 +2001,9 @@
 					63626B0D1962B02D00FA58D5 = {
 						DevelopmentTeam = MFK3G2QY2Y;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};

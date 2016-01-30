@@ -348,8 +348,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
@@ -358,6 +357,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    application.applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -644,15 +644,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     DDLogVerbose(@"Error in registration. Error: %@", error);
 }
 
-
 // Called if notification is received while app is active
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
     DDLogVerbose(@"Received Notification (Active): %@", userInfo);
 }
-
+/*
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
     DDLogVerbose(@"Received Notification (Active): %@", userInfo);
 }
-
+ */
 @end
