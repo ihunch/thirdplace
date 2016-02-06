@@ -33,4 +33,5 @@ extern NSString* const kXMPPMessageId_InviteHangout;
 + (NSString*)loginUserPhotoPath;
 + (void)updateLoginUserPhotoPath:(NSString*)path;
 + (NSString*)thirdplaceReportURL;
++ (NSString*)thirdplaceBlockURL;
 @end

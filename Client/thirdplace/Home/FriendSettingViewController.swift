@@ -38,7 +38,9 @@ class FriendSettingViewController: UIViewController,UITableViewDelegate, UITable
         // Pass the selected object to the new view controller.
         if (segue.identifier == "showReportWebView")
         {
-            
+            let desviewcontroller:WebUIViewController = segue.destinationViewController as! WebUIViewController
+            let indexpath = sender as! NSIndexPath
+            desviewcontroller.selectitemindex = indexpath.section
         }
     }
 }
@@ -138,7 +140,7 @@ extension FriendSettingViewController {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.section == 3 || indexPath.section == 4)
         {
-            self.performSegueWithIdentifier("showReportWebView", sender: nil)
+            self.performSegueWithIdentifier("showReportWebView", sender: indexPath)
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }

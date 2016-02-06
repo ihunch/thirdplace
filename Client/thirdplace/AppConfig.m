@@ -114,4 +114,8 @@ NSString *const kLoginUserPhotoPath = @"LoginUserPhotoPath";
     return @"http://www.thirdplace.social/report";
 }
 
++ (NSString*)thirdplaceBlockURL
+{
+    return @"http://www.thirdplace.social/block";
+}
 @end

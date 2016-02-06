@@ -20,9 +20,19 @@ class WebUIViewController: UIViewController,UIWebViewDelegate
     
     @IBOutlet weak var webview: UIWebView!
 
+    var selectitemindex: Int?
     override func viewDidLoad()
     {
-        let url = NSURL(string: AppConfig.thirdplaceReportURL())
+        var str = ""
+        if selectitemindex == 3
+        {
+            str = AppConfig.thirdplaceReportURL()
+        }
+        else if selectitemindex == 4
+        {
+            str = AppConfig.thirdplaceBlockURL()
+        }
+        let url = NSURL(string: str)
         let request = NSURLRequest(URL: url!)
         self.webview.loadRequest(request)
     }
