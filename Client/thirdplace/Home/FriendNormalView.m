@@ -54,5 +54,10 @@
     return [UIColor whiteColor];//[UIColor colorWithRed:187.0/255.0 green:189.0/255.0 blue:192.0/255.0 alpha:1.0];
 }
 
+-(void)setViewDelegate:(id<FriendViewDelegate>)delegate
+{
+    self.delegate = delegate;
+}
+
 
 @end

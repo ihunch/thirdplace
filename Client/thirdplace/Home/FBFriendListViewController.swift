@@ -101,7 +101,7 @@ class FBFriendListViewController: UIViewController,UITableViewDataSource, UITabl
         let xmppuser = rosterStorage.userForJID(jid, xmppStream: self.xmppStream, managedObjectContext: rosterDBContext)
         if (xmppuser == nil || xmppuser.subscription != "both")
         {
-            if (selectfb.objectForKey(fid!) == nil)
+            if (selectfb.objectForKey(indexPath.row) == nil)
             {
                 selectfb.setObject(jid, forKey: indexPath.row)
                 cell!.accessoryType = UITableViewCellAccessoryType.Checkmark
@@ -112,6 +112,7 @@ class FBFriendListViewController: UIViewController,UITableViewDataSource, UITabl
                 cell!.accessoryType = UITableViewCellAccessoryType.None
             }
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
     
     @IBAction func inviteFriend(sender: AnyObject)

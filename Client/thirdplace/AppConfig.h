@@ -32,4 +32,5 @@ extern NSString* const kXMPPMessageId_InviteHangout;
 + (UIColor*)blueColour;
 + (NSString*)loginUserPhotoPath;
 + (void)updateLoginUserPhotoPath:(NSString*)path;
++ (NSString*)thirdplaceReportURL;
 @end

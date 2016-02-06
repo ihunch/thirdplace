@@ -212,7 +212,8 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                         {
                             if (hangout.message.count == 1)
                             {
-                                hangoutcell.bgimageview.image = UIImage(named: "bbb.jpg")?.grayscale()
+                                hangoutcell.bgimageview.image = UIImage(named: "bbb.jpg")
+                                hangoutcell.bgimageview.alpha = 0.4
                             }
                             else
                             {

@@ -109,4 +109,9 @@ NSString *const kLoginUserPhotoPath = @"LoginUserPhotoPath";
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
++ (NSString*)thirdplaceReportURL
+{
+    return @"http://www.thirdplace.social/report";
+}
+
 @end

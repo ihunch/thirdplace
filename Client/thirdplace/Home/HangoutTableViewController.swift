@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HangoutTableViewController: DHCollectionTableViewController {
+class HangoutTableViewController: DHCollectionTableViewController,FriendViewDelegate {
     
     @IBOutlet weak var pagebackbutton: UIButton!
     @IBOutlet weak var sendbutton: UIButton!
@@ -241,6 +241,19 @@ class HangoutTableViewController: DHCollectionTableViewController {
     func dismissloadscreen()
     {
         MBProgressHUD.hideHUDForView(self.view, animated: true)
+    }
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
+        if (segue.identifier == "FriendSettingView")
+        {
+            let desviewcontroller:FriendSettingViewController = segue.destinationViewController as! FriendSettingViewController
+            desviewcontroller.selectedHangoutFriend = self.selectedHangoutFriend
+        }
     }
 }
 
@@ -534,9 +547,11 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
                 })
                 if (sarray.count == 0)
                 {
-                    friendView = FriendNormalView.friendViewWithFriend(selectedHangoutFriend) as? UIView
+                    friendView = FriendNormalView.friendViewWithFriend(selectedHangoutFriend) as? FriendNormalView
                     friendView?.tag = friendtag
                     friendView!.frame = cell.bounds
+                    let view: FriendNormalView = friendView as! FriendNormalView
+                    view.delegate = self
                     cell.contentView.addSubview(friendView!)
                 }
                 else
@@ -544,6 +559,8 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
                     friendView = sarray[0] as UIView
                     friendView!.frame = cell.bounds
                     friendView?.tag = ownphototag
+                    let view: FriendNormalView = friendView as! FriendNormalView
+                    view.delegate = self
                 }
             }
             return cell
@@ -662,6 +679,12 @@ extension HangoutTableViewController
     {
         dismissloadscreen()
         self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    // MARK: FriendContainerDelegate
+    func didTouchFriendView(friendView: FriendView!)
+    {
+        self.performSegueWithIdentifier("FriendSettingView", sender: nil)
     }
 }
 

@@ -12,4 +12,5 @@
 
 @interface FriendNormalView : FriendView
 + (id)friendViewWithFriend:(XMPPUserCoreDataStorageObject *)friend;
+-(void)setViewDelegate:(id<FriendViewDelegate>)delegate;
 @end
