@@ -38,7 +38,7 @@ class HangoutTableViewController: DHCollectionTableViewController,FriendViewDele
     let leftarrowtag = 1004
     let rightarrowtag = 1005
     var locationdata: NSArray?
-    
+    var myhangout: Hangout?
     var hangoutmodule : XMPPHangout{
         get{
             return self.appDelegate!.xmppHangout
@@ -47,7 +47,7 @@ class HangoutTableViewController: DHCollectionTableViewController,FriendViewDele
     
     override func awakeFromNib()
     {
-       super.awakeFromNib()
+        super.awakeFromNib()
     }
     
     deinit
@@ -57,6 +57,7 @@ class HangoutTableViewController: DHCollectionTableViewController,FriendViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.registerNib(UINib(nibName: "MultiLineTextInputTableViewCell", bundle: nil), forCellReuseIdentifier: "MultiLineTextInputTableViewCell")
+        tableView.registerNib(UINib(nibName: "MultiLineTextViewTableCell", bundle: nil), forCellReuseIdentifier: "MultiLineTextViewTableCell")
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 60
         xmppStream = self.appDelegate!.xmppStream
@@ -64,7 +65,6 @@ class HangoutTableViewController: DHCollectionTableViewController,FriendViewDele
         xmppHangout = self.appDelegate!.xmppHangout
         rosterStorage = self.appDelegate!.xmppRosterStorage
         hangoutmodule.addDelegate(self, delegateQueue: dispatch_get_main_queue())
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -88,12 +88,12 @@ class HangoutTableViewController: DHCollectionTableViewController,FriendViewDele
         let timearray = XMPPHangoutDataManager.initHangoutTimeData()
         locationdata = XMPPHangoutDataManager.initLocationData()
         let me = rosterStorage?.myUserForXMPPStream(xmppStream, managedObjectContext: rosterDBContext)
- 
+        
         //TODO: - change place data
         let p_context = hangoutDataManager.privateContext()
         let hangoutid = selectedHangoutID!
         let hangout = Hangout.MR_findFirstByAttribute("hangoutid", withValue: NSNumber(integer: hangoutid), inContext: p_context)
-        
+        myhangout = hangout
         let preferlocation = hangout.preferedlocation
         let locationstring = preferlocation!.componentsSeparatedByString(",")
         self.sourceArray =
@@ -139,7 +139,7 @@ class HangoutTableViewController: DHCollectionTableViewController,FriendViewDele
         }
         else
         {
-             self.contentOffsetDictionary.setValue(0, forKey: timerow)
+            self.contentOffsetDictionary.setValue(0, forKey: timerow)
         }
         if let location = hangout.getLatestLocation()
         {
@@ -152,7 +152,7 @@ class HangoutTableViewController: DHCollectionTableViewController,FriendViewDele
         }
     }
     
-    @IBAction func sendHangout(sender: AnyObject)
+    func sendHangoutAction()
     {
         self.showloadscreen()
         let createtime = NSDate().mt_inTimeZone(NSTimeZone.localTimeZone())
@@ -165,9 +165,12 @@ class HangoutTableViewController: DHCollectionTableViewController,FriendViewDele
         let selectdayindex = self.contentOffsetDictionary[dayrow] as! Int
         let selecttimeindex = self.contentOffsetDictionary[timerow] as! Int
         let selectlocationindex = self.contentOffsetDictionary[placerow] as! Int
-        let day = self.sourceArray[Int(dayrow)!][selectdayindex] as! Hangout_Day
-        let time = self.sourceArray[Int(timerow)!][selecttimeindex] as! Hangout_Time
-        let locationid = self.sourceArray[Int(placerow)!][selectlocationindex] as! String
+        let dayarray = self.sourceArray[Int(dayrow)!] as! NSArray
+        let day = dayarray[selectdayindex] as! Hangout_Day
+        let timearray = self.sourceArray[Int(timerow)!] as! NSArray
+        let time = timearray[selecttimeindex] as! Hangout_Time
+        let locationarray = self.sourceArray[Int(placerow)!] as! NSArray
+        let locationid = locationarray[selectlocationindex] as! String
         let hangouttime = HangoutTime.MR_createEntityInContext(p_context)
         let sundaymidnight = hangout.getLatestTime()!.enddate!.calculateSundayMidnightTime()
         let sundayendtime = sundaymidnight.mt_dateHoursAfter(23).mt_dateMinutesAfter(59)
@@ -208,7 +211,7 @@ class HangoutTableViewController: DHCollectionTableViewController,FriendViewDele
         hangouttime.updatejid = xmppStream!.myJID.bare()
         hangouttime.updatetime = createtime
         hangouttime.hangout = hangout
-
+        
         //location to do it later
         let location = HangoutLocation.MR_createEntityInContext(p_context)
         location.updatejid = xmppStream!.myJID.bare()
@@ -225,6 +228,11 @@ class HangoutTableViewController: DHCollectionTableViewController,FriendViewDele
         message.content = messageContent
         
         xmppHangout!.updateHangout(hangout, sender: xmppStream!.myJID)
+    }
+    
+    @IBAction func sendHangout(sender: AnyObject)
+    {
+        self.sendHangoutAction()
     }
     
     @IBAction func goback(sender: AnyObject) {
@@ -247,8 +255,8 @@ class HangoutTableViewController: DHCollectionTableViewController,FriendViewDele
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
         if (segue.identifier == "FriendSettingView")
         {
             let desviewcontroller:FriendSettingViewController = segue.destinationViewController as! FriendSettingViewController
@@ -266,7 +274,7 @@ extension HangoutTableViewController {
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 6
+        return 7
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
@@ -283,7 +291,7 @@ extension HangoutTableViewController {
         {
             return 150
         }
-        else if(indexPath.section == 4)
+        else if(indexPath.section == 4 || indexPath.section == 5)
         {
             return UITableViewAutomaticDimension
         }
@@ -292,19 +300,23 @@ extension HangoutTableViewController {
             return 50
         }
     }
-
+    
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
     {
         if (section == 0)
         {
             return 7
         }
+        else if (section == 4)
+        {
+            return 0
+        }
         else
         {
             return 17.0
         }
     }
-   
+    
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (section == 0)
         {
@@ -317,22 +329,69 @@ extension HangoutTableViewController {
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        if (indexPath.section > 4)
+        if (indexPath.section > 5)
         {
-            let cell = tableView.dequeueReusableCellWithIdentifier("EditHangoutControlPanel") 
+            let cell = tableView.dequeueReusableCellWithIdentifier("EditHangoutControlPanel")
             return cell!
         }
         else if (indexPath.section == 4)
+        {
+            let cell = tableView.dequeueReusableCellWithIdentifier("MultiLineTextViewTableCell", forIndexPath: indexPath) as? MultiLineTextViewTableCell
+            let message = myhangout!.getLatestMessage()
+            var fullnamearray: NSArray?
+            let sender = message!.updatejid!
+            if (sender == AppConfig.jid())
+            {
+                fullnamearray = AppConfig.name().characters.split{$0 == " "}.map(String.init)
+            }
+            else
+            {
+                let senderjid = XMPPJID.jidWithString(sender as String)
+                let xmppuser = self.rosterStorage!.userForJID(senderjid, xmppStream: self.xmppStream, managedObjectContext: rosterDBContext)
+                if (xmppuser != nil && xmppuser.nickname != nil)
+                {
+                    fullnamearray = xmppuser.nickname.characters.split{$0 == " "}.map(String.init)
+                }
+            }
+            if (fullnamearray != nil)
+            {
+                if (message!.content != nil)
+                {
+                    cell!.titleLabel?.text = "\(fullnamearray![0]): \(message!.content!)"
+                }
+                else
+                {
+                    cell!.titleLabel?.text = "\(fullnamearray![0]): "
+                }
+            }
+            cell!.bgview.selectiveBorderFlag = UInt(AUISelectiveBordersFlagTop)
+            cell!.bgview.selectiveBordersColor = UIColor.lightGrayColor()
+            cell!.bgview.selectiveBordersWidth = 0.5
+            cell!.bgview.layer.shadowColor = UIColor.grayColor().CGColor
+            cell!.bgview.layer.shadowOffset = CGSizeMake(1,3)
+            cell!.bgview.layer.shadowOpacity = 1
+            cell!.bgview.layer.shadowRadius = 2.0
+            cell!.bgview.layer.masksToBounds = false
+            return cell!
+        }
+        else if (indexPath.section == 5)
         {
             let cell = tableView.dequeueReusableCellWithIdentifier("MultiLineTextInputTableViewCell", forIndexPath: indexPath) as? MultiLineTextInputTableViewCell
             cell!.textView?.delegate = self
             cell!.textView?.placeholder = "Insert personal message"
             cell!.titleLabel?.text = ""
-            cell!.textString = ""
-            cell!.bgview.selectiveBorderFlag = UInt(AUISelectiveBordersFlagTop | AUISelectiveBordersFlagBottom | AUISelectiveBordersFlagLeft | AUISelectiveBordersFlagRight)
-            cell!.bgview.selectiveBordersColor = UIColor.lightGrayColor()
-            cell!.bgview.selectiveBordersWidth = 0
-            
+            if (messageContent != nil)
+            {
+                cell!.textString = messageContent!
+            }
+            else
+            {
+                cell!.textString = ""
+            }
+            cell!.textView?.editable = true
+            cell!.heightConstraint.constant = 65
+            cell!.bottomConstraint.constant = 5
+            cell!.titleHeightConstraint.constant = 0
             cell!.bgview.layer.shadowColor = UIColor.grayColor().CGColor
             cell!.bgview.layer.shadowOffset = CGSizeMake(1,3)
             cell!.bgview.layer.shadowOpacity = 1
@@ -345,7 +404,7 @@ extension HangoutTableViewController {
             if (indexPath.section != 0)
             {
                 let cell = tableView.dequeueReusableCellWithIdentifier(reuseTableViewCellIdentifier, forIndexPath: indexPath) as! DHCollectionTableViewCell
-                let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()  
+                let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
                 layout.minimumLineSpacing = 15
                 layout.sectionInset = UIEdgeInsetsMake(0, offsetLeftMargin, 0, offsetRightMargin)
                 layout.itemSize = CGSizeMake(cell.bounds.size.width - 60, cell.bounds.size.height - 6)
@@ -366,7 +425,7 @@ extension HangoutTableViewController {
             }
         }
     }
-        
+    
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
     {
         if (indexPath.section <= 3)
@@ -380,7 +439,6 @@ extension HangoutTableViewController {
                 let horizontalOffset: CGFloat = CGFloat(value != nil ? value!.floatValue : 0)
                 friendCell.collectionView.setContentOffset(CGPointMake(horizontalOffset, 0), animated: false)
                 friendCell.collectionView.backgroundColor = UIColor.clearColor()
-                
             }
             else
             {
@@ -394,7 +452,7 @@ extension HangoutTableViewController {
     
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
-        view.backgroundColor = UIColor.whiteColor()//AppConfig.themebgcolour()
+        view.backgroundColor = UIColor.clearColor()//AppConfig.themebgcolour()
         return view
     }
     
@@ -429,11 +487,10 @@ extension HangoutTableViewController {
         if (!displayKeyboard) {
             return;
         }
-        UIView.animateWithDuration(0.35, delay: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
-            let contentInsets = UIEdgeInsetsMake(self.tableView.contentInset.top, 0.0, 0.0, 0.0)
-            self.tableView.contentInset = contentInsets
-            self.tableView.scrollIndicatorInsets = contentInsets
-            }, completion: nil)
+        let contentInsets = UIEdgeInsetsMake(self.tableView.contentInset.top, 0.0, 0.0, 0.0)
+        self.tableView.contentInset = contentInsets
+        self.tableView.scrollIndicatorInsets = contentInsets
+        
         displayKeyboard = false
     }
 }
@@ -442,7 +499,6 @@ extension HangoutTableViewController: UITextViewDelegate
 {
     func textViewDidChange(textView: UITextView) {
         messageContent = textView.text
-        
         let size = textView.bounds.size
         let newSize = textView.sizeThatFits(CGSize(width: size.width, height: CGFloat.max))
         
@@ -460,10 +516,23 @@ extension HangoutTableViewController: UITextViewDelegate
             }
         }
     }
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool
+    {
+        if (text != "\n")
+        {
+            return true
+        }
+        else
+        {
+            self.sendHangoutAction()
+            return false
+        }
+    }
 }
 
 // MARK: - Collection View Data source and Delegate
-//TODO - it's better to use customcollectioncell for the day / time 
+//TODO - it's better to use customcollectioncell for the day / time
 extension HangoutTableViewController:UICollectionViewDataSource,UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
@@ -478,7 +547,8 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
         {
             let currentplacerow = self.contentOffsetDictionary[placerow] as! Int
             let cell: LocationCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseLocationCollectionViewCellIdentifier, forIndexPath: indexPath) as!LocationCollectionViewCell
-            if let placeidstr = self.sourceArray[collectionView.tag][indexPath.item] as? String{
+            let placearray = self.sourceArray[collectionView.tag] as! NSArray
+            if let placeidstr = placearray[indexPath.item] as? String{
                 let placeid = Int(placeidstr)
                 let locationdic = locationdata!.objectAtIndex(Int(placeid!)) as? NSDictionary
                 let name = locationdic!.objectForKey("name") as! String
@@ -592,7 +662,8 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
                 cell.leftarrow.hidden = true
                 cell.rightarrow.hidden = true
             }
-            let time = self.sourceArray[collectionView.tag][indexPath.item] as? Hangout_Time
+            let timearray = self.sourceArray[collectionView.tag] as! NSArray
+            let time = timearray[indexPath.item] as? Hangout_Time
             cell.label.text = time?.time_description
             return cell
         }
@@ -600,7 +671,8 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
         {
             let currentdayrow = self.contentOffsetDictionary[dayrow] as! Int
             let cell: DateTimeCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseDayTimeCollectionViewCellIdentifier, forIndexPath: indexPath)  as! DateTimeCollectionViewCell
-            let day = self.sourceArray[collectionView.tag][indexPath.item] as? Hangout_Day
+            let dayarray = self.sourceArray[collectionView.tag] as! NSArray
+            let day = dayarray[indexPath.item] as? Hangout_Day
             if (indexPath.row == currentdayrow)
             {
                 if (currentdayrow == 0)
@@ -629,14 +701,14 @@ extension HangoutTableViewController:UICollectionViewDataSource,UICollectionView
         }
     }
     
-     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath)
-     {
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath)
+    {
         let width = cell.bounds.size.width+15
         let index: NSInteger = collectionView.tag
         let value: AnyObject? = self.contentOffsetDictionary.valueForKey(index.description)
         let horizontalOffset: CGFloat = CGFloat(value != nil ? value!.floatValue : 0)
-         collectionView.setContentOffset(CGPointMake(horizontalOffset*width, 0), animated: false)
-     }
+        collectionView.setContentOffset(CGPointMake(horizontalOffset*width, 0), animated: false)
+    }
     
     override func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         

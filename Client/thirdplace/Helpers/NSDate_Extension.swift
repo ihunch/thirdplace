@@ -10,14 +10,6 @@ import Foundation
 
 extension NSDate
 {
-    func getNextSaturday() -> NSDate?
-    {
-        let calendar = NSCalendar.currentCalendar()
-        let saturday = NSDateComponents()
-        saturday.weekday = 7
-        return calendar.nextDateAfterDate(self, matchingComponents: saturday, options: NSCalendarOptions.MatchNextTime)
-    }
-    
     func calculateSundayMidnightTime() -> NSDate
     {
         let day = self.mt_components().weekday

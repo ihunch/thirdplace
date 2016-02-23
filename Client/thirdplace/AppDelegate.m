@@ -64,6 +64,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [NSDate mt_setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
     [DDLog addLogger:[DDTTYLogger sharedInstance] withLogLevel:XMPP_LOG_FLAG_SEND_RECV];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    application.applicationIconBadgeNumber = 0;
     [self setupXMPPStream];
     
     [MagicalRecord setupCoreDataStack];

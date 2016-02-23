@@ -13,7 +13,9 @@ class MultiLineTextInputTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel?
     @IBOutlet var textView: UITextView?
     @IBOutlet weak var bgview: UIView!
-    
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var titleHeightConstraint: NSLayoutConstraint!
     override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
@@ -31,7 +33,7 @@ class MultiLineTextInputTableViewCell: UITableViewCell {
             if let textView = textView {
                 textView.text = newValue
                 
-                textViewDidChange(textView)
+               // textViewDidChange(textView)
             }
         }
     }
@@ -42,6 +44,7 @@ class MultiLineTextInputTableViewCell: UITableViewCell {
         // Disable scrolling inside the text view so we enlarge to fitted size
         textView?.scrollEnabled = false
         textView?.delegate = self
+        textView?.returnKeyType = UIReturnKeyType.Send
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
@@ -73,4 +76,5 @@ extension MultiLineTextInputTableViewCell: UITextViewDelegate {
             }
         }
     }
+    
 }

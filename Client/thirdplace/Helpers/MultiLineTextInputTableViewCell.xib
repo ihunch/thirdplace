@@ -19,20 +19,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wza-U7-ppt">
-                        <rect key="frame" x="28" y="1" width="264" height="18"/>
+                        <rect key="frame" x="28" y="1" width="264" height="0.0"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="18" id="geJ-kV-dYz"/>
+                            <constraint firstAttribute="height" id="geJ-kV-dYz"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="15"/>
                         <color key="textColor" red="0.32156862749999998" green="0.40000000000000002" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OKX-zc-H03">
-                        <rect key="frame" x="28" y="19" width="264" height="125.5"/>
+                        <rect key="frame" x="28" y="1" width="264" height="143.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="90" id="gwl-su-CMR"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="gwl-su-CMR"/>
                         </constraints>
                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
@@ -55,7 +55,10 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="bgview" destination="yaw-5g-Tep" id="hDm-At-4nj"/>
+                <outlet property="bottomConstraint" destination="oCn-Kk-RQl" id="eiO-gi-STj"/>
+                <outlet property="heightConstraint" destination="gwl-su-CMR" id="ZYL-HI-g0C"/>
                 <outlet property="textView" destination="OKX-zc-H03" id="34z-k2-FDb"/>
+                <outlet property="titleHeightConstraint" destination="geJ-kV-dYz" id="N4T-Zy-dwm"/>
                 <outlet property="titleLabel" destination="Wza-U7-ppt" id="ANi-ey-SCI"/>
             </connections>
             <point key="canvasLocation" x="319" y="246"/>

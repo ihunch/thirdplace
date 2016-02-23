@@ -211,6 +211,9 @@
 		2F97F2731C5382B700B723B6 /* App.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F97F2721C5382B700B723B6 /* App.png */; };
 		2F9A2E691BA99D25008D4797 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9A2E681BA99D25008D4797 /* HomeScreenViewController.swift */; };
 		2F9A2E6D1BA9BB89008D4797 /* FriendContainerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9A2E6C1BA9BB89008D4797 /* FriendContainerTableViewCell.swift */; };
+		2F9DC9041C7C571200ED323B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F9DC9031C7C571200ED323B /* AudioToolbox.framework */; };
+		2F9DC9061C7C7CD300ED323B /* MultiLineTextViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9DC9051C7C7CD300ED323B /* MultiLineTextViewTableCell.swift */; };
+		2F9DC90A1C7C7F4500ED323B /* MultiLineTextViewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F9DC9091C7C7F4500ED323B /* MultiLineTextViewTableCell.xib */; };
 		2FA43F9E1BC128E900F9FBBD /* XMPPLoggingWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA43F9D1BC128E900F9FBBD /* XMPPLoggingWrapper.m */; };
 		2FA43FA01BCA8A2900F9FBBD /* NSDateAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA43F9F1BCA8A2900F9FBBD /* NSDateAdditions.swift */; };
 		2FA43FA21BCB304100F9FBBD /* HangoutInitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA43FA11BCB304100F9FBBD /* HangoutInitTableViewController.swift */; };
@@ -628,6 +631,9 @@
 		2F9A2E681BA99D25008D4797 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 		2F9A2E6C1BA9BB89008D4797 /* FriendContainerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendContainerTableViewCell.swift; sourceTree = "<group>"; };
 		2F9A2E701BAAEFE1008D4797 /* thirdplace-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "thirdplace-Bridging-Header.h"; sourceTree = "<group>"; };
+		2F9DC9031C7C571200ED323B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		2F9DC9051C7C7CD300ED323B /* MultiLineTextViewTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiLineTextViewTableCell.swift; sourceTree = "<group>"; };
+		2F9DC9091C7C7F4500ED323B /* MultiLineTextViewTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultiLineTextViewTableCell.xib; sourceTree = "<group>"; };
 		2FA43F9C1BC128E900F9FBBD /* XMPPLoggingWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPPLoggingWrapper.h; path = Utility/XMPPLoggingWrapper.h; sourceTree = "<group>"; };
 		2FA43F9D1BC128E900F9FBBD /* XMPPLoggingWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMPPLoggingWrapper.m; path = Utility/XMPPLoggingWrapper.m; sourceTree = "<group>"; };
 		2FA43F9F1BCA8A2900F9FBBD /* NSDateAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateAdditions.swift; sourceTree = "<group>"; };
@@ -719,6 +725,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F9DC9041C7C571200ED323B /* AudioToolbox.framework in Frameworks */,
 				2FE85D121B9AA71F00537455 /* libPods.a in Frameworks */,
 				291E79F01A98698A00E29A04 /* Security.framework in Frameworks */,
 				29F3DC711A98719800CEF32C /* libresolv.dylib in Frameworks */,
@@ -1840,6 +1847,8 @@
 				2F788F821C64B32800D41CBC /* FriendViewTableViewCell.swift */,
 				2F788F841C64B5D700D41CBC /* OneLabelTableViewCell.swift */,
 				2F788F861C64CB6200D41CBC /* UIViewExtension.swift */,
+				2F9DC9051C7C7CD300ED323B /* MultiLineTextViewTableCell.swift */,
+				2F9DC9091C7C7F4500ED323B /* MultiLineTextViewTableCell.xib */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1897,6 +1906,7 @@
 		63626B101962B02D00FA58D5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2F9DC9031C7C571200ED323B /* AudioToolbox.framework */,
 				2FC2335D1BDE5BEE003EA48B /* FacebookSDK.framework */,
 				2FC233591BDE5AA4003EA48B /* libxml2.tbd */,
 				2FE85D111B9AA71F00537455 /* libPods.a */,
@@ -2069,6 +2079,7 @@
 				2FCA14451C55B1D800EEC045 /* DateTimeCollectionViewCell.xib in Resources */,
 				2F97F2731C5382B700B723B6 /* App.png in Resources */,
 				2F6766621BBD717200F866F5 /* build-libidn.sh in Resources */,
+				2F9DC90A1C7C7F4500ED323B /* MultiLineTextViewTableCell.xib in Resources */,
 				2FD476BF1C424AD40013C330 /* cafe_au.plist in Resources */,
 				63626B1C1962B02D00FA58D5 /* InfoPlist.strings in Resources */,
 				5AF0E49DC97B0157DBB62221 /* Main.storyboard in Resources */,
@@ -2359,6 +2370,7 @@
 				2F6766351BBD717200F866F5 /* XMPPMessageArchiving.m in Sources */,
 				2F788F811C64AFB500D41CBC /* FriendSettingViewController.swift in Sources */,
 				2F6766451BBD717200F866F5 /* XMPPAttentionModule.m in Sources */,
+				2F9DC9061C7C7CD300ED323B /* MultiLineTextViewTableCell.swift in Sources */,
 				2F6766751BBD7A6000F866F5 /* XMPPRosterCoreDataStorage+Additions.m in Sources */,
 				2F6766411BBD717200F866F5 /* XMPPAutoTime.m in Sources */,
 				5AF0EEE59FE32A71737CBB97 /* PlaceCell.m in Sources */,

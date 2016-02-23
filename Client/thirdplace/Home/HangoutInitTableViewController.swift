@@ -126,11 +126,11 @@ class HangoutInitTableViewController: DHCollectionTableViewController
         hangoutmodule.cancelHangoutInvitation(hangout, sender: xmppStream.myJID)
     }
     
-    @IBAction func sendButton(sender: AnyObject)
+    func sendHangout()
     {
         self.showloadscreen()
         let createtime = NSDate().mt_inTimeZone(NSTimeZone.localTimeZone())
-        //create a temp hangout 
+        //create a temp hangout
         let p_context = hangoutDataManager.privateContext()
         let hangout = Hangout.MR_createEntityInContext(p_context)
         if ((alternativeMessage != nil) && (alternativeMessage != ""))
@@ -146,7 +146,7 @@ class HangoutInitTableViewController: DHCollectionTableViewController
         hangout.hangoutid = NSNumber(integer: HangoutConfig.tempHangoutID)
         let array = XMPPHangoutDataManager.getRandomThreeDigital(aumaxlocations)
         hangout.preferedlocation = "\(array[0]),\(array[1]),\(array[2])"
-        //user 
+        //user
         let sender = HangoutUser.MR_createEntityInContext(p_context)
         sender.goingstatus = "maybe"
         sender.jidstr  = xmppStream.myJID.bare()
@@ -178,8 +178,8 @@ class HangoutInitTableViewController: DHCollectionTableViewController
         }
         else
         {
-            let sat = now.getNextSaturday()?.mt_inTimeZone(NSTimeZone.localTimeZone())
-            let sun = now.getNextSaturday()?.mt_inTimeZone(NSTimeZone.localTimeZone()).mt_dateHoursAfter(24).mt_dateHoursAfter(23).mt_dateMinutesAfter(59)
+            let sat = now.mt_endOfCurrentWeek().mt_dateDaysBefore(1).mt_dateSecondsAfter(1)
+            let sun = now.mt_endOfCurrentWeek().mt_dateHoursAfter(24)
             hangouttime.startdate = sat
             hangouttime.enddate = sun
         }
@@ -202,6 +202,10 @@ class HangoutInitTableViewController: DHCollectionTableViewController
         message.updatetime = createtime
         message.updatejid = xmppStream.myJID.bare()
         message.hangout = hangout
+    }
+    @IBAction func sendButton(sender: AnyObject)
+    {
+       self.sendHangout()
     }
     
     @IBAction func confirmButton(sender: AnyObject)
@@ -487,6 +491,19 @@ extension HangoutInitTableViewController: UITextViewDelegate
                     tableView?.scrollToRowAtIndexPath(thisIndexPath, atScrollPosition: .Bottom, animated: false)
                 }
             }
+        }
+    }
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool
+    {
+        if (text != "\n")
+        {
+            return true
+        }
+        else
+        {
+            self.sendHangout()
+            return false
         }
     }
 }

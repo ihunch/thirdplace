@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AudioToolbox.AudioServices
 
 protocol HomeScreenDelegate
 {
@@ -575,6 +576,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         let user = rosterStorage.userForJID(jid, xmppStream: self.xmppStream, managedObjectContext: rosterDBContext)
         if (user != nil)
         {
+            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
             var unreadmessage = user.unreadMessages.integerValue
             unreadmessage++
             rosterStorage.updateUneadMessage(unreadmessage, user: user, xmppStream: self.xmppStream, managedObjectContext: rosterDBContext)

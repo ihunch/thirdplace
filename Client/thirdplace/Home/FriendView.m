@@ -152,8 +152,8 @@
         NSNumber* unreadmessage = self.friend.unreadMessages;
         if (unreadmessage.intValue > 0)
         {
-            NSString* message = [unreadmessage stringValue];
-            self.badge.badgeText = message;
+            //NSString* message = [unreadmessage stringValue];
+            self.badge.badgeText = @" ";//message;
             self.badge.hidden = NO;
         }
         else
