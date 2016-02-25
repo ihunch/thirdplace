@@ -594,7 +594,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                             message:messagebody
                                                            delegate:self
                                                   cancelButtonTitle:nil
-                                                  otherButtonTitles:@"accept",@"deny",nil];
+                                                  otherButtonTitles:@"deny",@"accept",nil];
         alertView.customobject = jid;
         [alertView show];
     }
@@ -612,7 +612,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)alertView:(CustomUIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     XMPPJID* fromjid = alertView.customobject;
     
-    if (buttonIndex == 0)
+    if (buttonIndex == 1)
     {
         XMPPvCardTemp* vcard = [self.xmppvCardTempModule vCardTempForJID:fromjid shouldFetch:NO];
         NSString* name = vcard.formattedName;

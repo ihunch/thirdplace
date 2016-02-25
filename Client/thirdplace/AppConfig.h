@@ -15,6 +15,7 @@ extern NSString* const kXMPPJIDKey;
 extern NSString* const kXMPPPasswordKey;
 
 extern NSString* const kXMPPMessageId_InviteHangout;
+extern NSString* const serverdateFormat;
 
 @interface AppConfig : NSObject
 

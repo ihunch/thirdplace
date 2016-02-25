@@ -44,6 +44,7 @@ class HangoutTableViewController: DHCollectionTableViewController,FriendViewDele
             return self.appDelegate!.xmppHangout
         }
     }
+    let p_context = NSManagedObjectContext.MR_context()
     
     override func awakeFromNib()
     {
@@ -90,7 +91,6 @@ class HangoutTableViewController: DHCollectionTableViewController,FriendViewDele
         let me = rosterStorage?.myUserForXMPPStream(xmppStream, managedObjectContext: rosterDBContext)
         
         //TODO: - change place data
-        let p_context = hangoutDataManager.privateContext()
         let hangoutid = selectedHangoutID!
         let hangout = Hangout.MR_findFirstByAttribute("hangoutid", withValue: NSNumber(integer: hangoutid), inContext: p_context)
         myhangout = hangout
@@ -157,7 +157,6 @@ class HangoutTableViewController: DHCollectionTableViewController,FriendViewDele
         self.showloadscreen()
         let createtime = NSDate().mt_inTimeZone(NSTimeZone.localTimeZone())
         //create a temp hangout
-        let p_context = hangoutDataManager.privateContext()
         let hangoutid = selectedHangoutID!
         let hangout = Hangout.MR_findFirstByAttribute("hangoutid", withValue: NSNumber(integer: hangoutid), inContext: p_context)
         let me = hangout.getUser(xmppStream!.myJID)
@@ -364,7 +363,7 @@ extension HangoutTableViewController {
                     cell!.titleLabel?.text = "\(fullnamearray![0]): "
                 }
             }
-            cell!.bgview.selectiveBorderFlag = UInt(AUISelectiveBordersFlagTop)
+            cell!.bgview.selectiveBorderFlag = UInt(AUISelectiveBordersFlagTop | AUISelectiveBordersFlagBottom)
             cell!.bgview.selectiveBordersColor = UIColor.lightGrayColor()
             cell!.bgview.selectiveBordersWidth = 0.5
             cell!.bgview.layer.shadowColor = UIColor.grayColor().CGColor
@@ -379,7 +378,6 @@ extension HangoutTableViewController {
             let cell = tableView.dequeueReusableCellWithIdentifier("MultiLineTextInputTableViewCell", forIndexPath: indexPath) as? MultiLineTextInputTableViewCell
             cell!.textView?.delegate = self
             cell!.textView?.placeholder = "Insert personal message"
-            cell!.titleLabel?.text = ""
             if (messageContent != nil)
             {
                 cell!.textString = messageContent!
@@ -391,7 +389,6 @@ extension HangoutTableViewController {
             cell!.textView?.editable = true
             cell!.heightConstraint.constant = 65
             cell!.bottomConstraint.constant = 5
-            cell!.titleHeightConstraint.constant = 0
             cell!.bgview.layer.shadowColor = UIColor.grayColor().CGColor
             cell!.bgview.layer.shadowOffset = CGSizeMake(1,3)
             cell!.bgview.layer.shadowOpacity = 1
@@ -451,14 +448,14 @@ extension HangoutTableViewController {
     }
     
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UIView()
+        let view = UIView(frame: CGRectZero)
         view.backgroundColor = UIColor.clearColor()//AppConfig.themebgcolour()
         return view
     }
     
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView()
+        let view = UIView(frame: CGRectZero)
         view.backgroundColor = UIColor.clearColor()
         return view
     }
@@ -749,6 +746,7 @@ extension HangoutTableViewController
 {
     func xmppHangout(sender:XMPPHangout, didUpdateHangout iq:XMPPIQ)
     {
+        p_context.MR_saveToPersistentStoreAndWait()
         dismissloadscreen()
         self.navigationController?.popViewControllerAnimated(true)
     }

@@ -25,6 +25,7 @@ class HangoutInitTableViewController: DHCollectionTableViewController
             _selectedHangoutFriend = friend
         }
     }
+    let p_context = NSManagedObjectContext.MR_context()
     
     @IBOutlet weak var declinebutton: UIButton!
     @IBOutlet weak var confirmbutton: UIButton!
@@ -118,7 +119,6 @@ class HangoutInitTableViewController: DHCollectionTableViewController
     {
         self.showloadscreen()
         //lookup a temp hangout
-        let p_context = hangoutDataManager.privateContext()
         let hangoutid = selectedHangoutid!
         let hangout = Hangout.MR_findFirstByAttribute("hangoutid", withValue: NSNumber(integer: hangoutid), inContext: p_context)
         let me = hangout.getUser(xmppStream.myJID)
@@ -131,7 +131,6 @@ class HangoutInitTableViewController: DHCollectionTableViewController
         self.showloadscreen()
         let createtime = NSDate().mt_inTimeZone(NSTimeZone.localTimeZone())
         //create a temp hangout
-        let p_context = hangoutDataManager.privateContext()
         let hangout = Hangout.MR_createEntityInContext(p_context)
         if ((alternativeMessage != nil) && (alternativeMessage != ""))
         {
@@ -214,7 +213,6 @@ class HangoutInitTableViewController: DHCollectionTableViewController
         let createtime = NSDate().mt_inTimeZone(NSTimeZone.localTimeZone())
         
         //lookup a temp hangout
-        let p_context = hangoutDataManager.privateContext()
         let hangoutid = selectedHangoutid!
         let hangout = Hangout.MR_findFirstByAttribute("hangoutid", withValue: NSNumber(integer: hangoutid), inContext: p_context)
         let me = hangout.getUser(xmppStream.myJID)
@@ -294,7 +292,8 @@ extension HangoutInitTableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
+    {
         return 17.0
     }
     
@@ -334,7 +333,6 @@ extension HangoutInitTableViewController {
             textcell!.bgview.selectiveBorderFlag = UInt(AUISelectiveBordersFlagTop | AUISelectiveBordersFlagBottom | AUISelectiveBordersFlagLeft | AUISelectiveBordersFlagRight)
             textcell!.bgview.selectiveBordersColor = UIColor.lightGrayColor()
             textcell!.bgview.selectiveBordersWidth = 0
-            textcell!.titleLabel?.text = ""
             textcell!.bgview.layer.shadowColor = UIColor.grayColor().CGColor
             textcell!.bgview.layer.shadowOffset = CGSizeMake(1,3)
             textcell!.bgview.layer.shadowOpacity = 1
@@ -347,7 +345,6 @@ extension HangoutInitTableViewController {
             let textcell = tableView.dequeueReusableCellWithIdentifier("MultiLineTextInputTableViewCell", forIndexPath: indexPath) as? MultiLineTextInputTableViewCell
             textcell!.textView!.placeholder = "Insert alternative message"
             textcell!.textView!.delegate = self
-            textcell!.titleLabel?.text = ""
             textcell!.textString = ""
             textcell!.bgview.selectiveBorderFlag = UInt(AUISelectiveBordersFlagTop | AUISelectiveBordersFlagBottom | AUISelectiveBordersFlagLeft | AUISelectiveBordersFlagRight)
             textcell!.bgview.selectiveBordersColor = UIColor.lightGrayColor()
@@ -510,20 +507,26 @@ extension HangoutInitTableViewController: UITextViewDelegate
 
 extension HangoutInitTableViewController
 {
-    func xmppHangout(sender:XMPPHangout, didCreateHangout iq:XMPPIQ)
+    func xmppHangout(sender:XMPPHangout, didCreateHangout createquery:DDXMLElement)
     {
+        let hangout = Hangout.MR_findFirstByAttribute("hangoutid", withValue: NSNumber(integer: HangoutConfig.tempHangoutID), inContext: p_context)
+        let newid = createquery.stringValue()
+        hangout.hangoutid = Int(newid)
+        p_context.MR_saveToPersistentStoreAndWait()
         self.dismissloadscreen()
         self.navigationController?.popViewControllerAnimated(true)
     }
     
     func xmppHangout(sender:XMPPHangout, didCloseHangout iq:XMPPIQ)
     {
+        p_context.MR_saveToPersistentStoreAndWait()
         self.dismissloadscreen()
         self.navigationController?.popViewControllerAnimated(true)
     }
     
     func xmppHangout(sender:XMPPHangout, didUpdateHangout iq:XMPPIQ)
     {
+        p_context.MR_saveToPersistentStoreAndWait()
         self.dismissloadscreen()
         self.navigationController?.popViewControllerAnimated(true)
     }

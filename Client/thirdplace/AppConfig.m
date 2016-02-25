@@ -9,7 +9,7 @@
 
 NSString* const kXMPPHostName = @"52.62.24.227";
 NSString* const kXMPPServerName = @"ip-172-31-1-174";
-//NSString* const kXMPPHostName = @"192.168.0.14";
+//NSString* const kXMPPHostName = @"192.168.0.4";
 //NSString* const kXMPPServerName = @"macintosh.local";
 NSString *const kXMPPHasDetailsKey = @"kXMPPHasDetails";
 NSString *const kXMPPJIDKey = @"kXMPPJID";
@@ -19,6 +19,7 @@ NSString *const kXMPPEmailKey = @"kXMPPEmail";
 NSString *const kNotificationKey = @"NotificationKey";
 NSString *const kXMPPMessageId_InviteHangout = @"xmpp_msg_invite";
 NSString *const kLoginUserPhotoPath = @"LoginUserPhotoPath";
+NSString* const serverdateFormat = @"yyyy-MM-dd HH:mm";
 
 @implementation AppConfig
 

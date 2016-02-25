@@ -101,7 +101,7 @@
     // TODO: Wrap all message creation up into appropriate class
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm"];
+    [dateFormat setDateFormat:serverdateFormat];
     
     DDXMLElement *createElement = [DDXMLElement elementWithName:@"create" xmlns:@"hangout:iq:detail"];
     DDXMLElement *hangoutElement = [DDXMLElement elementWithName:@"hangout"];

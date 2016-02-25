@@ -10,12 +10,10 @@ import UIKit
 
 class MultiLineTextInputTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var titleLabel: UILabel?
     @IBOutlet var textView: UITextView?
     @IBOutlet weak var bgview: UIView!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var titleHeightConstraint: NSLayoutConstraint!
     override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }

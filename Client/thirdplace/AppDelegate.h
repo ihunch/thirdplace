@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "AppConfig.h"
 #import "XMPPFramework.h"
 
 @class XMPPHangout;

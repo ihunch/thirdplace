@@ -9,7 +9,7 @@
 import UIKit
 @objc protocol XMPPHangoutDelegate
 {
-    func xmppHangout(sender:XMPPHangout, didCreateHangout iq:XMPPIQ);
+    func xmppHangout(sender:XMPPHangout, didCreateHangout createQuery:DDXMLElement);
     func xmppHangout(sender:XMPPHangout, didUpdateHangout iq:XMPPIQ);
     func xmppHangout(sender:XMPPHangout, didCloseHangout iq:XMPPIQ);
     func xmppHangout(sender:XMPPHangout, didReceiveMessage message:XMPPMessage);
@@ -62,8 +62,8 @@ class XMPPHangout: XMPPModule
                 let user = DDXMLElement(name: "user", stringValue: hangout.getOtherUser(sender)?.jidstr)
                 usersElement.addChild(user)
                 let hangoutlatesttime = hangout.getLatestTime()
-                let startElement = DDXMLElement(name: "startdate", stringValue: hangout.getLatestTime()?.startdate?.convertToString("yyyy-MM-dd HH:mm"))
-                let endElement = DDXMLElement(name: "enddate", stringValue: hangoutlatesttime!.enddate?.convertToString("yyyy-MM-dd HH:mm"))
+                let startElement = DDXMLElement(name: "startdate", stringValue: hangout.getLatestTime()?.startdate?.convertToString(serverdateFormat))
+                let endElement = DDXMLElement(name: "enddate", stringValue: hangoutlatesttime!.enddate?.convertToString(serverdateFormat))
                 let timedescription = DDXMLElement(name: "timedescription", stringValue:  hangoutlatesttime!.timedescription)
                 if (hangout.getLatestMessage() != nil)
                 {
@@ -110,8 +110,8 @@ class XMPPHangout: XMPPModule
                 let hangoutlatesttime = hangout.getLatestTime()
                 let timeElement = DDXMLElement(name: "time")
                 
-                let startElement = DDXMLElement(name: "startdate", stringValue: hangout.getLatestTime()?.startdate?.convertToString("yyyy-MM-dd HH:mm"))
-                let endElement = DDXMLElement(name: "enddate", stringValue: hangoutlatesttime!.enddate?.convertToString("yyyy-MM-dd HH:mm"))
+                let startElement = DDXMLElement(name: "startdate", stringValue: hangout.getLatestTime()?.startdate?.convertToString(serverdateFormat))
+                let endElement = DDXMLElement(name: "enddate", stringValue: hangoutlatesttime!.enddate?.convertToString(serverdateFormat))
                 let timedescription = DDXMLElement(name: "timedescription", stringValue:  hangoutlatesttime!.timedescription)
                 let timeconfirm = DDXMLElement(name: "timeconfirm", stringValue: "false")
                 timeElement.addChild(startElement)
@@ -211,31 +211,19 @@ class XMPPHangout: XMPPModule
         {
             if(iq.isResultIQ())
             {
-                let pcontext = XMPPHangoutDataManager.singleInstance.privateContext()
-                let hangout = Hangout.MR_findFirstByAttribute("hangoutid", withValue: NSNumber(integer: HangoutConfig.tempHangoutID), inContext: pcontext)
-                let newid = createquery.stringValue()
-                hangout.hangoutid = Int(newid)
-                pcontext.MR_saveToPersistentStoreAndWait()
-                XMPPHangoutDataManager.singleInstance.resetPrivateContext()
-                self.multicastDelegate().xmppHangout(self, didCreateHangout: iq)
+                self.multicastDelegate().xmppHangout(self, didCreateHangout: createquery)
                 return true
             };
         }
         let updateQuery = iq.elementForName("update", xmlns: self.hangout_xmlns)
         if (updateQuery != nil)
         {
-            let pcontext = XMPPHangoutDataManager.singleInstance.privateContext()
-            pcontext.MR_saveToPersistentStoreAndWait()
-            XMPPHangoutDataManager.singleInstance.resetPrivateContext()
             self.multicastDelegate().xmppHangout(self, didUpdateHangout: iq)
             return true
         }
         let closeQuery = iq.elementForName("close", xmlns: self.hangout_xmlns)
         if (closeQuery != nil)
         {
-            let pcontext = XMPPHangoutDataManager.singleInstance.privateContext()
-            pcontext.MR_saveToPersistentStoreAndWait()
-            XMPPHangoutDataManager.singleInstance.resetPrivateContext()
             self.multicastDelegate().xmppHangout(self, didCloseHangout: iq)
             return true
         }

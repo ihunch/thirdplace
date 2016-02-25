@@ -24,24 +24,6 @@ private let _SingletonInstance = XMPPHangoutDataManager()
         }
     }
     
-    func privateContext() -> NSManagedObjectContext
-    {
-        if privatecontext != nil
-        {
-            return privatecontext!
-        }
-        else
-        {
-            privatecontext = NSManagedObjectContext.MR_context()
-            return privatecontext!
-        }
-    }
-    
-    func resetPrivateContext()
-    {
-        privatecontext = nil
-    }
-    
     func handleHangout(item: DDXMLElement, stream: XMPPStream, fromjid: XMPPJID)
     {
         let createtime = NSDate().mt_inTimeZone(NSTimeZone.localTimeZone())
@@ -57,7 +39,7 @@ private let _SingletonInstance = XMPPHangoutDataManager()
         let enddatestr = item.elementForName(HangoutConfig.enddatekey).stringValue()
         
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        dateFormatter.dateFormat =  serverdateFormat
         let startdate = dateFormatter.dateFromString(startdatestr)!.mt_inTimeZone(NSTimeZone.localTimeZone())
         let enddate = dateFormatter.dateFromString(enddatestr)!.mt_inTimeZone(NSTimeZone.localTimeZone())
         let description = item.elementForName(HangoutConfig.descriptionkey).stringValue()
@@ -176,7 +158,7 @@ private let _SingletonInstance = XMPPHangoutDataManager()
         for eachelement in items
         {
             let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+            dateFormatter.dateFormat = serverdateFormat
             //General hangout
             let item = eachelement as! DDXMLElement
             var myhangout: Hangout? = nil

@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -16,25 +15,25 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KBu-UG-QJZ">
-                        <rect key="frame" x="27" y="1.5" width="266" height="95.5"/>
+                        <rect key="frame" x="27" y="1.5" width="266" height="111"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="ashdfkhlsajkdhflkjashfkjhaskdljfhlkjashflkjashfkljhaskjlfhlskajhfkljsahlfkjhaslkjfhkljsahfkljsahflkjashlf" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wza-U7-ppt">
-                        <rect key="frame" x="30" y="1" width="260" height="95.5"/>
+                        <rect key="frame" x="30" y="1" width="260" height="103.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="Wza-U7-ppt" secondAttribute="bottom" id="XSh-hV-8Jn"/>
+                    <constraint firstAttribute="bottom" secondItem="Wza-U7-ppt" secondAttribute="bottom" id="XSh-hV-8Jn"/>
                     <constraint firstAttribute="trailing" secondItem="Wza-U7-ppt" secondAttribute="trailing" constant="30" id="gVV-9a-F3b"/>
                     <constraint firstItem="KBu-UG-QJZ" firstAttribute="top" secondItem="Wza-U7-ppt" secondAttribute="top" constant="1" id="iHN-b5-2Ao"/>
                     <constraint firstItem="Wza-U7-ppt" firstAttribute="leading" secondItem="bFw-mW-LxI" secondAttribute="leading" constant="30" id="nM9-yW-vc1"/>
                     <constraint firstItem="Wza-U7-ppt" firstAttribute="top" secondItem="bFw-mW-LxI" secondAttribute="top" constant="1" id="pF5-Ru-drc"/>
                     <constraint firstItem="KBu-UG-QJZ" firstAttribute="leading" secondItem="Wza-U7-ppt" secondAttribute="leading" constant="-3" id="qU4-ER-Aa2"/>
                     <constraint firstItem="KBu-UG-QJZ" firstAttribute="trailing" secondItem="Wza-U7-ppt" secondAttribute="trailing" constant="3" id="uZj-sD-6uh"/>
-                    <constraint firstItem="KBu-UG-QJZ" firstAttribute="bottom" secondItem="Wza-U7-ppt" secondAttribute="bottom" constant="1" id="yTG-0R-lxh"/>
+                    <constraint firstItem="KBu-UG-QJZ" firstAttribute="bottom" secondItem="Wza-U7-ppt" secondAttribute="bottom" constant="8" id="yTG-0R-lxh"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

@@ -560,7 +560,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     //Mark: XMPPHangoutDelegate
-    func xmppHangout(sender:XMPPHangout, didCreateHangout iq:XMPPIQ)
+    func xmppHangout(sender:XMPPHangout, didCreateHangout createQuery:DDXMLElement)
     {
         XMPPLoggingWrapper.XMPPLogTrace()
         _hangoutFetchedResultsController = nil
