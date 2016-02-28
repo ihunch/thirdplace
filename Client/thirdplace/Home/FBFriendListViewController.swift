@@ -127,8 +127,7 @@ class FBFriendListViewController: UIViewController,UITableViewDataSource, UITabl
             {
                 let name =  fbuser["name"] as! String
                 self.xmppRoster.addUser(jid, withNickname: name)
-                let localdb = DataManager.singleInstance.getLocaldbContext()
-                DataManager.singleInstance.createXMPPRoster(localdb, jid)
+                DataManager.singleInstance.createXMPPRosterMainContext(jid)
             }
             else
             {

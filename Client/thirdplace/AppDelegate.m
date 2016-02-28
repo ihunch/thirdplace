@@ -39,6 +39,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     //local var
     NSMutableDictionary* buddyRequest;
+    NSManagedObjectContext* privateContext;
 }
 
 @synthesize xmppStream;
@@ -571,10 +572,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)xmppRoster:(XMPPRoster *)sender didReceiveRosterItem:(NSXMLElement *)item
 {
-    DataManager* db = [DataManager singleInstance];
-    NSManagedObjectContext* localdb = [db getLocaldbContext];
-    [localdb MR_saveToPersistentStoreAndWait]; // push the temp fb info into persistent store.
-    [db releaseLocalContext];
+    [privateContext MR_saveToPersistentStoreAndWait]; // push the temp fb info into persistent store.
+    privateContext = nil;
 }
 
 - (void)xmppRosterDidEndPopulating:(XMPPRoster *)sender
@@ -627,8 +626,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 -(void)createTempXMPPFBUser:(XMPPJID*)fromjid
 {
-    NSManagedObjectContext* localdb = [[DataManager singleInstance] getLocaldbContext];
-    [[DataManager singleInstance] createXMPPRoster:localdb :fromjid];
+    if (privateContext == nil)
+    {
+        privateContext = [NSManagedObjectContext MR_context];
+    }
+    [[DataManager singleInstance] createXMPPRoster:privateContext :fromjid];
 }
 
 #pragma mark UINotificationDelegate

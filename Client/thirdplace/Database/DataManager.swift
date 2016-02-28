@@ -30,25 +30,7 @@ class DataManager: NSObject {
             return _SingletonInstance
         }
     }
-    
-    func getLocaldbContext() -> NSManagedObjectContext
-    {
-        if localdbcontext != nil
-        {
-           return localdbcontext!
-        }
-        else
-        {
-            localdbcontext = NSManagedObjectContext.MR_context()
-            return localdbcontext!
-        }
-    }
-    
-    func releaseLocalContext()
-    {
-        localdbcontext = nil
-    }
-    
+        
     //MARK: - Query Functions
     func getXMPPUserFBInfo(jid: XMPPJID, dbcontext: NSManagedObjectContext?) -> XMPPRosterFB?
     {
@@ -82,8 +64,8 @@ class DataManager: NSObject {
         {
             y+=30
         }
-        result!.axisxValue = Float(x)
-        result!.axisyValue = Float(y)
+        result!.axisx = NSNumber(unsignedInt: x)
+        result!.axisy = NSNumber(unsignedInt: y)
         result!.jid = jid.bare()
         result!.fbid = jid.bare().componentsSeparatedByString("@")[0]
         NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
@@ -104,8 +86,8 @@ class DataManager: NSObject {
         {
             y+=30
         }
-        result!.axisxValue = Float(x)
-        result!.axisyValue = Float(y)
+        result!.axisx = NSNumber(unsignedInt: x)
+        result!.axisy = NSNumber(unsignedInt: y)
         result!.jid = jid.bare()
         result!.fbid = jid.bare().componentsSeparatedByString("@")[0]
         return result!

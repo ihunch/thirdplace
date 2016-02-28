@@ -37,8 +37,6 @@
 		2F3DAA1D1C2ACBBB0030BB33 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3DAA1C1C2ACBBB0030BB33 /* ErrorHandler.swift */; };
 		2F3DAA1F1C2C03710030BB33 /* LoginContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3DAA1E1C2C03710030BB33 /* LoginContentViewController.swift */; };
 		2F3E7E9B1BBE627F00729894 /* HangoutDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F3E7E991BBE627F00729894 /* HangoutDataModel.xcdatamodeld */; };
-		2F3E7EAE1BBFED2C00729894 /* _XMPPRosterFB.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F3E7EA91BBFED2C00729894 /* _XMPPRosterFB.m */; };
-		2F3E7EAF1BBFED2C00729894 /* XMPPRosterFB.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F3E7EAB1BBFED2C00729894 /* XMPPRosterFB.m */; };
 		2F3E7EB01BBFED2C00729894 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F3E7EAC1BBFED2C00729894 /* Model.xcdatamodeld */; };
 		2F3E7EE21BBFEE7400729894 /* _Hangout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3E7ED61BBFEE7400729894 /* _Hangout.swift */; };
 		2F3E7EE31BBFEE7400729894 /* _HangoutLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3E7ED71BBFEE7400729894 /* _HangoutLocation.swift */; };
@@ -214,6 +212,8 @@
 		2F9DC9041C7C571200ED323B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F9DC9031C7C571200ED323B /* AudioToolbox.framework */; };
 		2F9DC9061C7C7CD300ED323B /* MultiLineTextViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9DC9051C7C7CD300ED323B /* MultiLineTextViewTableCell.swift */; };
 		2F9DC90A1C7C7F4500ED323B /* MultiLineTextViewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F9DC9091C7C7F4500ED323B /* MultiLineTextViewTableCell.xib */; };
+		2F9DC90E1C81847000ED323B /* _XMPPRosterFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9DC90C1C81847000ED323B /* _XMPPRosterFB.swift */; };
+		2F9DC90F1C81847000ED323B /* XMPPRosterFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9DC90D1C81847000ED323B /* XMPPRosterFB.swift */; };
 		2FA43F9E1BC128E900F9FBBD /* XMPPLoggingWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA43F9D1BC128E900F9FBBD /* XMPPLoggingWrapper.m */; };
 		2FA43FA01BCA8A2900F9FBBD /* NSDateAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA43F9F1BCA8A2900F9FBBD /* NSDateAdditions.swift */; };
 		2FA43FA21BCB304100F9FBBD /* HangoutInitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA43FA11BCB304100F9FBBD /* HangoutInitTableViewController.swift */; };
@@ -296,10 +296,6 @@
 		2F3DAA1C1C2ACBBB0030BB33 /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		2F3DAA1E1C2C03710030BB33 /* LoginContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginContentViewController.swift; sourceTree = "<group>"; };
 		2F3E7E9A1BBE627F00729894 /* HangoutDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HangoutDataModel.xcdatamodel; sourceTree = "<group>"; };
-		2F3E7EA81BBFED2C00729894 /* _XMPPRosterFB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _XMPPRosterFB.h; sourceTree = "<group>"; };
-		2F3E7EA91BBFED2C00729894 /* _XMPPRosterFB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _XMPPRosterFB.m; sourceTree = "<group>"; };
-		2F3E7EAA1BBFED2C00729894 /* XMPPRosterFB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPRosterFB.h; sourceTree = "<group>"; };
-		2F3E7EAB1BBFED2C00729894 /* XMPPRosterFB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPRosterFB.m; sourceTree = "<group>"; };
 		2F3E7EAD1BBFED2C00729894 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		2F3E7ED61BBFEE7400729894 /* _Hangout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Hangout.swift; sourceTree = "<group>"; };
 		2F3E7ED71BBFEE7400729894 /* _HangoutLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _HangoutLocation.swift; sourceTree = "<group>"; };
@@ -634,6 +630,9 @@
 		2F9DC9031C7C571200ED323B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		2F9DC9051C7C7CD300ED323B /* MultiLineTextViewTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiLineTextViewTableCell.swift; sourceTree = "<group>"; };
 		2F9DC9091C7C7F4500ED323B /* MultiLineTextViewTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultiLineTextViewTableCell.xib; sourceTree = "<group>"; };
+		2F9DC90B1C81834400ED323B /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
+		2F9DC90C1C81847000ED323B /* _XMPPRosterFB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _XMPPRosterFB.swift; sourceTree = "<group>"; };
+		2F9DC90D1C81847000ED323B /* XMPPRosterFB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMPPRosterFB.swift; sourceTree = "<group>"; };
 		2FA43F9C1BC128E900F9FBBD /* XMPPLoggingWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPPLoggingWrapper.h; path = Utility/XMPPLoggingWrapper.h; sourceTree = "<group>"; };
 		2FA43F9D1BC128E900F9FBBD /* XMPPLoggingWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMPPLoggingWrapper.m; path = Utility/XMPPLoggingWrapper.m; sourceTree = "<group>"; };
 		2FA43F9F1BCA8A2900F9FBBD /* NSDateAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateAdditions.swift; sourceTree = "<group>"; };
@@ -764,10 +763,8 @@
 		2F3E7EA71BBFED2C00729894 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				2F3E7EA81BBFED2C00729894 /* _XMPPRosterFB.h */,
-				2F3E7EA91BBFED2C00729894 /* _XMPPRosterFB.m */,
-				2F3E7EAA1BBFED2C00729894 /* XMPPRosterFB.h */,
-				2F3E7EAB1BBFED2C00729894 /* XMPPRosterFB.m */,
+				2F9DC90C1C81847000ED323B /* _XMPPRosterFB.swift */,
+				2F9DC90D1C81847000ED323B /* XMPPRosterFB.swift */,
 			);
 			name = Models;
 			path = FBModel/Models;
@@ -2325,6 +2322,7 @@
 				2F6766191BBD717200F866F5 /* XMPPvCardTempBase.m in Sources */,
 				2F6765F31BBD717200F866F5 /* XMPPGroupCoreDataStorageObject.m in Sources */,
 				5AF0E6E3CEEC7C535E084BA0 /* GCPlaceholderTextView.m in Sources */,
+				2F9DC90F1C81847000ED323B /* XMPPRosterFB.swift in Sources */,
 				2F6765ED1BBD717200F866F5 /* XMPPFileTransfer.m in Sources */,
 				2F6766591BBD717200F866F5 /* DDTTYLogger.m in Sources */,
 				2F6766051BBD717200F866F5 /* XMPPRoomMessageCoreDataStorageObject.m in Sources */,
@@ -2358,7 +2356,6 @@
 				2F6765FF1BBD717200F866F5 /* XMPPJabberRPCModule.m in Sources */,
 				2F6766361BBD717200F866F5 /* XMPPvCardAvatarModule.m in Sources */,
 				2F67664D1BBD717200F866F5 /* DDList.m in Sources */,
-				2F3E7EAE1BBFED2C00729894 /* _XMPPRosterFB.m in Sources */,
 				2F6766461BBD717200F866F5 /* XMPPMessage+XEP_0224.m in Sources */,
 				2F6766531BBD717200F866F5 /* XMPPTimer.m in Sources */,
 				2F6766321BBD717200F866F5 /* XMPPMessageArchiving_Contact_CoreDataObject.m in Sources */,
@@ -2396,11 +2393,11 @@
 				2F3E7EE81BBFEE7400729894 /* Hangout.swift in Sources */,
 				2F6766171BBD717200F866F5 /* XMPPvCardTempAdr.m in Sources */,
 				2F6766091BBD717200F866F5 /* XMPPRoomMessageHybridCoreDataStorageObject.m in Sources */,
+				2F9DC90E1C81847000ED323B /* _XMPPRosterFB.swift in Sources */,
 				2F6765E71BBD717200F866F5 /* XMPPModule.m in Sources */,
 				2F3E7EF11BC0011500729894 /* XMPPHangout.swift in Sources */,
 				2F6766571BBD717200F866F5 /* DDFileLogger.m in Sources */,
 				2F3E7EE51BBFEE7400729894 /* _HangoutTime.swift in Sources */,
-				2F3E7EAF1BBFED2C00729894 /* XMPPRosterFB.m in Sources */,
 				2F6765F61BBD717200F866F5 /* XMPPRosterCoreDataStorage.m in Sources */,
 				2F788F891C64CD1500D41CBC /* WebUIViewController.swift in Sources */,
 				2F67662C1BBD717200F866F5 /* XMPPCapabilities.xcdatamodel in Sources */,
@@ -2848,9 +2845,10 @@
 		2F3E7EAC1BBFED2C00729894 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2F9DC90B1C81834400ED323B /* Model 2.xcdatamodel */,
 				2F3E7EAD1BBFED2C00729894 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2F3E7EAD1BBFED2C00729894 /* Model.xcdatamodel */;
+			currentVersion = 2F9DC90B1C81834400ED323B /* Model 2.xcdatamodel */;
 			name = Model.xcdatamodeld;
 			path = FBModel/Model.xcdatamodeld;
 			sourceTree = "<group>";

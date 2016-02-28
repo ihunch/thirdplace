@@ -8,6 +8,7 @@
 @class XMPPUserCoreDataStorageObject;
 @class FriendView;
 @class CustomBadge;
+@class XMPPRosterFB;
 
 @protocol FriendViewDelegate
 
@@ -23,8 +24,9 @@
 @property (nonatomic, strong) UIImage *friendImage;
 @property (nonatomic, strong) UIImage *styledFriendImage;
 @property (nonatomic, strong) CustomBadge* badge;
+@property (nonatomic, strong) XMPPRosterFB* fbprofile;
 + (id)addFriendView;
 
 + (id)friendViewWithFriend:(XMPPUserCoreDataStorageObject *)aFriend;
-
+- (void)setXMPPRosterFB:(XMPPRosterFB*)fbroster;
 @end

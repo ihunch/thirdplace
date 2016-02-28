@@ -133,8 +133,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         self.dragFriendView = nil;
         [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
             XMPPRosterFB* rfb = [[DataManager singleInstance] getXMPPUserFBInfo:friendView.friend.jid dbcontext:localContext];
-            rfb.axisxValue = friendView.center.x;
-            rfb.axisyValue = friendView.center.y;
+            rfb.axisx = [NSNumber numberWithFloat:friendView.center.x];
+            rfb.axisy = [NSNumber numberWithFloat:friendView.center.y];
         }];
         
         [UIView animateWithDuration:0.3 animations:^{
@@ -159,6 +159,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     DataManager* dbm = [DataManager singleInstance];
     FriendView *friendView = [FriendView friendViewWithFriend:friend];
     friendView.delegate = self;
+    NSManagedObjectContext* mainContext = [NSManagedObjectContext MR_defaultContext];
+    XMPPRosterFB* fbuser = [[DataManager singleInstance] getXMPPUserFBInfo:friend.jid dbcontext:mainContext];
+    [friendView setXMPPRosterFB:fbuser];
     [self.friendViews addObject:friendView];
     XMPPRosterFB* rfb = [dbm getXMPPUserFBInfo:friend.jid dbcontext:nil];
     if (friend.photo == nil)
@@ -170,7 +173,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     friendView.label.hidden = NO;
     [self addSubview:friendView];
     [self updateLines];
-    
 }
 
 -(void)removeAllFriendViews

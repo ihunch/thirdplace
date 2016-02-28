@@ -8,6 +8,7 @@
 #import "XMPPFramework.h"
 #import "AppConfig.h"
 #import "CustomBadge.h"
+#import "thirdplace-Swift.h"
 
 @interface FriendView ()
 
@@ -69,15 +70,21 @@
     {
         [friend removeObserver:self forKeyPath:@"photo"];
         [friend removeObserver:self forKeyPath:@"subscription"];
-        [friend removeObserver:self forKeyPath:@"unreadMessages"];
     }
-    
     _friend = friend;
     [friend addObserver:self forKeyPath:@"photo" options:NSKeyValueObservingOptionInitial context:nil];
     [friend addObserver:self forKeyPath:@"subscription" options:NSKeyValueObservingOptionInitial context:nil];
-    [friend addObserver:self forKeyPath:@"unreadMessages" options:NSKeyValueObservingOptionInitial context:nil];
-
     self.label.text = friend.nickname;
+}
+
+- (void)setXMPPRosterFB:(XMPPRosterFB*)fbroster
+{
+    if (_fbprofile != nil)
+    {
+        [fbroster removeObserver:self forKeyPath:@"unreadMessages"];
+    }
+    _fbprofile = fbroster;
+    [fbroster addObserver:self forKeyPath:@"unreadMessages" options:NSKeyValueObservingOptionInitial context:nil];
 }
 
 - (UIImage *)styledFriendImage
@@ -149,7 +156,7 @@
     }
     else if ([keyPath isEqualToString:@"unreadMessages"] )
     {
-        NSNumber* unreadmessage = self.friend.unreadMessages;
+        NSNumber* unreadmessage = self.fbprofile.unreadMessages;
         if (unreadmessage.intValue > 0)
         {
             //NSString* message = [unreadmessage stringValue];
@@ -168,7 +175,7 @@
 {
     [self.friend removeObserver:self forKeyPath:@"photo"];
     [self.friend removeObserver:self forKeyPath:@"subscription"];
-    [self.friend removeObserver:self forKeyPath:@"unreadMessages"];
+    [self.fbprofile removeObserver:self forKeyPath:@"unreadMessages"];
 }
 
 - (UIColor *)outlineColor

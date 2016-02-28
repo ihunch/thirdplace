@@ -9,5 +9,4 @@
 #ifndef DBHeaderFile_h
 #define DBHeaderFile_h
 
-#import "XMPPRosterFB.h"
 #endif /* DBHeaderFile_h */

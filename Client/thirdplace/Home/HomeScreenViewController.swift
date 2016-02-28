@@ -406,7 +406,15 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     // MARK: Action View
     func displayCreateHangoutView(friend:XMPPUserCoreDataStorageObject, activeHangout: Hangout?)
     {
-        rosterStorage.updateUneadMessage(0, user: friend, xmppStream: self.xmppStream, managedObjectContext: rosterDBContext)
+        MagicalRecord.saveWithBlockAndWait({ (localContext : NSManagedObjectContext!) in
+            
+            let fbroster = DataManager.singleInstance.getXMPPUserFBInfo(friend.jid, dbcontext: localContext)
+            if (fbroster != nil)
+            {
+                fbroster!.updateUnReadMessage(0)
+            }
+        })
+    
         if (activeHangout != nil)
         {
             let otheruser = activeHangout!.getOtherUser(xmppStream!.myJID)
@@ -572,15 +580,19 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         XMPPLoggingWrapper.XMPPLogTrace()
         _hangoutFetchedResultsController = nil
         hometablelistview.reloadData()
-        let jid = message.from()
-        let user = rosterStorage.userForJID(jid, xmppStream: self.xmppStream, managedObjectContext: rosterDBContext)
-        if (user != nil)
-        {
-            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
-            var unreadmessage = user.unreadMessages.integerValue
-            unreadmessage++
-            rosterStorage.updateUneadMessage(unreadmessage, user: user, xmppStream: self.xmppStream, managedObjectContext: rosterDBContext)
-        }
+       
+        MagicalRecord.saveWithBlockAndWait({ (localContext : NSManagedObjectContext!) in
+         
+            let jid = message.from()
+            let fbroster = DataManager.singleInstance.getXMPPUserFBInfo(jid, dbcontext: localContext)
+            if (fbroster != nil)
+            {
+                AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+                var unreadmessage = fbroster!.unreadMessages!.integerValue
+                unreadmessage++
+                fbroster!.updateUnReadMessage(unreadmessage)
+            }
+       })
     }
     
     func xmppHangout(sender:XMPPHangout, didCloseHangout iq:XMPPIQ)
