@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Xcode 7.0">
+    <entity name="Hangout" representedClassName="Hangout" syncable="YES">
+        <attribute name="createtime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="createUserJID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hangoutdescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hangoutid" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="locationconfirmed" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="preferedlocation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sorttime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="timeconfirmed" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <relationship name="location" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HangoutLocation" inverseName="hangout" inverseEntity="HangoutLocation" syncable="YES"/>
+        <relationship name="message" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HangoutMessage" inverseName="hangout" inverseEntity="HangoutMessage" syncable="YES"/>
+        <relationship name="time" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HangoutTime" inverseName="hangout" inverseEntity="HangoutTime" syncable="YES"/>
+        <relationship name="user" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HangoutUser" inverseName="hangout" inverseEntity="HangoutUser" syncable="YES"/>
+        <relationship name="version" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Hangoutversion" inverseName="hangout" inverseEntity="Hangoutversion" syncable="YES"/>
+    </entity>
+    <entity name="HangoutLocation" representedClassName="HangoutLocation" syncable="YES">
+        <attribute name="locationconfirm" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="locationid" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="updatejid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatetime" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="hangout" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Hangout" inverseName="location" inverseEntity="Hangout" syncable="YES"/>
+    </entity>
+    <entity name="HangoutMessage" representedClassName="HangoutMessage" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="messageid" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="updatejid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatetime" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="hangout" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Hangout" inverseName="message" inverseEntity="Hangout" syncable="YES"/>
+    </entity>
+    <entity name="HangoutTime" representedClassName="HangoutTime" syncable="YES">
+        <attribute name="enddate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="startdate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="timeconfirmed" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="timedescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatejid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatetime" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="hangout" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Hangout" inverseName="time" inverseEntity="Hangout" syncable="YES"/>
+    </entity>
+    <entity name="HangoutUser" representedClassName="HangoutUser" syncable="YES">
+        <attribute name="goingstatus" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="jidstr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="hangout" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Hangout" inverseName="user" inverseEntity="Hangout" syncable="YES"/>
+    </entity>
+    <entity name="Hangoutversion" representedClassName="Hangoutversion" syncable="YES">
+        <attribute name="versionid" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="versiontime" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="hangout" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Hangout" inverseName="version" inverseEntity="Hangout" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Hangout" positionX="-4761" positionY="-558" width="128" height="238"/>
+        <element name="HangoutLocation" positionX="-4536" positionY="-531" width="128" height="118"/>
+        <element name="HangoutMessage" positionX="-4725" positionY="-265" width="128" height="118"/>
+        <element name="HangoutTime" positionX="-4538" positionY="-369" width="128" height="148"/>
+        <element name="HangoutUser" positionX="-4923" positionY="-328" width="128" height="103"/>
+        <element name="Hangoutversion" positionX="-4914" positionY="-495" width="128" height="88"/>
+    </elements>
+</model>

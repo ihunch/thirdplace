@@ -618,6 +618,7 @@
 		2F6766661BBD74D000F866F5 /* AppConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
 		2F6766731BBD7A6000F866F5 /* XMPPRosterCoreDataStorage+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XMPPRosterCoreDataStorage+Additions.h"; sourceTree = "<group>"; };
 		2F6766741BBD7A6000F866F5 /* XMPPRosterCoreDataStorage+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XMPPRosterCoreDataStorage+Additions.m"; sourceTree = "<group>"; };
+		2F724A6B1C846AF60059E849 /* HangoutDataModel 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "HangoutDataModel 3.xcdatamodel"; sourceTree = "<group>"; };
 		2F788F801C64AFB500D41CBC /* FriendSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendSettingViewController.swift; sourceTree = "<group>"; };
 		2F788F821C64B32800D41CBC /* FriendViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendViewTableViewCell.swift; sourceTree = "<group>"; };
 		2F788F841C64B5D700D41CBC /* OneLabelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneLabelTableViewCell.swift; sourceTree = "<group>"; };
@@ -2833,10 +2834,11 @@
 		2F3E7E991BBE627F00729894 /* HangoutDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2F724A6B1C846AF60059E849 /* HangoutDataModel 3.xcdatamodel */,
 				2FCA14461C57D0FF00EEC045 /* HangoutDataModel 2.xcdatamodel */,
 				2F3E7E9A1BBE627F00729894 /* HangoutDataModel.xcdatamodel */,
 			);
-			currentVersion = 2FCA14461C57D0FF00EEC045 /* HangoutDataModel 2.xcdatamodel */;
+			currentVersion = 2F724A6B1C846AF60059E849 /* HangoutDataModel 3.xcdatamodel */;
 			name = HangoutDataModel.xcdatamodeld;
 			path = Hangout/HangoutDataModel.xcdatamodeld;
 			sourceTree = "<group>";

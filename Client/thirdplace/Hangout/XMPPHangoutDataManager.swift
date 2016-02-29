@@ -154,7 +154,7 @@ private let _SingletonInstance = XMPPHangoutDataManager()
     func handleHangoutLists(items: NSArray, stream: XMPPStream)
     {
         MagicalRecord.saveWithBlockAndWait({ (localContext : NSManagedObjectContext!) in
-            
+        Hangout.MR_truncateAllInContext(localContext)
         for eachelement in items
         {
             let dateFormatter = NSDateFormatter()

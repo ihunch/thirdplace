@@ -36,21 +36,6 @@ class HangoutInitTableViewController: DHCollectionTableViewController
     var defaultMessage: String {
         get
         {
-            let fullnamearray: NSArray? = AppConfig.name().characters.split{$0 == " "}.map(String.init)
-            if (fullnamearray != nil)
-            {
-                 return String(format: "%@: Want to catch up this weekend?",   fullnamearray![0] as! String)
-            }
-            else
-            {
-               return String(format: "Want to catch up with %@ this weekend?",  AppConfig.name() )
-            }
-           
-        }
-    }
-    var defaultSendMessage: String {
-        get
-        {
             return String(format: "Want to catch up this weekend?")
         }
     }
@@ -138,7 +123,7 @@ class HangoutInitTableViewController: DHCollectionTableViewController
         }
         else
         {
-            hangout.hangoutdescription = defaultSendMessage
+            hangout.hangoutdescription = defaultMessage
         }
         hangout.createtime = createtime
         hangout.createUserJID = xmppStream.myJID.bare()
@@ -196,7 +181,7 @@ class HangoutInitTableViewController: DHCollectionTableViewController
         }
         else
         {
-            message.content = defaultSendMessage
+            message.content = defaultMessage
         }
         message.updatetime = createtime
         message.updatejid = xmppStream.myJID.bare()
@@ -328,7 +313,38 @@ extension HangoutInitTableViewController {
         else if (indexPath.section == 1 )
         {
             let textcell = tableView.dequeueReusableCellWithIdentifier("MultiLineTextInputTableViewCell", forIndexPath: indexPath) as? MultiLineTextInputTableViewCell
-            textcell!.textString = self.defaultMessage
+            var fullnamearray: NSArray?
+            if (selectedHangoutid != nil)
+            {
+                let hangoutid = selectedHangoutid!
+                let hangout = Hangout.MR_findFirstByAttribute("hangoutid", withValue: NSNumber(integer: hangoutid), inContext: p_context)
+                let message = hangout.getLatestMessage()
+                let sender = message!.updatejid!
+                if (sender == AppConfig.jid())
+                {
+                    fullnamearray = AppConfig.name().characters.split{$0 == " "}.map(String.init)
+                    if (fullnamearray != nil)
+                    {
+                        textcell!.textString = "\(fullnamearray![0]): \(message!.content!)"
+                    }
+
+                }
+                else
+                {
+                    let senderjid = XMPPJID.jidWithString(sender as String)
+                    let xmppuser = self.rosterStorage.userForJID(senderjid, xmppStream: self.xmppStream, managedObjectContext: rosterDBContext)
+                    if (xmppuser != nil && xmppuser.nickname != nil)
+                    {
+                        fullnamearray = xmppuser.nickname.characters.split{$0 == " "}.map(String.init)
+                    }
+                    textcell!.textString = "\(fullnamearray![0]): \(message!.content!)"
+                }
+            }
+            else
+            {
+                fullnamearray = AppConfig.name().characters.split{$0 == " "}.map(String.init)
+                textcell!.textString = "\(fullnamearray![0]): \(self.defaultMessage)"
+            }            
             textcell!.textView!.editable = false
             textcell!.bgview.selectiveBorderFlag = UInt(AUISelectiveBordersFlagTop | AUISelectiveBordersFlagBottom | AUISelectiveBordersFlagLeft | AUISelectiveBordersFlagRight)
             textcell!.bgview.selectiveBordersColor = UIColor.lightGrayColor()

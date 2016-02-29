@@ -386,7 +386,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         let request =  xmppHangoutDB.getHangoutListRequest(xmppStream!.myJID)
         if (request != nil)
         {
-            let afetchedController = NSFetchedResultsController(fetchRequest: request!, managedObjectContext: NSManagedObjectContext.MR_context(), sectionNameKeyPath: nil, cacheName: nil)
+            let afetchedController = NSFetchedResultsController(fetchRequest: request!, managedObjectContext: NSManagedObjectContext.MR_defaultContext(), sectionNameKeyPath: nil, cacheName: nil)
             afetchedController.delegate = self
             _hangoutFetchedResultsController = afetchedController
             
@@ -401,6 +401,13 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
 
         }
         return _hangoutFetchedResultsController
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController)
+    {
+        XMPPLoggingWrapper.XMPPLogTrace()
+        _hangoutFetchedResultsController = nil
+        hometablelistview.reloadData()
     }
     
     // MARK: Action View
@@ -568,13 +575,6 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     //Mark: XMPPHangoutDelegate
-    func xmppHangout(sender:XMPPHangout, didCreateHangout createQuery:DDXMLElement)
-    {
-        XMPPLoggingWrapper.XMPPLogTrace()
-        _hangoutFetchedResultsController = nil
-        hometablelistview.reloadData()
-    }
-    
     func xmppHangout(sender:XMPPHangout, didReceiveMessage message:XMPPMessage)
     {
         XMPPLoggingWrapper.XMPPLogTrace()
@@ -582,7 +582,6 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         hometablelistview.reloadData()
        
         MagicalRecord.saveWithBlockAndWait({ (localContext : NSManagedObjectContext!) in
-         
             let jid = message.from()
             let fbroster = DataManager.singleInstance.getXMPPUserFBInfo(jid, dbcontext: localContext)
             if (fbroster != nil)
@@ -593,20 +592,6 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                 fbroster!.updateUnReadMessage(unreadmessage)
             }
        })
-    }
-    
-    func xmppHangout(sender:XMPPHangout, didCloseHangout iq:XMPPIQ)
-    {
-        XMPPLoggingWrapper.XMPPLogTrace()
-        _hangoutFetchedResultsController = nil
-        hometablelistview.reloadData()
-    }
-    
-    func xmppHangout(sender:XMPPHangout, didUpdateHangout iq:XMPPIQ)
-    {
-        XMPPLoggingWrapper.XMPPLogTrace()
-        _hangoutFetchedResultsController = nil
-        hometablelistview.reloadData()
     }
     
     func xmppHangout(sender:XMPPHangout, didHangoutLists iq:XMPPIQ)
