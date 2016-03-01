@@ -459,6 +459,10 @@ enum XMPPRosterFlags
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark Roster Management
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)addMyJID:(XMPPJID *)jid xmppStream:(XMPPStream *)stream
+{
+    [xmppRosterStorage addMyJID:jid xmppStream:stream];
+}
 
 - (void)addUser:(XMPPJID *)jid withNickname:(NSString *)optionalName{
 	[self addUser:jid withNickname:optionalName groups:nil subscribeToPresence:YES];

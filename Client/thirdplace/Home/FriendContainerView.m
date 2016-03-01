@@ -160,10 +160,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     FriendView *friendView = [FriendView friendViewWithFriend:friend];
     friendView.delegate = self;
     NSManagedObjectContext* mainContext = [NSManagedObjectContext MR_defaultContext];
-    XMPPRosterFB* fbuser = [[DataManager singleInstance] getXMPPUserFBInfo:friend.jid dbcontext:mainContext];
-    [friendView setXMPPRosterFB:fbuser];
+    XMPPRosterFB* rfb = [dbm getXMPPUserFBInfo:friend.jid dbcontext:mainContext];
+    [friendView setXMPPRosterFB:rfb];
     [self.friendViews addObject:friendView];
-    XMPPRosterFB* rfb = [dbm getXMPPUserFBInfo:friend.jid dbcontext:nil];
     if (friend.photo == nil)
     {
         [dbm fetchFBPhoto:rfb.fbid :friend];
@@ -268,7 +267,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             UIImage* image = [UIImage imageWithContentsOfFile:dest];
             if (image != nil)
             {
-                [self.rosterCoreDataStorage setFBPhoto:image forUserWithJID:me.jid xmppStream:[self xmppStream] managedObjectContext:self.rosterDBContext];
+                [self.rosterCoreDataStorage setPhoto:image forUserWithJID:me.jid xmppStream:[self xmppStream]];
+            }
+            else
+            {
+                DataManager* dbm = [DataManager singleInstance];
+                XMPPRosterFB* rfb = [dbm getXMPPUserFBInfo:me.jid dbcontext:nil];
+                [dbm fetchFBPhoto:rfb.fbid :me];
             }
         }
         self.me = me;

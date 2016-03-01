@@ -46,12 +46,12 @@ class DataManager: NSObject {
         }
         if (result == nil)
         {
-            result = createXMPPRosterMainContext(jid)
+            result = createXMPPRosterMainContext(jid,dbcontext: dbcontext)
         }
         return result
     }
    
-    func createXMPPRosterMainContext(jid: XMPPJID) -> XMPPRosterFB
+    func createXMPPRosterMainContext(jid: XMPPJID, dbcontext: NSManagedObjectContext?) -> XMPPRosterFB
     {
         let result = XMPPRosterFB.MR_createEntity()
         var x = arc4random_uniform(280)
@@ -68,7 +68,7 @@ class DataManager: NSObject {
         result!.axisy = NSNumber(unsignedInt: y)
         result!.jid = jid.bare()
         result!.fbid = jid.bare().componentsSeparatedByString("@")[0]
-        NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+        dbcontext?.MR_saveToPersistentStoreAndWait()
         return result!
 
     }

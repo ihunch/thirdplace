@@ -160,7 +160,6 @@ static XMPPRosterCoreDataStorage *sharedInstance;
                                   managedObjectContext:(NSManagedObjectContext *)moc
 {
 	// This is a public method, so it may be invoked on any thread/queue.
-	
 	XMPPLogTrace();
 	
 	XMPPJID *myJID = stream.myJID;
@@ -422,7 +421,7 @@ static XMPPRosterCoreDataStorage *sharedInstance;
 		
 		NSManagedObjectContext *moc = [self managedObjectContext];
 		XMPPUserCoreDataStorageObject *user = [self userForJID:jid xmppStream:stream managedObjectContext:moc];
-		if (user)
+        if (user)
 		{
 			user.photo = photo;
 		}
@@ -564,6 +563,28 @@ static XMPPRosterCoreDataStorage *sharedInstance;
                     
                     *groups = groupNames;
                 }
+            }
+        }
+    }];
+}
+
+-(void)addMyJID:(XMPPJID *)jid xmppStream:(XMPPStream *)stream
+{
+    [self scheduleBlock:^{
+        NSManagedObjectContext *moc = [self managedObjectContext];
+        XMPPUserCoreDataStorageObject* user = [self myUserForXMPPStream:stream managedObjectContext:moc];
+        if (user == nil)
+        {
+            XMPPUserCoreDataStorageObject* me =[XMPPUserCoreDataStorageObject insertInManagedObjectContext:moc withJID:jid streamBareJidStr:[[self myJIDForXMPPStream:stream] bare]];
+            NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+            NSString *subfolder = [documentsDirectory stringByAppendingPathComponent:@"profile_pictures"];
+            
+            NSString *dest = [subfolder stringByAppendingPathComponent:[AppConfig loginUserPhotoPath]];
+            
+            UIImage* image = [UIImage imageWithContentsOfFile:dest];
+            if (image != nil)
+            {
+                me.photo = image;
             }
         }
     }];

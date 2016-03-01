@@ -170,6 +170,11 @@
  * Useful if you disable autoFetchRoster.
 **/
 - (void)fetchRoster;
+/**
+ * Add MyJID locally
+ **/
+
+- (void)addMyJID:(XMPPJID *)jid xmppStream:(XMPPStream *)stream;
 
 /**
  * Adds the given user to the roster with an optional nickname 
@@ -318,6 +323,8 @@
  * The XMPPRoster class is configured to ignore the passed
  * storage class in its init method if this method returns NO.
 **/
+- (void)addMyJID:(XMPPJID *)jid xmppStream:(XMPPStream *)stream;
+
 - (BOOL)configureWithParent:(XMPPRoster *)aParent queue:(dispatch_queue_t)queue;
 
 - (void)beginRosterPopulationForXMPPStream:(XMPPStream *)stream;

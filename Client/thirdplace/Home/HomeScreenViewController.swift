@@ -21,7 +21,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     {
         let row = sender.tag
         let indexpath = NSIndexPath(forRow: row, inSection: 0)
-        let hangout = self.hangoutFetchedRequestControler!.objectAtIndexPath(indexpath) as! Hangout
+        let hangout = hangoutFetchedRequestsControler!.objectAtIndexPath(indexpath) as! Hangout
         if let location = hangout.getLatestLocation() as HangoutLocation?
         {
             if let locationdic = locationlists!.objectAtIndex((location.locationid?.integerValue)!) as? NSDictionary
@@ -112,7 +112,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             hangoutcell.topvalueconstraint.constant = 0
             hangoutcell.bgimageview.alpha = 1.0
             let indexpath = NSIndexPath(forRow: indexPath.row, inSection: 0)
-            let hangout = self.hangoutFetchedRequestControler!.objectAtIndexPath(indexpath) as! Hangout
+            let hangout = hangoutFetchedRequestsControler!.objectAtIndexPath(indexpath) as! Hangout
             hangoutcell.mapbutton.tag = indexPath.row
             let message = hangout.getLatestMessage()
             let time = hangout.getLatestTime()
@@ -263,9 +263,9 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
-        if (self.hangoutFetchedRequestControler != nil)
+        if (self.hangoutFetchedRequestsControler != nil)
         {
-            let sectionInfo = self.hangoutFetchedRequestControler!.sections
+            let sectionInfo = hangoutFetchedRequestsControler!.sections
             if (sectionInfo != nil)
             {
                 let sections = sectionInfo![0]
@@ -314,9 +314,9 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(section != 0)
         {
-            if (self.hangoutFetchedRequestControler != nil)
+            if (self.hangoutFetchedRequestsControler != nil)
             {
-                let sectionInfo = self.hangoutFetchedRequestControler!.sections
+                let sectionInfo = self.hangoutFetchedRequestsControler!.sections
                 if (sectionInfo != nil)
                 {
                     let sections = sectionInfo![0]
@@ -354,7 +354,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             if (self.xmppStream!.isConnected())
             {
                 let indexpath = NSIndexPath(forRow: indexPath.row, inSection: 0)
-                let hangout = hangoutFetchedRequestControler?.objectAtIndexPath(indexpath) as! Hangout
+                let hangout = hangoutFetchedRequestsControler?.objectAtIndexPath(indexpath) as! Hangout
                 var users = hangout.user.allObjects.filter{
                     $0.jidstr != xmppStream!.myJID.bare()
                 }
@@ -378,7 +378,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     var _hangoutFetchedResultsController: NSFetchedResultsController? = nil
-    var hangoutFetchedRequestControler : NSFetchedResultsController?
+    var hangoutFetchedRequestsControler : NSFetchedResultsController?
     {
         if _hangoutFetchedResultsController != nil{
             return _hangoutFetchedResultsController!
@@ -529,11 +529,14 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         let fbrequest =  FBRequest.requestForMyFriends()
         fbrequest.startWithCompletionHandler {
             (connection:FBRequestConnection!,   result:AnyObject!, error:NSError!) -> Void in
-            let fblists = result.objectForKey("data") as? NSArray
-            let fbviewcontroller = self.storyboard?.instantiateViewControllerWithIdentifier("FBFriendListViewController") as! FBFriendListViewController?
-            fbviewcontroller!.friendlists = fblists
-            MBProgressHUD.hideHUDForView(self.view, animated: true)
-            self.navigationController?.pushViewController(fbviewcontroller!, animated: true)
+            if (error == nil)
+            {
+                let fblists = result.objectForKey("data") as? NSArray
+                let fbviewcontroller = self.storyboard?.instantiateViewControllerWithIdentifier("FBFriendListViewController") as! FBFriendListViewController?
+                fbviewcontroller!.friendlists = fblists
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
+                self.navigationController?.pushViewController(fbviewcontroller!, animated: true)
+            }
         }
     }
 
@@ -596,9 +599,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func xmppHangout(sender:XMPPHangout, didHangoutLists iq:XMPPIQ)
     {
-        XMPPLoggingWrapper.XMPPLogTrace()
-        _hangoutFetchedResultsController = nil
-        hometablelistview.reloadData()
+        
     }
     
     func xmppStreamDidConnect(sender: XMPPStream)
@@ -630,7 +631,7 @@ extension HomeScreenViewController:UICollectionViewDataSource,UICollectionViewDe
             {
                 let dhcollectionview = collectionView as! DHIndexedCollectionView
                 let cellindexpath = dhcollectionview.indexPath
-                let hangout = self.hangoutFetchedRequestControler!.objectAtIndexPath(cellindexpath) as! Hangout
+                let hangout = hangoutFetchedRequestsControler!.objectAtIndexPath(cellindexpath) as! Hangout
                 let otheruser = XMPPJID.jidWithString(hangout.getOtherUser(me.jid)!.jidstr!)
                 let friend = rosterStorage.userForJID(otheruser, xmppStream: self.xmppStream, managedObjectContext: rosterDBContext)
                 friendView = FriendNormalView.friendViewWithFriend(friend) as? UIView

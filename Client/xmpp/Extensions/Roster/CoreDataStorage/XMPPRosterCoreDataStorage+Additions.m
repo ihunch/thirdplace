@@ -60,29 +60,6 @@ NSAssert(dispatch_get_specific(storageQueueTag), @"Private method: MUST run on s
 }
 
 #pragma mark - XMPPRoster Custom Method
-- (void)addMyJID:(XMPPJID *)jid xmppStream:(XMPPStream *)stream  managedObjectContext:(NSManagedObjectContext *)moc
-{
-    XMPPUserCoreDataStorageObject* user = [self myUserForXMPPStream:stream managedObjectContext:moc];
-    if (user == nil)
-    {
-        [self scheduleBlock:^{
-            
-            XMPPUserCoreDataStorageObject* me =[XMPPUserCoreDataStorageObject insertInManagedObjectContext:moc withJID:jid streamBareJidStr:[[self myJIDForXMPPStream:stream] bare]];
-            NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-            NSString *subfolder = [documentsDirectory stringByAppendingPathComponent:@"profile_pictures"];
-            
-            NSString *dest = [subfolder stringByAppendingPathComponent:[AppConfig loginUserPhotoPath]];
-            
-            UIImage* image = [UIImage imageWithContentsOfFile:dest];
-            if (image != nil)
-            {
-                me.photo = image;
-            }
-        }];
-    }
-}
-
-
 - (void)setFBPhoto:(UIImage *)image forUserWithJID:(XMPPJID *)jid xmppStream:(XMPPStream *)stream
 managedObjectContext:(NSManagedObjectContext *)moc
 {
@@ -94,14 +71,6 @@ managedObjectContext:(NSManagedObjectContext *)moc
         {
             user.photo = image;
         }
-    }];
-}
-
--(void)updateUneadMessage:(NSInteger)unmessages user:(XMPPUserCoreDataStorageObject *)user xmppStream:(XMPPStream *)stream managedObjectContext:(NSManagedObjectContext *)moc
-{
-    XMPPLogTrace();
-    [self scheduleBlock:^{
-        user.unreadMessages = [NSNumber numberWithInt:unmessages];
     }];
 }
 @end

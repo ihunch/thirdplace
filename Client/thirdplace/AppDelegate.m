@@ -579,7 +579,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)xmppRosterDidEndPopulating:(XMPPRoster *)sender
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    [xmppRosterStorage addMyJID:[[xmppStream myJID] bareJID] xmppStream:xmppStream managedObjectContext:self.managedObjectContext_roster];
+    [xmppRoster addMyJID:[[xmppStream myJID] bareJID] xmppStream:xmppStream];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

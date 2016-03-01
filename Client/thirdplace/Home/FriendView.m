@@ -64,27 +64,27 @@
     return self;
 }
 
-- (void)setFriend:(XMPPUserCoreDataStorageObject *)friend
+- (void)setFriend:(XMPPUserCoreDataStorageObject *)afriend
 {
-    if (_friend)
+    if (afriend != _friend)
     {
-        [friend removeObserver:self forKeyPath:@"photo"];
-        [friend removeObserver:self forKeyPath:@"subscription"];
+        [_friend removeObserver:self forKeyPath:@"photo"];
+        [_friend removeObserver:self forKeyPath:@"subscription"];
+        _friend = afriend;
+        [_friend addObserver:self forKeyPath:@"photo" options:NSKeyValueObservingOptionInitial context:nil];
+        [_friend addObserver:self forKeyPath:@"subscription" options:NSKeyValueObservingOptionInitial context:nil];
     }
-    _friend = friend;
-    [friend addObserver:self forKeyPath:@"photo" options:NSKeyValueObservingOptionInitial context:nil];
-    [friend addObserver:self forKeyPath:@"subscription" options:NSKeyValueObservingOptionInitial context:nil];
-    self.label.text = friend.nickname;
+    self.label.text = afriend.nickname;
 }
 
 - (void)setXMPPRosterFB:(XMPPRosterFB*)fbroster
 {
-    if (_fbprofile != nil)
+    if (fbroster != _fbprofile)
     {
-        [fbroster removeObserver:self forKeyPath:@"unreadMessages"];
+        [_fbprofile removeObserver:self forKeyPath:@"unreadMessages"];
+        _fbprofile = fbroster;
+        [_fbprofile addObserver:self forKeyPath:@"unreadMessages" options:NSKeyValueObservingOptionInitial context:nil];
     }
-    _fbprofile = fbroster;
-    [fbroster addObserver:self forKeyPath:@"unreadMessages" options:NSKeyValueObservingOptionInitial context:nil];
 }
 
 - (UIImage *)styledFriendImage
@@ -173,9 +173,9 @@
 
 - (void)dealloc
 {
-    [self.friend removeObserver:self forKeyPath:@"photo"];
-    [self.friend removeObserver:self forKeyPath:@"subscription"];
-    [self.fbprofile removeObserver:self forKeyPath:@"unreadMessages"];
+    [_friend removeObserver:self forKeyPath:@"photo"];
+    [_friend removeObserver:self forKeyPath:@"subscription"];
+    [_fbprofile removeObserver:self forKeyPath:@"unreadMessages"];
 }
 
 - (UIColor *)outlineColor
