@@ -7,7 +7,7 @@
 //
 #import "AppConfig.h"
 
-NSString* const kXMPPHostName = @"52.62.24.227";
+NSString* const kXMPPHostName = @"52.8.226.182";
 NSString* const kXMPPServerName = @"ip-172-31-1-174";
 //NSString* const kXMPPHostName = @"192.168.0.4";
 //NSString* const kXMPPServerName = @"macintosh.local";

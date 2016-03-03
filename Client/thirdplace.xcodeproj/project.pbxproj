@@ -52,6 +52,7 @@
 		2F3E7EED1BBFEE7400729894 /* Hangoutversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3E7EE11BBFEE7400729894 /* Hangoutversion.swift */; };
 		2F3E7EF11BC0011500729894 /* XMPPHangout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3E7EF01BC0011500729894 /* XMPPHangout.swift */; };
 		2F3E7EF41BC0053C00729894 /* XMPPHangoutDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3E7EF31BC0053C00729894 /* XMPPHangoutDataManager.swift */; };
+		2F44512F1C88591500EA9D61 /* cafe_us.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F44512E1C88591500EA9D61 /* cafe_us.plist */; };
 		2F4A0BA11C3608D6002A54D9 /* FriendNormalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A0BA01C3608D6002A54D9 /* FriendNormalView.m */; };
 		2F4A0BA41C37694D002A54D9 /* CALayer+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A0BA31C37694D002A54D9 /* CALayer+Additions.m */; };
 		2F4A0BAB1C38FB3A002A54D9 /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A0BA71C38FB3A002A54D9 /* MapAnnotation.m */; };
@@ -311,6 +312,7 @@
 		2F3E7EE11BBFEE7400729894 /* Hangoutversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hangoutversion.swift; sourceTree = "<group>"; };
 		2F3E7EF01BC0011500729894 /* XMPPHangout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XMPPHangout.swift; path = Hangout/XMPPHangout.swift; sourceTree = "<group>"; };
 		2F3E7EF31BC0053C00729894 /* XMPPHangoutDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XMPPHangoutDataManager.swift; path = Hangout/XMPPHangoutDataManager.swift; sourceTree = "<group>"; };
+		2F44512E1C88591500EA9D61 /* cafe_us.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cafe_us.plist; sourceTree = "<group>"; };
 		2F4A0B9F1C3608D6002A54D9 /* FriendNormalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendNormalView.h; sourceTree = "<group>"; };
 		2F4A0BA01C3608D6002A54D9 /* FriendNormalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendNormalView.m; sourceTree = "<group>"; };
 		2F4A0BA21C37694D002A54D9 /* CALayer+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+Additions.h"; sourceTree = "<group>"; };
@@ -1878,6 +1880,7 @@
 		63626B051962B02D00FA58D5 = {
 			isa = PBXGroup;
 			children = (
+				2F44512E1C88591500EA9D61 /* cafe_us.plist */,
 				2F97F2721C5382B700B723B6 /* App.png */,
 				2FD476BE1C424AD40013C330 /* cafe_au.plist */,
 				2F1982971BBD1D570036AF53 /* Media.xcassets */,
@@ -2073,6 +2076,7 @@
 				2F1EC6FC1BB59A160079A438 /* MultiLineTextInputTableViewCell.xib in Resources */,
 				2FEF8CCF1C1DAC2400AF1D95 /* LocationCollectionViewCell.xib in Resources */,
 				2F1EC6F61BB195310079A438 /* Launch Screen.storyboard in Resources */,
+				2F44512F1C88591500EA9D61 /* cafe_us.plist in Resources */,
 				63D13E4619666F3B00D17CF5 /* bbb1.jpg in Resources */,
 				2FCA14451C55B1D800EEC045 /* DateTimeCollectionViewCell.xib in Resources */,
 				2F97F2731C5382B700B723B6 /* App.png in Resources */,
@@ -2698,7 +2702,7 @@
 					"\"UIKit\"",
 					"-lxml2",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thirdplace.us;
 				PRODUCT_NAME = thirdplace;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "thirdplace-Bridging-Header.h";
@@ -2781,7 +2785,7 @@
 					"\"UIKit\"",
 					"-lxml2",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thirdplace.us;
 				PRODUCT_NAME = thirdplace;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "thirdplace-Bridging-Header.h";

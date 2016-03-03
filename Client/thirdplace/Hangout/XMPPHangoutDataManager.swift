@@ -306,12 +306,12 @@ extension XMPPHangoutDataManager
     
     class func  initHangoutTimeData() -> [Hangout_Time]
     {
-        return [Hangout_Time(time_description: "Brunch", time: 10),Hangout_Time(time_description: "Lunch", time: 12),Hangout_Time(time_description: "Arvo", time: 14)]
+        return [Hangout_Time(time_description: "Brunch", time: 10),Hangout_Time(time_description: "Lunch", time: 12),Hangout_Time(time_description: "Afternoon", time: 14)]
     }
     
     class func initLocationData() -> NSArray?
     {
-        let path = NSBundle.mainBundle().pathForResource("cafe_au", ofType: "plist")
+        let path = NSBundle.mainBundle().pathForResource("cafe_us", ofType: "plist")
         let lists = NSArray(contentsOfFile: path!)
         return lists;
     }

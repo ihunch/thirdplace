@@ -11,6 +11,7 @@ import UIKit
 class HangoutInitTableViewController: DHCollectionTableViewController
 {
     let aumaxlocations = 18
+    let usmaxlocations = 16
     let leftmargin: CGFloat = 30
     var displayKeyboard = false
     var offset:CGPoint?
@@ -128,7 +129,7 @@ class HangoutInitTableViewController: DHCollectionTableViewController
         hangout.createtime = createtime
         hangout.createUserJID = xmppStream.myJID.bare()
         hangout.hangoutid = NSNumber(integer: HangoutConfig.tempHangoutID)
-        let array = XMPPHangoutDataManager.getRandomThreeDigital(aumaxlocations)
+        let array = XMPPHangoutDataManager.getRandomThreeDigital(usmaxlocations)
         hangout.preferedlocation = "\(array[0]),\(array[1]),\(array[2])"
         //user
         let sender = HangoutUser.MR_createEntityInContext(p_context)
