@@ -162,13 +162,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             NSString *jid = [self stringToJID:fbId];
             NSString *password = [[self class] stringToXmppPassword:fbId];
             
-            NSString *fbFirstName = [user objectForKey:@"first_name"];
-            NSString *fbLastName = [user objectForKey:@"last_name"];
-            NSString *fbEmail = [user objectForKey:@"email"];
+            NSString *name = [user objectForKey:@"name"];
+         //   NSString *fbLastName = [user objectForKey:@"last_name"];
+         //   NSString *fbEmail = [user objectForKey:@"email"];
             
-            NSString *fbFullName = [NSString stringWithFormat:@"%@ %@", fbFirstName, fbLastName];
+            NSString *fbFullName = name;
             
-            [AppConfig updateDetails:jid withPassword:password withName:fbFullName withEmail:fbEmail];
+            [AppConfig updateDetails:jid withPassword:password withName:fbFullName withEmail:nil];
             
             success = [self connectXMPP:jid withPassword:password];
         }
