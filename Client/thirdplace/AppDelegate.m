@@ -164,11 +164,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             
             NSString *name = [user objectForKey:@"name"];
          //   NSString *fbLastName = [user objectForKey:@"last_name"];
-         //   NSString *fbEmail = [user objectForKey:@"email"];
+            NSString *fbEmail = [user objectForKey:@"email"];
             
             NSString *fbFullName = name;
             
-            [AppConfig updateDetails:jid withPassword:password withName:fbFullName withEmail:nil];
+            [AppConfig updateDetails:jid withPassword:password withName:fbFullName withEmail:fbEmail];
             
             success = [self connectXMPP:jid withPassword:password];
         }
