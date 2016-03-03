@@ -142,7 +142,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                             fullnamearray = xmppuser.nickname.characters.split{$0 == " "}.map(String.init)
                         }
                     }
-                    if (fullnamearray != nil)
+                    if (fullnamearray != nil && fullnamearray?.count >= 1)
                     {
                         if (message!.content != nil)
                         {
@@ -543,6 +543,8 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     func didTouchMe()
     {
         //self.performSegueWithIdentifier("ProfileViewController", sender: nil)
+        let testdata = XMPPRosterFB.MR_findAll()
+        print(testdata.count)
     }
     
     func fadeoutloadingscreen()
