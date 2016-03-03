@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>name</key>
+		<string>Four Barrel Coffee</string>
+		<key>address</key>
+		<string>375 Valencia St, San Francisco, CA 94103, United States</string>
+        <key>photopath</key>
+        <string>Four Barrel Coffee</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Sightglass Coffee</string>
+		<key>address</key>
+		<string>270 7th St, San Francisco, CA 94103, United States</string>
+        <key>photopath</key>
+        <string>Sightglass Coffee</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Crossroads Cafe</string>
+		<key>address</key>
+		<string>699 Delancey St, San Francisco, CA 94107, United States</string>
+        <key>photopath</key>
+        <string>Crossroads Cafe</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Philz</string>
+		<key>address</key>
+		<string>3101 24th St, San Francisco, CA 94110, United States</string>
+        <key>photopath</key>
+        <string>Philz</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Grand Coffee</string>
+		<key>address</key>
+		<string>2663 Mission St San Francisco, CA 94110 United States</string>
+        <key>photopath</key>
+        <string>Grand Coffee</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Cafe La Flore</string>
+		<key>address</key>
+		<string>1032 Clement St, San Francisco, CA 94118, United States</string>
+        <key>photopath</key>
+        <string>Cafe La Flore</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Ritual</string>
+		<key>address</key>
+		<string>1026 Valencia St, San Francisco, CA 94110, United States</string>
+        <key>photopath</key>
+        <string>Ritual</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Jane</string>
+		<key>address</key>
+		<string>2123 Fillmore St (btwn California &amp; Sacramento St), San Francisco, CA 94115, United States</string>
+        <key>photopath</key>
+        <string>Jane</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Velo Rouge</string>
+		<key>address</key>
+		<string>798 Arguello Blvd (at Cabrillo St), San Francisco, CA 94118, United States</string>
+        <key>photopath</key>
+        <string>Velo Rouge</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Arlequin</string>
+		<key>address</key>
+		<string>384 Hayes St (at Gough St), San Francisco, CA 94102, United States</string>
+        <key>photopath</key>
+        <string>Arlequin</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Darwin</string>
+		<key>address</key>
+		<string>212 Ritch St (at Bryant St), San Francisco, CA 94107, United States</string>
+        <key>photopath</key>
+        <string>Darwin</string>
+	</dict>
+	<dict>
+		<key>address</key>
+		<string>66 Mint Plaza (at Jessie St), San Francisco, CA 94103, United States</string>
+		<key>name</key>
+		<string>Blue Bottle</string>
+        <key>photopath</key>
+        <string>Blue Bottle</string>
+	</dict>
+	<dict>
+		<key>address</key>
+		<string>1435 Irving St (btwn 15th &amp; 16th Ave), San Francisco, CA 94122, United States</string>
+		<key>name</key>
+		<string>Hollow</string>
+        <key>photopath</key>
+        <string>Hollow</string>
+	</dict>
+	<dict>
+		<key>address</key>
+		<string>1890 Bryant St. San Francisco, CA 94110</string>
+		<key>name</key>
+		<string>Coffee Bar</string>
+        <key>photopath</key>
+        <string>Coffee Bar</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Wrecking Ball</string>
+		<key>address</key>
+		<string>2271 Union Street, San Francisco, CA 94123</string>
+        <key>photopath</key>
+        <string>Wrecking Ball</string>
+	</dict>
+	<dict>
+		<key>address</key>
+		<string>670 Commercial St San Francisco, CA 94111 United States</string>
+		<key>name</key>
+		<string>Chapel Hill</string>
+        <key>photopath</key>
+        <string>Chapel Hill</string>
+	</dict>
+    <dict>
+        <key>address</key>
+        <string>670 Commercial St San Francisco, CA 94111 United States</string>
+        <key>name</key>
+        <string>Chapel Hill</string>
+        <key>photopath</key>
+        <string>Chapel Hill</string>
+    </dict>
+    <dict>
+        <key>address</key>
+        <string>1435 Irving St (btwn 15th &amp; 16th Ave), San Francisco, CA 94122, United States</string>
+        <key>name</key>
+        <string>Hollow</string>
+        <key>photopath</key>
+        <string>Hollow</string>
+    </dict>
+    <dict>
+        <key>address</key>
+        <string>670 Commercial St San Francisco, CA 94111 United States</string>
+        <key>name</key>
+        <string>Chapel Hill</string>
+        <key>photopath</key>
+        <string>Chapel Hill</string>
+    </dict>
+</array>
+</plist>
