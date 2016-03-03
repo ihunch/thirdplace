@@ -11,7 +11,7 @@ import UIKit
 class HangoutInitTableViewController: DHCollectionTableViewController
 {
     let aumaxlocations = 18
-    let usmaxlocations = 16
+    let usmaxlocations = 15
     let leftmargin: CGFloat = 30
     var displayKeyboard = false
     var offset:CGPoint?
