@@ -20,7 +20,7 @@ int main(int argc, char * argv[])
         
         if (inTests) {
             //use a special empty delegate when we are inside the tests
-            returnValue = UIApplicationMain(argc, argv, nil, @"TestsAppDelegate");
+            returnValue = UIApplicationMain(argc, argv, nil, @"AppDelegate");
         }
         else {
             //use the normal delegate
