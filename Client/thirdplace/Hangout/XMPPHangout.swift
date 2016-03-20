@@ -22,6 +22,7 @@ class XMPPHangout: XMPPModule
     let hangout_xmlns = "hangout:iq:detail"
     let hangout_message_detail_xmlns = "hangout:message:detail"
     let hangout_lists_xmlns = "hangout:iq:list"
+    let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate
     
     init(db: XMPPHangoutStorage)
     {
@@ -232,8 +233,10 @@ class XMPPHangout: XMPPModule
         {
             //feed the data into hangout message
             let lists = listQuery.elementsForName("hangout")
-            XMPPHangoutDataManager.singleInstance.handleHangoutLists(lists, stream: sender)
-            self.multicastDelegate().xmppHangout(self, didHangoutLists: iq)
+            let pqueue = appDelegate?.hangoutqueue
+            dispatch_async(pqueue!, {
+                XMPPHangoutDataManager.singleInstance.handleHangoutLists(lists, stream: sender)
+            })
             return true
         }
         return false
@@ -244,8 +247,11 @@ class XMPPHangout: XMPPModule
         XMPPLoggingWrapper.XMPPLogTrace()
         let jidfrom = message.from()
         let hangoutquery = message.elementForName("hangout", xmlns: hangout_message_detail_xmlns)
-        dbmanager.handleHangout(hangoutquery, stream: sender, fromjid: jidfrom)
-        self.multicastDelegate().xmppHangout(self, didReceiveMessage: message)
+        let pqueue = appDelegate?.hangoutqueue
+        dispatch_async(pqueue!, {
+            self.dbmanager.handleHangout(hangoutquery, stream: sender, fromjid: jidfrom)
+            self.multicastDelegate().xmppHangout(self, didReceiveMessage: message)
+        })
     }
     
     func xmppStreamDidAuthenticate(sender: XMPPStream)

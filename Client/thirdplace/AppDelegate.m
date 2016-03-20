@@ -52,6 +52,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @synthesize xmppCapabilitiesStorage;
 @synthesize xmppHangoutStorage;
 @synthesize xmppHangout;
+@synthesize hangoutqueue;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -76,7 +77,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     self.window.rootViewController = rootviewcontroller;
     [self.window makeKeyAndVisible];
     buddyRequest = [NSMutableDictionary dictionary];
-    
+    hangoutqueue = dispatch_queue_create("com.thirdplace.hangoutqueue", DISPATCH_QUEUE_SERIAL);
     //push notification register
     UIUserNotificationType types = UIUserNotificationTypeBadge |
     UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
@@ -86,10 +87,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
     [[UIApplication sharedApplication] registerForRemoteNotifications];
-    
-    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-        [Hangout MR_truncateAllInContext:localContext];
-    }];
     return YES;
 }
 

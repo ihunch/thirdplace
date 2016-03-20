@@ -263,7 +263,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
-        if (self.hangoutFetchedRequestsControler != nil)
+        if (hangoutFetchedRequestsControler != nil)
         {
             let sectionInfo = hangoutFetchedRequestsControler!.sections
             if (sectionInfo != nil)
@@ -314,9 +314,9 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(section != 0)
         {
-            if (self.hangoutFetchedRequestsControler != nil)
+            if (hangoutFetchedRequestsControler != nil)
             {
-                let sectionInfo = self.hangoutFetchedRequestsControler!.sections
+                let sectionInfo = hangoutFetchedRequestsControler!.sections
                 if (sectionInfo != nil)
                 {
                     let sections = sectionInfo![0]
@@ -598,12 +598,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             }
        })
     }
-    
-    func xmppHangout(sender:XMPPHangout, didHangoutLists iq:XMPPIQ)
-    {
-        
-    }
-    
+
     func xmppStreamDidConnect(sender: XMPPStream)
     {
 

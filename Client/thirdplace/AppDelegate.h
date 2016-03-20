@@ -40,6 +40,7 @@
 @property (nonatomic, strong, readonly) XMPPCapabilitiesCoreDataStorage *xmppCapabilitiesStorage;
 @property (nonatomic, strong, readonly) XMPPHangout* xmppHangout;
 @property (nonatomic, strong, readonly) XMPPHangoutDataManager* xmppHangoutStorage;
+@property (nonatomic, strong, readonly) dispatch_queue_t hangoutqueue;
 - (NSManagedObjectContext *)managedObjectContext_roster;
 - (NSManagedObjectContext *)managedObjectContext_capabilities;
 

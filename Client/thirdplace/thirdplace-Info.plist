@@ -24,21 +24,17 @@
 	<string>1.0.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>fb643081122497267</string>
-            </array>
-        </dict>
-    </array>
-    <key>FacebookAppID</key>
-    <string>643081122497267</string>
-    <key>FacebookDisplayName</key>
-    <string>thirdplace SF</string>
-    <key>CFBundleVersion</key>
-	<string>12</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb643081122497267</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>13</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -53,6 +49,10 @@
 			</dict>
 		</array>
 	</dict>
+	<key>FacebookAppID</key>
+	<string>643081122497267</string>
+	<key>FacebookDisplayName</key>
+	<string>thirdplace SF</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbauth</string>
