@@ -32,6 +32,7 @@ class HangoutInitTableViewController: DHCollectionTableViewController
     @IBOutlet weak var confirmbutton: UIButton!
     @IBOutlet weak var pagebackbutton: UIButton!
     @IBOutlet weak var sendbutton: UIButton!
+    var delegate: HomeScreenDelegate!
     
     let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate
     var defaultMessage: String {
@@ -538,13 +539,7 @@ extension HangoutInitTableViewController
     {
         p_context.MR_saveToPersistentStoreAndWait()
         self.dismissloadscreen()
-        self.navigationController?.popViewControllerAnimated(true)
-    }
-    
-    func xmppHangout(sender:XMPPHangout, didUpdateHangout iq:XMPPIQ)
-    {
-        p_context.MR_saveToPersistentStoreAndWait()
-        self.dismissloadscreen()
+        delegate.didCloseHangout()
         self.navigationController?.popViewControllerAnimated(true)
     }
 }

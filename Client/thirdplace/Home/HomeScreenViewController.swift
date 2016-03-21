@@ -12,6 +12,7 @@ import AudioToolbox.AudioServices
 protocol HomeScreenDelegate
 {
     func didFBLoginSuccess()
+    func didCloseHangout()
 }
 
 class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FriendContainerViewDelegate,HomeScreenDelegate,NSFetchedResultsControllerDelegate {
@@ -462,6 +463,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                     hangoutviewcontroller?.title = "Hangout"
                     hangoutviewcontroller?.selectedHangoutid = activeHangout!.hangoutid?.integerValue
                     hangoutviewcontroller?.selectedHangoutFriend = friend
+                    hangoutviewcontroller?.delegate = self
                     if hangoutviewcontroller != nil
                     {
                         self.navigationController?.pushViewController(hangoutviewcontroller!, animated: true)
@@ -485,6 +487,7 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             let hangoutviewcontroller = self.storyboard?.instantiateViewControllerWithIdentifier("HangoutInitTableViewController") as! HangoutInitTableViewController?
             hangoutviewcontroller?.title = "Hangout"
             hangoutviewcontroller?.selectedHangoutFriend = friend
+            hangoutviewcontroller?.delegate = self
             if hangoutviewcontroller != nil
             {
                 self.navigationController?.pushViewController(hangoutviewcontroller!, animated: true)
@@ -496,6 +499,11 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     func didFBLoginSuccess()
     {
         appDelegate!.loginXMPP()
+    }
+    
+    func didCloseHangout()
+    {
+        hometablelistview.reloadData()
     }
     
 // MARK: FriendContainerDelegate

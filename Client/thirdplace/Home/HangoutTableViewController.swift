@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 class HangoutTableViewController: DHCollectionTableViewController,FriendViewDelegate {
     
     @IBOutlet weak var pagebackbutton: UIButton!
