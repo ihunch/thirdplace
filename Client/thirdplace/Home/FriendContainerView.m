@@ -148,7 +148,16 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     if (gestureRecognizer.state == UIGestureRecognizerStateChanged)
     {
         CGPoint translation = [gestureRecognizer translationInView:self];
-        self.dragFriendView.center = CGPointMake(self.dragFriendView.center.x + translation.x, self.dragFriendView.center.y + translation.y);
+        CGFloat y = self.dragFriendView.center.y + translation.y;
+        if (y >= 300)
+        {
+            y = 300;
+        }
+        else if (y <= 40)
+        {
+            y = 40;
+        }
+        self.dragFriendView.center = CGPointMake(self.dragFriendView.center.x + translation.x,  y);
         [self updateLines];
     }   
     [gestureRecognizer setTranslation:CGPointZero inView:self];

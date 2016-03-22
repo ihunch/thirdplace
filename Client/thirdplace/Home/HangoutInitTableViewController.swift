@@ -542,6 +542,14 @@ extension HangoutInitTableViewController
         delegate.didCloseHangout()
         self.navigationController?.popViewControllerAnimated(true)
     }
+    
+    
+    func xmppHangout(sender:XMPPHangout, didUpdateHangout iq:XMPPIQ)
+    {
+        p_context.MR_saveToPersistentStoreAndWait()
+        self.dismissloadscreen()
+        self.navigationController?.popViewControllerAnimated(true)
+    }
 }
 
 

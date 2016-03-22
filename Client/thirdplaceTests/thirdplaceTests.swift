@@ -72,6 +72,8 @@ class thirdplaceTests: XCTestCase {
             let photopath = locationdic.objectForKey("photopath") as! String
             let image = UIImage(named: photopath)
             assert(image != nil)
+            let address = "\(locationdic.objectForKey("street")!), \(locationdic.objectForKey("city")!) \(locationdic.objectForKey("state")!) \(locationdic.objectForKey("zip")!)"
+            XCTAssertEqual(locationdic.objectForKey("address") as? String, address)
         }
     }
     
@@ -130,7 +132,6 @@ class thirdplaceTests: XCTestCase {
             let array = [1,2]
             let db = XMPPHangoutDataManager.singleInstance
             let result = db.removeHangouts(array, dbcontext: localContext)
-            XCTAssertEqual(1, result.count)
         })
        
     }

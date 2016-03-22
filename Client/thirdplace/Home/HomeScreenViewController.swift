@@ -27,9 +27,16 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         {
             if let locationdic = locationlists!.objectAtIndex((location.locationid?.integerValue)!) as? NSDictionary
             {
-                let name = locationdic.objectForKey("address") as! String
+                let city = locationdic.objectForKey("city") as! String
+                let street = locationdic.objectForKey("street") as! String
+                let zip = locationdic.objectForKey("zip") as! String
+                let state = locationdic.objectForKey("state") as! String
+                
                 let map =  MapViewController(nibName: "MapViewController", bundle: nil)
-                map.address = name
+                map.city = city
+                map.street = street
+                map.postcode = zip
+                map.state = state
                 self.navigationController?.pushViewController(map, animated: true)
             }
         }
