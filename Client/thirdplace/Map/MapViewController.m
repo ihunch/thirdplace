@@ -16,7 +16,10 @@
 @end
 
 @implementation MapViewController
-@synthesize address;
+@synthesize state;
+@synthesize street;
+@synthesize postcode;
+@synthesize city;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,7 +34,6 @@
 {
     [super viewDidLoad];
     self.mapView.delegate = self;
-    self.mapView.showsUserLocation = YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -59,7 +61,16 @@
     // Do any additional setup after loading the view from its nib.
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     // don't use a hint region
-    [geocoder geocodeAddressString:address completionHandler:^(NSArray *placemarks, NSError *error)
+    NSString* streetkey = (NSString*)kABPersonAddressStreetKey;
+    NSString* citykey = (NSString*)kABPersonAddressCityKey;
+    NSString* statekey = (NSString*)kABPersonAddressStateKey;
+    NSString* zipkey = (NSString*)kABPersonAddressZIPKey;
+    NSString* countrykey = (NSString*)kABPersonAddressCountryKey;
+    NSString* countrycodekey = (NSString*)kABPersonAddressCountryCodeKey;
+  
+    NSDictionary* addressdic = @{streetkey:street, citykey:city, zipkey:postcode,statekey:state,countrykey:@"Australia",countrycodekey:@"AU"};
+    
+    [geocoder geocodeAddressDictionary:addressdic completionHandler:^(NSArray *placemarks, NSError *error)
     {
         if (error)
         {
@@ -68,6 +79,7 @@
         }
         //put the coordinate on map
         CLPlacemark *placemark = [placemarks lastObject];
+        
         [self displayPinOnMap:placemark];
     }];
 }

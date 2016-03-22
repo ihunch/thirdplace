@@ -2811,7 +2811,7 @@
 				2FCA14461C57D0FF00EEC045 /* HangoutDataModel 2.xcdatamodel */,
 				2F3E7E9A1BBE627F00729894 /* HangoutDataModel.xcdatamodel */,
 			);
-			currentVersion = 2F06F2D71C9D321200C7AB46 /* HangoutDataModel 4.xcdatamodel */;
+			currentVersion = 2F724A6B1C846AF60059E849 /* HangoutDataModel 3.xcdatamodel */;
 			name = HangoutDataModel.xcdatamodeld;
 			path = Hangout/HangoutDataModel.xcdatamodeld;
 			sourceTree = "<group>";
