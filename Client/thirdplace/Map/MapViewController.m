@@ -68,7 +68,7 @@
     NSString* countrykey = (NSString*)kABPersonAddressCountryKey;
     NSString* countrycodekey = (NSString*)kABPersonAddressCountryCodeKey;
   
-    NSDictionary* addressdic = @{streetkey:street, citykey:city, zipkey:postcode,statekey:state,countrykey:@"Australia",countrycodekey:@"AU"};
+    NSDictionary* addressdic = @{streetkey:street, citykey:city, zipkey:postcode,statekey:state,countrykey:@"United States",countrycodekey:@"US"};
     
     [geocoder geocodeAddressDictionary:addressdic completionHandler:^(NSArray *placemarks, NSError *error)
     {

@@ -9,6 +9,14 @@
 		<string>375 Valencia St, San Francisco, CA 94103, United States</string>
 		<key>photopath</key>
 		<string>Four Barrel Coffee</string>
+		<key>street</key>
+		<string>375 Valencia St</string>
+		<key>city</key>
+		<string>San Francisco</string>
+		<key>state</key>
+		<string>CA</string>
+		<key>zip</key>
+		<string>94103</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -17,6 +25,14 @@
 		<string>270 7th St, San Francisco, CA 94103, United States</string>
 		<key>photopath</key>
 		<string>Sightglass Coffee</string>
+		<key>street</key>
+		<string>270 7th St</string>
+		<key>city</key>
+		<string>San Francisco</string>
+		<key>state</key>
+		<string>CA</string>
+		<key>zip</key>
+		<string>94103</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -25,6 +41,14 @@
 		<string>699 Delancey St, San Francisco, CA 94107, United States</string>
 		<key>photopath</key>
 		<string>Crossroads Cafe</string>
+		<key>street</key>
+		<string>699 Delancey St</string>
+		<key>city</key>
+		<string>San Francisco</string>
+		<key>state</key>
+		<string>CA</string>
+		<key>zip</key>
+		<string>94107</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -33,14 +57,30 @@
 		<string>3101 24th St, San Francisco, CA 94110, United States</string>
 		<key>photopath</key>
 		<string>Philz</string>
+		<key>street</key>
+		<string>3101 24th St</string>
+		<key>city</key>
+		<string>San Francisco</string>
+		<key>state</key>
+		<string>CA</string>
+		<key>zip</key>
+		<string>94110</string>
 	</dict>
 	<dict>
 		<key>name</key>
 		<string>Grand Coffee</string>
 		<key>address</key>
-		<string>2663 Mission St San Francisco, CA 94110 United States</string>
+		<string>2663 Mission St, San Francisco, CA 94110 United States</string>
 		<key>photopath</key>
 		<string>Grand Coffee</string>
+		<key>street</key>
+		<string>2663 Mission St</string>
+		<key>city</key>
+		<string>San Francisco</string>
+		<key>state</key>
+		<string>CA</string>
+		<key>zip</key>
+		<string>94110</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -49,6 +89,14 @@
 		<string>1032 Clement St, San Francisco, CA 94118, United States</string>
 		<key>photopath</key>
 		<string>Cafe La Flore</string>
+		<key>street</key>
+		<string>1032 Clement St</string>
+		<key>city</key>
+		<string>San Francisco</string>
+		<key>state</key>
+		<string>CA</string>
+		<key>zip</key>
+		<string>94118</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -57,6 +105,14 @@
 		<string>1026 Valencia St, San Francisco, CA 94110, United States</string>
 		<key>photopath</key>
 		<string>Ritual</string>
+		<key>street</key>
+		<string>1026 Valencia St</string>
+		<key>city</key>
+		<string>San Francisco</string>
+		<key>state</key>
+		<string>CA</string>
+		<key>zip</key>
+		<string>94110</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -65,6 +121,14 @@
 		<string>2123 Fillmore St (btwn California &amp; Sacramento St), San Francisco, CA 94115, United States</string>
 		<key>photopath</key>
 		<string>Jane</string>
+		<key>street</key>
+		<string>2123 Fillmore St (btwn California &amp; Sacramento St)</string>
+		<key>city</key>
+		<string>San Francisco</string>
+		<key>state</key>
+		<string>CA</string>
+		<key>zip</key>
+		<string>94115</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -73,6 +137,14 @@
 		<string>798 Arguello Blvd (at Cabrillo St), San Francisco, CA 94118, United States</string>
 		<key>photopath</key>
 		<string>Velo Rouge</string>
+		<key>street</key>
+		<string>798 Arguello Blvd (at Cabrillo St)</string>
+		<key>city</key>
+		<string>San Francisco</string>
+		<key>state</key>
+		<string>CA</string>
+		<key>zip</key>
+		<string>94118</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -81,6 +153,14 @@
 		<string>384 Hayes St (at Gough St), San Francisco, CA 94102, United States</string>
 		<key>photopath</key>
 		<string>Arlequin</string>
+		<key>street</key>
+		<string>384 Hayes St (at Gough St)</string>
+		<key>city</key>
+		<string>San Francisco</string>
+		<key>state</key>
+		<string>CA</string>
+		<key>zip</key>
+		<string>94102</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -89,6 +169,14 @@
 		<string>212 Ritch St (at Bryant St), San Francisco, CA 94107, United States</string>
 		<key>photopath</key>
 		<string>Darwin</string>
+		<key>street</key>
+		<string>212 Ritch St (at Bryant St)</string>
+		<key>city</key>
+		<string>San Francisco</string>
+		<key>state</key>
+		<string>CA</string>
+		<key>zip</key>
+		<string>94107</string>
 	</dict>
 	<dict>
 		<key>address</key>
@@ -97,6 +185,14 @@
 		<string>Blue Bottle</string>
 		<key>photopath</key>
 		<string>Blue Bottle</string>
+		<key>street</key>
+		<string>66 Mint Plaza (at Jessie St)</string>
+		<key>city</key>
+		<string>San Francisco</string>
+		<key>state</key>
+		<string>CA</string>
+		<key>zip</key>
+		<string>94103</string>
 	</dict>
 	<dict>
 		<key>address</key>
@@ -105,14 +201,30 @@
 		<string>Hollow</string>
 		<key>photopath</key>
 		<string>Hollow</string>
+		<key>street</key>
+		<string>1435 Irving St (btwn 15th &amp; 16th Ave)</string>
+		<key>city</key>
+		<string>San Francisco</string>
+		<key>state</key>
+		<string>CA</string>
+		<key>zip</key>
+		<string>94122</string>
 	</dict>
 	<dict>
 		<key>address</key>
-		<string>1890 Bryant St. San Francisco, CA 94110</string>
+		<string>1890 Bryant St, San Francisco, CA 94110</string>
 		<key>name</key>
 		<string>Coffee Bar</string>
 		<key>photopath</key>
-		<string>Coffee Bar</string>
+		<string>Hollow</string>
+		<key>street</key>
+		<string>1890 Bryant St</string>
+		<key>city</key>
+		<string>San Francisco</string>
+		<key>state</key>
+		<string>CA</string>
+		<key>zip</key>
+		<string>94110</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -121,14 +233,30 @@
 		<string>2271 Union Street, San Francisco, CA 94123</string>
 		<key>photopath</key>
 		<string>Wrecking Ball</string>
+		<key>street</key>
+		<string>2271 Union Street</string>
+		<key>city</key>
+		<string>San Francisco</string>
+		<key>state</key>
+		<string>CA</string>
+		<key>zip</key>
+		<string>94123</string>
 	</dict>
 	<dict>
 		<key>address</key>
-		<string>670 Commercial St San Francisco, CA 94111 United States</string>
+		<string>670 Commercial St, San Francisco, CA 94111 United States</string>
 		<key>name</key>
 		<string>Chapel Hill</string>
 		<key>photopath</key>
 		<string>Chapel Hill</string>
+		<key>street</key>
+		<string>670 Commercial St</string>
+		<key>city</key>
+		<string>San Francisco</string>
+		<key>state</key>
+		<string>CA</string>
+		<key>zip</key>
+		<string>94111</string>
 	</dict>
 </array>
 </plist>
