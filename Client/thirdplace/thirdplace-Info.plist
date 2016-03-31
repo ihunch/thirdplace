@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -53,6 +53,10 @@
 	<string>643081122497267</string>
 	<key>FacebookDisplayName</key>
 	<string>thirdplace SF</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<true/>
+	<key>ITSEncryptionExportComplianceCode</key>
+	<string>e65d70b3-ede1-44db-ad9d-0ab0df58a740</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbauth</string>
@@ -91,7 +95,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-    <key>ITSAppUsesNonExemptEncryption</key><true/>
-    <key>ITSEncryptionExportComplianceCode</key><string>e65d70b3-ede1-44db-ad9d-0ab0df58a740</string>
 </dict>
 </plist>
