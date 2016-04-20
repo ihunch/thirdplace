@@ -57,6 +57,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    self.backgroundColor = [UIColor blackColor];
     self.friendViews = [NSMutableArray array];
     self.linesView = [[LinesView alloc] init];
     self.linesView.hidden = true;
