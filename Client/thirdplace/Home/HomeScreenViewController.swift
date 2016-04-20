@@ -110,7 +110,8 @@ class HomeScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     {
         if indexPath.section == 0
         {
-            let cell = tableView.dequeueReusableCellWithIdentifier("FriendContainerTableViewCell") as? FriendContainerTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("FriendContainerTableViewCell")
+                as? FriendContainerTableViewCell
             return cell!
         }
         else

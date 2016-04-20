@@ -112,9 +112,7 @@ class HangoutInitTableViewController: DHCollectionTableViewController
         hangoutmodule.cancelHangoutInvitation(hangout, sender: xmppStream.myJID)
     }
     
-    func sendHangout()
-    {
-        self.showloadscreen()
+    func sendHangout(){
         let createtime = NSDate().mt_inTimeZone(NSTimeZone.localTimeZone())
         //create a temp hangout
         let hangout = Hangout.MR_createEntityInContext(p_context)
@@ -188,14 +186,13 @@ class HangoutInitTableViewController: DHCollectionTableViewController
         message.updatejid = xmppStream.myJID.bare()
         message.hangout = hangout
     }
-    @IBAction func sendButton(sender: AnyObject)
-    {
-       self.sendHangout()
+    
+    @IBAction func sendButton(sender: AnyObject){
+        self.showloadscreen()
+        self.sendHangout()
     }
     
-    @IBAction func confirmButton(sender: AnyObject)
-    {
-        self.showloadscreen()
+    func updateHangout(){
         let createtime = NSDate().mt_inTimeZone(NSTimeZone.localTimeZone())
         
         //lookup a temp hangout
@@ -220,7 +217,6 @@ class HangoutInitTableViewController: DHCollectionTableViewController
         message.updatejid = xmppStream.myJID.bare()
         message.hangout = hangout
         
-        
         if ((alternativeMessage != nil) && (alternativeMessage != ""))
         {
             message.content = alternativeMessage
@@ -230,6 +226,12 @@ class HangoutInitTableViewController: DHCollectionTableViewController
             message.content = defaultConfirmMessage
         }
         hangoutmodule.updateHangout(hangout, sender: xmppStream.myJID)
+    }
+    
+    @IBAction func confirmButton(sender: AnyObject)
+    {
+        self.showloadscreen()
+        self.updateHangout()
     }
     
     func showloadscreen()
@@ -516,7 +518,13 @@ extension HangoutInitTableViewController: UITextViewDelegate
         }
         else
         {
-            self.sendHangout()
+            if selectedHangoutid != nil{
+                updateHangout()
+            }
+            else{
+                sendHangout()
+            }
+
             return false
         }
     }
